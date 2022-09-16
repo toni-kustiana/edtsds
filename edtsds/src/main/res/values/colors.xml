@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- primary -->
+
+    <color name="colorPrimary50">#044B95</color>
+    <color name="colorPrimary40">#0958AA</color>
+    <color name="colorPrimary30">#1178D4</color>
+    <color name="colorPrimary20">#368BE2</color>
+    <color name="colorPrimary10">#6CA5E0</color>
+
+    <!-- neutral -->
+
+    <color name="colorNeutral70">#151823</color>
+    <color name="colorNeutral60">#434755</color>
+    <color name="colorNeutral50">#70727D</color>
+    <color name="colorNeutral40">#9C9DA6</color>
+    <color name="colorNeutral30">#DCDEE3</color>
+    <color name="colorNeutral20">#EFF3F6</color>
+    <color name="colorNeutral10">#F8FBFC</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <!-- support -->
+
+    <color name="colorSupportError">#EE2B2E</color>
+    <color name="colorSupportBgError">#FFEDEE</color>
+
+    <color name="colorSupportWarning">#FF7D1D</color>
+    <color name="colorSupportBgWarning">#FFF0E6</color>
+
+    <color name="colorSupportSuccess">#8FC742</color>
+    <color name="colorSupportBgSuccess">#EBFFD0</color>
+</resources>

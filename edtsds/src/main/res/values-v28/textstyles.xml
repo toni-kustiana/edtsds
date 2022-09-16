@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="D1" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineHeight">30dp</item>
+    </style>
+
+    <style name="D2" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineHeight">26dp</item>
+    </style>
+
+    <style name="H1" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">18dp</item>
+    </style>
+
+    <style name="H2" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">16dp</item>
+    </style>
+
+    <style name="H3" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+    </style>
+
+    <style name="H4" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight">12dp</item>
+    </style>
+
+    <style name="B1" parent="RubikRegular">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">16dp</item>
+    </style>
+
+    <style name="B1Medium" parent="RubikMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">16dp</item>
+    </style>
+
+    <style name="B2" parent="RubikRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+    </style>
+
+    <style name="B3" parent="RubikRegular">
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight">12dp</item>
+    </style>
+
+    <style name="P1" parent="RubikRegular">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">21dp</item>
+    </style>
+
+    <style name="P2" parent="RubikRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">18dp</item>
+    </style>
+
+    <style name="AlertTextError" parent="RubikRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+        <item name="android:textColor">@color/colorSupportError</item>
+    </style>
+
+    <style name="WarningTextError" parent="RubikRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+        <item name="android:textColor">@color/colorSupportWarning</item>
+    </style>
+
+    <style name="SuccessTextError" parent="RubikRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+        <item name="android:textColor">@color/colorSupportSuccess</item>
+    </style>
+</resources>
