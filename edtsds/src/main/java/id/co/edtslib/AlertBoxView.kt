@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import id.co.edtslib.databinding.ViewAlertSuccessBoxBinding
 
-open class AlertSuccessBoxView: FrameLayout {
+open class AlertBoxView: FrameLayout {
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -20,6 +20,10 @@ open class AlertSuccessBoxView: FrameLayout {
         defStyleAttr
     ) {
         init(attrs)
+    }
+
+    enum class AlertType {
+        Success, Warning, Error
     }
 
     protected val binding: ViewAlertSuccessBoxBinding =
@@ -40,6 +44,14 @@ open class AlertSuccessBoxView: FrameLayout {
             binding.ivCancel.isVisible = value == true
         }
 
+    var type = AlertType.Success
+        set(value) {
+            field = value
+
+            binding.root.isSelected = type == AlertType.Error || type == AlertType.Warning
+            binding.root.isActivated = type == AlertType.Error
+        }
+
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -50,6 +62,9 @@ open class AlertSuccessBoxView: FrameLayout {
 
             message = a.getString(R.styleable.AlertSuccessBoxView_message)
             dismissible = a.getBoolean(R.styleable.AlertSuccessBoxView_dismissible, true)
+
+            val typeIdx = a.getInt(R.styleable.AlertSuccessBoxView_type, AlertType.Success.ordinal)
+            type = AlertType.values()[typeIdx]
 
             a.recycle()
         }

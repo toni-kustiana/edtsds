@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/clContent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_support_success"
+    android:background="@drawable/bg_support_alert"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,7 +9,7 @@
         android:id="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_alert_success"
+        android:src="@drawable/ic_support_alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <androidx.appcompat.widget.AppCompatTextView
@@ -21,7 +20,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
         style="@style/B2"
-        android:textColor="@color/colorSupportSuccess"
+        android:textColor="@color/color_support_alert"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
     <androidx.appcompat.widget.AppCompatImageView

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AlertSuccessBoxView">
+        <attr name="type" format="enum">
+            <enum name="success" value="0" />
+            <enum name="warning" value="1" />
+            <enum name="error" value="2" />
+        </attr>
         <attr name="message" format="string" />
         <attr name="dismissible" format="boolean" />
     </declare-styleable>
