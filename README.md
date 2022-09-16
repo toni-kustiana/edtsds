@@ -31,7 +31,7 @@ android edts design system
 [string]: message of alert
 
 ##### _app:dismissible_
-[dismissible]: alert box can dismissible or not, default true
+[boolean]: alert box can dismissible or not, default true
 
 #### Method for set message on the AlertSuccessBoxView
 
