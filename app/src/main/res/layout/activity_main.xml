@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.AlertSuccessBoxView
+    <id.co.edtslib.AlertWarningBoxView
         app:dismissible="true"
         app:message="abah test"
         app:layout_constraintTop_toTopOf="parent"

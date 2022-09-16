@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import id.co.edtslib.databinding.ViewAlertSuccessBoxBinding
 
-class AlertSuccessBoxView: FrameLayout {
+open class AlertSuccessBoxView: FrameLayout {
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -22,7 +22,7 @@ class AlertSuccessBoxView: FrameLayout {
         init(attrs)
     }
 
-    private val binding: ViewAlertSuccessBoxBinding =
+    protected val binding: ViewAlertSuccessBoxBinding =
         ViewAlertSuccessBoxBinding.inflate(LayoutInflater.from(context), this, true)
 
 
