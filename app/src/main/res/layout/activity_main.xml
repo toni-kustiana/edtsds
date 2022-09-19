@@ -2,11 +2,12 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <id.co.edtslib.ButtonView
-        app:state="medium"
-        app:mode="light"
+        app:size="medium"
+        app:variant="negative"
         android:id="@+id/buttonView"
         android:text="@string/app_name"
         android:layout_margin="16dp"

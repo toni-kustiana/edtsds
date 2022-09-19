@@ -53,8 +53,8 @@ var message: String? = null
 
 ```xml
 <id.co.edtslib.ButtonView
-    app:state="medium"
-    app:mode="light"
+    app:size="medium"
+    app:variant="primary"
     android:id="@+id/buttonView"
     android:text="@string/app_name"
     android:layout_margin="16dp"
@@ -64,14 +64,25 @@ var message: String? = null
 
 #### Attributes information
 
-##### _app:state_
-[enum]: enum of button state: medium, small, default small\
+##### _app:size_
+[enum]: enum of button size: medium, small, default medium\
 medium:\
 ![ButtonView](https://i.ibb.co/p1CQ5qL/button-medium.png)
 
 small:\
 ![ButtonView](https://i.ibb.co/98K5XGp/button-small.png)
 
-##### _app:mode_
-[enum]: enum of button mode: dark, light, default dark
+##### _app:variant_
+[enum]: enum of button variant: primary, secondary, outline, negative, default primary\
 
+primary:\
+![ButtonView](https://i.postimg.cc/8zYyCqmf/button-primary.png)
+
+secondary:\
+![ButtonView](https://i.postimg.cc/XqNKL8g0/button-secondary.png)
+
+outline:\
+![ButtonView](https://i.postimg.cc/K8TTnwyM/button-outline.png)
+
+negative:\
+![ButtonView](https://i.postimg.cc/L5zXqKP9/button-negative.png)

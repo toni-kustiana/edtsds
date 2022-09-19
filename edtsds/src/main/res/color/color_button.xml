@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- disabled -->
+    <item android:state_enabled="false" android:color="@color/colorWhite" />
+
+    <!-- negative -->
+    <item android:state_selected="true" android:state_activated="true"
+        android:state_enabled="true" android:color="@color/colorNeutral60" />
+
+    <!-- outline -->
+    <item android:state_selected="false" android:state_activated="true"
+        android:state_enabled="true" android:color="@color/colorPrimary30" />
+
+    <!-- secondary -->
+    <item android:state_selected="true" android:state_enabled="true"
+        android:color="@color/colorWhite" />
+
+    <!-- primary -->
+    <item android:state_enabled="true" android:color="@color/colorWhite" />
+</selector>

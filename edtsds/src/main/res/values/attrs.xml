@@ -11,13 +11,15 @@
     </declare-styleable>
 
     <declare-styleable name="ButtonView">
-        <attr name="state" format="enum">
+        <attr name="variant" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="secondary" value="1" />
+            <enum name="outline" value="2" />
+            <enum name="negative" value="3" />
+        </attr>
+        <attr name="size" format="enum">
             <enum name="medium" value="0" />
             <enum name="small" value="1" />
-        </attr>
-        <attr name="mode" format="enum">
-            <enum name="dark" value="0" />
-            <enum name="light" value="1" />
         </attr>
     </declare-styleable>
 </resources>
