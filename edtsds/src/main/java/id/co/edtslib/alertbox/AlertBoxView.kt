@@ -58,14 +58,14 @@ open class AlertBoxView: FrameLayout {
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
                 attrs,
-                R.styleable.AlertSuccessBoxView,
+                R.styleable.AlertBoxView,
                 0, 0
             )
 
-            message = a.getString(R.styleable.AlertSuccessBoxView_message)
-            dismissible = a.getBoolean(R.styleable.AlertSuccessBoxView_dismissible, true)
+            message = a.getString(R.styleable.AlertBoxView_message)
+            dismissible = a.getBoolean(R.styleable.AlertBoxView_dismissible, true)
 
-            val typeIdx = a.getInt(R.styleable.AlertSuccessBoxView_type, AlertType.Success.ordinal)
+            val typeIdx = a.getInt(R.styleable.AlertBoxView_type, AlertType.Success.ordinal)
             type = AlertType.values()[typeIdx]
 
             a.recycle()

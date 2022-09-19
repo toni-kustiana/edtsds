@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="AlertSuccessBoxView">
+    <declare-styleable name="AlertBoxView">
         <attr name="type" format="enum">
             <enum name="success" value="0" />
             <enum name="warning" value="1" />
@@ -8,5 +8,16 @@
         </attr>
         <attr name="message" format="string" />
         <attr name="dismissible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ButtonView">
+        <attr name="state" format="enum">
+            <enum name="medium" value="0" />
+            <enum name="small" value="1" />
+        </attr>
+        <attr name="mode" format="enum">
+            <enum name="Dark" value="0" />
+            <enum name="Light" value="1" />
+        </attr>
     </declare-styleable>
 </resources>
