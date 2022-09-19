@@ -16,8 +16,8 @@
             <enum name="small" value="1" />
         </attr>
         <attr name="mode" format="enum">
-            <enum name="Dark" value="0" />
-            <enum name="Light" value="1" />
+            <enum name="dark" value="0" />
+            <enum name="light" value="1" />
         </attr>
     </declare-styleable>
 </resources>
