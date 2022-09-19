@@ -3,11 +3,10 @@ android edts design system
 
 ## List of components
 
-# [1. AlertBoxView](##AlertBoxView)
-# [2. ButtonView](##ButtonView)
+# [1. AlertBoxView](#AlertBoxView)
+# [2. ButtonView](#ButtonView)
 
-
-## AlertBoxView
+# AlertBoxView
 
 #### Usage
 
@@ -48,19 +47,19 @@ success:\
 var message: String? = null
 ```
 
-## ButtonView
+# ButtonView
 
 #### Usage
 
 ```xml
 <id.co.edtslib.ButtonView
-        app:state="medium"
-        app:mode="light"
-        android:id="@+id/buttonView"
-        android:text="@string/app_name"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    app:state="medium"
+    app:mode="light"
+    android:id="@+id/buttonView"
+    android:text="@string/app_name"
+    android:layout_margin="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
