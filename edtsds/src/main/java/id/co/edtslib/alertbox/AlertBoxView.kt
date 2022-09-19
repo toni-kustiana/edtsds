@@ -1,10 +1,11 @@
-package id.co.edtslib
+package id.co.edtslib.alertbox
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import id.co.edtslib.R
 import id.co.edtslib.databinding.ViewAlertSuccessBoxBinding
 
 open class AlertBoxView: FrameLayout {
@@ -26,9 +27,10 @@ open class AlertBoxView: FrameLayout {
         Success, Warning, Error
     }
 
-    protected val binding: ViewAlertSuccessBoxBinding =
+    private val binding: ViewAlertSuccessBoxBinding =
         ViewAlertSuccessBoxBinding.inflate(LayoutInflater.from(context), this, true)
 
+    var delegate: AlertBoxDelegate? = null
 
     var message: String? = null
         set(value) {
@@ -71,6 +73,7 @@ open class AlertBoxView: FrameLayout {
 
         binding.ivCancel.setOnClickListener {
             isVisible = false
+            delegate?.onDismiss()
         }
     }
 
