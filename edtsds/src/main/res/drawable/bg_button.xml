@@ -7,7 +7,7 @@
             <corners android:radius="@dimen/dimen_4dp" />
         </shape>
     </item>
-    <!-- negative -->
+    <!-- outline -->
     <item android:state_selected="true" android:state_activated="true" android:state_enabled="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/colorWhite" />
@@ -15,7 +15,7 @@
             <corners android:radius="@dimen/dimen_4dp" />
         </shape>
     </item>
-    <!-- outline -->
+    <!-- alternative -->
     <item android:state_selected="false" android:state_activated="true" android:state_enabled="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/colorWhite" />

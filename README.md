@@ -81,8 +81,8 @@ primary:\
 secondary:\
 ![ButtonView](https://i.postimg.cc/XqNKL8g0/button-secondary.png)
 
-outline:\
+alternative:\
 ![ButtonView](https://i.postimg.cc/K8TTnwyM/button-outline.png)
 
-negative:\
+outline:\
 ![ButtonView](https://i.postimg.cc/L5zXqKP9/button-negative.png)

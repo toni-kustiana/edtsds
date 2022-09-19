@@ -13,7 +13,7 @@ class ButtonView: AppCompatTextView {
     }
 
     enum class ButtonVariant {
-        Primary, Secondary, Outline, Negative
+        Primary, Secondary, Alternative, Outline
     }
 
     constructor(context: Context) : super(context) {
@@ -48,8 +48,8 @@ class ButtonView: AppCompatTextView {
         set(value) {
             field = value
 
-            isSelected = variant == ButtonVariant.Secondary || variant == ButtonVariant.Negative
-            isActivated = variant == ButtonVariant.Outline || variant == ButtonVariant.Negative
+            isSelected = variant == ButtonVariant.Secondary || variant == ButtonVariant.Outline
+            isActivated = variant == ButtonVariant.Alternative || variant == ButtonVariant.Outline
 
         }
 

@@ -14,8 +14,8 @@
         <attr name="variant" format="enum">
             <enum name="primary" value="0" />
             <enum name="secondary" value="1" />
-            <enum name="outline" value="2" />
-            <enum name="negative" value="3" />
+            <enum name="alternative" value="2" />
+            <enum name="outline" value="3" />
         </attr>
         <attr name="size" format="enum">
             <enum name="medium" value="0" />
