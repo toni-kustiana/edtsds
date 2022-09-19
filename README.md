@@ -73,7 +73,7 @@ small:\
 ![ButtonView](https://i.ibb.co/98K5XGp/button-small.png)
 
 ##### _app:variant_
-[enum]: enum of button variant: primary, secondary, outline, negative, default primary\
+[enum]: enum of button variant: primary, secondary, outline, negative, default primary
 
 primary:\
 ![ButtonView](https://i.postimg.cc/8zYyCqmf/button-primary.png)
