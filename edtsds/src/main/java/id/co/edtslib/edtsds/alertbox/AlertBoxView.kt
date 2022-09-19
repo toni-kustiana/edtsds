@@ -1,12 +1,12 @@
-package id.co.edtslib.alertbox
+package id.co.edtslib.edtsds.alertbox
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
-import id.co.edtslib.R
-import id.co.edtslib.databinding.ViewAlertSuccessBoxBinding
+import id.co.edtslib.edtsds.R
+import id.co.edtslib.edtsds.databinding.ViewAlertSuccessBoxBinding
 
 open class AlertBoxView: FrameLayout {
     constructor(context: Context) : super(context) {

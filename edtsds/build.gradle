@@ -1,10 +1,28 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+group = 'id.co.edtslib.edtsds'
+version = '1.0.0'
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'id.co.edtslib.edtsds'
+                artifactId = 'Edtsds'
+                version = '1.0.0'
+            }
+        }
+    }
 }
 
 android {
-    namespace 'id.co.edtslib'
+    namespace 'id.co.edtslib.edtsds'
     compileSdk 33
 
     defaultConfig {

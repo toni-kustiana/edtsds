@@ -1,4 +1,4 @@
-package id.co.edtslib
+package id.co.edtslib.edtsds
 
 import android.content.Context
 import android.util.AttributeSet
