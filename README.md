@@ -3,8 +3,8 @@ android edts design system
 
 ## List of components
 
-# [Link to Header](##AlertBoxView) 1. AlertBoxView
-# [Link to Header](##ButtonView) 2. ButtonView
+# [1. AlertBoxView](##AlertBoxView)
+# [2. ButtonView](##ButtonView)
 
 
 ## AlertBoxView
@@ -25,14 +25,14 @@ android edts design system
 #### Attributes information
 
 ##### _app:type_
-[enum]: enum of alert type: success, warning error
-alert:
+[enum]: enum of alert type: success, warning error\
+alert:\
 ![AlertBoxView](https://i.ibb.co/9wQNKKv/error-alert.png)
 
-warning:
+warning:\
 ![AlertBoxView](https://i.ibb.co/QrBfXHr/warning-alert.png)
 
-success:
+success:\
 ![AlertBoxView](https://i.ibb.co/cQdSwt8/success-alert.png)
 
 ##### _app:message_
@@ -66,11 +66,11 @@ var message: String? = null
 #### Attributes information
 
 ##### _app:state_
-[enum]: enum of button state: medium, small, default small
-medium:
+[enum]: enum of button state: medium, small, default small\
+medium:\
 ![ButtonView](https://i.ibb.co/p1CQ5qL/button-medium.png)
 
-small:
+small:\
 ![ButtonView](https://i.ibb.co/98K5XGp/button-small.png)
 
 ##### _app:mode_
