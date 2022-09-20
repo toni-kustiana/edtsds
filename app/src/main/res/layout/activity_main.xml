@@ -14,6 +14,7 @@
         android:layout_height="wrap_content" />
 
     <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/tvPin"
         android:hint="pin"
         android:layout_marginTop="@dimen/dimen_16dp"
         app:inputType="pin"
