@@ -2,14 +2,38 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.ButtonView
-        app:size="medium"
-        app:variant="alternative"
-        android:id="@+id/buttonView"
-        android:text="@string/app_name"
+    <id.co.edtslib.edtsds.TextFieldView
+        android:hint="password"
+        app:inputType="password"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.TextFieldView
+        android:hint="pin"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:inputType="pin"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.TextFieldView
+        android:hint="phone"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:inputType="phone"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.TextFieldView
+        android:hint="text"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:inputType="text"
+        app:maxLength="4"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

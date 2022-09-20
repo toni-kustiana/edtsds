@@ -1,10 +1,51 @@
 # edtsds
 android edts design system
 
+## Setup
+### Gradle
+
+Add this to your project level `build.gradle`:
+```groovy
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+Add this to your app `build.gradle`:
+```groovy
+dependencies {
+    implementation 'com.github.edtslib:edtslib:latest'
+}
+```
+
 ## List of components
 
-# [1. AlertBoxView](#AlertBoxView)
-# [2. ButtonView](#ButtonView)
+# [1. Primary/Secondary Color](#Color)
+# [2. AlertBoxView](#AlertBoxView)
+# [3. ButtonView](#ButtonView)
+
+# Color
+
+Please override colors (if need)
+
+```xml
+    <!-- primary -->
+
+    <color name="colorPrimary50">#044B95</color>
+    <color name="colorPrimary40">#0958AA</color>
+    <color name="colorPrimary30">#1178D4</color>
+    <color name="colorPrimary20">#368BE2</color>
+    <color name="colorPrimary10">#6CA5E0</color>
+
+    <!-- secondary -->
+
+    <color name="colorSecondary50">#CC8000</color>
+    <color name="colorSecondary40">#DA8D0B</color>
+    <color name="colorSecondary30">#F29D0D</color>
+    <color name="colorSecondary20">#F0AF42</color>
+    <color name="colorSecondary10">#EEC786</color>
+```
 
 # AlertBoxView
 
