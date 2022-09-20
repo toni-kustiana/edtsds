@@ -6,37 +6,10 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:hint="password"
-        app:inputType="password"
+    <id.co.edtslib.edtsds.otpview.OtpView
+        android:id="@+id/otpView"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:id="@+id/tvPin"
-        android:hint="pin"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:inputType="pin"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:hint="ktp"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:imeOptions="next"
-        app:inputType="ktp"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:hint="text"
-        app:imeOptions="done"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:inputType="text"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </androidx.appcompat.widget.LinearLayoutCompat>
