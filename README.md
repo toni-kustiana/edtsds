@@ -15,7 +15,7 @@ allprojects {
 Add this to your app `build.gradle`:
 ```groovy
 dependencies {
-    implementation 'com.github.edtslib:edtsds:latest'
+    implementation 'com.github.edtslib:edtslib:latest'
 }
 ```
 
@@ -25,6 +25,7 @@ dependencies {
 # [2. AlertBoxView](#AlertBoxView)
 # [3. ButtonView](#ButtonView)
 # [4. TextFieldView](#TextFieldView)
+# [5. OtpView](#OtpView)
 
 # Color
 
@@ -145,8 +146,6 @@ outline:\
 
 #### Attributes information
 
-TextFieldView is extends of TextInputLayout, you can use parent attributes. Additional attributes is
-
 ##### _app:inputType_
 [enum]: type of textfield: text, password, pin, phone, ktp, address, default text\
 
@@ -159,4 +158,62 @@ TextFieldView is extends of TextInputLayout, you can use parent attributes. Addi
 #### Delegeta for receive input value of TextFieldView
 ```kotlin
 var delegate: TextFieldDelegate? = null
+```
+
+# OtpView
+![TextFieldView](https://i.postimg.cc/JhTGB5FQ/Screen-Shot-2022-09-20-at-15-51-33.png)
+
+#### Usage
+
+```xml
+   <id.co.edtslib.edtsds.otpview.OtpView
+        android:id="@+id/otpView"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+#### Attributes information
+
+##### _app:pinType_
+[enum]: input type of PIN
+1. number: pin show number
+2. password: pin show *
+3. passwordWithEye: number/passwword combination with icon eye
+
+##### _app:pinEyePassword_
+[reference]: eye of password if pinType = passwordWithEye
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_visible" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_invisible" />
+</selector>
+```
+
+##### _app:otpPasswordSymbol_
+[string]: password symbol
+
+##### _app:otpPasswordAnimate_
+[integer]: delay time (millisecond) typed to password symbol
+
+##### _app:otpLength_
+[integer]: length of pin, default 4
+
+##### _app:otpHintTextColor_
+[color]: text color of hint, default not set
+
+##### _app:otpHint_
+[string]: text of hint, default not set
+
+
+### Listener when input change
+```kotlin
+      var delegate: OtpDelegate? = null
+```
+
+### Methode for access otpview
+```kotlin
+      var isError = false
+      fun clear()
 ```

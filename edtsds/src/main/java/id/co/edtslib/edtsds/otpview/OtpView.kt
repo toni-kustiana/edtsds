@@ -66,22 +66,21 @@ class OtpView : LinearLayoutCompat {
                 0, 0
             )
 
-            length = a.getInteger(R.styleable.OtpView_pinLength, 4)
+            length = a.getInteger(R.styleable.OtpView_otpLength, 4)
             val textStyleReId = R.style.D1
             val margin = resources.getDimensionPixelSize(R.dimen.dimen_8dp)
 
-            pinType = a.getInteger(R.styleable.OtpView_pinType, 0)
-            val pinEyePassword = a.getResourceId(R.styleable.OtpView_pinEyePassword,
-                R.drawable.img_password_eye)
+            pinType = a.getInteger(R.styleable.OtpView_otpType, 0)
+            val pinEyePassword = R.drawable.img_password_eye
 
-            val pinPasswordAnimate = a.getInteger(R.styleable.OtpView_pinPasswordAnimate, 0)
-            pinPasswordSymbol = a.getString(R.styleable.OtpView_pinPasswordSymbol)
+            val pinPasswordAnimate = a.getInteger(R.styleable.OtpView_otpPasswordAnimate, 0)
+            pinPasswordSymbol = a.getString(R.styleable.OtpView_otpPasswordSymbol)
             if (pinPasswordSymbol == null) {
                 pinPasswordSymbol = "*"
             }
 
-            val placeHolderText = a.getString(R.styleable.OtpView_pinPlaceHolderText)
-            val placeHolderTextColor = a.getColor(R.styleable.OtpView_pinPlaceHolderTextColor, 0)
+            val placeHolderText = a.getString(R.styleable.OtpView_otpPlaceHolderText)
+            val placeHolderTextColor = a.getColor(R.styleable.OtpView_otpPlaceHolderTextColor, 0)
 
 
             editText = NoPasteEditText(context)
@@ -150,7 +149,6 @@ class OtpView : LinearLayoutCompat {
             }
 
             editText?.addTextChangedListener {
-                isError = false
                 if (it != null) {
                     val l = it.length
                     repeat(length) { idx ->

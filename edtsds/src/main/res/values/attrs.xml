@@ -40,13 +40,12 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="OtpView">
-        <attr name="pinLength" format="integer" />
-        <attr name="pinEyePassword" format="reference" />
-        <attr name="pinPasswordAnimate" format="integer" />
-        <attr name="pinPasswordSymbol" format="string" />
-        <attr name="pinPlaceHolderText" format="string" />
-        <attr name="pinPlaceHolderTextColor" format="color" />
-        <attr name="pinType" format="enum">
+        <attr name="otpLength" format="integer" />
+        <attr name="otpPasswordAnimate" format="integer" />
+        <attr name="otpPasswordSymbol" format="string" />
+        <attr name="otpPlaceHolderText" format="string" />
+        <attr name="otpPlaceHolderTextColor" format="color" />
+        <attr name="otpType" format="enum">
             <enum name="number" value="0" />
             <enum name="password" value="1" />
             <enum name="passwordWithEye" value="2" />
