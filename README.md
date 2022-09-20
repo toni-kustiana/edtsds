@@ -32,6 +32,7 @@ dependencies {
 Please override colors (if need)
 
 ```xml
+
     <!-- primary -->
 
 <color name="colorPrimary50">#044B95</color>
@@ -47,6 +48,7 @@ Please override colors (if need)
 <color name="colorSecondary30">#F29D0D</color>
 <color name="colorSecondary20">#F0AF42</color>
 <color name="colorSecondary10">#EEC786</color>
+
 ```
 
 # AlertBoxView
@@ -137,14 +139,16 @@ outline:\
 
 ```xml
     <id.co.edtslib.edtsds.textfield.TextFieldView
-    android:hint="password"
-    app:inputType="password"
-    android:layout_margin="16dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:hint="password"
+        app:inputType="password"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
+
+TextFieldView is extends from TextInputLayout. Additional attributes are
 
 ##### _app:inputType_
 [enum]: type of textfield: text, password, pin, phone, ktp, address, default text\
@@ -153,7 +157,7 @@ outline:\
 [enum]: type of action key: next, done, send, default text\
 
 ##### _app:maxLength_
-[int]: max legth of input
+[int]: max length of input
 
 #### Delegeta for receive input value of TextFieldView
 ```kotlin
