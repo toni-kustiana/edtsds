@@ -34,19 +34,19 @@ Please override colors (if need)
 ```xml
     <!-- primary -->
 
-    <color name="colorPrimary50">#044B95</color>
-    <color name="colorPrimary40">#0958AA</color>
-    <color name="colorPrimary30">#1178D4</color>
-    <color name="colorPrimary20">#368BE2</color>
-    <color name="colorPrimary10">#6CA5E0</color>
+<color name="colorPrimary50">#044B95</color>
+<color name="colorPrimary40">#0958AA</color>
+<color name="colorPrimary30">#1178D4</color>
+<color name="colorPrimary20">#368BE2</color>
+<color name="colorPrimary10">#6CA5E0</color>
 
     <!-- secondary -->
 
-    <color name="colorSecondary50">#CC8000</color>
-    <color name="colorSecondary40">#DA8D0B</color>
-    <color name="colorSecondary30">#F29D0D</color>
-    <color name="colorSecondary20">#F0AF42</color>
-    <color name="colorSecondary10">#EEC786</color>
+<color name="colorSecondary50">#CC8000</color>
+<color name="colorSecondary40">#DA8D0B</color>
+<color name="colorSecondary30">#F29D0D</color>
+<color name="colorSecondary20">#F0AF42</color>
+<color name="colorSecondary10">#EEC786</color>
 ```
 
 # AlertBoxView
@@ -137,11 +137,11 @@ outline:\
 
 ```xml
     <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:hint="password"
-        app:inputType="password"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:hint="password"
+    app:inputType="password"
+    android:layout_margin="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
@@ -161,7 +161,7 @@ var delegate: TextFieldDelegate? = null
 ```
 
 # OtpView
-![TextFieldView](https://i.postimg.cc/JhTGB5FQ/Screen-Shot-2022-09-20-at-15-51-33.png)
+![OtpView](https://i.postimg.cc/2SMptqgx/OtpView.png)
 
 #### Usage
 
@@ -180,16 +180,6 @@ var delegate: TextFieldDelegate? = null
 1. number: pin show number
 2. password: pin show *
 3. passwordWithEye: number/passwword combination with icon eye
-
-##### _app:pinEyePassword_
-[reference]: eye of password if pinType = passwordWithEye
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_visible" android:state_selected="true" />
-    <item android:drawable="@drawable/ic_invisible" />
-</selector>
-```
 
 ##### _app:otpPasswordSymbol_
 [string]: password symbol
@@ -215,5 +205,5 @@ var delegate: TextFieldDelegate? = null
 ### Methode for access otpview
 ```kotlin
       var isError = false
-      fun clear()
+fun clear()
 ```

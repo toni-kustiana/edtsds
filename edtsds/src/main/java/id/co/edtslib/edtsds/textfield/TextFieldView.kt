@@ -180,7 +180,8 @@ class TextFieldView: TextInputLayout {
         layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 
         editText.setTextAppearance(R.style.B1)
-        editText.setTextColor(ContextCompat.getColor(context, R.color.colorNeutral70))
+        editText.setTextColor(ContextCompat.getColorStateList(context,
+            R.color.color_text_text_field))
         editText.setBackgroundResource(R.drawable.bg_text_field)
 
         setErrorTextAppearance(R.style.B3)
@@ -202,7 +203,7 @@ class TextFieldView: TextInputLayout {
 
         setHintTextAppearance(R.style.H3)
         defaultHintTextColor = ContextCompat.getColorStateList(context, R.color.colorNeutral40)
-        hintTextColor = ContextCompat.getColorStateList(context, R.color.colorNeutral50)
+        hintTextColor = ContextCompat.getColorStateList(context, R.color.color_hint_text_field)
 
         setIndicatorPadding()
 
