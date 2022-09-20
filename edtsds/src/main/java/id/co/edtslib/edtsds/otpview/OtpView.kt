@@ -49,6 +49,12 @@ class OtpView : LinearLayoutCompat {
 
     var delegate: OtpDelegate? = null
 
+    var isError = false
+        set(value) {
+            field = value
+            isActivated = isError
+        }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun init(attrs: AttributeSet?) {
         orientation = HORIZONTAL
@@ -144,6 +150,7 @@ class OtpView : LinearLayoutCompat {
             }
 
             editText?.addTextChangedListener {
+                isError = false
                 if (it != null) {
                     val l = it.length
                     repeat(length) { idx ->
