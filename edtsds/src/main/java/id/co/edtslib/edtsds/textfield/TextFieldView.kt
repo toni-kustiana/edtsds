@@ -166,6 +166,7 @@ class TextFieldView: TextInputLayout {
         }
         else {
             inputType = InputType.Text
+            imeOption = ImeOption.Next
         }
     }
 
