@@ -27,6 +27,7 @@ dependencies {
 # [4. TextFieldView](#TextFieldView)
 # [5. OtpView](#OtpView)
 # [6. StepperView](#StepperView)
+# [7. BadgeView](#BadgeView)
 
 # Color
 
@@ -250,3 +251,38 @@ true\
 ```kotlin
       var delegate: StepperDelegate? = null
 ```
+
+# BadgeView
+
+#### Usage
+
+```xml
+<id.co.edtslib.edtsds.badge.BadgeView
+    android:background="@color/colorNeutral70"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:label="Label"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    app:badgeType="important"/>
+```
+
+#### Attributes information
+
+##### _app:label_
+[string]: label text for badge
+
+##### _app:badgeType_
+[enum]: enum of badge type: primary, secondary, neutral, important
+
+primary:\
+![BadgeView]()
+
+secondary:\
+![BadgeView]()
+
+neutral:\
+![BadgeView]()
+
+important:\
+![BadgeView]()
