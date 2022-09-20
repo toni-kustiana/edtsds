@@ -1,15 +1,24 @@
-package id.co.edtslib.edtsds
+package id.co.edtslib.edtsds.textfield
 
 import android.content.Context
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import id.co.edtslib.edtsds.R
+import id.co.edtslib.edtsds.base.MyMaskedTextChangedListener
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone
+        Text, Password, Pin, Phone, Ktp, Address
+    }
+
+    enum class ImeOption {
+        Next, Done, Send
     }
 
     constructor(context: Context) : super(context) {
@@ -25,6 +34,25 @@ class TextFieldView: TextInputLayout {
     ) {
         init(attrs)
     }
+
+    var delegate: TextFieldDelegate? = null
+
+    var imeOption = ImeOption.Next
+        set(value) {
+            field = value
+            when(value) {
+                ImeOption.Done -> {
+                    editText?.imeOptions = EditorInfo.IME_ACTION_DONE
+                }
+                ImeOption.Send -> {
+                    editText?.imeOptions = EditorInfo.IME_ACTION_SEND
+                }
+                else -> {
+                    editText?.imeOptions = EditorInfo.IME_ACTION_NEXT
+                }
+            }
+
+        }
 
     var maxLength = 0
         set(value) {
@@ -48,20 +76,46 @@ class TextFieldView: TextInputLayout {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
                         android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
                 }
                 InputType.Pin -> {
                     endIconMode = END_ICON_PASSWORD_TOGGLE
                     editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
                         android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
                 }
                 InputType.Phone -> {
-                    editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_PHONE or
+                        android.text.InputType.TYPE_TEXT_VARIATION_PHONETIC
+
+                    setPhoneListener()
+                }
+                InputType.Ktp -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_PHONE or
                             android.text.InputType.TYPE_TEXT_VARIATION_PHONETIC
-                    maxLength = 14
+
+                    setKtpListener()
+                }
+                InputType.Address -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
+                            android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
                 }
                 else -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
                         android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
                 }
             }
         }
@@ -104,6 +158,9 @@ class TextFieldView: TextInputLayout {
             inputType = InputType.values()[v]
 
             maxLength = a.getInt(R.styleable.TextFieldView_maxLength, 0)
+
+            val e = a.getInt(R.styleable.TextFieldView_imeOptions, 0)
+            imeOption = ImeOption.values()[e]
 
             a.recycle()
         }
@@ -164,6 +221,48 @@ class TextFieldView: TextInputLayout {
 
             val view = getChildAt(1)
             view.setPadding(0, dp4, 0, 0)
+        }
+    }
+
+    private fun setPhoneListener() {
+        if (editText != null) {
+            val listener = MyMaskedTextChangedListener("08[00]-[0000]-[000000]",
+                editText!!,
+                object : MaskedTextChangedListener.ValueListener {
+                    override fun onTextChanged(
+                        maskFilled: Boolean,
+                        extractedValue: String,
+                        formattedValue: String
+                    ) {
+
+                        delegate?.onChanged("08$extractedValue")
+                    }
+
+                })
+
+            editText!!.addTextChangedListener(listener)
+            editText!!.onFocusChangeListener = listener
+        }
+    }
+
+    private fun setKtpListener() {
+        if (editText != null) {
+            val listener = MyMaskedTextChangedListener("[0000].[0000].[0000].[0000]",
+                editText!!,
+                object : MaskedTextChangedListener.ValueListener {
+                    override fun onTextChanged(
+                        maskFilled: Boolean,
+                        extractedValue: String,
+                        formattedValue: String
+                    ) {
+
+                        delegate?.onChanged(extractedValue)
+                    }
+
+                })
+
+            editText!!.addTextChangedListener(listener)
+            editText!!.onFocusChangeListener = listener
         }
     }
 }

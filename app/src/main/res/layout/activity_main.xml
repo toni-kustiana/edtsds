@@ -6,14 +6,14 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.TextFieldView
+    <id.co.edtslib.edtsds.textfield.TextFieldView
         android:hint="password"
         app:inputType="password"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <id.co.edtslib.edtsds.TextFieldView
+    <id.co.edtslib.edtsds.textfield.TextFieldView
         android:hint="pin"
         android:layout_marginTop="@dimen/dimen_16dp"
         app:inputType="pin"
@@ -21,19 +21,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <id.co.edtslib.edtsds.TextFieldView
-        android:hint="phone"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:hint="ktp"
         android:layout_marginTop="@dimen/dimen_16dp"
-        app:inputType="phone"
+        app:imeOptions="next"
+        app:inputType="ktp"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <id.co.edtslib.edtsds.TextFieldView
+    <id.co.edtslib.edtsds.textfield.TextFieldView
         android:hint="text"
+        app:imeOptions="done"
         android:layout_marginTop="@dimen/dimen_16dp"
         app:inputType="text"
-        app:maxLength="4"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
