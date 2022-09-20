@@ -15,7 +15,7 @@ allprojects {
 Add this to your app `build.gradle`:
 ```groovy
 dependencies {
-    implementation 'com.github.edtslib:edtslib:latest'
+    implementation 'com.github.edtslib:edtsds:latest'
 }
 ```
 
@@ -144,6 +144,8 @@ outline:\
 ```
 
 #### Attributes information
+
+TextFieldView is extends of TextInputLayout, you can use parent attributes. Additional attributes is
 
 ##### _app:inputType_
 [enum]: type of textfield: text, password, pin, phone, ktp, address, default text\
