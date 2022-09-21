@@ -12,7 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val otpView = findViewById<OtpView>(R.id.otpView)
-        otpView.isError = true
     }
 }

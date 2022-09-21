@@ -26,29 +26,28 @@ dependencies {
 # [3. ButtonView](#ButtonView)
 # [4. TextFieldView](#TextFieldView)
 # [5. OtpView](#OtpView)
+# [6. StepperView](#StepperView)
 
 # Color
 
 Please override colors (if need)
 
 ```xml
-
     <!-- primary -->
 
-<color name="colorPrimary50">#044B95</color>
-<color name="colorPrimary40">#0958AA</color>
-<color name="colorPrimary30">#1178D4</color>
-<color name="colorPrimary20">#368BE2</color>
-<color name="colorPrimary10">#6CA5E0</color>
+    <color name="colorPrimary50">#044B95</color>
+    <color name="colorPrimary40">#0958AA</color>
+    <color name="colorPrimary30">#1178D4</color>
+    <color name="colorPrimary20">#368BE2</color>
+    <color name="colorPrimary10">#6CA5E0</color>
 
     <!-- secondary -->
 
-<color name="colorSecondary50">#CC8000</color>
-<color name="colorSecondary40">#DA8D0B</color>
-<color name="colorSecondary30">#F29D0D</color>
-<color name="colorSecondary20">#F0AF42</color>
-<color name="colorSecondary10">#EEC786</color>
-
+    <color name="colorSecondary50">#CC8000</color>
+    <color name="colorSecondary40">#DA8D0B</color>
+    <color name="colorSecondary30">#F29D0D</color>
+    <color name="colorSecondary20">#F0AF42</color>
+    <color name="colorSecondary10">#EEC786</color>
 ```
 
 # AlertBoxView
@@ -157,7 +156,7 @@ TextFieldView is extends from TextInputLayout. Additional attributes are
 [enum]: type of action key: next, done, send, default text\
 
 ##### _app:maxLength_
-[int]: max length of input
+[int]: max legth of input
 
 #### Delegeta for receive input value of TextFieldView
 ```kotlin
@@ -209,5 +208,45 @@ var delegate: TextFieldDelegate? = null
 ### Methode for access otpview
 ```kotlin
       var isError = false
-fun clear()
+      fun clear()
+```
+
+# StepperView
+
+#### Usage
+
+```xml
+    <id.co.edtslib.edtsds.stepper.StepperView
+        android:layout_margin="16dp"
+        app:canInput="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+#### Attributes information
+
+##### _app:canInput_
+[boolean]: can input manually of stepper or no, default false/
+
+false/
+![TextFieldView](https://i.postimg.cc/j5cdRV1p/stepper1.png)
+
+true/
+![TextFieldView](https://i.postimg.cc/x1VrpxxM/stepper2.png)
+
+##### _app:minValue_
+[integer]: minimum value of stepper, default 0
+
+##### _app:maxValue_
+[integer]: maximum value of stepper, default no limit
+
+##### _app:step_
+[integer]: increment step value, default 1
+
+##### _app:value_
+[integer]: default value, default 1
+
+### Listener when value change
+```kotlin
+      var delegate: StepperDelegate? = null
 ```
