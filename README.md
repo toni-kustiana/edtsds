@@ -35,19 +35,19 @@ Please override colors (if need)
 ```xml
     <!-- primary -->
 
-    <color name="colorPrimary50">#044B95</color>
-    <color name="colorPrimary40">#0958AA</color>
-    <color name="colorPrimary30">#1178D4</color>
-    <color name="colorPrimary20">#368BE2</color>
-    <color name="colorPrimary10">#6CA5E0</color>
+<color name="colorPrimary50">#044B95</color>
+<color name="colorPrimary40">#0958AA</color>
+<color name="colorPrimary30">#1178D4</color>
+<color name="colorPrimary20">#368BE2</color>
+<color name="colorPrimary10">#6CA5E0</color>
 
     <!-- secondary -->
 
-    <color name="colorSecondary50">#CC8000</color>
-    <color name="colorSecondary40">#DA8D0B</color>
-    <color name="colorSecondary30">#F29D0D</color>
-    <color name="colorSecondary20">#F0AF42</color>
-    <color name="colorSecondary10">#EEC786</color>
+<color name="colorSecondary50">#CC8000</color>
+<color name="colorSecondary40">#DA8D0B</color>
+<color name="colorSecondary30">#F29D0D</color>
+<color name="colorSecondary20">#F0AF42</color>
+<color name="colorSecondary10">#EEC786</color>
 ```
 
 # AlertBoxView
@@ -138,11 +138,11 @@ outline:\
 
 ```xml
     <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:hint="password"
-        app:inputType="password"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:hint="password"
+    app:inputType="password"
+    android:layout_margin="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
@@ -170,10 +170,10 @@ var delegate: TextFieldDelegate? = null
 
 ```xml
    <id.co.edtslib.edtsds.otpview.OtpView
-        android:id="@+id/otpView"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/otpView"
+    android:layout_margin="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
@@ -208,7 +208,7 @@ var delegate: TextFieldDelegate? = null
 ### Methode for access otpview
 ```kotlin
       var isError = false
-      fun clear()
+fun clear()
 ```
 
 # StepperView
@@ -217,21 +217,21 @@ var delegate: TextFieldDelegate? = null
 
 ```xml
     <id.co.edtslib.edtsds.stepper.StepperView
-        android:layout_margin="16dp"
-        app:canInput="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:layout_margin="16dp"
+    app:canInput="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
 
 ##### _app:canInput_
-[boolean]: can input manually of stepper or no, default false/
+[boolean]: can input manually of stepper or no, default false\
 
-false/
+false\
 ![TextFieldView](https://i.postimg.cc/j5cdRV1p/stepper1.png)
 
-true/
+true\
 ![TextFieldView](https://i.postimg.cc/x1VrpxxM/stepper2.png)
 
 ##### _app:minValue_
