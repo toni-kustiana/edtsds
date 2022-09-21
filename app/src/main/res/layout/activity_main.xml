@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <id.co.edtslib.edtsds.RibbonView
-        android:id="@+id/ribobonView"
+        android:id="@+id/errorMessageView"
         app:type="error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

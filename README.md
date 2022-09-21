@@ -293,11 +293,11 @@ true\
 #### Usage
 
 ```xml
-<id.co.edtslib.edtsds.RibbonView
-        android:id="@+id/ribobonView"
-        app:type="error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.RibbonView
+    android:id="@+id/errorMessageView"
+    app:type="error"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
