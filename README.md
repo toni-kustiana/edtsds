@@ -18,6 +18,9 @@ dependencies {
     implementation 'com.github.edtslib:edtslib:latest'
 }
 ```
+## List of modules
+# [1. Popup](#Popup)
+
 
 ## List of components
 
@@ -29,6 +32,48 @@ dependencies {
 # [6. OtpView](#OtpView)
 # [7. StepperView](#StepperView)
 # [7. RibbonView](#RibbonView)
+
+# Popup
+
+![Popup](https://i.postimg.cc/FKkFWsQH/popupparameters.png)
+
+#### Usage
+
+For show popup please call static function
+
+### two button
+
+```kotlin
+fun show(activity: FragmentActivity, title: String?, message: String,
+                 positiveButton: String?, negativeButton: String?,
+                 positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
+                 orientation: Orientation = Orientation.Horizontal)
+```
+![Popup](https://i.postimg.cc/26Sj78yy/popup2button.png)
+
+For vertical layout: Orientation.Vertical
+
+![Popup](https://i.postimg.cc/V6zyj77F/popuptwo.png)
+
+### one button
+
+```kotlin
+fun show(activity: FragmentActivity, title: String?, message: String,
+                 positiveButton: String?, positiveClickListener: OnClickListener?) {
+            show(activity, title, message, positiveButton, null,
+                positiveClickListener, null)
+        }
+```
+![Popup](https://i.postimg.cc/XNwGNXFS/popupone.png)
+
+#### Parameters information
+
+#### Method for Popup
+For close popup, call the function close
+```kotlin
+
+Popup.close()
+```
 
 # Color
 
@@ -70,7 +115,7 @@ Please override colors (if need)
 #### Attributes information
 
 ##### _app:type_
-[enum]: enum of alert type: success, warning error\
+[enum]: enum of alert type: success, warning, error\
 error:\
 ![AlertBoxView](https://i.ibb.co/9wQNKKv/error-alert.png)
 
@@ -294,16 +339,16 @@ true\
 
 ```xml
     <id.co.edtslib.edtsds.RibbonView
-    android:id="@+id/errorMessageView"
-    app:type="error"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:id="@+id/errorMessageView"
+        app:type="error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
 
 ##### _app:type_
-[enum]: enum of alert type: success, warning error\
+[enum]: enum of alert type: success, warning, error\
 error:\
 ![AlertBoxView](https://i.postimg.cc/3RB3D9V5/error.png)
 
