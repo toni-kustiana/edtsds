@@ -23,11 +23,11 @@ dependencies {
 
 # [1. Primary/Secondary Color](#Color)
 # [2. AlertBoxView](#AlertBoxView)
-# [3. ButtonView](#ButtonView)
-# [4. TextFieldView](#TextFieldView)
-# [5. OtpView](#OtpView)
-# [6. StepperView](#StepperView)
-# [7. BadgeView](#BadgeView)
+# [3. BadgeView](#BadgeView)
+# [4. ButtonView](#ButtonView)
+# [5. TextFieldView](#TextFieldView)
+# [6. OtpView](#OtpView)
+# [7. StepperView](#StepperView)
 
 # Color
 
@@ -258,13 +258,12 @@ true\
 
 ```xml
 <id.co.edtslib.edtsds.badge.BadgeView
-    android:background="@color/colorNeutral70"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:label="Label"
     android:layout_gravity="center"
     android:foregroundGravity="center"
-    app:badgeType="important"/>
+    app:badgeType="important"
+    app:label="Label" />
 ```
 
 #### Attributes information
