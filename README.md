@@ -28,6 +28,7 @@ dependencies {
 # [5. TextFieldView](#TextFieldView)
 # [6. OtpView](#OtpView)
 # [7. StepperView](#StepperView)
+# [7. RibbonView](#RibbonView)
 
 # Color
 
@@ -70,7 +71,7 @@ Please override colors (if need)
 
 ##### _app:type_
 [enum]: enum of alert type: success, warning error\
-alert:\
+error:\
 ![AlertBoxView](https://i.ibb.co/9wQNKKv/error-alert.png)
 
 warning:\
@@ -285,4 +286,38 @@ true\
 ### Listener when value change
 ```kotlin
       var delegate: StepperDelegate? = null
+```
+
+# RibbonView
+
+#### Usage
+
+```xml
+<id.co.edtslib.edtsds.RibbonView
+        android:id="@+id/ribobonView"
+        app:type="error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+#### Attributes information
+
+##### _app:type_
+[enum]: enum of alert type: success, warning error\
+error:\
+![AlertBoxView](https://i.postimg.cc/3RB3D9V5/error.png)
+
+warning:\
+![AlertBoxView](https://i.postimg.cc/k5RVKrvr/warning.png)
+
+success:\
+![AlertBoxView](https://i.postimg.cc/PfYm0DZG/success.png)
+
+
+#### Method for show message on the RibbonView
+
+```kotlin
+
+fun show(message: Int)
+fun show(message: String?)
 ```

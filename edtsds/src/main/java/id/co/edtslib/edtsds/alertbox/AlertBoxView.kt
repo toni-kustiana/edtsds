@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewAlertSuccessBoxBinding
 
-open class AlertBoxView: FrameLayout {
+class AlertBoxView: FrameLayout {
     constructor(context: Context) : super(context) {
         init(null)
     }

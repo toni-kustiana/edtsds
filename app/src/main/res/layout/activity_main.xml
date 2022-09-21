@@ -6,9 +6,9 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:layout_margin="16dp"
-        app:canInput="true"
+    <id.co.edtslib.edtsds.RibbonView
+        android:id="@+id/ribobonView"
+        app:type="error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
