@@ -92,6 +92,41 @@ success:\
 var message: String? = null
 ```
 
+# BadgeView
+
+#### Usage
+
+```xml
+<id.co.edtslib.edtsds.badge.BadgeView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    app:badgeType="important"
+    app:label="Label" />
+```
+
+#### Attributes information
+
+##### _app:label_
+[string]: label text for badge
+
+##### _app:badgeType_
+[enum]: enum of badge type: primary, secondary, neutral, important
+
+primary:\
+![BadgeView]()
+
+secondary:\
+![BadgeView]()
+
+neutral:\
+![BadgeView]()
+
+important:\
+![BadgeView]()
+
+
 # ButtonView
 
 #### Usage
@@ -251,37 +286,3 @@ true\
 ```kotlin
       var delegate: StepperDelegate? = null
 ```
-
-# BadgeView
-
-#### Usage
-
-```xml
-<id.co.edtslib.edtsds.badge.BadgeView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:foregroundGravity="center"
-    app:badgeType="important"
-    app:label="Label" />
-```
-
-#### Attributes information
-
-##### _app:label_
-[string]: label text for badge
-
-##### _app:badgeType_
-[enum]: enum of badge type: primary, secondary, neutral, important
-
-primary:\
-![BadgeView]()
-
-secondary:\
-![BadgeView]()
-
-neutral:\
-![BadgeView]()
-
-important:\
-![BadgeView]()
