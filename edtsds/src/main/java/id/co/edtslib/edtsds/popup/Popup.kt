@@ -1,9 +1,11 @@
 package id.co.edtslib.edtsds.popup
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.View
 import android.view.View.OnClickListener
 import android.view.Window
 import android.view.WindowManager
@@ -14,11 +16,12 @@ import id.co.edtslib.edtsds.ButtonView
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DialogPopupBinding
 
-class Popup private constructor(context: Context) : Dialog(context) {
+class Popup private constructor(context: Context, private val view: View?) : Dialog(context) {
     enum class Orientation {
         Horizontal, Vertical
     }
 
+    @SuppressLint("StaticFieldLeak")
     companion object {
         private var popup: Popup? = null
         var dismissible = false
@@ -35,7 +38,7 @@ class Popup private constructor(context: Context) : Dialog(context) {
                  orientation: Orientation = Orientation.Horizontal) {
 
             if (popup == null) {
-                popup = Popup(activity)
+                popup = Popup(activity, null)
 
                 popup?.binding?.tvTitle?.isVisible = title?.isNotEmpty() == true
                 popup?.binding?.tvTitle?.text = title
@@ -94,6 +97,10 @@ class Popup private constructor(context: Context) : Dialog(context) {
             }
         }
 
+        fun show(view: View) {
+            popup = Popup(view.context, view)
+        }
+
         fun close() {
             try {
                 popup?.dismiss()
@@ -112,7 +119,7 @@ class Popup private constructor(context: Context) : Dialog(context) {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        setContentView(binding.root)
+        setContentView(view ?: binding.root)
         window?.decorView?.setBackgroundResource(android.R.color.transparent)
 
         setCancelable(dismissible)
