@@ -43,6 +43,7 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="OtpView">
+        <attr name="otpShape" format="reference" />
         <attr name="otpLength" format="integer" />
         <attr name="otpPasswordAnimate" format="integer" />
         <attr name="otpPasswordSymbol" format="string" />
@@ -73,5 +74,8 @@
     </declare-styleable>
     <declare-styleable name="RibbonView">
         <attr name="type" />
+    </declare-styleable>
+    <declare-styleable name="SlidingItemView">
+        <attr name="itemSpace" format="dimension" />
     </declare-styleable>
 </resources>
