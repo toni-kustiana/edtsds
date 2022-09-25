@@ -5,6 +5,7 @@ import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -182,7 +183,8 @@ class TextFieldView: TextInputLayout {
         val dp4 = resources.getDimensionPixelSize(R.dimen.dimen_4dp)
 
         editText.setPadding(editText.paddingStart, editText.paddingTop+dp4, editText.paddingEnd, editText.paddingBottom)
-        editText.setTextAppearance(R.style.B1)
+
+        TextViewCompat.setTextAppearance(editText, R.style.B1)
         editText.setTextColor(ContextCompat.getColorStateList(context,
             R.color.color_text_text_field))
         editText.setBackgroundResource(R.drawable.bg_text_field)
