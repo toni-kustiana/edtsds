@@ -100,6 +100,7 @@
         <attr name="space" />
         <attr name="count"  />
         <attr name="imageHeight" format="dimension" />
+        <attr name="pagerFullHeight" format="boolean" />
     </declare-styleable>
     <declare-styleable name="LinkTextView">
         <attr name="linkText" format="string" />
