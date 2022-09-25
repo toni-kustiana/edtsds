@@ -33,6 +33,7 @@ dependencies {
 # [7. StepperView](#StepperView)
 # [7. RibbonView](#RibbonView)
 # [8. PagingNavigationView](#PagingNavigationView)
+# [9. LinkTextView](#LinkTextView)
 
 # Popup
 
@@ -446,6 +447,45 @@ var count: Int = 0
 ```kotlin
     // selected index of shape
 var selectedIndex: Int = -1
+```
+# LinkTextView
+![LinkTextView](https://i.ibb.co/HtKNSnB/linktextview.png)
+
+#### Usage
+
+```xml
+    <id.co.edtslib.edtsds.LinkTextView
+        app:linkColor="#ff0000"
+        app:linkText="Syarat &amp; Ketentuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dengan melanjutkan, kamu menyetujui Syarat &amp; Ketentuan layanan di Aplikasi."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+```
+
+### Attributes information
+
+An example is shown below.
+
+```xml
+        app:linkColor="#ff0000"
+        app:linkText="Syarat &amp; Ketentuan"
+```
+
+##### _app:linkColor_
+[string]: color of link
+
+##### _app:linkText_
+[reference]: the text to be in link
+
+### Listener for click of text link
+```kotlin
+        findViewById<LinkTextView>(R.id.textView).setOnClickListener {
+            Toast.makeText(this, "Hello Link", Toast.LENGTH_SHORT).show()
+        }
 ```
 
 # BoardingView

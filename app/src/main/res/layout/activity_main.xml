@@ -7,14 +7,15 @@
     android:padding="@dimen/dimen_16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:layout_marginTop="72dp"
-        app:inputType="phone"
-        app:imeOptions="done"
-        android:hint="Nomor Ponsel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.LinkTextView
+        app:linkColor="#ff0000"
+        app:linkText="Syarat &amp; Ketentuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dengan melanjutkan, kamu menyetujui Syarat &amp; Ketentuan layanan di Aplikasi."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -101,4 +101,8 @@
         <attr name="count"  />
         <attr name="imageHeight" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="LinkTextView">
+        <attr name="linkText" format="string" />
+        <attr name="linkColor" format="color" />
+    </declare-styleable>
 </resources>
