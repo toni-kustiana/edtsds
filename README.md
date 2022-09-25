@@ -20,7 +20,7 @@ dependencies {
 ```
 ## List of modules
 # [1. Popup](#Popup)
-# [2. BoardingView](#BordingView)
+# [2. BoardingView](#BoardingView)
 
 ## List of components
 
@@ -60,10 +60,10 @@ For vertical layout: Orientation.Vertical
 
 ```kotlin
 fun show(activity: FragmentActivity, title: String?, message: String,
-                 positiveButton: String?, positiveClickListener: OnClickListener?) {
-            show(activity, title, message, positiveButton, null,
-                positiveClickListener, null)
-        }
+         positiveButton: String?, positiveClickListener: OnClickListener?) {
+    show(activity, title, message, positiveButton, null,
+        positiveClickListener, null)
+}
 ```
 ![Popup](https://i.postimg.cc/XNwGNXFS/popupone.png)
 
@@ -379,9 +379,9 @@ fun show(message: String?)
 
 ```xml
     <id.co.edtslib.edtsds.pagingnavigation.PagingNavigationView
-        android:id="@+id/exapmleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exapmleView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 ### Attributes information
@@ -425,19 +425,19 @@ You can set a listener to be notified when the user click the PagingNavigation. 
 
 ```kotlin
         val navigation = findViewById<PagingNavigation>(R.id.navigation)
-        navigation.delegate = object : PagingNavigationDelegate {
-            override fun onSelected(position: Int) {
-                Toast.makeText(this@MainActivity, "Selected Index $position",
-                    Toast.LENGTH_SHORT).show()
-            }
-        }
+navigation.delegate = object : PagingNavigationDelegate {
+    override fun onSelected(position: Int) {
+        Toast.makeText(this@MainActivity, "Selected Index $position",
+            Toast.LENGTH_SHORT).show()
+    }
+}
 ```
 
 ### Setting the view attributes via code
 For convenience, many of the PagingNavigation attributes can be set via code.
 ```kotlin
         // set size of pager
-        var count: Int = 0
+var count: Int = 0
 ```
 
 ### Method for navigation actions on the PagingNavigation
@@ -445,7 +445,7 @@ For convenience, many of the PagingNavigation attributes can be set via code.
 
 ```kotlin
     // selected index of shape
-    var selectedIndex: Int = -1
+var selectedIndex: Int = -1
 ```
 
 # BoardingView
@@ -455,10 +455,10 @@ For convenience, many of the PagingNavigation attributes can be set via code.
 
 ```xml
      <id.co.edtslib.edtsds.boarding.BoardingView
-        android:id="@+id/exampleView"
-        app:imageHeight="208dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exampleView"
+    app:imageHeight="208dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 ### Attributes information
@@ -473,13 +473,13 @@ You can fill board data list like
 
 ```kotlin
 
-    val item1 = BoardingData("ic_onboarding_1", "Belanja Mudah",
-            "One stop online store yang menyediakan berbagai macam produk dalam satu Aplikasi.")
-    val item2 = BoardingData("ic_onboarding_2", "Beragam Varian Produk",
-            "Menyediakan ribuan pilihan produk yang lengkap dengan harga terbaik dari segala kebutuhan.")
+val item1 = BoardingData("ic_onboarding_1", "Belanja Mudah",
+    "One stop online store yang menyediakan berbagai macam produk dalam satu Aplikasi.")
+val item2 = BoardingData("ic_onboarding_2", "Beragam Varian Produk",
+    "Menyediakan ribuan pilihan produk yang lengkap dengan harga terbaik dari segala kebutuhan.")
 
-    val item3 = BoardingData("ic_onboarding_3", "Banyak Promonya",
-            "Nikmati beragam promo dari indomaret untuk kamu dari promo cashback hingga gratis ongkir.")
-    
-    exampleView.list = listOf(item1, item2, item3)
+val item3 = BoardingData("ic_onboarding_3", "Banyak Promonya",
+    "Nikmati beragam promo dari indomaret untuk kamu dari promo cashback hingga gratis ongkir.")
+
+exampleView.list = listOf(item1, item2, item3)
 ```
