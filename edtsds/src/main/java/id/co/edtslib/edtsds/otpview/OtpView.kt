@@ -24,7 +24,7 @@ import id.co.edtslib.edtsds.base.NoPasteEditText
 class OtpView : LinearLayoutCompat {
     var editText: AppCompatEditText? = null
     private val textColorResId = ContextCompat.getColorStateList(context, R.color.color_neutral70_support_error)
-    private val shapeResId = R.drawable.bg_otp
+    private var shapeResId = R.drawable.bg_otp
     private var length = 4
     private var showPassword = false // false. show *
     private var pinType = PinType.Number.ordinal
@@ -65,6 +65,8 @@ class OtpView : LinearLayoutCompat {
                 R.styleable.OtpView,
                 0, 0
             )
+
+            shapeResId = a.getResourceId(R.styleable.OtpView_otpShape, 0)
 
             length = a.getInteger(R.styleable.OtpView_otpLength, 4)
             val textStyleReId = R.style.D1
