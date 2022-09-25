@@ -1,0 +1,14 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- shape for selection -->
+    <item android:state_selected="true">
+        <shape android:shape="oval">
+            <solid android:color="#1171D4" />
+        </shape>
+    </item>
+    <!-- shape for defaul -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#DCDEE3" />
+        </shape>
+    </item>
+</selector>

@@ -78,4 +78,12 @@
     <declare-styleable name="SlidingItemView">
         <attr name="itemSpace" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="PagingNavigationView">
+        <attr name="shape" format="integer" />
+        <attr name="shapeSize" format="dimension" />
+        <attr name="shapeSelectedWidth" format="dimension" />
+        <attr name="shapeSelectedHeight" format="dimension" />
+        <attr name="space" format="dimension" />
+        <attr name="count" format="integer" />
+    </declare-styleable>
 </resources>
