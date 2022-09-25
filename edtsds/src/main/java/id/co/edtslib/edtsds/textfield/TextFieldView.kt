@@ -179,6 +179,9 @@ class TextFieldView: TextInputLayout {
         layoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
         layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 
+        val dp4 = resources.getDimensionPixelSize(R.dimen.dimen_4dp)
+
+        editText.setPadding(editText.paddingStart, editText.paddingTop+dp4, editText.paddingEnd, editText.paddingBottom)
         editText.setTextAppearance(R.style.B1)
         editText.setTextColor(ContextCompat.getColorStateList(context,
             R.color.color_text_text_field))
@@ -228,7 +231,7 @@ class TextFieldView: TextInputLayout {
 
     private fun setPhoneListener() {
         if (editText != null) {
-            val listener = MyMaskedTextChangedListener("08[00]-[0000]-[000000]",
+            val listener = MyMaskedTextChangedListener("[00]-[0000]-[000000]",
                 editText!!,
                 object : MaskedTextChangedListener.ValueListener {
                     override fun onTextChanged(
@@ -244,6 +247,8 @@ class TextFieldView: TextInputLayout {
 
             editText!!.addTextChangedListener(listener)
             editText!!.onFocusChangeListener = listener
+
+            prefixText = "08"
         }
     }
 

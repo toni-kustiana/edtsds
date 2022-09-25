@@ -4,11 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
+    android:padding="@dimen/dimen_16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.boarding.BoardingView
-        android:id="@+id/exampleView"
-        app:imageHeight="208dp"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:layout_marginTop="72dp"
+        app:inputType="phone"
+        app:imeOptions="done"
+        android:hint="Nomor Ponsel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
