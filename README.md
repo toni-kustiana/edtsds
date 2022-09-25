@@ -45,9 +45,9 @@ For show popup please call static function
 
 ```kotlin
 fun show(activity: FragmentActivity, title: String?, message: String,
-                 positiveButton: String?, negativeButton: String?,
-                 positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
-                 orientation: Orientation = Orientation.Horizontal)
+         positiveButton: String?, negativeButton: String?,
+         positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
+         orientation: Orientation = Orientation.Horizontal)
 ```
 ![Popup](https://i.postimg.cc/26Sj78yy/popup2button.png)
 
@@ -260,6 +260,9 @@ var delegate: TextFieldDelegate? = null
 
 #### Attributes information
 
+##### _app:otpShape_
+[reference]: shape of input otp area, default
+
 ##### _app:pinType_
 [enum]: input type of PIN
 1. number: pin show number
@@ -339,10 +342,10 @@ true\
 
 ```xml
     <id.co.edtslib.edtsds.RibbonView
-        android:id="@+id/errorMessageView"
-        app:type="error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/errorMessageView"
+    app:type="error"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
