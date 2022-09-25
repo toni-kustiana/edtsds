@@ -6,6 +6,12 @@
         <enum name="error" value="2" />
     </attr>
     <attr name="message" format="string" />
+    <attr name="shape" format="integer" />
+    <attr name="shapeSize" format="dimension" />
+    <attr name="shapeSelectedWidth" format="dimension" />
+    <attr name="shapeSelectedHeight" format="dimension" />
+    <attr name="space" format="dimension" />
+    <attr name="count" format="integer" />
 
     <declare-styleable name="AlertBoxView">
         <attr name="type" />
@@ -79,11 +85,20 @@
         <attr name="itemSpace" format="dimension" />
     </declare-styleable>
     <declare-styleable name="PagingNavigationView">
-        <attr name="shape" format="integer" />
-        <attr name="shapeSize" format="dimension" />
-        <attr name="shapeSelectedWidth" format="dimension" />
-        <attr name="shapeSelectedHeight" format="dimension" />
-        <attr name="space" format="dimension" />
-        <attr name="count" format="integer" />
+        <attr name="shape"  />
+        <attr name="shapeSize"  />
+        <attr name="shapeSelectedWidth"  />
+        <attr name="shapeSelectedHeight"  />
+        <attr name="space" />
+        <attr name="count"  />
+    </declare-styleable>
+    <declare-styleable name="BoardingView">
+        <attr name="shape"  />
+        <attr name="shapeSize"  />
+        <attr name="shapeSelectedWidth"  />
+        <attr name="shapeSelectedHeight"  />
+        <attr name="space" />
+        <attr name="count"  />
+        <attr name="imageHeight" format="dimension" />
     </declare-styleable>
 </resources>

@@ -6,15 +6,9 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.RibbonView
-        android:id="@+id/errorMessageView"
-        app:type="error"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <SeekBar
-        android:max="100"
-        android:id="@+id/seekBar"
+    <id.co.edtslib.edtsds.boarding.BoardingView
+        android:id="@+id/exampleView"
+        app:imageHeight="208dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

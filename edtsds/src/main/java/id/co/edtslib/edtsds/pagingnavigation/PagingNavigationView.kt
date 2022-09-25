@@ -8,11 +8,11 @@ import id.co.edtslib.edtsds.R
 
 class PagingNavigationView : LinearLayoutCompat {
     var delegate: PagingNavigationDelegate? = null
-    private var space = 0f
-    private var shapeSize = 0f
-    private var shapeSelectedWidth = 0f
-    private var shapeSelectedHeight = 0f
-    private var shapeResId = 0
+    var space = 0f
+    var shapeSize = 0f
+    var shapeSelectedWidth = 0f
+    var shapeSelectedHeight = 0f
+    var shapeResId = 0
 
     // set size of pager
     var count: Int = 0

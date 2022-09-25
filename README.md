@@ -20,6 +20,7 @@ dependencies {
 ```
 ## List of modules
 # [1. Popup](#Popup)
+# [2. BoardingView](#BordingView)
 
 ## List of components
 
@@ -445,4 +446,40 @@ For convenience, many of the PagingNavigation attributes can be set via code.
 ```kotlin
     // selected index of shape
     var selectedIndex: Int = -1
+```
+
+# BoardingView
+![BoardingView](https://i.postimg.cc/dV4w1xJm/boardingview.png)
+
+#### Usage
+
+```xml
+     <id.co.edtslib.edtsds.boarding.BoardingView
+        android:id="@+id/exampleView"
+        app:imageHeight="208dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+### Attributes information
+##### _app:imageHeight_
+[dimension]: height of image
+
+You can use all pagenavigation attributes fot setup page navigation view [PagingNavigationView](#PagingNavigationView)
+
+### Data
+
+You can fill board data list like
+
+```kotlin
+
+    val item1 = BoardingData("ic_onboarding_1", "Belanja Mudah",
+            "One stop online store yang menyediakan berbagai macam produk dalam satu Aplikasi.")
+    val item2 = BoardingData("ic_onboarding_2", "Beragam Varian Produk",
+            "Menyediakan ribuan pilihan produk yang lengkap dengan harga terbaik dari segala kebutuhan.")
+
+    val item3 = BoardingData("ic_onboarding_3", "Banyak Promonya",
+            "Nikmati beragam promo dari indomaret untuk kamu dari promo cashback hingga gratis ongkir.")
+    
+    exampleView.list = listOf(item1, item2, item3)
 ```
