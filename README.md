@@ -34,6 +34,7 @@ dependencies {
 # [7. RibbonView](#RibbonView)
 # [8. PagingNavigationView](#PagingNavigationView)
 # [9. LinkTextView](#LinkTextView)
+# [10. OtpRemainingView](#OtpRemainingView)
 
 # Popup
 
@@ -486,6 +487,73 @@ An example is shown below.
         findViewById<LinkTextView>(R.id.textView).setOnClickListener {
             Toast.makeText(this, "Hello Link", Toast.LENGTH_SHORT).show()
         }
+```
+
+# OtpRemainingView
+![OtpRemainingView](https://i.ibb.co/R05d6NJ/pincounterview.jpg)
+![OtpRemainingView](https://i.ibb.co/2qW4FCj/pin3.jpg)
+
+#### Usage
+
+```xml
+    <id.co.edtslib.edtsds.otpremainingview.OtpRemainingView
+        android:id="@+id/exampleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:otpRemainingText="@string/send_code_counter"
+        app:otpInterval="180"
+        app:otpRemainingFormat="text"
+        app:otpRemainingHour="jam"
+        app:otpRemainingMinute="menit"
+        app:otpRemainingSecond="detik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+
+### Attributes information
+
+##### _app:otpRemainingText_
+[string]: text of counter, must contains %s, which will replace with remain time, for example
+```xml
+<string name="send_code_counter"><![CDATA[Kirim ulang dapat dilakukan setelah <b>%s</b>.]]></string>
+```
+
+##### _app:otpInterval_
+[integer]: interval time, in second
+
+##### _app:otpRemainingFormat_
+[enum]: clock: format remain hh:mm:ss, text: format remain time hour [hour lang] minute [minute lang] second psecond lang]
+
+##### _app:otpRemainingHour_
+[string]: hour wording, use if otpRemainingHour = text
+
+##### _app:otpRemainingMinute_
+[string]: minute wording, use if otpRemainingMinute = text
+
+##### _app:otpRemainingSecond_
+[string]: second wording, use if otpRemainingSecond = text
+
+### Method for navigation actions on the OtpRemainingView
+You can start count with call start method
+
+```kotlin
+    fun start() 
+```
+
+### Listening for OtpRemainingView
+
+You can set a listener to be notified when remain time is up. An example is shown below.
+
+```kotlin
+        val otpRemainingView = findViewById<OtpRemainingView>(R.id.otpRemainingView)
+otpRemainingView.delegate = object : OtpRemainingDelegate {
+    override fun onExpired() {
+        Toast.makeText(this@MainActivity, "Hi, counter is expired", Toast.LENGTH_SHORT).show()
+
+    }
+}
 ```
 
 # BoardingView
