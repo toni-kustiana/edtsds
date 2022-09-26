@@ -106,4 +106,16 @@
         <attr name="linkText" format="string" />
         <attr name="linkColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="OtpRemainingView">
+        <attr name="otpInterval" format="integer" />
+        <attr name="otpRemainingText" format="string" />
+        <attr name="otpRemainingFormat" format="enum">
+            <enum name="clock" value="0"/>
+            <enum name="text" value="1"/>
+        </attr>
+        <attr name="otpRemainingHour" format="string" />
+        <attr name="otpRemainingMinute" format="string" />
+        <attr name="otpRemainingSecond" format="string" />
+
+    </declare-styleable>
 </resources>

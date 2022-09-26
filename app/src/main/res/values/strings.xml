@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Edts DS Example</string>
+    <string name="send_code_counter"><![CDATA[Kirim ulang dapat dilakukan setelah <b>%s</b>.]]></string>
+
 </resources>
