@@ -262,7 +262,7 @@ outline:\
 TextFieldView is extends from TextInputLayout. Additional attributes are
 
 ##### _app:inputType_
-[enum]: type of textfield: text, password, pin, phone, ktp, address, default text\
+[enum]: type of textfield: text, password, pin, phone, ktp, address, search, default text\
 
 ##### _app:imeOptions_
 [enum]: type of action key: next, done, send, default text\
