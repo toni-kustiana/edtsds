@@ -35,9 +35,6 @@ class OtpVerificationView: FrameLayout {
 
     private fun init(attrs: AttributeSet?) {
         binding.bvVerification.isEnabled = false
-        binding.bvVerification.setOnClickListener {
-            delegate?.onSubmit()
-        }
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -49,6 +46,9 @@ class OtpVerificationView: FrameLayout {
             binding.otpView.delegate = object : OtpDelegate {
                 override fun onCompleted(pin: String) {
                     binding.bvVerification.isEnabled = true
+                    binding.bvVerification.setOnClickListener {
+                        delegate?.onSubmit(pin)
+                    }
                 }
 
                 override fun onTextChanged(text: String) {

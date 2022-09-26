@@ -19,7 +19,7 @@ class OtpRemainingView: FrameLayout {
     var interval = 0L
     private var startTime = 0L
     private var format = FormatType.Clock
-    var counterText: String? = null
+    var remainingText: String? = null
     private var sHour: String? = null
     private var sMinute: String? = null
     private var sSecond: String? = null
@@ -55,7 +55,7 @@ class OtpRemainingView: FrameLayout {
                 0, 0
             )
 
-            counterText = a.getString(R.styleable.OtpRemainingView_otpRemainingText)
+            remainingText = a.getString(R.styleable.OtpRemainingView_otpRemainingText)
             interval = a.getInt(R.styleable.OtpRemainingView_otpInterval, 0).toLong()
             format = FormatType.values()[a.getInteger(R.styleable.OtpRemainingView_otpRemainingFormat, 0)]
 
@@ -113,7 +113,7 @@ class OtpRemainingView: FrameLayout {
     }
 
     private fun showRemain(interval: Long) {
-        if (counterText != null) {
+        if (remainingText != null) {
             val hour = interval / 3600
             val minute = (interval % 3600) / 60
             val second = (interval % 3600) % 60
@@ -158,7 +158,7 @@ class OtpRemainingView: FrameLayout {
                 }
             }
 
-            binding.tvCounter.text = HtmlCompat.fromHtml(String.format(counterText!!, remain),
+            binding.tvCounter.text = HtmlCompat.fromHtml(String.format(remainingText!!, remain),
                 HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
     }
