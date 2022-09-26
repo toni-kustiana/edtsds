@@ -45,20 +45,22 @@ dependencies {
 
 ```xml
     <id.co.edtslib.edtsds.otpverification.OtpVerificationView
-        android:id="@+id/exampleView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exampleView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 ### Set attribute and data
 
 ```kotlin
     val otpView = binding.otpView
-    val otpRemainingView = binding.otpRemainingView
+val otpRemainingView = binding.otpRemainingView
+
+var delegate: OtpVerificationDelegate? = null
 ```
 
 # Popup
