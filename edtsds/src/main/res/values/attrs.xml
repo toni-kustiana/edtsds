@@ -48,19 +48,6 @@
             <enum name="send" value="2" />
         </attr>
     </declare-styleable>
-    <declare-styleable name="OtpView">
-        <attr name="otpShape" format="reference" />
-        <attr name="otpLength" format="integer" />
-        <attr name="otpPasswordAnimate" format="integer" />
-        <attr name="otpPasswordSymbol" format="string" />
-        <attr name="otpPlaceHolderText" format="string" />
-        <attr name="otpPlaceHolderTextColor" format="color" />
-        <attr name="otpType" format="enum">
-            <enum name="number" value="0" />
-            <enum name="password" value="1" />
-            <enum name="passwordWithEye" value="2" />
-        </attr>
-    </declare-styleable>
     <declare-styleable name="StepperView">
         <attr name="minValue" format="integer" />
         <attr name="maxValue" format="integer" />
@@ -106,8 +93,26 @@
         <attr name="linkText" format="string" />
         <attr name="linkColor" format="color" />
     </declare-styleable>
+
+    <!-- otp -->
+    <attr name="otpInterval" format="integer" />
+
+    <declare-styleable name="OtpView">
+        <attr name="otpShape" format="reference" />
+        <attr name="otpLength" format="integer" />
+        <attr name="otpPasswordAnimate" format="integer" />
+        <attr name="otpPasswordSymbol" format="string" />
+        <attr name="otpPlaceHolderText" format="string" />
+        <attr name="otpPlaceHolderTextColor" format="color" />
+        <attr name="otpType" format="enum">
+            <enum name="number" value="0" />
+            <enum name="password" value="1" />
+            <enum name="passwordWithEye" value="2" />
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="OtpRemainingView">
-        <attr name="otpInterval" format="integer" />
+        <attr name="otpInterval" />
         <attr name="otpRemainingText" format="string" />
         <attr name="otpRemainingFormat" format="enum">
             <enum name="clock" value="0"/>
@@ -117,5 +122,8 @@
         <attr name="otpRemainingMinute" format="string" />
         <attr name="otpRemainingSecond" format="string" />
 
+    </declare-styleable>
+    <declare-styleable name="OtpVerificationView">
+        <attr name="otpInterval" />
     </declare-styleable>
 </resources>

@@ -19,7 +19,7 @@ class OtpRemainingView: FrameLayout {
     var interval = 0L
     private var startTime = 0L
     private var format = FormatType.Clock
-    private var counterText: String? = null
+    var counterText: String? = null
     private var sHour: String? = null
     private var sMinute: String? = null
     private var sSecond: String? = null
