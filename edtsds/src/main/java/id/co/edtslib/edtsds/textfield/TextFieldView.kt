@@ -5,6 +5,7 @@ import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
@@ -15,11 +16,11 @@ import id.co.edtslib.edtsds.base.MyMaskedTextChangedListener
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address
+        Text, Password, Pin, Phone, Ktp, Address, Search
     }
 
     enum class ImeOption {
-        Next, Done, Send
+        Next, Done, Send, Search
     }
 
     constructor(context: Context) : super(context) {
@@ -36,6 +37,7 @@ class TextFieldView: TextInputLayout {
         init(attrs)
     }
 
+    private var hint: String? = null
     var delegate: TextFieldDelegate? = null
 
     var imeOption = ImeOption.Next
@@ -47,6 +49,9 @@ class TextFieldView: TextInputLayout {
                 }
                 ImeOption.Send -> {
                     editText?.imeOptions = EditorInfo.IME_ACTION_SEND
+                }
+                ImeOption.Search -> {
+                    editText?.imeOptions = EditorInfo.IME_ACTION_SEARCH
                 }
                 else -> {
                     editText?.imeOptions = EditorInfo.IME_ACTION_NEXT
@@ -110,6 +115,28 @@ class TextFieldView: TextInputLayout {
                         delegate?.onChanged(it?.toString())
                     }
                 }
+                InputType.Search -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
+                            android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+
+                    editText?.addTextChangedListener {
+                        endIconMode = if (it?.toString()?.isNotEmpty() == true) END_ICON_CUSTOM else END_ICON_NONE
+                        endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_search_cancel,
+                            null)
+                        setEndIconOnClickListener {
+                            editText?.text = null
+                        }
+
+                        delegate?.onChanged(it?.toString())
+                    }
+
+                    editText?.setOnFocusChangeListener { _, b ->
+                        isHintEnabled = ! b
+                    }
+
+                    startIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_search,
+                        null)
+                }
                 else -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
                         android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
@@ -146,7 +173,8 @@ class TextFieldView: TextInputLayout {
     }
 
     private fun init(attrs: AttributeSet?) {
-        setup()
+        val editText = TextInputEditText(context)
+        addView(editText)
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -169,20 +197,31 @@ class TextFieldView: TextInputLayout {
             inputType = InputType.Text
             imeOption = ImeOption.Next
         }
+
+        setup(editText)
     }
 
 
-    private fun setup() {
-        val editText = TextInputEditText(context)
-        addView(editText)
+    private fun setup(editText: TextInputEditText) {
+        hint = editText.hint?.toString()
 
         val layoutParams = editText.layoutParams
         layoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
         layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 
-        val dp4 = resources.getDimensionPixelSize(R.dimen.dimen_4dp)
+        if (inputType == InputType.Search) {
+            editText.setPadding(0, 0, 0, 0)
+        }
+        else {
+            val dp4 = resources.getDimensionPixelSize(R.dimen.dimen_4dp)
 
-        editText.setPadding(editText.paddingStart, editText.paddingTop+dp4, editText.paddingEnd, editText.paddingBottom)
+            editText.setPadding(
+                editText.paddingStart,
+                editText.paddingTop + dp4,
+                editText.paddingEnd,
+                editText.paddingBottom
+            )
+        }
 
         TextViewCompat.setTextAppearance(editText, R.style.B1)
         editText.setTextColor(ContextCompat.getColorStateList(context,
@@ -211,8 +250,6 @@ class TextFieldView: TextInputLayout {
         hintTextColor = ContextCompat.getColorStateList(context, R.color.color_hint_text_field)
 
         setIndicatorPadding()
-
-        errorIconDrawable = null
     }
 
     override fun setError(errorText: CharSequence?) {

@@ -40,12 +40,14 @@
             <enum name="phone" value="3" />
             <enum name="ktp" value="4" />
             <enum name="address" value="5" />
+            <enum name="search" value="6" />
         </attr>
         <attr name="maxLength" format="integer" />
         <attr name="imeOptions" format="enum">
             <enum name="next" value="0" />
             <enum name="done" value="1" />
             <enum name="send" value="2" />
+            <enum name="search" value="3" />
         </attr>
     </declare-styleable>
     <declare-styleable name="StepperView">
