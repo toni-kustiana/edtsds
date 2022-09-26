@@ -21,6 +21,7 @@ dependencies {
 ## List of modules
 # [1. Popup](#Popup)
 # [2. BoardingView](#BoardingView)
+# [3. OtpVerificationView](#OtpVerificationView)
 
 ## List of components
 
@@ -35,6 +36,30 @@ dependencies {
 # [8. PagingNavigationView](#PagingNavigationView)
 # [9. LinkTextView](#LinkTextView)
 # [10. OtpRemainingView](#OtpRemainingView)
+
+# OtpVerificationView
+
+![OtpVerificationView](https://i.postimg.cc/g2JbJkY9/otpverification.png)
+
+#### Usage
+
+```xml
+    <id.co.edtslib.edtsds.otpverification.OtpVerificationView
+        android:id="@+id/exampleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+### Set attribute and data
+
+```kotlin
+    val otpView = binding.otpView
+    val otpRemainingView = binding.otpRemainingView
+```
 
 # Popup
 
