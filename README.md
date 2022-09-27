@@ -22,6 +22,7 @@ dependencies {
 # [1. Popup](#Popup)
 # [2. BoardingView](#BoardingView)
 # [3. OtpVerificationView](#OtpVerificationView)
+# [4. SlidingBannerView](#SlidingBannerView)
 
 ## List of components
 
@@ -37,6 +38,41 @@ dependencies {
 # [9. LinkTextView](#LinkTextView)
 # [10. OtpRemainingView](#OtpRemainingView)
 
+# SlidingBannerView
+
+![SlidingBannerView](https://i.postimg.cc/t4ycyTG1/slidingbanerrview.png)
+
+
+#### Usage
+
+```xml
+    <id.co.edtslib.edtsds.list.banner.SlidingBannerView
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:id="@+id/exampleView"
+        app:itemSpace="@dimen/dimen_8dp"
+        android:paddingStart="@dimen/dimen_16dp"
+        app:itemPreviewSize="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+#### Attributes information
+
+##### _app:itemSpace_
+[dimension]: space between item
+
+##### _app:itemPreviewSize_
+[dimension]: preview size of next item
+
+### Set data
+
+```kotlin
+    val exampleView = findViewById<SlidingBannerView>(R.id.exampleView)
+        exampleView.data = listOf("https://i.postimg.cc/Z0twhtqF/banner1.png",
+            "https://i.postimg.cc/Z0twhtqF/banner1.png", "https://i.postimg.cc/Z0twhtqF/banner1.png")
+```
+
+
 # OtpVerificationView
 
 ![OtpVerificationView](https://i.postimg.cc/g2JbJkY9/otpverification.png)
@@ -45,22 +81,22 @@ dependencies {
 
 ```xml
     <id.co.edtslib.edtsds.otpverification.OtpVerificationView
-    android:id="@+id/exampleView"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:id="@+id/exampleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 ```
 
 ### Set attribute and data
 
 ```kotlin
     val otpView = binding.otpView
-val otpRemainingView = binding.otpRemainingView
-
-var delegate: OtpVerificationDelegate? = null
+    val otpRemainingView = binding.otpRemainingView
+    
+    var delegate: OtpVerificationDelegate? = null
 ```
 
 # Popup
@@ -262,7 +298,7 @@ outline:\
 TextFieldView is extends from TextInputLayout. Additional attributes are
 
 ##### _app:inputType_
-[enum]: type of textfield: text, password, pin, phone, ktp, address, search, default text\
+[enum]: type of textfield: text, password, pin, phone, ktp, address, default text\
 
 ##### _app:imeOptions_
 [enum]: type of action key: next, done, send, default text\
@@ -575,12 +611,12 @@ You can set a listener to be notified when remain time is up. An example is show
 
 ```kotlin
         val otpRemainingView = findViewById<OtpRemainingView>(R.id.otpRemainingView)
-otpRemainingView.delegate = object : OtpRemainingDelegate {
-    override fun onExpired() {
-        Toast.makeText(this@MainActivity, "Hi, counter is expired", Toast.LENGTH_SHORT).show()
-
-    }
-}
+        otpRemainingView.delegate = object : OtpRemainingDelegate {
+            override fun onExpired() {
+                Toast.makeText(this@MainActivity, "Hi, counter is expired", Toast.LENGTH_SHORT).show()
+                
+            }
+        }
 ```
 
 # BoardingView
