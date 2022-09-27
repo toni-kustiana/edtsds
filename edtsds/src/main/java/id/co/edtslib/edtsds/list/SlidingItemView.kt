@@ -74,7 +74,7 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
     protected abstract fun isEqual(a: T, b: T): Boolean
     protected abstract fun createAdapter(): BaseRecyclerViewAdapter<viewBinding, T>
 
-    private fun init(attrs: AttributeSet?) {
+    protected open fun init(attrs: AttributeSet?) {
         adapter = createAdapter()
 
         val startSnapHelper = StartSnapHelper()
