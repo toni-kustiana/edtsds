@@ -7,9 +7,10 @@ import id.co.edtslib.edtsds.databinding.AdapterBannerBinding
 
 class BannerAdapter: BaseRecyclerViewAdapter<AdapterBannerBinding, String>() {
     var height = 0
+    var roundedCorners = 0
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterBannerBinding
         get() = AdapterBannerBinding::inflate
 
-    override fun createHolder() = BannerHolder(binding, height)
+    override fun createHolder() = BannerHolder(binding, height, roundedCorners)
 }

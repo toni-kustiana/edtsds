@@ -3,11 +3,13 @@ package id.co.edtslib.edtsds.list.banner
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
 import id.co.edtslib.baserecyclerview.BaseViewHolder
 import id.co.edtslib.edtsds.databinding.AdapterBannerBinding
 
-class BannerHolder(private val binding: AdapterBannerBinding, private var height: Int):
+class BannerHolder(private val binding: AdapterBannerBinding, private var height: Int,
+                   private var roundedCorners: Int):
     BaseViewHolder<String>(binding) {
     override fun setData(
         list: MutableList<String>,
@@ -21,16 +23,26 @@ class BannerHolder(private val binding: AdapterBannerBinding, private var height
                 if (lp.height != height) {
                     lp.height = height
                     binding.imageView.post {
-                        Glide.with(binding.root.context).load(list[position]).into(binding.imageView)
+                        loadImage(list[position])
                     }
                 }
                 else {
-                    Glide.with(binding.root.context).load(list[position]).into(binding.imageView)
+                    loadImage(list[position])
                 }
             }
         }
         else {
-            Glide.with(binding.root.context).load(list[position]).into(binding.imageView)
+            loadImage(list[position])
+        }
+    }
+
+    private fun loadImage(url: String) {
+        if (roundedCorners > 0) {
+            Glide.with(binding.root.context).load(url).transform(RoundedCorners(roundedCorners)).into(binding.imageView)
+        }
+        else {
+            Glide.with(binding.root.context).load(url).into(binding.imageView)
+
         }
     }
 }

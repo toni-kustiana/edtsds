@@ -71,18 +71,22 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
         init(attrs)
     }
 
+    var snap = false
+        set(value) {
+            field = value
+            if (value) {
+                val startSnapHelper = StartSnapHelper()
+                startSnapHelper.attachToRecyclerView(this)
+            }
+        }
+
     protected abstract fun isEqual(a: T, b: T): Boolean
     protected abstract fun createAdapter(): BaseRecyclerViewAdapter<viewBinding, T>
 
     protected open fun init(attrs: AttributeSet?) {
         adapter = createAdapter()
-
-        val startSnapHelper = StartSnapHelper()
-        startSnapHelper.attachToRecyclerView(this)
-
-        clipToPadding = false
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
+        clipToPadding = false
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -97,6 +101,9 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
             lPaddingEnd = paddingStart
             itemPreviewSize = a.getDimensionPixelSize(R.styleable.SlidingItemView_itemPreviewSize,
                 paddingStart)
+
+            snap = a.getBoolean(R.styleable.SlidingItemView_snap,
+                false)
 
             setPadding(paddingStart, paddingTop, itemPreviewSize, paddingBottom)
             addItemDecoration(ItemDecoration(size))

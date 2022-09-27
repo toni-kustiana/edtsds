@@ -21,6 +21,8 @@ class SlidingBannerView: SlidingItemView<AdapterBannerBinding, String> {
     override fun init(attrs: AttributeSet?) {
         super.init(attrs)
 
+        snap = true
+
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
                 attrs,
@@ -31,8 +33,12 @@ class SlidingBannerView: SlidingItemView<AdapterBannerBinding, String> {
             val bannerHeight = a.getDimensionPixelSize(
                 R.styleable.SlidingBannerView_bannerHeight, 0)
 
+            val roundedCorners = a.getDimensionPixelSize(
+                R.styleable.SlidingBannerView_bannerCorner, 0)
+
             val adapter = adapter as BannerAdapter
             adapter.height = bannerHeight
+            adapter.roundedCorners = roundedCorners
 
             a.recycle()
         }
