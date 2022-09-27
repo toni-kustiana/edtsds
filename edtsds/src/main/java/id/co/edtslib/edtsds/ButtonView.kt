@@ -34,11 +34,12 @@ class ButtonView: AppCompatTextView {
         set(value) {
             field = value
 
-            val dp12 = resources.getDimensionPixelSize(R.dimen.dimen_12dp)
             val left = if (value == ButtonSize.Small) resources.getDimensionPixelSize(R.dimen.dimen_12dp)
                 else resources.getDimensionPixelSize(R.dimen.dimen_16dp)
+            val top = if (value == ButtonSize.Small) resources.getDimensionPixelSize(R.dimen.dimen_8dp)
+            else resources.getDimensionPixelSize(R.dimen.dimen_12dp)
 
-            setPadding(left, dp12, left, dp12)
+            setPadding(left, top, left, top)
 
             TextViewCompat.setTextAppearance(this, if (value == ButtonSize.Small) R.style.H4
                 else R.style.H2)

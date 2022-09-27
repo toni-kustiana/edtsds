@@ -100,12 +100,14 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
 
             lPaddingEnd = paddingStart
             itemPreviewSize = a.getDimensionPixelSize(R.styleable.SlidingItemView_itemPreviewSize,
-                paddingStart)
+                0)
 
             snap = a.getBoolean(R.styleable.SlidingItemView_snap,
                 false)
 
-            setPadding(paddingStart, paddingTop, itemPreviewSize, paddingBottom)
+            if (itemPreviewSize > 0) {
+                setPadding(paddingStart, paddingTop, itemPreviewSize, paddingBottom)
+            }
             addItemDecoration(ItemDecoration(size))
 
             a.recycle()
