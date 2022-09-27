@@ -11,10 +11,9 @@
         android:layout_marginTop="@dimen/dimen_16dp"
         android:id="@+id/exampleView"
         app:itemSpace="@dimen/dimen_8dp"
-        android:background="@drawable/bg_support_warning"
         android:paddingStart="@dimen/dimen_16dp"
         app:itemPreviewSize="32dp"
-        app:bannerCorner="@dimen/dimen_32dp"
+        app:bannerCorner="@dimen/dimen_8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="RtlSymmetry" />
