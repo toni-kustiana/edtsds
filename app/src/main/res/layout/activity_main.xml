@@ -2,21 +2,20 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="@dimen/dimen_16dp"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        app:inputType="search"
-        app:imeOptions="search"
+    <id.co.edtslib.edtsds.list.banner.SlidingBannerView
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:id="@+id/exampleView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemSpace="@dimen/dimen_8dp"
+        android:paddingStart="@dimen/dimen_16dp"
+        app:itemPreviewSize="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:ignore="RtlSymmetry" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--

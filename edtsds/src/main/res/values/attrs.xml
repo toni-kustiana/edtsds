@@ -72,6 +72,7 @@
     </declare-styleable>
     <declare-styleable name="SlidingItemView">
         <attr name="itemSpace" format="dimension" />
+        <attr name="itemPreviewSize" format="dimension" />
     </declare-styleable>
     <declare-styleable name="PagingNavigationView">
         <attr name="shape"  />
