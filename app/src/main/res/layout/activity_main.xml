@@ -7,22 +7,26 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <id.co.edtslib.edtsds.ButtonView
-        app:size="small"
-        android:text="abah adilah"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.list.banner.SlidingBannerView
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:id="@+id/exampleView"
-        app:itemSpace="@dimen/dimen_8dp"
-        android:paddingStart="@dimen/dimen_16dp"
-        app:itemPreviewSize="0dp"
-        app:bannerCorner="@dimen/dimen_8dp"
+    <id.co.edtslib.edtsds.list.SlidingItemLayoutView
+        android:id="@+id/lll"
+        android:background="@color/colorPrimary30"
+        app:drawableStartCompat="@drawable/flash"
+        app:drawableWidth="120dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="RtlSymmetry" />
+        android:layout_height="wrap_content">
+        <id.co.edtslib.edtsds.list.banner.SlidingBannerView
+            android:paddingTop="@dimen/dimen_12dp"
+            android:paddingBottom="@dimen/dimen_12dp"
+            android:id="@+id/exampleView"
+            app:itemSpace="@dimen/dimen_8dp"
+            android:paddingStart="120dp"
+            app:itemPreviewSize="0dp"
+            app:bannerCorner="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlSymmetry" />
+
+    </id.co.edtslib.edtsds.list.SlidingItemLayoutView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--

@@ -75,6 +75,10 @@
         <attr name="itemPreviewSize" format="dimension" />
         <attr name="snap" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="SlidingItemLayoutView">
+        <attr name="drawableStartCompat" format="reference" />
+        <attr name="drawableWidth" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="SlidingBannerView">
         <attr name="bannerHeight" format="dimension" />
         <attr name="bannerCorner" format="dimension" />
