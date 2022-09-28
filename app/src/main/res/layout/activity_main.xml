@@ -10,8 +10,6 @@
     <id.co.edtslib.edtsds.list.SlidingItemLayoutView
         android:id="@+id/lll"
         android:background="@color/colorPrimary30"
-        app:drawableStartCompat="@drawable/flash"
-        app:drawableWidth="120dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <id.co.edtslib.edtsds.list.banner.SlidingBannerView
