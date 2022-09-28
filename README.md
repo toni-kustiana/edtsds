@@ -45,7 +45,7 @@ dependencies {
 
 ![SlidingItemLayoutView](https://i.postimg.cc/K8JgG4YS/slid.png)
 
-First child of view must be SlidingItemView [#SlidingItemView]
+First child of view must be SlidingItemView [SlidingItemView](#SlidingItemView)
 
 #### Usage
 
