@@ -22,6 +22,7 @@ dependencies {
 # [1. Popup](#Popup)
 # [2. BoardingView](#BoardingView)
 # [3. OtpVerificationView](#OtpVerificationView)
+# [5. SlidingItemLayoutView](#SlidingBannerView)
 # [4. SlidingBannerView](#SlidingBannerView)
 
 ## List of components
@@ -37,6 +38,69 @@ dependencies {
 # [8. PagingNavigationView](#PagingNavigationView)
 # [9. LinkTextView](#LinkTextView)
 # [10. OtpRemainingView](#OtpRemainingView)
+# [11. SlidingItemView](#SlidingItemView)
+
+
+# SlidingItemLayoutView
+
+![SlidingItemLayoutView](https://i.postimg.cc/K8JgG4YS/slid.png)
+
+First child of view must be SlidingItemView [#SlidingItemView]
+
+#### Usage
+
+```xml
+<id.co.edtslib.edtsds.list.SlidingItemLayoutView
+        android:id="@+id/lll"
+        android:background="@color/colorPrimary30"
+        app:drawableStartCompat="@drawable/flash"
+        app:drawableWidth="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <id.co.edtslib.edtsds.list.banner.SlidingBannerView
+            android:paddingTop="@dimen/dimen_12dp"
+            android:paddingBottom="@dimen/dimen_12dp"
+            android:id="@+id/exampleView"
+            app:itemSpace="@dimen/dimen_8dp"
+            android:paddingStart="120dp"
+            app:itemPreviewSize="0dp"
+            app:bannerCorner="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlSymmetry" />
+    </id.co.edtslib.edtsds.list.SlidingItemLayoutView>
+```
+
+#### Attributes information
+
+##### _app:drawableStartCompat_
+[refrence]: background image
+
+##### _app:drawableWidth_
+[dimension]: width of image background
+
+### Initialize
+
+After draw SlidingItemView, you must call redraw
+
+```kotlin
+    fun redraw()
+```
+
+# SlidingItemView
+
+Abstract class of Recycler View with sliding
+
+#### Attributes information
+
+##### _app:itemSpace_
+[dimension]: item space
+
+##### _app:itemPreviewSize_
+[dimension]: dimension of next item preview, default 0
+
+##### _app:snap_
+[boolean]: item snap, default false
 
 # SlidingBannerView
 
