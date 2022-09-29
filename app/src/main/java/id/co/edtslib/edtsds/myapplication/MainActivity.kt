@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import id.co.edtslib.edtsds.chips.SlidingChipsView
 import id.co.edtslib.edtsds.list.SlidingItemLayoutView
 import id.co.edtslib.edtsds.list.banner.SlidingBannerView
 
@@ -12,6 +13,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val list = mutableListOf("Abah", "Hezbi", "Ade", "Robert", "Jovan", "Ucup")
+        val chips = findViewById<SlidingChipsView<String>>(R.id.chips)
+        chips.items = list
 
         val lll = findViewById<SlidingItemLayoutView>(R.id.lll)
 

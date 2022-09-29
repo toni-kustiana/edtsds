@@ -1,0 +1,7 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- background when chip is selected -->
+    <item android:state_selected="true"
+        android:color="@color/colorPrimary30" />
+    <!-- background when chip is normal -->
+    <item android:color="@color/colorNeutral20"/>
+</selector>

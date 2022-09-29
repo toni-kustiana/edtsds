@@ -138,4 +138,12 @@
     <declare-styleable name="OtpVerificationView">
         <attr name="otpInterval" />
     </declare-styleable>
+    <declare-styleable name="SlidingChipsView">
+        <attr name="slideChipMargin" format="dimension" />
+        <attr name="slideChipTextColor" format="reference" />
+        <attr name="slideChipTextPadding" format="dimension" />
+        <attr name="slideChipBackground" format="reference" />
+        <attr name="slideChipTextStyle" format="reference" />
+        <attr name="slideChipStrokeColor" format="reference" />
+    </declare-styleable>
 </resources>
