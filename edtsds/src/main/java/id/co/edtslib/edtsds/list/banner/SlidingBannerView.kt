@@ -18,6 +18,36 @@ class SlidingBannerView: SlidingItemView<AdapterBannerBinding, String> {
     override fun createAdapter() = BannerAdapter()
     override fun isEqual(a: String, b: String) = a == b
 
+    override var data: List<String>
+        get() = super.data
+        set(value) {
+            if (bannerScale > 0f) {
+                post {
+                    super.data = value
+                }
+            }
+            else {
+                super.data = value
+            }
+        }
+    var bannerScale = 0f
+        set(value) {
+            field = value
+            if (adapter is BannerAdapter) {
+                (adapter as BannerAdapter).scale = value
+            }
+            post {
+                if (bannerScale > 0f) {
+                    layoutParams.height = (bannerScale*width).toInt() + paddingTop + paddingBottom
+                }
+                else {
+                    layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+                }
+            }
+
+        }
+
+
     override fun init(attrs: AttributeSet?) {
         super.init(attrs)
 
@@ -30,17 +60,19 @@ class SlidingBannerView: SlidingItemView<AdapterBannerBinding, String> {
                 0, 0
             )
 
-            val bannerHeight = a.getDimensionPixelSize(
-                R.styleable.SlidingBannerView_bannerHeight, 0)
+            bannerScale = a.getFloat(
+                R.styleable.SlidingBannerView_bannerScale, 0f)
 
             val roundedCorners = a.getDimensionPixelSize(
                 R.styleable.SlidingBannerView_bannerCorner, 0)
 
             val adapter = adapter as BannerAdapter
-            adapter.height = bannerHeight
             adapter.roundedCorners = roundedCorners
 
             a.recycle()
+        }
+        else {
+            bannerScale = 0f
         }
     }
 }

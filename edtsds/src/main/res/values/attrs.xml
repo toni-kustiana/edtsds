@@ -80,7 +80,7 @@
         <attr name="drawableWidth" format="dimension" />
     </declare-styleable>
     <declare-styleable name="SlidingBannerView">
-        <attr name="bannerHeight" format="dimension" />
+        <attr name="bannerScale" format="float" />
         <attr name="bannerCorner" format="dimension" />
     </declare-styleable>
     <declare-styleable name="PagingNavigationView">

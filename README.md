@@ -222,6 +222,9 @@ Abstract class of Recycler View with sliding
 ##### _app:itemPreviewSize_
 [dimension]: preview size of next item
 
+##### _app:bannerScale_
+[dimension]: scale height from match parent, default 0
+
 ### Set data
 
 ```kotlin

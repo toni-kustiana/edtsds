@@ -25,7 +25,7 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
     private var lPaddingEnd =0
     private var runnable: Runnable? = null
 
-    var data = listOf<T>()
+    open var data = listOf<T>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             if (isDifferent(value)) {
