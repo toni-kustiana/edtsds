@@ -226,7 +226,8 @@ class TextFieldView: TextInputLayout {
         TextViewCompat.setTextAppearance(editText, R.style.B1)
         editText.setTextColor(ContextCompat.getColorStateList(context,
             R.color.color_text_text_field))
-        editText.setBackgroundResource(R.drawable.bg_text_field)
+        editText.setBackgroundResource(if (inputType == InputType.Search) R.drawable.bg_search_field
+            else R.drawable.bg_text_field)
 
         setErrorTextAppearance(R.style.B3)
         setErrorTextColor((ContextCompat.getColorStateList(context, R.color.colorSupportError)))
