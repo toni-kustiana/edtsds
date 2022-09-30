@@ -4,30 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <id.co.edtslib.edtsds.chips.SlidingChipsView
-        android:id="@+id/chips"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <id.co.edtslib.edtsds.list.SlidingItemLayoutView
-        android:id="@+id/lll"
-        android:background="@color/colorPrimary30"
+    <id.co.edtslib.edtsds.list.banner.SlidingBannerView
+        android:paddingTop="@dimen/dimen_12dp"
+        android:paddingBottom="@dimen/dimen_12dp"
+        android:id="@+id/exampleView"
+        app:itemSpace="@dimen/dimen_8dp"
+        android:paddingStart="@dimen/dimen_16dp"
+        app:itemPreviewSize="0dp"
+        app:bannerCorner="@dimen/dimen_8dp"
+        app:bannerScale="0.449"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <id.co.edtslib.edtsds.list.banner.SlidingBannerView
-            android:paddingTop="@dimen/dimen_12dp"
-            android:paddingBottom="@dimen/dimen_12dp"
-            android:id="@+id/exampleView"
-            app:itemSpace="@dimen/dimen_8dp"
-            android:paddingStart="120dp"
-            app:itemPreviewSize="0dp"
-            app:bannerCorner="@dimen/dimen_8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="RtlSymmetry" />
-    </id.co.edtslib.edtsds.list.SlidingItemLayoutView>
+        android:layout_height="wrap_content"
+        tools:ignore="RtlSymmetry" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--
