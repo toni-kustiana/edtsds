@@ -33,15 +33,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </FrameLayout>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvTitle"
-                android:layout_marginStart="@dimen/dimen_16dp"
-                android:layout_marginEnd="@dimen/dimen_16dp"
+            <FrameLayout
                 android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/H1"
-                android:textColor="@color/colorNeutral70"
+                android:id="@+id/flTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        style="@style/H1"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/colorNeutral70"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCancel"
+                        android:src="@drawable/ic_cancel"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </FrameLayout>
             <View
                 android:layout_marginTop="@dimen/dimen_20dp"
                 android:background="@color/colorNeutral30"

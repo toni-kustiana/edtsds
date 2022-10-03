@@ -149,7 +149,9 @@
     </declare-styleable>
     <declare-styleable name="BottomLayout">
         <attr name="title" format="string" />
-        <attr name="layout" format="reference" />
+        <attr name="titleLayout" format="reference" />
+        <attr name="contentLayout" format="reference" />
+        <attr name="cancelable" format="boolean" />
         <attr name="tray" format="boolean" />
         <attr name="bottomLayoutType" format="enum">
             <enum name="flat" value="0" />

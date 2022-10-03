@@ -67,13 +67,17 @@ Here's a basic implementation.
 Using BottomLayoutDialog class for bottom layout as dialog
 
 ```kotlin
-    fun show(context: Context, title: String, contentView: View)
-    fun showWithNoTray(context: Context, title: String, contentView: View)
-    
-    // example
-    BottomLayoutDialog.show(this, "Test",
-            inflater.inflate(R.layout.view_content_swipe, null))
-    
+    fun showTray(context: Context, title: String, contentView: View, titleView: View? = null)
+fun showSwipeTray(context: Context, title: String, contentView: View, tray: Boolean = true,
+                  cancelable: Boolean = false, titleView: View? = null)
+
+// example
+val inflater = LayoutInflater.from(this)
+val bindingContent: ViewContentSwipeBinding =
+    ViewContentSwipeBinding.inflate(inflater, null, false)
+
+BottomLayoutDialog.showTray(this, "Test", bindingContent.root)
+
 ```
 
 ### Attributes information
@@ -81,11 +85,17 @@ Using BottomLayoutDialog class for bottom layout as dialog
 ##### _app:title_
 [string]: title of bottom layout
 
-##### _app:layout_
-[resourceId]: content of bottom layout. You can access via contentView
+##### _app:contentLayout_
+[resourceId]: content of bottom layout.
+
+##### _app:titleLayout_
+[resourceId]: title of bottom layout, default null
 
 ##### _app:snap_
 [boolea]: snap or not, default true
+
+##### _app:cancelable_
+[boolea]: show cancel icon or not, default false
 
 ##### _app:bottomLayoutType_
 [boolea]: flat or dialog, default flat

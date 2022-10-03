@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.bottom.BottomLayoutDialog
+import id.co.edtslib.edtsds.myapplication.databinding.ViewContentSwipeBinding
+import id.co.edtslib.edtsds.myapplication.databinding.ViewTitleSwipeBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +16,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val inflater = LayoutInflater.from(this)
+        val bindingContent: ViewContentSwipeBinding =
+            ViewContentSwipeBinding.inflate(inflater, null, false)
 
-        BottomLayoutDialog.show(this, "Test",
-            inflater.inflate(R.layout.view_content_swipe, null))
+        val bindingTitle: ViewTitleSwipeBinding =
+            ViewTitleSwipeBinding.inflate(inflater, null, false)
+
+
+        //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
+        BottomLayoutDialog.showTray(this, "Test", bindingContent.root)
 /*
         val params = WindowManager.LayoutParams()
         params.width = WindowManager.LayoutParams.MATCH_PARENT

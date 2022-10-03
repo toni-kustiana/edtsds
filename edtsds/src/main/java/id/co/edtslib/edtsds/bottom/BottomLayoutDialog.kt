@@ -11,35 +11,37 @@ import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 open class BottomLayoutDialog(context: Context):
     Dialog(context,R.style.EdtsDialog) {
     companion object {
-        fun show(context: Context, title: String, contentView: View) {
-            val dialog = BottomLayoutDialog(context)
+        private lateinit var dialog: BottomLayoutDialog
+        fun showSwipeTray(context: Context, title: String, contentView: View, tray: Boolean = true,
+            cancelable: Boolean = false, titleView: View? = null) {
+            dialog = BottomLayoutDialog(context)
             dialog.binding.bottomLayout.title = title
+            dialog.binding.bottomLayout.tray = tray
+            dialog.binding.bottomLayout.cancelable = cancelable
             dialog.binding.bottomLayout.contentView = contentView
+            dialog.binding.bottomLayout.titleView = titleView
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dialog.dismiss()
                 }
             }
 
-            dialog.setCancelable(false)
+            dialog.setCancelable(cancelable)
             dialog.setCanceledOnTouchOutside(false)
             dialog.show()
         }
 
-        fun showWithNoTray(context: Context, title: String, contentView: View) {
-            val dialog = BottomLayoutDialog(context)
-            dialog.binding.bottomLayout.title = title
-            dialog.binding.bottomLayout.contentView = contentView
-            dialog.binding.bottomLayout.tray = false
-            dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
-                override fun onDismiss() {
-                    dialog.dismiss()
-                }
-            }
+        fun showTray(context: Context, title: String, contentView: View, titleView: View? = null) {
+            showSwipeTray(context, title, contentView, tray = false, cancelable = true, titleView)
+        }
 
-            dialog.setCancelable(true)
-            dialog.setCanceledOnTouchOutside(false)
-            dialog.show()
+        fun close() {
+            try {
+                dialog.dismiss()
+            }
+            catch (ignore: Exception) {
+
+            }
         }
     }
 

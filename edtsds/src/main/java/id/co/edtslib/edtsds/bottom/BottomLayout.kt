@@ -59,15 +59,34 @@ class BottomLayout: FrameLayout {
             binding.vWindow.setBackgroundColor(ContextCompat.getColor(context, if (type == Type.Dialog) R.color.colorOpacity else android.R.color.transparent))
         }
 
-    var layout = 0
+    var cancelable = false
         set(value) {
             field = value
-            if (value != 0) {
-                val layoutInflater = LayoutInflater.from(context)
-                contentView = layoutInflater.inflate(value, null)
+            binding.ivCancel.isVisible = cancelable
+            binding.ivCancel.setOnClickListener {
+                isVisible = false
             }
-            else {
-                contentView = null
+        }
+
+    var contentLayout = 0
+        set(value) {
+            field = value
+            contentView = if (value != 0) {
+                val layoutInflater = LayoutInflater.from(context)
+                layoutInflater.inflate(value, null)
+            } else {
+                null
+            }
+        }
+
+    var titleLayout = 0
+        set(value) {
+            field = value
+            titleView = if (value != 0) {
+                val layoutInflater = LayoutInflater.from(context)
+                layoutInflater.inflate(value, null)
+            } else {
+                null
             }
         }
 
@@ -86,6 +105,16 @@ class BottomLayout: FrameLayout {
                 binding.flContent.addView(value)
             }
         }
+    var titleView: View? = null
+        set(value) {
+            field = value
+            if (value != null) {
+                binding.flTitle.removeAllViews()
+                binding.flTitle.addView(value)
+            }
+        }
+
+
 
     private fun init(attrs: AttributeSet?) {
         if (layoutParams is ViewGroup.LayoutParams) {
@@ -103,16 +132,23 @@ class BottomLayout: FrameLayout {
             tray = a.getBoolean(R.styleable.BottomLayout_tray, true)
             snap = a.getBoolean(R.styleable.BottomLayout_snap, true)
             title = a.getString(R.styleable.BottomLayout_title)
+            cancelable = a.getBoolean(R.styleable.BottomLayout_cancelable, false)
 
             val lType = a.getInt(R.styleable.BottomLayout_bottomLayoutType, 0)
             type = Type.values()[lType]
 
-            layout = a.getResourceId(R.styleable.BottomLayout_layout, 0)
+            val lTitleLayout = a.getResourceId(R.styleable.BottomLayout_titleLayout, 0)
+            if (lTitleLayout != 0) {
+                titleLayout = lTitleLayout
+            }
+
+            contentLayout = a.getResourceId(R.styleable.BottomLayout_contentLayout, 0)
 
             a.recycle()
         }
         else {
             type = Type.Flat
+            cancelable = false
         }
 
         setSwipeListener()
@@ -138,7 +174,7 @@ class BottomLayout: FrameLayout {
                         else {
                             val y = (motionEvent.y - lastY)/2f
                             val newY = binding.flBottom.translationY + y
-                            lastY = y
+                            lastY = motionEvent.y
 
                             binding.flBottom.translationY = if (newY < 0) 0f else
                                 if (newY > max) max
