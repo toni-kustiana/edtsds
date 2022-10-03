@@ -84,7 +84,7 @@ class SlidingItemLayoutView: FrameLayout {
                     val alpha = if (slidingItemView.paddingStart == 0) 1f else (slidingItemOffsetX*1.0f)/(slidingItemView.paddingStart*1.0f)
                     imageView?.alpha = if (alpha < 0f) 0f else if (alpha > 1f) 1f else alpha
 
-                    val ix = -((imageView!!.width-slidingItemOffsetX).toFloat())/4f
+                    val ix = -((imageView!!.width-slidingItemOffsetX).toFloat())/5f
                     imageView?.translationX = if (ix > 0) 0f else ix
 
                     super.onScrolled(recyclerView, dx, dy)

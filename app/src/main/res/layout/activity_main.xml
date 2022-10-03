@@ -2,23 +2,9 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <id.co.edtslib.edtsds.list.banner.SlidingBannerView
-        android:paddingTop="@dimen/dimen_12dp"
-        android:paddingBottom="@dimen/dimen_12dp"
-        android:id="@+id/exampleView"
-        app:itemSpace="@dimen/dimen_8dp"
-        android:paddingStart="@dimen/dimen_16dp"
-        app:itemPreviewSize="0dp"
-        app:bannerCorner="@dimen/dimen_8dp"
-        app:bannerScale="0.449"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="RtlSymmetry" />
-
+    android:layout_height="match_parent">
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--
         app:otpRemainingText="@string/send_code_counter"

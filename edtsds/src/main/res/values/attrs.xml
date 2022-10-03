@@ -12,6 +12,7 @@
     <attr name="shapeSelectedHeight" format="dimension" />
     <attr name="space" format="dimension" />
     <attr name="count" format="integer" />
+    <attr name="snap" format="boolean" />
 
     <declare-styleable name="AlertBoxView">
         <attr name="type" />
@@ -73,7 +74,7 @@
     <declare-styleable name="SlidingItemView">
         <attr name="itemSpace" format="dimension" />
         <attr name="itemPreviewSize" format="dimension" />
-        <attr name="snap" format="boolean" />
+        <attr name="snap"  />
     </declare-styleable>
     <declare-styleable name="SlidingItemLayoutView">
         <attr name="drawableStartCompat" format="reference" />
@@ -145,5 +146,15 @@
         <attr name="slideChipBackground" format="reference" />
         <attr name="slideChipTextStyle" format="reference" />
         <attr name="slideChipStrokeColor" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="BottomLayout">
+        <attr name="title" format="string" />
+        <attr name="layout" format="reference" />
+        <attr name="tray" format="boolean" />
+        <attr name="bottomLayoutType" format="enum">
+            <enum name="flat" value="0" />
+            <enum name="dialog" value="1" />
+        </attr>
+        <attr name="snap"  />
     </declare-styleable>
 </resources>
