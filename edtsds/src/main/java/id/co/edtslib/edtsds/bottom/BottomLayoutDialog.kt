@@ -5,10 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
 open class BottomLayoutDialog(context: Context):
-    Dialog(context, com.google.android.material.R.style.Animation_Design_BottomSheetDialog) {
+    Dialog(context,R.style.EdtsDialog) {
     companion object {
         fun show(context: Context, title: String, contentView: View) {
             val dialog = BottomLayoutDialog(context)
@@ -51,5 +52,7 @@ open class BottomLayoutDialog(context: Context):
 
         setContentView(binding.root)
         window?.decorView?.setBackgroundResource(android.R.color.transparent)
+
+        binding.bottomLayout.showAnimate()
     }
 }

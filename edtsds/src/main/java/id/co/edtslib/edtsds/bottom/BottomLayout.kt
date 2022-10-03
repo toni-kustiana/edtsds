@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewBottomLayoutBinding
@@ -225,6 +226,16 @@ class BottomLayout: FrameLayout {
             if (type == Type.Dialog) {
                 delegate?.onDismiss()
             }
+        }
+    }
+
+    fun showAnimate() {
+        binding.flBottom.isInvisible = true
+        post {
+            binding.flBottom.translationY = binding.flBottom.height.toFloat()
+            binding.flBottom.isVisible = true
+            binding.flBottom.animate().translationY(0f)
+
         }
     }
 }
