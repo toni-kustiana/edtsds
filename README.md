@@ -24,6 +24,7 @@ dependencies {
 # [3. OtpVerificationView](#OtpVerificationView)
 # [4. SlidingItemLayoutView](#SlidingItemLayoutView)
 # [5. SlidingBannerView](#SlidingBannerView)
+# [6. BottomLayout](#BottomLayout)
 
 ## List of components
 
@@ -40,6 +41,54 @@ dependencies {
 # [10. OtpRemainingView](#OtpRemainingView)
 # [11. SlidingItemView](#SlidingItemView)
 # [11. SlidingChipsView](#SlidingChipsView)
+
+# BottomLayout
+
+![BottomLayout](https://i.postimg.cc/ZYymM9qf/bottomlayout.png)
+
+# Usage
+
+Here's a basic implementation.
+
+```xml
+   <id.co.edtslib.edtsds.bottom.BottomLayout
+    android:id="@+id/bottomLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:snap="true"
+    app:bottomLayoutType="dialog"
+    app:layour="@layout/view_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+```
+
+### Dialog util
+
+Using BottomLayoutDialog class for bottom layout as dialog
+
+```kotlin
+    fun show(context: Context, title: String, contentView: View)
+    fun showWithNoTray(context: Context, title: String, contentView: View)
+    
+    // example
+    BottomLayoutDialog.show(this, "Test",
+            inflater.inflate(R.layout.view_content_swipe, null))
+    
+```
+
+### Attributes information
+
+##### _app:title_
+[string]: title of bottom layout
+
+##### _app:layout_
+[resourceId]: content of bottom layout. You can access via contentView
+
+##### _app:snap_
+[boolea]: snap or not, default true
+
+##### _app:bottomLayoutType_
+[boolea]: flat or dialog, default flat
 
 # SlidingChipsView
 
@@ -145,24 +194,24 @@ First child of view must be SlidingItemView [SlidingItemView](#SlidingItemView)
 
 ```xml
 <id.co.edtslib.edtsds.list.SlidingItemLayoutView
-        android:id="@+id/lll"
-        android:background="@color/colorPrimary30"
-        app:drawableStartCompat="@drawable/flash"
-        app:drawableWidth="120dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <id.co.edtslib.edtsds.list.banner.SlidingBannerView
-            android:paddingTop="@dimen/dimen_12dp"
-            android:paddingBottom="@dimen/dimen_12dp"
-            android:id="@+id/exampleView"
-            app:itemSpace="@dimen/dimen_8dp"
-            android:paddingStart="120dp"
-            app:itemPreviewSize="0dp"
-            app:bannerCorner="@dimen/dimen_8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="RtlSymmetry" />
-    </id.co.edtslib.edtsds.list.SlidingItemLayoutView>
+android:id="@+id/lll"
+android:background="@color/colorPrimary30"
+app:drawableStartCompat="@drawable/flash"
+app:drawableWidth="120dp"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+<id.co.edtslib.edtsds.list.banner.SlidingBannerView
+android:paddingTop="@dimen/dimen_12dp"
+android:paddingBottom="@dimen/dimen_12dp"
+android:id="@+id/exampleView"
+app:itemSpace="@dimen/dimen_8dp"
+android:paddingStart="120dp"
+app:itemPreviewSize="0dp"
+app:bannerCorner="@dimen/dimen_8dp"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+tools:ignore="RtlSymmetry" />
+</id.co.edtslib.edtsds.list.SlidingItemLayoutView>
 ```
 
 #### Attributes information
@@ -205,13 +254,13 @@ Abstract class of Recycler View with sliding
 
 ```xml
     <id.co.edtslib.edtsds.list.banner.SlidingBannerView
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:id="@+id/exampleView"
-        app:itemSpace="@dimen/dimen_8dp"
-        android:paddingStart="@dimen/dimen_16dp"
-        app:itemPreviewSize="32dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:layout_marginTop="@dimen/dimen_16dp"
+    android:id="@+id/exampleView"
+    app:itemSpace="@dimen/dimen_8dp"
+    android:paddingStart="@dimen/dimen_16dp"
+    app:itemPreviewSize="32dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 #### Attributes information
@@ -229,8 +278,8 @@ Abstract class of Recycler View with sliding
 
 ```kotlin
     val exampleView = findViewById<SlidingBannerView>(R.id.exampleView)
-        exampleView.data = listOf("https://i.postimg.cc/Z0twhtqF/banner1.png",
-            "https://i.postimg.cc/Z0twhtqF/banner1.png", "https://i.postimg.cc/Z0twhtqF/banner1.png")
+exampleView.data = listOf("https://i.postimg.cc/Z0twhtqF/banner1.png",
+    "https://i.postimg.cc/Z0twhtqF/banner1.png", "https://i.postimg.cc/Z0twhtqF/banner1.png")
 ```
 
 
@@ -242,22 +291,22 @@ Abstract class of Recycler View with sliding
 
 ```xml
     <id.co.edtslib.edtsds.otpverification.OtpVerificationView
-        android:id="@+id/exampleView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exampleView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 ```
 
 ### Set attribute and data
 
 ```kotlin
     val otpView = binding.otpView
-    val otpRemainingView = binding.otpRemainingView
-    
-    var delegate: OtpVerificationDelegate? = null
+val otpRemainingView = binding.otpRemainingView
+
+var delegate: OtpVerificationDelegate? = null
 ```
 
 # Popup
@@ -680,15 +729,15 @@ var selectedIndex: Int = -1
 
 ```xml
     <id.co.edtslib.edtsds.LinkTextView
-        app:linkColor="#ff0000"
-        app:linkText="Syarat &amp; Ketentuan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dengan melanjutkan, kamu menyetujui Syarat &amp; Ketentuan layanan di Aplikasi."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    app:linkColor="#ff0000"
+    app:linkText="Syarat &amp; Ketentuan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Dengan melanjutkan, kamu menyetujui Syarat &amp; Ketentuan layanan di Aplikasi."
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 ```
 
 ### Attributes information
@@ -697,7 +746,7 @@ An example is shown below.
 
 ```xml
         app:linkColor="#ff0000"
-        app:linkText="Syarat &amp; Ketentuan"
+    app:linkText="Syarat &amp; Ketentuan"
 ```
 
 ##### _app:linkColor_
@@ -709,8 +758,8 @@ An example is shown below.
 ### Listener for click of text link
 ```kotlin
         findViewById<LinkTextView>(R.id.textView).setOnClickListener {
-            Toast.makeText(this, "Hello Link", Toast.LENGTH_SHORT).show()
-        }
+    Toast.makeText(this, "Hello Link", Toast.LENGTH_SHORT).show()
+}
 ```
 
 # OtpRemainingView

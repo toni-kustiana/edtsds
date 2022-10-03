@@ -36,7 +36,7 @@ open class BottomLayoutDialog(context: Context):
                 }
             }
 
-            dialog.setCancelable(false)
+            dialog.setCancelable(true)
             dialog.setCanceledOnTouchOutside(false)
             dialog.show()
         }
