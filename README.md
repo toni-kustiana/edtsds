@@ -876,7 +876,7 @@ You can use all pagenavigation attributes fot setup page navigation view [Paging
 ### Data
 
 You can fill board data list like
-
+ 
 ```kotlin
 
 val item1 = BoardingData("ic_onboarding_1", "Belanja Mudah",
