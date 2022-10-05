@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Alert.show(this, "Terjadi kesalahan")
+        Alert.show(this, "Password yg Anda masukan kurang tepat.")
 
         //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
   /*

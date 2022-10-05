@@ -40,7 +40,22 @@ dependencies {
 # [9. LinkTextView](#LinkTextView)
 # [10. OtpRemainingView](#OtpRemainingView)
 # [11. SlidingItemView](#SlidingItemView)
-# [11. SlidingChipsView](#SlidingChipsView)
+# [12. SlidingChipsView](#SlidingChipsView)
+# [13. Alert](#Alert)
+
+# Alert
+
+![Alert](https://i.postimg.cc/hGjR03bh/alert.png)
+
+# Usage
+
+```kotlin
+    fun show(context: Context, message: String, duration: Long = LENGTH_LONG, view: View? = null)
+
+// example
+    Alert.show(this, "Password yg Anda masukan kurang tepat.")
+
+```
 
 # BottomLayout
 
