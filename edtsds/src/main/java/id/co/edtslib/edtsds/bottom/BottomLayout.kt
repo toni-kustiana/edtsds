@@ -91,7 +91,7 @@ class BottomLayout: FrameLayout {
         }
 
 
-    private var lastY = 0f
+    private var rawY = 0f
     private var isDown = false
     private var downTime  = 0L
     var contentView: View? = null
@@ -161,24 +161,33 @@ class BottomLayout: FrameLayout {
                 val max = (binding.flBottom.height - binding.flTray.height).toFloat()
                 when(motionEvent.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        lastY = motionEvent.y
+                        rawY = motionEvent.rawY - binding.flBottom.translationY
                         isDown = true
                         downTime = Date().time
                     }
                     MotionEvent.ACTION_MOVE -> {
                         if (! isDown) {
                             isDown = true
-                            lastY = motionEvent.y
+                            rawY = motionEvent.rawY - binding.flBottom.translationY
                             downTime = Date().time
                         }
                         else {
-                            val y = (motionEvent.y - lastY)/2f
-                            val newY = binding.flBottom.translationY + y
-                            lastY = motionEvent.y
+                            val dy = motionEvent.rawY - rawY
+                            val newY =  if (dy < 0f) 0f else if (dy > max) max else dy
+                            binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
+                                override fun onAnimationStart(p0: Animator) {
+                                }
 
-                            binding.flBottom.translationY = if (newY < 0) 0f else
-                                if (newY > max) max
-                                else newY
+                                override fun onAnimationEnd(p0: Animator) {
+                                }
+
+                                override fun onAnimationCancel(p0: Animator) {
+                                }
+
+                                override fun onAnimationRepeat(p0: Animator) {
+                                }
+
+                            }).translationY(newY).setDuration(0L).start()
                         }
                     }
                     MotionEvent.ACTION_UP -> {
@@ -189,6 +198,7 @@ class BottomLayout: FrameLayout {
                     }
                 }
             }
+            view.performClick()
             return@setOnTouchListener true
         }
     }
@@ -197,29 +207,59 @@ class BottomLayout: FrameLayout {
         val max = (binding.flBottom.height - binding.flTray.height).toFloat()
         isDown = false
 
-        val y = (motionEvent.y - lastY)/2f
+        val dy = motionEvent.rawY - rawY
+        var newY =  if (dy < 0f) 0f else if (dy > max) max else dy
+
         val d = Date().time - downTime
         if (d < 1000) {
             val yAbs = abs(y)
-            if (yAbs > 1) {
-                binding.flBottom.translationY = if (y < 0) 0f else max
-                checkDismiss()
+            if (yAbs > 2) {
+                newY = if (dy < 0) 0f else max
             }
-            else {
+        }
+
+        binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator) {
+            }
+
+            override fun onAnimationEnd(p0: Animator) {
                 snap()
             }
-        }
-        else {
-            snap()
-        }
+
+            override fun onAnimationCancel(p0: Animator) {
+                snap()
+            }
+
+            override fun onAnimationRepeat(p0: Animator) {
+                snap()
+            }
+
+        }).translationY(newY).setDuration(0L).start()
     }
 
     private fun snap() {
         val max = (binding.flBottom.height - binding.flTray.height).toFloat()
         if (snap) {
             val mid = 2f*max/3f
+            val snapY = if (binding.flBottom.translationY > mid) max else 0f
 
-            binding.flBottom.animate().
+            binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(p0: Animator) {
+                }
+
+                override fun onAnimationEnd(p0: Animator) {
+                    binding.flBottom.translationY = snapY
+                }
+
+                override fun onAnimationCancel(p0: Animator) {
+                }
+
+                override fun onAnimationRepeat(p0: Animator) {
+                }
+
+            }).translationY(snapY).setDuration(0L).start()
+
+            /*binding.flBottom.animate().
             setListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(p0: Animator) {
                 }
@@ -236,7 +276,7 @@ class BottomLayout: FrameLayout {
                 }
 
             }).
-            translationY(if (binding.flBottom.translationY > mid) max else 0f)
+            translationY(snapY).start()*/
         }
         else {
             checkDismiss()

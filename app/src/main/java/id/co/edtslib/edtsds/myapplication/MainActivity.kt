@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
-        BottomLayoutDialog.showTray(this, "Test", bindingContent.root)
+        BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
 /*
         val params = WindowManager.LayoutParams()
         params.width = WindowManager.LayoutParams.MATCH_PARENT
