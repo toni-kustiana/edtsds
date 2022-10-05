@@ -3,7 +3,7 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.ErrorMessage
+import id.co.edtslib.edtsds.Alert
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ErrorMessage.show(this, "Terjadi kesalahan")
+        Alert.show(this, "Terjadi kesalahan")
 
         //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
   /*

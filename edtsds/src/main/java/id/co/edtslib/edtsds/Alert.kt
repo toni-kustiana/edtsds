@@ -11,7 +11,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.databinding.ViewErrorMessageBinding
 
-object ErrorMessage {
+object Alert {
     const val LENGTH_LONG = 1L
     const val LENGTH_SHORT = 0L
 
