@@ -1,12 +1,9 @@
 package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.bottom.BottomLayoutDialog
-import id.co.edtslib.edtsds.myapplication.databinding.ViewContentSwipeBinding
-import id.co.edtslib.edtsds.myapplication.databinding.ViewTitleSwipeBinding
+import id.co.edtslib.edtsds.ErrorMessage
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,17 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val inflater = LayoutInflater.from(this)
-        val bindingContent: ViewContentSwipeBinding =
-            ViewContentSwipeBinding.inflate(inflater, null, false)
-
-        val bindingTitle: ViewTitleSwipeBinding =
-            ViewTitleSwipeBinding.inflate(inflater, null, false)
-
+        ErrorMessage.show(this, "Terjadi kesalahan")
 
         //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
-        BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
-/*
+  /*
         val params = WindowManager.LayoutParams()
         params.width = WindowManager.LayoutParams.MATCH_PARENT
         params.height = WindowManager.LayoutParams.WRAP_CONTENT
