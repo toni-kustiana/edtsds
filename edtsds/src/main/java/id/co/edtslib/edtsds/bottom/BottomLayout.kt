@@ -255,34 +255,17 @@ class BottomLayout: FrameLayout {
 
                 override fun onAnimationEnd(p0: Animator) {
                     binding.flBottom.translationY = snapY
+                    checkDismiss()
                 }
 
                 override fun onAnimationCancel(p0: Animator) {
+                    checkDismiss()
                 }
 
                 override fun onAnimationRepeat(p0: Animator) {
                 }
 
             }).translationY(snapY).setDuration(0L).start()
-
-            /*binding.flBottom.animate().
-            setListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(p0: Animator) {
-                }
-
-                override fun onAnimationEnd(p0: Animator) {
-                    checkDismiss()
-                }
-
-                override fun onAnimationCancel(p0: Animator) {
-                    checkDismiss()
-                }
-
-                override fun onAnimationRepeat(p0: Animator) {
-                }
-
-            }).
-            translationY(snapY).start()*/
         }
         else {
             checkDismiss()
