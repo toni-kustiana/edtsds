@@ -5,6 +5,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <id.co.edtslib.edtsds.list.menu.MenuListView
+        android:id="@+id/exampleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--
         app:otpRemainingText="@string/send_code_counter"

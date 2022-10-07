@@ -25,6 +25,7 @@ dependencies {
 # [4. SlidingItemLayoutView](#SlidingItemLayoutView)
 # [5. SlidingBannerView](#SlidingBannerView)
 # [6. BottomLayout](#BottomLayout)
+# [7. MenuListView](#MenuListView)
 
 ## List of components
 
@@ -43,7 +44,29 @@ dependencies {
 # [12. SlidingChipsView](#SlidingChipsView)
 # [13. Alert](#Alert)
 
-# Alert
+# MenuListView
+
+![MenuListView](https://i.postimg.cc/brSVGpmG/menulistview.png)
+
+# Usage
+
+```xml
+     <id.co.edtslib.edtsds.list.menu.MenuListView
+        android:id="@+id/exampleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+```
+
+```kotlin
+   val exampleView = findViewById<MenuListView<String>>(R.id.exampleView)
+    exampleView.delegate = object : MenuDelegate<String> {
+    override fun onSelected(t: String) {
+        Toast.makeText(this@MainActivity, t, Toast.LENGTH_SHORT).show() }
+    }
+    exampleView.data = listOf("Menu 1", "Menu 2", "Menu 3")
+
+```
 
 ![Alert](https://i.postimg.cc/hGjR03bh/alert.png)
 

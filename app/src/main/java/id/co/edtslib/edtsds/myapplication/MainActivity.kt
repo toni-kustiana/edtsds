@@ -1,9 +1,11 @@
 package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.Alert
+import id.co.edtslib.edtsds.list.menu.MenuDelegate
+import id.co.edtslib.edtsds.list.menu.MenuListView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,34 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Alert.show(this, "Password yg Anda masukan kurang tepat.")
-
-        //BottomLayoutDialog.showSwipeTray(this, "Test", bindingContent.root)
-  /*
-        val params = WindowManager.LayoutParams()
-        params.width = WindowManager.LayoutParams.MATCH_PARENT
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT
-        params.format = PixelFormat.TRANSLUCENT;
-        params.gravity = Gravity.TOP
-        params.flags = (WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-
-        val alertBox = AlertBoxView(this)
-        alertBox.message = "test"
-        alertBox.type = AlertBoxView.AlertType.Error
-        alertBox.dismissible = false
-
-        val mWM = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        mWM.addView(alertBox, params)
-
-        alertBox.setOnClickListener {
-            mWM.removeView(alertBox)
+        val exampleView = findViewById<MenuListView<String>>(R.id.exampleView)
+        exampleView.delegate = object : MenuDelegate<String> {
+            override fun onSelected(t: String) {
+                Toast.makeText(this@MainActivity, t, Toast.LENGTH_SHORT).show()
+            }
         }
-
-        val exampleView = findViewById<TextView>(R.id.exampleView)
-        exampleView.setOnClickListener {
-            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
-        }*/
+        exampleView.data = listOf("Menu 1", "Menu 2", "Menu 3")
 
     }
 }
