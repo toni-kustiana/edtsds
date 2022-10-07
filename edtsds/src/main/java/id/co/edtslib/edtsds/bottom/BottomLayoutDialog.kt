@@ -9,11 +9,12 @@ import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
 open class BottomLayoutDialog(context: Context):
-    Dialog(context,R.style.EdtsDialog) {
+    Dialog(context,R.style.BottomLayoutDialog) {
     companion object {
         private lateinit var dialog: BottomLayoutDialog
-        fun showSwipeTray(context: Context, title: String, contentView: View, tray: Boolean = true,
-            cancelable: Boolean = false, titleView: View? = null) {
+        fun showSwipeTray(context: Context, title: String, contentView: View,
+                          tray: Boolean = true, cancelable: Boolean = false,
+                          titleView: View? = null, titleDivider: Boolean = true) {
             dialog = BottomLayoutDialog(context)
             dialog.binding.bottomLayout.title = title
             dialog.binding.bottomLayout.tray = tray
@@ -31,7 +32,7 @@ open class BottomLayoutDialog(context: Context):
             dialog.show()
         }
 
-        fun showTray(context: Context, title: String, contentView: View, titleView: View? = null) {
+        fun showTray(context: Context, title: String, contentView: View, titleView: View? = null, titleDivider: Boolean = true) {
             showSwipeTray(context, title, contentView, tray = false, cancelable = true, titleView)
         }
 

@@ -90,6 +90,12 @@ class BottomLayout: FrameLayout {
             }
         }
 
+    var titleDivider = true
+        set(value) {
+            field = value
+            binding.vLine.isVisible = value
+        }
+
 
     private var rawY = 0f
     private var isDown = false
