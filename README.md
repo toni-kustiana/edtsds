@@ -68,6 +68,8 @@ dependencies {
 
 ```
 
+# Alert
+
 ![Alert](https://i.postimg.cc/hGjR03bh/alert.png)
 
 # Usage
