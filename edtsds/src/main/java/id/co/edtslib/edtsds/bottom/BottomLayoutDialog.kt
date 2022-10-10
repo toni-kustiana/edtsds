@@ -21,6 +21,7 @@ open class BottomLayoutDialog(context: Context):
             dialog.binding.bottomLayout.cancelable = cancelable
             dialog.binding.bottomLayout.contentView = contentView
             dialog.binding.bottomLayout.titleView = titleView
+            dialog.binding.bottomLayout.titleDivider = titleDivider
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dialog.dismiss()

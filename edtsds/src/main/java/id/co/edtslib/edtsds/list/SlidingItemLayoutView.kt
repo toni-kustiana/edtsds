@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import id.co.edtslib.edtsds.R
@@ -28,7 +29,6 @@ class SlidingItemLayoutView: FrameLayout {
     private var imageView: AppCompatImageView? = null
     private var imageViewResId = 0
     private var drawableWidth = 0f
-    private var slidingItemOffsetX = 0
 
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
@@ -74,23 +74,40 @@ class SlidingItemLayoutView: FrameLayout {
     }
 
     private fun setScrollListener(slidingItemView: SlidingItemView<*, *>) {
-        slidingItemOffsetX = slidingItemView.paddingStart
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollImage(slidingItemView)
+
             slidingItemView.addOnScrollListener(object : OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    slidingItemOffsetX -= dx
-
-                    val alpha = if (slidingItemView.paddingStart == 0) 1f else (slidingItemOffsetX*1.0f)/(slidingItemView.paddingStart*1.0f)
-                    imageView?.alpha = if (alpha < 0f) 0f else if (alpha > 1f) 1f else alpha
-
-                    val ix = -((imageView!!.width-slidingItemOffsetX).toFloat())/5f
-                    imageView?.translationX = if (ix > 0) 0f else ix
+                    scrollImage(recyclerView)
 
                     super.onScrolled(recyclerView, dx, dy)
                 }
 
             })
+        }
+    }
+
+    private fun scrollImage(recyclerView: RecyclerView) {
+        if (recyclerView.layoutManager is LinearLayoutManager) {
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val first = layoutManager.findFirstVisibleItemPosition()
+            if (first == 0) {
+                val view = layoutManager.findViewByPosition(first)
+                val widthAlphaMax = recyclerView.paddingStart.toFloat()*2.0f/3f
+
+                val left = if (view == null) 0 else if (view.left < 0) 0 else view.left
+                val remain = recyclerView.paddingStart.toFloat() - left
+                imageView?.alpha = left*1f/widthAlphaMax
+
+                val pct = remain/5.0f
+                imageView?.translationX = -pct
+            }
+            else {
+                if (imageView!!.translationX != -imageView !!.width.toFloat()) {
+                    imageView!!.translationX = -imageView!!.width.toFloat()
+                }
+            }
         }
     }
 

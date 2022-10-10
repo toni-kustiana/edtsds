@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="EdtsDialog" parent="Animation.Design.BottomSheetDialog" />
-    <style name="BottomLayoutDialog" parent="EdtsDialog" />
+    <style name="BottomLayoutDialog" parent="EdtsDialog">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>
