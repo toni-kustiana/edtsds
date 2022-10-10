@@ -97,6 +97,7 @@ class BottomLayout: FrameLayout {
         }
 
 
+    private var originalRawY = 0f
     private var rawY = 0f
     private var isDown = false
     private var downTime  = 0L
@@ -167,6 +168,7 @@ class BottomLayout: FrameLayout {
                 val max = (binding.flBottom.height - binding.flTray.height).toFloat()
                 when(motionEvent.action) {
                     MotionEvent.ACTION_DOWN -> {
+                        originalRawY = motionEvent.rawY
                         rawY = motionEvent.rawY - binding.flBottom.translationY
                         isDown = true
                         downTime = Date().time
@@ -174,6 +176,7 @@ class BottomLayout: FrameLayout {
                     MotionEvent.ACTION_MOVE -> {
                         if (! isDown) {
                             isDown = true
+                            originalRawY = motionEvent.rawY
                             rawY = motionEvent.rawY - binding.flBottom.translationY
                             downTime = Date().time
                         }
@@ -214,14 +217,49 @@ class BottomLayout: FrameLayout {
         isDown = false
 
         val dy = motionEvent.rawY - rawY
-        var newY =  if (dy < 0f) 0f else if (dy > max) max else dy
+        val newY =  if (dy < 0f) 0f else if (dy > max) max else dy
 
         val d = Date().time - downTime
-        if (d < 1000) {
-            val yAbs = abs(y)
-            if (yAbs > 2) {
-                newY = if (dy < 0) 0f else max
+        if (d < 100) {
+            val dy1 = motionEvent.rawY - originalRawY
+            if (abs(dy1) > 10) {
+                if (dy1 > 0) {
+                    binding.flBottom.animate().translationY(max).setListener(object : Animator.AnimatorListener {
+                        override fun onAnimationStart(p0: Animator) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animator) {
+                            checkDismiss()
+                        }
+
+                        override fun onAnimationCancel(p0: Animator) {
+                            checkDismiss()
+                        }
+
+                        override fun onAnimationRepeat(p0: Animator) {
+                            checkDismiss()
+                        }
+
+                    })
+                }
+                else {
+                    binding.flBottom.animate().translationY(0f).setListener(object : Animator.AnimatorListener {
+                        override fun onAnimationStart(p0: Animator) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animator) {
+                        }
+
+                        override fun onAnimationCancel(p0: Animator) {
+                        }
+
+                        override fun onAnimationRepeat(p0: Animator) {
+                        }
+
+                    })
+                }
             }
+            return
         }
 
         binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
