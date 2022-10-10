@@ -46,7 +46,7 @@ dependencies {
 # [14. Checkbox](#Checkbox)
 
 
-# MenuListView
+# Checkbox
 
 ![Checkbox](https://i.postimg.cc/Bn0HjP5W/checkbox.png)
 
