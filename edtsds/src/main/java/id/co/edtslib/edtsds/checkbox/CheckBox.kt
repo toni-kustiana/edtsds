@@ -20,10 +20,21 @@ class CheckBox: AppCompatTextView {
     init {
         setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox, 0, 0, 0)
         gravity = Gravity.CENTER_VERTICAL
+        if (text?.isNotEmpty() == true) {
+            compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.dimen_checkbox_padding)
+        }
 
         setOnClickListener {
             isActivated = ! isActivated
             delegate?.onChecked(isActivated)
+        }
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+
+        if (text?.isNotEmpty() == true) {
+            compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.dimen_checkbox_padding)
         }
     }
 }

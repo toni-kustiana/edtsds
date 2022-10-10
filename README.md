@@ -43,8 +43,34 @@ dependencies {
 # [11. SlidingItemView](#SlidingItemView)
 # [12. SlidingChipsView](#SlidingChipsView)
 # [13. Alert](#Alert)
+# [14. Checkbox](#Checkbox)
+
 
 # MenuListView
+
+![Checkbox](https://i.postimg.cc/Bn0HjP5W/checkbox.png)
+
+# Usage
+
+```xml
+    <id.co.edtslib.edtsds.checkbox.CheckBox
+        android:id="@+id/exampleView"
+        android:text="Abah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+```
+
+```kotlin
+   val exampleView = findViewById<CheckBox>(R.id.exampleView)
+    exampleView.delegate = object : CheckBoxDelegate {
+        override fun onChecked(checked: Boolean) {
+            Toast.makeText(this@MainActivity, "$checked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+```
+
 
 ![MenuListView](https://i.postimg.cc/brSVGpmG/menulistview.png)
 

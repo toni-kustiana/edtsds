@@ -2,12 +2,14 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.edtsds.list.menu.MenuListView
+    <id.co.edtslib.edtsds.checkbox.CheckBox
         android:id="@+id/exampleView"
-        android:layout_width="match_parent"
+        android:text="Abah"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </androidx.appcompat.widget.LinearLayoutCompat>
 <!--
