@@ -21,7 +21,7 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
         }
     }
 
-    private var itemPreviewSize = 0
+    protected var itemPreviewSize = 0
     private var lPaddingEnd =0
     private var runnable: Runnable? = null
 

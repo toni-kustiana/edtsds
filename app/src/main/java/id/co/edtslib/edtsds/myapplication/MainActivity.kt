@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.checkbox.CheckBox
 import id.co.edtslib.edtsds.checkbox.CheckBoxDelegate
+import id.co.edtslib.edtsds.list.banner.SlidingBannerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,12 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val exampleView = findViewById<CheckBox>(R.id.exampleView)
-        exampleView.delegate = object : CheckBoxDelegate {
-            override fun onChecked(checked: Boolean) {
-                Toast.makeText(this@MainActivity, "$checked", Toast.LENGTH_SHORT).show()
-            }
-        }
+        val slidingView = findViewById<SlidingBannerView>(R.id.slidingView)
+        slidingView.postDelayed( {
+            slidingView.data = listOf("https://i.postimg.cc/Z0twhtqF/banner1.png",
+                "https://i.postimg.cc/k43CmW9q/banner4.png", "https://i.postimg.cc/Z0twhtqF/banner1.png")
+
+        }, 1000)
 
     }
 }

@@ -38,7 +38,7 @@ class SlidingBannerView: SlidingItemView<AdapterBannerBinding, String> {
             }
             post {
                 if (bannerScale > 0f) {
-                    layoutParams.height = (bannerScale*width).toInt() + paddingTop + paddingBottom
+                    layoutParams.height = (bannerScale*(width-paddingStart-itemPreviewSize)).toInt()
                 }
                 else {
                     layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
