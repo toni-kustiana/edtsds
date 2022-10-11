@@ -1,4 +1,4 @@
-package id.co.edtslib.edtsds.chips
+package id.co.edtslib.edtsds.chips.sliding
 
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat

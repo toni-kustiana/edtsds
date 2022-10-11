@@ -1,4 +1,4 @@
-package id.co.edtslib.edtsds.chips
+package id.co.edtslib.edtsds.chips.sliding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

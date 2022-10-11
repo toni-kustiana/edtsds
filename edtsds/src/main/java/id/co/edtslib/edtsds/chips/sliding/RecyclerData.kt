@@ -1,4 +1,4 @@
-package id.co.edtslib.edtsds.chips
+package id.co.edtslib.edtsds.chips.sliding
 
 data class RecyclerData<T>(
     val data: T,

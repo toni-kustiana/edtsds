@@ -44,7 +44,65 @@ dependencies {
 # [12. SlidingChipsView](#SlidingChipsView)
 # [13. Alert](#Alert)
 # [14. Checkbox](#Checkbox)
+# [15. GroupChipView](#GroupChipView)
 
+# GroupChipView
+
+![GroupChipView](https://i.postimg.cc/pdx7y3GZ/groupchip.png)
+
+# Usage
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.chips.group.GroupChipView
+        android:id="@+id/chipGroupView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+Here's to give list data to groupchipview
+
+```kotlin
+        val groupChipView = findViewById<GroupChipView<String>>(R.id.chipGroupView)
+        groupChipView.items = mutableListOf("Ade", "Abah", "Fadil", "Hezbi", "Abraham", "Robert", "Viktor", "Fahri", "Jovan", "Kevin")
+
+```
+
+### Attributes information
+
+##### _app:groupChipMargin_
+[dimension]: margin start end end with parent, default 16dp
+
+##### _app:groupChipTextPadding_
+[dimension]: start and text text padding text and chip, default 20dp
+
+##### _app:groupChipTextColor_
+[integer]: resource id color of chip text, default
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- text color when chip is selected -->
+    <item android:state_selected="true"
+        android:color="#ffffff" />
+    <!-- text color when chip is normal -->
+    <item android:color="#1171D4"/>
+</selector>
+```
+
+##### _app:groupChipBackground_
+[integer]: resource id color of chip background, default
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- background when chip is selected -->
+    <item android:state_selected="true"
+        android:color="#1171D4" />
+    <!-- background when chip is normal -->
+    <item android:color="#EFF3F6"/>
+</selector>
+```
 
 # Checkbox
 
@@ -54,20 +112,20 @@ dependencies {
 
 ```xml
     <id.co.edtslib.edtsds.checkbox.CheckBox
-        android:id="@+id/exampleView"
-        android:text="Abah"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exampleView"
+    android:text="Abah"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
 ```
 
 ```kotlin
    val exampleView = findViewById<CheckBox>(R.id.exampleView)
-    exampleView.delegate = object : CheckBoxDelegate {
-        override fun onChecked(checked: Boolean) {
-            Toast.makeText(this@MainActivity, "$checked", Toast.LENGTH_SHORT).show()
-        }
+exampleView.delegate = object : CheckBoxDelegate {
+    override fun onChecked(checked: Boolean) {
+        Toast.makeText(this@MainActivity, "$checked", Toast.LENGTH_SHORT).show()
     }
+}
 
 ```
 
@@ -78,19 +136,19 @@ dependencies {
 
 ```xml
      <id.co.edtslib.edtsds.list.menu.MenuListView
-        android:id="@+id/exampleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/exampleView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 
 ```
 
 ```kotlin
    val exampleView = findViewById<MenuListView<String>>(R.id.exampleView)
-    exampleView.delegate = object : MenuDelegate<String> {
+exampleView.delegate = object : MenuDelegate<String> {
     override fun onSelected(t: String) {
         Toast.makeText(this@MainActivity, t, Toast.LENGTH_SHORT).show() }
-    }
-    exampleView.data = listOf("Menu 1", "Menu 2", "Menu 3")
+}
+exampleView.data = listOf("Menu 1", "Menu 2", "Menu 3")
 
 ```
 
@@ -104,7 +162,7 @@ dependencies {
     fun show(context: Context, message: String, duration: Long = LENGTH_LONG, view: View? = null)
 
 // example
-    Alert.show(this, "Password yg Anda masukan kurang tepat.")
+Alert.show(this, "Password yg Anda masukan kurang tepat.")
 
 ```
 
@@ -927,7 +985,7 @@ You can use all pagenavigation attributes fot setup page navigation view [Paging
 ### Data
 
 You can fill board data list like
- 
+
 ```kotlin
 
 val item1 = BoardingData("ic_onboarding_1", "Belanja Mudah",
