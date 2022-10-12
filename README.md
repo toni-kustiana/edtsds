@@ -47,7 +47,7 @@ dependencies {
 # [15. GroupChipView](#GroupChipView)
 # [16. ScaleImageView](#ScaleImageView)
 
-# GroupChipView
+# ScaleImageView
 
 ![ScaleImageView](https://i.postimg.cc/3w86mqVm/scaleimagevidw.png)
 
