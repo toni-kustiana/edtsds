@@ -45,6 +45,29 @@ dependencies {
 # [13. Alert](#Alert)
 # [14. Checkbox](#Checkbox)
 # [15. GroupChipView](#GroupChipView)
+# [16. ScaleImageView](#ScaleImageView)
+
+# GroupChipView
+
+![ScaleImageView](https://i.postimg.cc/3w86mqVm/scaleimagevidw.png)
+
+# Usage
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.ScaleImageView
+    android:background="#ff0000"
+    app:scale="0.5"
+    android:src="@drawable/ic_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+```
+### Attributes information
+
+##### _app:scale_
+[float]: height scale image with width, default 1 (square)
+
 
 # GroupChipView
 
