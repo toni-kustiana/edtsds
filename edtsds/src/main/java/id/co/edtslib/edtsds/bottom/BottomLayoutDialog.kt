@@ -59,4 +59,8 @@ open class BottomLayoutDialog(context: Context):
 
         binding.bottomLayout.showAnimate()
     }
+
+    override fun onBackPressed() {
+        close()
+    }
 }

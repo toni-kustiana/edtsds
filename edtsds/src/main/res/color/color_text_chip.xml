@@ -4,5 +4,5 @@
     <item android:state_selected="true"
         android:color="@color/colorWhite" />
     <!-- text color when chip is normal -->
-    <item android:color="@color/colorNeutral50"/>
+    <item android:color="@color/colorPrimary30"/>
 </selector>

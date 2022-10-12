@@ -155,6 +155,9 @@
         <attr name="groupChipBackground" format="reference" />
         <attr name="groupChipTextStyle" format="reference" />
     </declare-styleable>
+    <declare-styleable name="ScaleImageView">
+        <attr name="scale" format="float" />
+    </declare-styleable>
     <declare-styleable name="BottomLayout">
         <attr name="title" format="string" />
         <attr name="titleLayout" format="reference" />
