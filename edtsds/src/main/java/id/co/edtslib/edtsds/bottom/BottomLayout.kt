@@ -43,6 +43,8 @@ class BottomLayout: FrameLayout {
         set(value) {
             field = value
             binding.tvTitle.text = value
+
+            binding.flTitle.isVisible = value?.isNotEmpty() == true || cancelable
         }
 
     var tray = true
@@ -66,6 +68,8 @@ class BottomLayout: FrameLayout {
             binding.ivCancel.setOnClickListener {
                 isVisible = false
             }
+
+            binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable
         }
 
     var contentLayout = 0
