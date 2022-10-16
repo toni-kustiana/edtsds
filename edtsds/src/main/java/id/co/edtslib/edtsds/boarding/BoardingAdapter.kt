@@ -7,8 +7,10 @@ import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
 class BoardingAdapter: BaseRecyclerViewAdapter<AdapterBoardingItemBinding, BoardingData>() {
     var height = 0f
+    var alignment = BoardingView.Alignment.Left
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterBoardingItemBinding
         get() = AdapterBoardingItemBinding::inflate
 
-    override fun createHolder() = BoardingHolder(binding, height)
+    override fun createHolder() = BoardingHolder(binding, height, alignment)
 }

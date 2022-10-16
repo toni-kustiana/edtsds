@@ -101,6 +101,12 @@
         <attr name="count"  />
         <attr name="imageHeight" format="dimension" />
         <attr name="pagerFullHeight" format="boolean" />
+        <attr name="alignment" format="enum">
+            <enum value="0" name="Left" />
+            <enum value="1" name="Center" />
+            <enum value="2" name="Right"/>
+        </attr>
+
     </declare-styleable>
     <declare-styleable name="LinkTextView">
         <attr name="linkText" format="string" />

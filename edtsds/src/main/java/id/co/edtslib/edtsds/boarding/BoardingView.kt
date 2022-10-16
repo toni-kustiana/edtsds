@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.boarding
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -30,11 +31,32 @@ class BoardingView: FrameLayout {
         init(attrs)
     }
 
+    enum class Alignment {
+        Left, Center, Right
+    }
+
     private val binding: ViewBoardingBinding =
         ViewBoardingBinding.inflate(LayoutInflater.from(context), this, true)
 
     val pagingNavigationView = binding.navigation
     val viewPager = binding.viewPager
+    var alignment = Alignment.Left
+        set(value) {
+            field = value
+            val layoutParams = binding.navigation.layoutParams as LinearLayoutCompat.LayoutParams
+            when (value) {
+                Alignment.Center -> {
+                    layoutParams.gravity = Gravity.CENTER_HORIZONTAL
+                }
+                Alignment.Right -> {
+                    layoutParams.gravity = Gravity.END
+                }
+                else -> {
+                    layoutParams.gravity = Gravity.START
+                }
+            }
+            adapter.alignment = value
+        }
 
     var list: List<BoardingData>? = null
         @SuppressLint("NotifyDataSetChanged")
@@ -79,6 +101,9 @@ class BoardingView: FrameLayout {
             binding.navigation.shapeResId = a.getResourceId(
                 R.styleable.BoardingView_shape,
                 R.drawable.bg_navigation)
+
+            val iAlignment = a.getInt(R.styleable.BoardingView_alignment, 0)
+            alignment = Alignment.values()[iAlignment]
 
 
             val fullHeight = a.getBoolean(R.styleable.BoardingView_pagerFullHeight, false)

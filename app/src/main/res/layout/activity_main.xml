@@ -6,10 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.ScaleImageView
-        android:background="#ff0000"
-        app:scale="0.5"
-        android:src="@drawable/ic_search"
+    <id.co.edtslib.edtsds.boarding.BoardingView
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:imageHeight="180dp"
+        app:shape="@drawable/bg_onboarding_page_navigation"
+        app:shapeSize="@dimen/dimen_8dp"
+        app:shapeSelectedWidth="@dimen/dimen_20dp"
+        app:alignment="Center"
+        android:id="@+id/boardingView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
