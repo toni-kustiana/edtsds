@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.boarding.BoardingView
-        android:layout_marginTop="@dimen/dimen_20dp"
-        app:imageHeight="180dp"
-        app:shape="@drawable/bg_onboarding_page_navigation"
-        app:shapeSize="@dimen/dimen_8dp"
-        app:shapeSelectedWidth="@dimen/dimen_20dp"
-        app:alignment="Center"
-        android:id="@+id/boardingView"
+    <id.co.edtslib.edtsds.list.checkmenu.CheckMenuListView
+        android:id="@+id/exampleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

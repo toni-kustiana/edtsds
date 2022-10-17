@@ -26,6 +26,7 @@ dependencies {
 # [5. SlidingBannerView](#SlidingBannerView)
 # [6. BottomLayout](#BottomLayout)
 # [7. MenuListView](#MenuListView)
+# [8. CheckMenuListView](#CheckMenuListView)
 
 ## List of components
 
@@ -152,7 +153,6 @@ exampleView.delegate = object : CheckBoxDelegate {
 
 ```
 
-
 ![MenuListView](https://i.postimg.cc/brSVGpmG/menulistview.png)
 
 # Usage
@@ -174,6 +174,51 @@ exampleView.delegate = object : MenuDelegate<String> {
 exampleView.data = listOf("Menu 1", "Menu 2", "Menu 3")
 
 ```
+
+# Alert
+
+![Alert](https://i.postimg.cc/hGjR03bh/alert.png)
+
+# Usage
+
+```kotlin
+    fun show(context: Context, message: String, duration: Long = LENGTH_LONG, view: View? = null)
+
+// example
+Alert.show(this, "Password yg Anda masukan kurang tepat.")
+
+```
+
+
+![CheckMenuListView](https://i.postimg.cc/1tby9dyq/check.png)
+
+# Usage
+
+```xml
+     <id.co.edtslib.edtsds.list.checkmenu.CheckMenuListView
+    android:id="@+id/exampleView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+```
+
+Your class must inherit from DataSelected class
+
+```kotlin
+    class Test(private val p: String): DataSelected() {
+        override fun toString() = p
+    }
+
+   val test1 = Test("Ade")
+    val test2 = Test("Abah")
+    val test3 = Test("Fadil")
+    val test4 = Test("Hezbi")
+    val test5 = Test("Abraham")
+    
+    val exampleView = findViewById<CheckMenuListView<Test>>(R.id.exampleView)
+    exampleView.data = listOf(test1, test2, test3, test4, test5)
+```
+
 
 # Alert
 
