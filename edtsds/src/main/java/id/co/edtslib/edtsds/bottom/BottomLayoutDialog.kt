@@ -11,7 +11,7 @@ import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 open class BottomLayoutDialog(context: Context):
     Dialog(context,R.style.BottomLayoutDialog) {
     companion object {
-        private lateinit var dialog: BottomLayoutDialog
+        lateinit var dialog: BottomLayoutDialog
         fun showSwipeTray(context: Context, title: String, contentView: View,
                           tray: Boolean = true, cancelable: Boolean = false,
                           titleView: View? = null, titleDivider: Boolean = true,
@@ -42,6 +42,15 @@ open class BottomLayoutDialog(context: Context):
         }
 
         fun close() {
+            try {
+                dialog.dismiss()
+            }
+            catch (ignore: Exception) {
+
+            }
+        }
+
+        fun close(dialog: Dialog) {
             try {
                 dialog.dismiss()
             }
