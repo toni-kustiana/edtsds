@@ -170,6 +170,7 @@
         <attr name="contentLayout" format="reference" />
         <attr name="cancelable" format="boolean" />
         <attr name="tray" format="boolean" />
+        <attr name="popup" format="boolean" />
         <attr name="bottomLayoutType" format="enum">
             <enum name="flat" value="0" />
             <enum name="dialog" value="1" />

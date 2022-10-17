@@ -44,7 +44,7 @@ class BottomLayout: FrameLayout {
             field = value
             binding.tvTitle.text = value
 
-            binding.flTitle.isVisible = value?.isNotEmpty() == true || cancelable
+            binding.flTitle.isVisible = value?.isNotEmpty() == true || cancelable || ! popup
         }
 
     var tray = true
@@ -61,6 +61,20 @@ class BottomLayout: FrameLayout {
             binding.vWindow.setBackgroundColor(ContextCompat.getColor(context, if (type == Type.Dialog) R.color.colorOpacity else android.R.color.transparent))
         }
 
+    var popup: Boolean = false
+        set(value) {
+            field = value
+            binding.ivBack.isVisible = value
+            binding.ivBack.setOnClickListener {
+                isVisible = false
+            }
+            if (value) {
+                cancelable = false
+            }
+
+            binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable || ! value
+        }
+
     var cancelable = false
         set(value) {
             field = value
@@ -69,7 +83,7 @@ class BottomLayout: FrameLayout {
                 isVisible = false
             }
 
-            binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable
+            binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable || ! popup
         }
 
     var contentLayout = 0
@@ -144,6 +158,7 @@ class BottomLayout: FrameLayout {
             snap = a.getBoolean(R.styleable.BottomLayout_snap, true)
             title = a.getString(R.styleable.BottomLayout_title)
             cancelable = a.getBoolean(R.styleable.BottomLayout_cancelable, false)
+            popup = a.getBoolean(R.styleable.BottomLayout_popup, false)
 
             val lType = a.getInt(R.styleable.BottomLayout_bottomLayoutType, 0)
             type = Type.values()[lType]
@@ -160,6 +175,7 @@ class BottomLayout: FrameLayout {
         else {
             type = Type.Flat
             cancelable = false
+            popup = false
         }
 
         setSwipeListener()

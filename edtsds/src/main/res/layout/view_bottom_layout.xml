@@ -15,6 +15,7 @@
     <FrameLayout
         android:id="@+id/flBottom"
         android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/dimen_bottom_layout_margin_top"
         android:background="@drawable/bg_layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -42,6 +43,12 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBack"
+                        android:paddingStart="@dimen/dimen_16dp"
+                        android:src="@drawable/ic_arrow_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvTitle"
                         android:layout_marginStart="@dimen/dimen_16dp"

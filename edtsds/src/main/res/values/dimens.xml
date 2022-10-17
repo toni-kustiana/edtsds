@@ -17,6 +17,8 @@
     <dimen name="dimen_56dp">56dp</dimen>
 
     <dimen name="dimen_checkbox_padding">6dp</dimen>
+    <dimen name="dimen_bottom_layout_margin_top">100dp</dimen>
+
     <dimen name="chip_dimen_1dp">1dp</dimen>
     <dimen name="chip_dimen_16dp">16dp</dimen>
     <dimen name="chip_dimen_20dp">20dp</dimen>

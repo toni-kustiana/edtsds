@@ -14,7 +14,8 @@ open class BottomLayoutDialog(context: Context):
         private lateinit var dialog: BottomLayoutDialog
         fun showSwipeTray(context: Context, title: String, contentView: View,
                           tray: Boolean = true, cancelable: Boolean = false,
-                          titleView: View? = null, titleDivider: Boolean = true) {
+                          titleView: View? = null, titleDivider: Boolean = true,
+                          popup: Boolean = false) {
             dialog = BottomLayoutDialog(context)
             dialog.binding.bottomLayout.title = title
             dialog.binding.bottomLayout.tray = tray
@@ -22,6 +23,7 @@ open class BottomLayoutDialog(context: Context):
             dialog.binding.bottomLayout.contentView = contentView
             dialog.binding.bottomLayout.titleView = titleView
             dialog.binding.bottomLayout.titleDivider = titleDivider
+            dialog.binding.bottomLayout.popup = popup
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dialog.dismiss()
@@ -33,8 +35,10 @@ open class BottomLayoutDialog(context: Context):
             dialog.show()
         }
 
-        fun showTray(context: Context, title: String, contentView: View, titleView: View? = null, titleDivider: Boolean = true) {
-            showSwipeTray(context, title, contentView, tray = false, cancelable = true, titleView)
+        fun showTray(context: Context, title: String, contentView: View, titleView: View? = null,
+                     titleDivider: Boolean = true, popup: Boolean = false) {
+            showSwipeTray(context, title, contentView, tray = false, cancelable = true,
+                titleView = titleView, titleDivider = titleDivider, popup = popup)
         }
 
         fun close() {
