@@ -153,6 +153,8 @@ exampleView.delegate = object : CheckBoxDelegate {
 
 ```
 
+# MenuListView
+
 ![MenuListView](https://i.postimg.cc/brSVGpmG/menulistview.png)
 
 # Usage
@@ -189,6 +191,7 @@ Alert.show(this, "Password yg Anda masukan kurang tepat.")
 
 ```
 
+# CheckMenuListView
 
 ![CheckMenuListView](https://i.postimg.cc/1tby9dyq/check.png)
 
