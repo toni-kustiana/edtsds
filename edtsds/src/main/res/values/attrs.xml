@@ -43,6 +43,7 @@
             <enum name="address" value="5" />
             <enum name="search" value="6" />
         </attr>
+        <attr name="startIcon" format="reference" />
         <attr name="maxLength" format="integer" />
         <attr name="imeOptions" format="enum">
             <enum name="next" value="0" />

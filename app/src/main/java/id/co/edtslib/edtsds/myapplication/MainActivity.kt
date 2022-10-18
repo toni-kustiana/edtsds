@@ -17,9 +17,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val binding = ViewContentSwipeBinding.inflate(LayoutInflater.from(this), null, false)
-
-        BottomLayoutDialog.showSwipeTray(this, title = "Test", popup = false, contentView = binding.root)
     }
 }

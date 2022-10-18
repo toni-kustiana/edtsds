@@ -38,6 +38,7 @@ class TextFieldView: TextInputLayout {
     }
 
     private var hint: String? = null
+    private var startIcon: Int = 0
     var delegate: TextFieldDelegate? = null
 
     var imeOption = ImeOption.Next
@@ -134,8 +135,17 @@ class TextFieldView: TextInputLayout {
                         isHintEnabled = ! b
                     }
 
-                    startIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_search,
-                        null)
+                    startIconDrawable = if (startIcon == 0) {
+                        ResourcesCompat.getDrawable(
+                            resources, R.drawable.ic_search,
+                            null
+                        )
+                    } else {
+                        ResourcesCompat.getDrawable(
+                            resources, startIcon,
+                            null
+                        )
+                    }
                 }
                 else -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
@@ -182,6 +192,8 @@ class TextFieldView: TextInputLayout {
                 R.styleable.TextFieldView,
                 0, 0
             )
+
+            startIcon = a.getResourceId(R.styleable.TextFieldView_startIcon, 0)
 
             val v = a.getInt(R.styleable.TextFieldView_inputType, 0)
             inputType = InputType.values()[v]

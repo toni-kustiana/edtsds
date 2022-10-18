@@ -38,7 +38,6 @@
             <id.co.edtslib.edtsds.ButtonView
                 android:layout_marginEnd="@dimen/dimen_4dp"
                 android:id="@+id/bvNegative"
-                android:textAllCaps="true"
                 app:variant="outline"
                 app:size="medium"
                 android:layout_weight="1"
@@ -47,7 +46,6 @@
             <id.co.edtslib.edtsds.ButtonView
                 android:layout_marginStart="@dimen/dimen_4dp"
                 android:id="@+id/bvPositive"
-                android:textAllCaps="true"
                 app:variant="primary"
                 app:size="medium"
                 android:layout_weight="1"
