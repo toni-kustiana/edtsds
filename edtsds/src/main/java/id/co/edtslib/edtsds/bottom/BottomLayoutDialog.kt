@@ -40,9 +40,9 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
         }
 
         fun showTray(context: Context, title: String, contentView: View, titleView: View? = null,
-                     titleDivider: Boolean = true, popup: Boolean = false) =
+                     titleDivider: Boolean = true, popup: Boolean = false, themeResId: Int = R.style.BottomLayoutDialog) =
             showSwipeTray(context, title, contentView, tray = false, cancelable = true,
-                titleView = titleView, titleDivider = titleDivider, popup = popup)
+                titleView = titleView, titleDivider = titleDivider, popup = popup, themeResId = themeResId)
 
         fun close() {
             try {
