@@ -1,14 +1,11 @@
 package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.boarding.BoardingData
-import id.co.edtslib.edtsds.boarding.BoardingView
-import id.co.edtslib.edtsds.bottom.BottomLayoutDialog
-import id.co.edtslib.edtsds.list.checkmenu.CheckMenuListView
-import id.co.edtslib.edtsds.myapplication.databinding.ViewContentSwipeBinding
+import id.co.edtslib.edtsds.list.checkmenu.RadioButtonListDelegate
+import id.co.edtslib.edtsds.list.radiobuttonlist.RadioButtonListView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,10 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val listView = findViewById<RadioButtonListView<Employee>>(R.id.listView)
+        listView.data = listOf(Employee("Ade"), Employee("Abah"),
+            Employee("Fadil"), Employee("Hezbi"), Employee("Abraham"))
+        listView.selectedIndex = 4
+        listView.delegate = object : RadioButtonListDelegate<Employee> {
+            override fun onSelected(t: Employee) {
+                Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
 
-        val binding = ViewContentSwipeBinding.inflate(LayoutInflater.from(this), null, false)
-
-        BottomLayoutDialog.showSwipeTray(this, title = "Test", popup = false, contentView = binding.root,
-            themeResId = R.style.EdtsDialog)
     }
 }
