@@ -27,6 +27,7 @@ dependencies {
 # [6. BottomLayout](#BottomLayout)
 # [7. MenuListView](#MenuListView)
 # [8. CheckMenuListView](#CheckMenuListView)
+# [9. RadioButtonListView](#RadioButtonListView)
 
 ## List of components
 
@@ -220,6 +221,38 @@ Your class must inherit from DataSelected class
     
     val exampleView = findViewById<CheckMenuListView<Test>>(R.id.exampleView)
     exampleView.data = listOf(test1, test2, test3, test4, test5)
+```
+
+# RadioButtonListView
+
+![RadioButtonListView](https://i.ibb.co/khvyPCR/radiobuttonlist.png)
+
+# Usage
+
+```xml
+    <id.co.edtslib.edtsds.list.radiobuttonlist.RadioButtonListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+```
+
+Your class must inherit from DataSelected class
+
+```kotlin
+    class Employee(private val name: String): DataSelected() {
+        override fun toString() = name
+    }
+
+    val listView = findViewById<RadioButtonListView<Employee>>(R.id.listView)
+    listView.data = listOf(Employee("Ade"), Employee("Abah"),
+        Employee("Fadil"), Employee("Hezbi"), Employee("Abraham"))
+    listView.selectedIndex = 4
+    listView.delegate = object : RadioButtonListDelegate<Employee> {
+        override fun onSelected(t: Employee) {
+            Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
 ```
 
 
