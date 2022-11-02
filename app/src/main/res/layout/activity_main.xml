@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
+    android:layout_margin="@dimen/dimen_16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.list.checkboxlist.multiple.MultipleCheckBoxListView
-        android:id="@+id/listView"
+    <id.co.edtslib.edtsds.stepper.StepperView
+        android:id="@+id/stepperView"
+        app:textColorPlus="#ffffff"
+        app:backgroundPlus="@drawable/bg_plus"
+        app:backgroundValue="@drawable/bg_value"
+        app:canInput="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

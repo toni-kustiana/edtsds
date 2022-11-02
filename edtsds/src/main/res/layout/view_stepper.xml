@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_32dp">
     <androidx.appcompat.widget.AppCompatTextView
         android:background="@drawable/bg_stepper_minus"
@@ -20,7 +20,8 @@
         android:gravity="center"
         android:textColor="@color/colorNeutral70"
         style="@style/H2"
-        android:layout_width="@dimen/dimen_40dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="match_parent" />
     <androidx.appcompat.widget.AppCompatTextView
         android:background="@drawable/bg_stepper_plus"

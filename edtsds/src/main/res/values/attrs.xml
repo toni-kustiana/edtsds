@@ -58,6 +58,12 @@
         <attr name="step" format="integer" />
         <attr name="value" format="integer" />
         <attr name="canInput" format="boolean" />
+        <attr name="backgroundMinus" format="reference" />
+        <attr name="backgroundPlus" format="reference" />
+        <attr name="backgroundValue" format="reference" />
+        <attr name="textColorMinus" format="color" />
+        <attr name="textColorPlus" format="color" />
+
     </declare-styleable>
 
     <declare-styleable name="BadgeView">

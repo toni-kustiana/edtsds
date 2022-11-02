@@ -4,9 +4,9 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import id.co.edtslib.edtsds.R
 import java.lang.NumberFormatException
@@ -46,10 +46,13 @@ class StepperView: FrameLayout {
             }
         }
 
-        view.findViewById<View>(R.id.tvAdd).setOnClickListener {
+        val tvAdd = view.findViewById<TextView>(R.id.tvAdd)
+        tvAdd.setOnClickListener {
             add()
         }
-        view.findViewById<View>(R.id.tvMinus).setOnClickListener {
+
+        val tvMinus = view.findViewById<TextView>(R.id.tvMinus)
+        tvMinus.setOnClickListener {
             minus()
         }
 
@@ -77,6 +80,31 @@ class StepperView: FrameLayout {
             editText?.isClickable = canInput
 
             isActivated = canInput
+
+            val bgMinus = a.getResourceId(R.styleable.StepperView_backgroundMinus, 0)
+            if (bgMinus != 0) {
+                tvMinus.setBackgroundResource(bgMinus)
+            }
+
+            val bgPlus = a.getResourceId(R.styleable.StepperView_backgroundPlus, 0)
+            if (bgPlus != 0) {
+                tvAdd.setBackgroundResource(bgPlus)
+            }
+
+            val bgValue = a.getResourceId(R.styleable.StepperView_backgroundValue, 0)
+            if (bgValue != 0) {
+                editText?.setBackgroundResource(bgValue)
+            }
+
+            val colorMinus = a.getColor(R.styleable.StepperView_textColorMinus, 0)
+            if (colorMinus != 0) {
+                tvMinus.setTextColor(colorMinus)
+            }
+
+            val colorPlus = a.getColor(R.styleable.StepperView_textColorPlus, 0)
+            if (colorPlus != 0) {
+                tvAdd.setTextColor(colorPlus)
+            }
 
             val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
             val dp56 = resources.getDimensionPixelSize(R.dimen.dimen_56dp)
