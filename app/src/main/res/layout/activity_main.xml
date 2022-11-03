@@ -7,12 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:id="@+id/stepperView"
-        app:textColorPlus="#ffffff"
-        app:backgroundPlus="@drawable/bg_plus"
-        app:backgroundValue="@drawable/bg_value"
-        app:canInput="false"
+    <id.co.edtslib.edtsds.percentagebarview.PercentageBarView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/percentageBarView"
+        app:colorActive="@color/purple_200"
+        app:radius="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="16dp"  />
 </LinearLayout>

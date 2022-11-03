@@ -184,4 +184,9 @@
         </attr>
         <attr name="snap"  />
     </declare-styleable>
+    <declare-styleable name="PercentageBarView">
+        <attr name="colorNoActive" format="reference" />
+        <attr name="colorActive" format="reference" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
 </resources>
