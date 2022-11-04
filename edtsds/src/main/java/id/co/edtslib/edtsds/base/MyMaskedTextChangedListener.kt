@@ -10,13 +10,13 @@ class MyMaskedTextChangedListener: MaskedTextChangedListener {
     /**
      * Convenience constructor.
      */
-    constructor(format: String, field: EditText, valueListener: ValueListener?) :
+    constructor(format: String, field: EditText, valueListener: MyValueListener?) :
             this(format, field, null, valueListener)
 
     /**
      * Convenience constructor.
      */
-    constructor(format: String, field: EditText, listener: TextWatcher?, valueListener: ValueListener?) :
+    constructor(format: String, field: EditText, listener: TextWatcher?, valueListener: MyValueListener?) :
             this(format, true, field, listener, valueListener)
 
     /**
@@ -24,7 +24,7 @@ class MyMaskedTextChangedListener: MaskedTextChangedListener {
      */
     constructor(
         format: String, autocomplete: Boolean, field: EditText, listener: TextWatcher?,
-        valueListener: ValueListener?
+        valueListener: MyValueListener?
     ) :
             super(
                 format, emptyList(), emptyList(), AffinityCalculationStrategy.WHOLE_STRING,
@@ -33,6 +33,9 @@ class MyMaskedTextChangedListener: MaskedTextChangedListener {
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         try {
+            if (valueListener is MyValueListener) {
+                (valueListener as MyValueListener).onFocussed(view, hasFocus)
+            }
             super.onFocusChange(view, hasFocus)
         }
         catch (ignore: SecurityException) {

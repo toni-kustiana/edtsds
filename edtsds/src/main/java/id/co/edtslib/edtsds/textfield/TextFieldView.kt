@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.textfield
 import android.content.Context
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -10,9 +11,9 @@ import androidx.core.widget.TextViewCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.redmadrobot.inputmask.MaskedTextChangedListener
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.base.MyMaskedTextChangedListener
+import id.co.edtslib.edtsds.base.MyValueListener
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
@@ -38,6 +39,8 @@ class TextFieldView: TextInputLayout {
     }
 
     private var hint: String? = null
+    private var emptyHint: String? = null
+
     private var startIcon: Int = 0
     var delegate: TextFieldDelegate? = null
 
@@ -86,6 +89,11 @@ class TextFieldView: TextInputLayout {
                     editText?.addTextChangedListener {
                         delegate?.onChanged(it?.toString())
                     }
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
+                    }
                 }
                 InputType.Pin -> {
                     endIconMode = END_ICON_PASSWORD_TOGGLE
@@ -94,6 +102,11 @@ class TextFieldView: TextInputLayout {
 
                     editText?.addTextChangedListener {
                         delegate?.onChanged(it?.toString())
+                    }
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
                     }
                 }
                 InputType.Phone -> {
@@ -105,6 +118,12 @@ class TextFieldView: TextInputLayout {
                 InputType.Email -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
                             android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
+                    }
                 }
                 InputType.Ktp -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_PHONE or
@@ -118,6 +137,11 @@ class TextFieldView: TextInputLayout {
 
                     editText?.addTextChangedListener {
                         delegate?.onChanged(it?.toString())
+                    }
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
                     }
                 }
                 InputType.Search -> {
@@ -158,6 +182,12 @@ class TextFieldView: TextInputLayout {
                     editText?.addTextChangedListener {
                         delegate?.onChanged(it?.toString())
                     }
+
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
+                    }
                 }
             }
         }
@@ -197,6 +227,8 @@ class TextFieldView: TextInputLayout {
                 0, 0
             )
 
+            emptyHint = a.getString(R.styleable.TextFieldView_emptyHint)
+
             startIcon = a.getResourceId(R.styleable.TextFieldView_startIcon, 0)
 
             val v = a.getInt(R.styleable.TextFieldView_inputType, 0)
@@ -220,6 +252,9 @@ class TextFieldView: TextInputLayout {
 
     private fun setup(editText: TextInputEditText) {
         hint = editText.hint?.toString()
+        if (emptyHint?.isNotEmpty() == true) {
+            this@TextFieldView.setHint(emptyHint)
+        }
 
         val layoutParams = editText.layoutParams
         layoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -289,7 +324,13 @@ class TextFieldView: TextInputLayout {
         if (editText != null) {
             val listener = MyMaskedTextChangedListener("[00]-[0000]-[000000]",
                 editText!!,
-                object : MaskedTextChangedListener.ValueListener {
+                object : MyValueListener {
+                    override fun onFocussed(view: View?, hasFocus: Boolean) {
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (hasFocus) hint else emptyHint)
+                        }
+                    }
+
                     override fun onTextChanged(
                         maskFilled: Boolean,
                         extractedValue: String,
@@ -312,7 +353,13 @@ class TextFieldView: TextInputLayout {
         if (editText != null) {
             val listener = MyMaskedTextChangedListener("[0000].[0000].[0000].[0000]",
                 editText!!,
-                object : MaskedTextChangedListener.ValueListener {
+                object : MyValueListener {
+                    override fun onFocussed(view: View?, hasFocus: Boolean) {
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (hasFocus) hint else emptyHint)
+                        }
+                    }
+
                     override fun onTextChanged(
                         maskFilled: Boolean,
                         extractedValue: String,
