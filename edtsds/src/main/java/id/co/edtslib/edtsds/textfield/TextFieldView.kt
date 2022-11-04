@@ -16,7 +16,7 @@ import id.co.edtslib.edtsds.base.MyMaskedTextChangedListener
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address, Search
+        Text, Password, Pin, Phone, Ktp, Address, Search, Email
     }
 
     enum class ImeOption {
@@ -101,6 +101,10 @@ class TextFieldView: TextInputLayout {
                         android.text.InputType.TYPE_TEXT_VARIATION_PHONETIC
 
                     setPhoneListener()
+                }
+                InputType.Email -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
+                            android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                 }
                 InputType.Ktp -> {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_PHONE or

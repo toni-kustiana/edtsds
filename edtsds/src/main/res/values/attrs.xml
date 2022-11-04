@@ -42,6 +42,7 @@
             <enum name="ktp" value="4" />
             <enum name="address" value="5" />
             <enum name="search" value="6" />
+            <enum name="email" value="7" />
         </attr>
         <attr name="startIcon" format="reference" />
         <attr name="maxLength" format="integer" />
