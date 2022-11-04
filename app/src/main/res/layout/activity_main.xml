@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
     <id.co.edtslib.edtsds.textfield.date.DateFieldView
+        android:id="@+id/dateView"
         app:dateFormat="dd-MM-yyyy"
         app:hint="DD-MM-YYYY"
         app:minAge="17"

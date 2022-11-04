@@ -50,6 +50,48 @@ dependencies {
 # [16. ScaleImageView](#ScaleImageView)
 # [16. PercentageBarView](#PercentageBarView)
 # [17. SexFieldView](#SexFieldView)
+# [18. DateFieldView](#DateFieldView)
+
+# DateFieldView
+
+![DateFieldView](https://i.postimg.cc/k53ZPV2C/dateview.png)
+
+The DateFieldView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+       <id.co.edtslib.edtsds.textfield.date.DateFieldView
+    android:id="@+id/dateView"
+    app:dateFormat="dd-MM-yyyy"
+    app:hint="DD-MM-YYYY"
+    app:minAge="17"
+    android:layout_marginTop="@dimen/dimen_16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+```
+
+### Attributes information
+
+##### _app:dateFormat_
+[string]: date format using java convention, like dd-MM-yyyy
+
+##### _app:hint_
+[string]: hint of field when value is empty
+
+##### _app:minAge_
+[integer]: minimum age of calendar, default 0
+
+### Listener for date value changed
+```kotlin
+    val dateView = findViewById<DateFieldView>(R.id.dateView)
+    dateView.delegate = object : DateFieldDelegate {
+        override fun onDateChanged(date: Date, format: String) {
+            Toast.makeText(this@MainActivity, format, Toast.LENGTH_SHORT).show()
+        }
+    }
+```
 
 # SexFieldView
 
@@ -71,7 +113,7 @@ Here's a basic implementation.
 ### Attributes information
 
 ##### _app:label_
-[reference]: label of field
+[string]: label of field
 
 
 ### Listener for Sex Value Changed

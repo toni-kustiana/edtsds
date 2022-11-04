@@ -31,10 +31,17 @@ class DateFieldView: FrameLayout {
     private val binding = ViewDateFieldBinding.inflate(LayoutInflater.from(context), this, true)
     private var selectedDate: Date? = null
 
+    var delegate: DateFieldDelegate? = null
+
     var date: Date? = null
         set(value) {
             field = value
             setTextValue()
+
+            if (value != null) {
+                val simpleDateFormat = SimpleDateFormat(format, Locale("ID"))
+                delegate?.onDateChanged(value, simpleDateFormat.format(value))
+            }
         }
 
     var format = "dd-MM-yyyy"
