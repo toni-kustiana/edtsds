@@ -55,6 +55,7 @@ dependencies {
 # DateFieldView
 
 ![DateFieldView](https://i.postimg.cc/k53ZPV2C/dateview.png)
+![DateFieldView](https://i.postimg.cc/1XVmYngF/dateview1.png)
 
 The DateFieldView is very easy to use. Just add it to your layout like any other view.
 ##### Via XML
