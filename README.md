@@ -49,6 +49,40 @@ dependencies {
 # [15. GroupChipView](#GroupChipView)
 # [16. ScaleImageView](#ScaleImageView)
 # [16. PercentageBarView](#PercentageBarView)
+# [17. SexFieldView](#SexFieldView)
+
+# SexFieldView
+
+![SexFieldView](https://i.postimg.cc/5tdFpMsP/sexfieldview.png)
+
+The SexFieldView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+       <id.co.edtslib.edtsds.textfield.SexFieldView
+            app:label="Jenis Kelamin"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+```
+
+### Attributes information
+
+##### _app:label_
+[reference]: label of field
+
+
+### Listener for Sex Value Changed
+```kotlin
+    val sexView = findViewById<SexFieldView>(R.id.sexView)
+    sexView.delegate = object : SexFieldDelegate {
+        override fun onSelected(sex: SexFieldView.Sex) {
+        }
+    }
+```
+
 
 # PercentageBarView
 
