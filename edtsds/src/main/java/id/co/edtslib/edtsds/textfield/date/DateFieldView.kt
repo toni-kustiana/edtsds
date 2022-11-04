@@ -1,5 +1,6 @@
 package id.co.edtslib.edtsds.textfield.date
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewDateFieldBinding
+import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +29,7 @@ class DateFieldView: FrameLayout {
     }
 
     private val binding = ViewDateFieldBinding.inflate(LayoutInflater.from(context), this, true)
+    private var selectedDate: Date? = null
 
     var date: Date? = null
         set(value) {
@@ -58,6 +61,7 @@ class DateFieldView: FrameLayout {
 
                 val calendar = Calendar.getInstance()
                 calendar.time = if (date == null) Date() else date!!
+                selectedDate = calendar.time
 
                 val dialog = DatePickerDialog(context, R.style.CalendarDatePickerDialog,
                         { _, year, month, date ->
@@ -70,12 +74,39 @@ class DateFieldView: FrameLayout {
                         }, calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE))
 
-                val now = Calendar.getInstance()
-                now.time = Date()
-                now.set(Calendar.YEAR, now.get(Calendar.YEAR)-minAge)
-
-                dialog.datePicker.maxDate = now.time.time
+                dialog.datePicker.maxDate = getMaxDate()
                 dialog.show()
+            }
+            else {
+                val binding = ViewDatePickerBinding.inflate(LayoutInflater.from(context), null, false)
+                binding.datePicker.maxDate = getMaxDate()
+
+                val calendar = Calendar.getInstance()
+                calendar.time = if (date == null) Date() else date!!
+
+                binding.datePicker.init(calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
+                ) { _, year, month, date ->
+                    val result = Calendar.getInstance()
+                    result.set(Calendar.YEAR, year)
+                    result.set(Calendar.MONTH, month)
+                    result.set(Calendar.DATE, date)
+
+                    selectedDate = result.time
+                }
+
+                val builder = AlertDialog.Builder(context)
+                builder.setView(binding.root)
+                builder.setNegativeButton(android.R.string.cancel) {
+                        p0, _ -> p0.dismiss()
+                }
+
+                builder.setPositiveButton(android.R.string.ok
+                ) { p0, _ ->
+                    this@DateFieldView.date = selectedDate
+                    p0?.dismiss()
+                }
+                builder.show()
             }
         }
 
@@ -96,5 +127,13 @@ class DateFieldView: FrameLayout {
 
             a.recycle()
         }
+    }
+
+    private fun getMaxDate(): Long {
+        val now = Calendar.getInstance()
+        now.time = Date()
+        now.set(Calendar.YEAR, now.get(Calendar.YEAR)-minAge)
+
+        return now.time.time
     }
 }
