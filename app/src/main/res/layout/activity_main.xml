@@ -2,19 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
+    android:orientation="vertical"
     android:layout_margin="@dimen/dimen_16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.percentagebarview.PercentageBarView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/percentageBarView"
-        app:colorActive="@color/purple_200"
-        app:radius="5dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+    <id.co.edtslib.edtsds.textfield.SexFieldView
+        app:label="Jenis Kelamin"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:layout_width="match_parent"
-        android:layout_height="16dp"  />
+        android:layout_height="wrap_content" />
 </LinearLayout>

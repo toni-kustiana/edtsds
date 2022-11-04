@@ -5,6 +5,7 @@
         <enum name="warning" value="1" />
         <enum name="error" value="2" />
     </attr>
+    <attr name="label" format="string" />
     <attr name="message" format="string" />
     <attr name="shape" format="integer" />
     <attr name="shapeSize" format="dimension" />
@@ -75,7 +76,7 @@
             <enum name="neutral" value="2" />
             <enum name="important" value="3" />
         </attr>
-        <attr name="label" format="string" />
+        <attr name="label"  />
     </declare-styleable>
     <declare-styleable name="RibbonView">
         <attr name="type" />
@@ -190,5 +191,8 @@
         <attr name="colorNoActive" format="reference" />
         <attr name="colorActive" format="reference" />
         <attr name="radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="SexFieldView">
+        <attr name="label"  />
     </declare-styleable>
 </resources>
