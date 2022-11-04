@@ -7,6 +7,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewDateFieldBinding
 import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
@@ -53,6 +54,15 @@ class DateFieldView: FrameLayout {
             setTextValue()
         }
 
+    var error: String? = null
+        set(value) {
+            field = value
+
+            binding.tvError.isVisible = value?.isNotEmpty() == true
+            binding.tvError.text = value
+        }
+
+
 
     private fun setTextValue() {
         binding.tvValue.text = if (date == null) hint else {
@@ -63,6 +73,8 @@ class DateFieldView: FrameLayout {
     }
 
     private fun init(attrs: AttributeSet?) {
+        error = null
+
         binding.root.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 

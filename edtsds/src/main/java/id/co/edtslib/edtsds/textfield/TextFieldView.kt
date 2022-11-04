@@ -116,6 +116,10 @@ class TextFieldView: TextInputLayout {
                     setPhoneListener()
                 }
                 InputType.Email -> {
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
+
                     editText?.inputType = android.text.InputType.TYPE_CLASS_TEXT or
                             android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
