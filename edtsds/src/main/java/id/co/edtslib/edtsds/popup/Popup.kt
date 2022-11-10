@@ -99,6 +99,7 @@ class Popup private constructor(context: Context, private val view: View?) : Dia
 
         fun show(view: View) {
             popup = Popup(view.context, view)
+            popup?.show()
         }
 
         fun close() {
