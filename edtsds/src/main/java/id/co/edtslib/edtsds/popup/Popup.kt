@@ -100,6 +100,12 @@ class Popup private constructor(context: Context, private val view: View?) : Dia
         fun show(view: View) {
             popup = Popup(view.context, view)
             popup?.show()
+
+            val width = Resources.getSystem().displayMetrics.widthPixels * 0.9f
+            popup?.window?.setLayout(
+                width.toInt(),
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
         }
 
         fun close() {
