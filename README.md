@@ -51,6 +51,29 @@ dependencies {
 # [16. PercentageBarView](#PercentageBarView)
 # [17. SexFieldView](#SexFieldView)
 # [18. DateFieldView](#DateFieldView)
+# [19. HtmlTextView](#HtmlTextView)
+
+# DateFieldView
+
+![HtmlTextView](https://i.postimg.cc/sfcLBQ2B/htmltextview.png)
+
+The HtmlTextView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.HtmlTextView
+        app:inputType="text"
+        app:imeOptions="next"
+        android:text="@string/send_via_miscall"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <string name="send_via_miscall"><![CDATA[Verifikasi via <b>Missed Call</b>]]></string>
+```
+
 
 # DateFieldView
 
