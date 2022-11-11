@@ -16,7 +16,7 @@ import id.co.edtslib.edtsds.ButtonView
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DialogPopupBinding
 
-class Popup private constructor(context: Context, private val view: View?) : Dialog(context) {
+class Popup private constructor(context: Context, private val view: View?, themeResId: Int) : Dialog(context, themeResId) {
     enum class Orientation {
         Horizontal, Vertical
     }
@@ -27,18 +27,18 @@ class Popup private constructor(context: Context, private val view: View?) : Dia
         var dismissible = false
 
         fun show(activity: FragmentActivity, title: String?, message: String,
-                 positiveButton: String?, positiveClickListener: OnClickListener?) {
+                 positiveButton: String?, positiveClickListener: OnClickListener?, themeResId: Int = 0) {
             show(activity, title, message, positiveButton, null,
-                positiveClickListener, null)
+                positiveClickListener, null, themeResId = themeResId)
         }
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, negativeButton: String?,
                  positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
-                 orientation: Orientation = Orientation.Horizontal) {
+                 orientation: Orientation = Orientation.Horizontal, themeResId: Int = 0) {
 
             if (popup == null) {
-                popup = Popup(activity, null)
+                popup = Popup(activity, null, themeResId)
 
                 popup?.binding?.tvTitle?.isVisible = title?.isNotEmpty() == true
                 popup?.binding?.tvTitle?.text = title
@@ -97,14 +97,26 @@ class Popup private constructor(context: Context, private val view: View?) : Dia
             }
         }
 
-        fun show(view: View) {
-            popup = Popup(view.context, view)
+        fun showFullScreen(view: View, themeResId: Int = 0) {
+            show(view, width = WindowManager.LayoutParams.MATCH_PARENT.toFloat(),
+                height = WindowManager.LayoutParams.MATCH_PARENT, themeResId = themeResId)
+        }
+
+        fun show(view: View, width: Float = 0.9f,
+            height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
+                 themeResId: Int = 0) {
+            popup = Popup(view.context, view, themeResId)
             popup?.show()
 
-            val width = Resources.getSystem().displayMetrics.widthPixels * 0.9f
+            val w = if (width == WindowManager.LayoutParams.WRAP_CONTENT.toFloat())
+                WindowManager.LayoutParams.WRAP_CONTENT else
+                if (width == WindowManager.LayoutParams.MATCH_PARENT.toFloat())
+                    WindowManager.LayoutParams.MATCH_PARENT else
+                    (Resources.getSystem().displayMetrics.widthPixels * 0.9f).toInt()
+
             popup?.window?.setLayout(
-                width.toInt(),
-                WindowManager.LayoutParams.WRAP_CONTENT
+                w,
+                height
             )
         }
 
