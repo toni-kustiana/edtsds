@@ -54,6 +54,12 @@ class DateFieldView: FrameLayout {
             setTextValue()
         }
 
+    var label: String? = null
+        set(value) {
+            field = value
+            binding.tvLabel.text = label
+        }
+
     var error: String? = null
         set(value) {
             field = value
@@ -143,6 +149,7 @@ class DateFieldView: FrameLayout {
             }
 
             hint = a.getString(R.styleable.DateFieldView_hint)
+            label = a.getString(R.styleable.DateFieldView_label)
 
             a.recycle()
         }

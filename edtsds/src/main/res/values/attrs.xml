@@ -199,5 +199,6 @@
         <attr name="dateFormat" format="string"  />
         <attr name="hint" format="string" />
         <attr name="minAge" format="integer" />
+        <attr name="label"  />
     </declare-styleable>
 </resources>
