@@ -53,7 +53,7 @@ dependencies {
 # [18. DateFieldView](#DateFieldView)
 # [19. HtmlTextView](#HtmlTextView)
 
-# DateFieldView
+# HtmlTextView
 
 ![HtmlTextView](https://i.postimg.cc/sfcLBQ2B/htmltextview.png)
 
