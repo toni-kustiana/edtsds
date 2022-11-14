@@ -148,5 +148,13 @@ class Popup private constructor(context: Context, private val view: View?, theme
         window?.decorView?.setBackgroundResource(android.R.color.transparent)
 
         setCancelable(dismissible)
+
+        setOnDismissListener {
+            popup = null
+        }
+
+        setOnCancelListener {
+            popup = null
+        }
     }
 }
