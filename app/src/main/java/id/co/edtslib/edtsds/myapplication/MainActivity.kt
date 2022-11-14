@@ -1,6 +1,7 @@
 package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -15,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val binding = ViewContentSwipeBinding.inflate(LayoutInflater.from(this), null, false)
-        Popup.showFullScreen(binding.root)
+        Popup.show(activity = this, title = "081905242788", message = "Apakah Nomor Ponsel yang\nmasukkan sudah bener?",
+            positiveClickListener = {}, positiveButton = "Konfirmasi", gravity = Gravity.CENTER_HORIZONTAL)
 
     }
 }

@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.Window
@@ -27,23 +28,28 @@ class Popup private constructor(context: Context, private val view: View?, theme
         var dismissible = false
 
         fun show(activity: FragmentActivity, title: String?, message: String,
-                 positiveButton: String?, positiveClickListener: OnClickListener?, themeResId: Int = 0) {
+                 positiveButton: String?, positiveClickListener: OnClickListener?,
+                 gravity: Int = Gravity.START, themeResId: Int = 0) {
             show(activity, title, message, positiveButton, null,
-                positiveClickListener, null, themeResId = themeResId)
+                positiveClickListener, null, themeResId =
+                themeResId, gravity = gravity)
         }
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, negativeButton: String?,
                  positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
-                 orientation: Orientation = Orientation.Horizontal, themeResId: Int = 0) {
+                 orientation: Orientation = Orientation.Horizontal, gravity: Int = Gravity.START,
+                 themeResId: Int = 0) {
 
             if (popup == null) {
                 popup = Popup(activity, null, themeResId)
 
                 popup?.binding?.tvTitle?.isVisible = title?.isNotEmpty() == true
                 popup?.binding?.tvTitle?.text = title
+                popup?.binding?.tvTitle?.gravity = gravity
 
                 popup?.binding?.tvMessage?.text = message
+                popup?.binding?.tvMessage?.gravity = gravity
 
                 popup?.binding?.bvNegative?.isVisible = negativeButton != null
                 popup?.binding?.bvNegative?.text = negativeButton
