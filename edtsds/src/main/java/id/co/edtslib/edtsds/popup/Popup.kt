@@ -18,6 +18,8 @@ import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DialogPopupBinding
 
 class Popup private constructor(context: Context, private val view: View?, themeResId: Int) : Dialog(context, themeResId) {
+    var dismissible = false
+
     enum class Orientation {
         Horizontal, Vertical
     }
@@ -25,11 +27,10 @@ class Popup private constructor(context: Context, private val view: View?, theme
     @SuppressLint("StaticFieldLeak")
     companion object {
         private var popup: Popup? = null
-        var dismissible = false
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, positiveClickListener: OnClickListener?,
-                 gravity: Int = Gravity.START, themeResId: Int = 0) {
+                 gravity: Int = Gravity.START, themeResId: Int = 0, dismissible: Boolean = false) {
             show(activity, title, message, positiveButton, null,
                 positiveClickListener, null, themeResId =
                 themeResId, gravity = gravity)
@@ -39,10 +40,12 @@ class Popup private constructor(context: Context, private val view: View?, theme
                  positiveButton: String?, negativeButton: String?,
                  positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
                  orientation: Orientation = Orientation.Horizontal, gravity: Int = Gravity.START,
-                 themeResId: Int = 0) {
+                 themeResId: Int = 0, dismissible: Boolean = false) {
 
             if (popup == null) {
                 popup = Popup(activity, null, themeResId)
+
+                popup?.dismissible = dismissible
 
                 popup?.binding?.tvTitle?.isVisible = title?.isNotEmpty() == true
                 popup?.binding?.tvTitle?.text = title
