@@ -106,15 +106,17 @@ class Popup private constructor(context: Context, private val view: View?, theme
             }
         }
 
-        fun showFullScreen(view: View, themeResId: Int = 0) {
+        fun showFullScreen(view: View, themeResId: Int = 0, dismissible: Boolean = false) {
             show(view, width = WindowManager.LayoutParams.MATCH_PARENT.toFloat(),
-                height = WindowManager.LayoutParams.MATCH_PARENT, themeResId = themeResId)
+                height = WindowManager.LayoutParams.MATCH_PARENT, themeResId = themeResId,
+                dismissible = dismissible)
         }
 
         fun show(view: View, width: Float = 0.9f,
             height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
-                 themeResId: Int = 0) {
+                 themeResId: Int = 0, dismissible: Boolean = false) {
             popup = Popup(view.context, view, themeResId)
+            popup?.dismissible = dismissible
             popup?.show()
 
             val w = if (width == WindowManager.LayoutParams.WRAP_CONTENT.toFloat())
