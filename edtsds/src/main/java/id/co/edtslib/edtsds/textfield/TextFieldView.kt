@@ -40,6 +40,12 @@ class TextFieldView: TextInputLayout {
 
     private var hint: String? = null
     private var emptyHint: String? = null
+        set(value) {
+            field = value
+            if (value != null) {
+                placeholderText = emptyHint
+            }
+        }
 
     private var startIcon: Int = 0
     var delegate: TextFieldDelegate? = null

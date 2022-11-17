@@ -204,5 +204,6 @@
         <attr name="hint" format="string" />
         <attr name="minAge" format="integer" />
         <attr name="label"  />
+        <attr name="autoShowLabel" format="boolean" />
     </declare-styleable>
 </resources>

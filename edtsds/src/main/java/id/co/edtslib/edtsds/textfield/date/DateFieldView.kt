@@ -43,6 +43,8 @@ class DateFieldView: FrameLayout {
                 val simpleDateFormat = SimpleDateFormat(format, Locale("ID"))
                 delegate?.onDateChanged(value, simpleDateFormat.format(value))
             }
+
+            binding.tvLabel.isVisible = autoShowLabel != false || value != null
         }
 
     var format = "dd-MM-yyyy"
@@ -60,6 +62,12 @@ class DateFieldView: FrameLayout {
             binding.tvLabel.text = label
         }
 
+    var autoShowLabel: Boolean? = null
+        set(value) {
+            field = value
+            binding.tvLabel.isVisible = value != false
+        }
+
     var error: String? = null
         set(value) {
             field = value
@@ -75,13 +83,22 @@ class DateFieldView: FrameLayout {
             val simpleDateFormat = SimpleDateFormat(format, Locale("ID"))
             simpleDateFormat.format(date!!)
         }
-        binding.root.isActivated = date != null
+        binding.tvValue.isActivated = date != null
     }
 
     private fun init(attrs: AttributeSet?) {
         error = null
 
+        binding.editText.setOnFocusChangeListener { _, b ->
+            isActivated = b
+            binding.tvValue.isActivated = date != null
+
+            binding.tvLabel.isVisible = b || autoShowLabel != false || date != null
+        }
+
         binding.root.setOnClickListener {
+            binding.editText.requestFocus()
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
                 val calendar = Calendar.getInstance()
@@ -150,6 +167,7 @@ class DateFieldView: FrameLayout {
 
             hint = a.getString(R.styleable.DateFieldView_hint)
             label = a.getString(R.styleable.DateFieldView_label)
+            autoShowLabel = a.getBoolean(R.styleable.DateFieldView_autoShowLabel, true)
 
             a.recycle()
         }
