@@ -3,4 +3,6 @@
     <string name="send_code_counter"><![CDATA[Kirim ulang dapat dilakukan setelah <b>%s</b>.]]></string>
     <string name="send_via_miscall"><![CDATA[Verifikasi via <b>Missed Call</b>]]></string>
 
+    <string name="term_and_condition_link">syarat dan ketentuan</string>
+    <string name="apps_term_and_condition"><![CDATA[Dengan menggunakan aplikasi Klik Indomaret, saya telah<br />menyetujui <b><u>syarat dan ketentuan</u></b>]]></string>
 </resources>
