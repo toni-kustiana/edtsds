@@ -37,7 +37,7 @@ class SexFieldView: FrameLayout {
             binding.tvLabel.text = label
         }
 
-    var sex: Sex = Sex.Man
+    var sex: Sex? = null
         set(value) {
             field = value
 
@@ -65,10 +65,11 @@ class SexFieldView: FrameLayout {
             )
 
             label = a.getString(R.styleable.SexFieldView_label)
+            val iSex = a.getInt(R.styleable.SexFieldView_sex, 0)
+
+            sex = Sex.values()[iSex]
 
             a.recycle()
         }
-
-        sex = Sex.Man
     }
 }

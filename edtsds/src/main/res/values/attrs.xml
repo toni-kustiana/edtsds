@@ -194,6 +194,10 @@
     </declare-styleable>
     <declare-styleable name="SexFieldView">
         <attr name="label"  />
+        <attr name="sex" format="enum">
+            <enum name="man" value="0" />
+            <enum name="woman" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="DateFieldView">
         <attr name="dateFormat" format="string"  />

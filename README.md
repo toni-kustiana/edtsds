@@ -139,6 +139,8 @@ Here's a basic implementation.
 ##### _app:label_
 [string]: label of field
 
+##### _app:sex_
+[enum]: man or woman
 
 ### Listener for Sex Value Changed
 ```kotlin

@@ -7,11 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.HtmlTextView
-        app:inputType="text"
-        app:imeOptions="next"
-        android:text="@string/send_via_miscall"
-        android:layout_marginTop="@dimen/dimen_16dp"
+    <id.co.edtslib.edtsds.textfield.sex.SexFieldView
+        app:label="Jenis Kelamin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
