@@ -65,9 +65,10 @@ class SexFieldView: FrameLayout {
             )
 
             label = a.getString(R.styleable.SexFieldView_label)
-            val iSex = a.getInt(R.styleable.SexFieldView_sex, 0)
-
-            sex = Sex.values()[iSex]
+            val iSex = a.getInt(R.styleable.SexFieldView_sex, -1)
+            if (iSex >= 0) {
+                sex = Sex.values()[iSex]
+            }
 
             a.recycle()
         }
