@@ -76,7 +76,7 @@ class DateFieldView: FrameLayout {
             binding.tvError.isVisible = value?.isNotEmpty() == true
             binding.tvError.text = value
 
-            isSelected = value?.isNotEmpty() != true
+            isSelected = value?.isNotEmpty() == true
         }
 
 
