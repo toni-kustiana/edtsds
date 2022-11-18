@@ -12,6 +12,15 @@
         android:padding="@dimen/dimen_12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:inputType="none"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/editText"
+            android:layout_width="1px"
+            android:layout_height="1px" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLabel"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,14 +46,6 @@
             android:src="@drawable/ic_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <androidx.appcompat.widget.AppCompatEditText
-            android:background="@android:color/transparent"
-            android:cursorVisible="false"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/editText"
-            android:layout_width="1px"
-            android:layout_height="1px" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvError"

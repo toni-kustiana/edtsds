@@ -3,7 +3,9 @@ package id.co.edtslib.edtsds.textfield.sex
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewSexFieldBinding
 
@@ -29,6 +31,12 @@ class SexFieldView: FrameLayout {
     private val binding = ViewSexFieldBinding.inflate(LayoutInflater.from(context), this, true)
 
     var delegate: SexFieldDelegate? = null
+    var error: String? = null
+        set(value) {
+            field = value
+            binding.tvError.isVisible = value?.isNotEmpty() == true
+            binding.tvError.text = error
+        }
 
     var label: String? = null
         set(value) {
@@ -49,12 +57,23 @@ class SexFieldView: FrameLayout {
 
 
     private fun init(attrs: AttributeSet?) {
+        binding.tvError.isVisible = false
+
+        binding.editText.setOnFocusChangeListener { view, b ->
+            if (b) {
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
+
         binding.cbMan.setOnClickListener {
             sex = Sex.Man
+            binding.editText.requestFocus()
         }
 
         binding.cbWoman.setOnClickListener {
             sex = Sex.Woman
+            binding.editText.requestFocus()
         }
 
         if (attrs != null) {

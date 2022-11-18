@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
@@ -74,6 +75,8 @@ class DateFieldView: FrameLayout {
 
             binding.tvError.isVisible = value?.isNotEmpty() == true
             binding.tvError.text = value
+
+            isSelected = value?.isNotEmpty() != true
         }
 
 
@@ -89,7 +92,11 @@ class DateFieldView: FrameLayout {
     private fun init(attrs: AttributeSet?) {
         error = null
 
-        binding.editText.setOnFocusChangeListener { _, b ->
+        binding.editText.setOnFocusChangeListener { v, b ->
+            if (b) {
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
             isActivated = b
             binding.tvValue.isActivated = date != null
 
