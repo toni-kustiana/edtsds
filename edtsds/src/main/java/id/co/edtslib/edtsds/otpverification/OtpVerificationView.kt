@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewOtpVerificationBinding
 import id.co.edtslib.edtsds.otpremainingview.OtpRemainingDelegate
@@ -27,14 +28,24 @@ class OtpVerificationView: FrameLayout {
         init(attrs)
     }
 
-    private val binding: ViewOtpVerificationBinding =
+    val binding: ViewOtpVerificationBinding =
         ViewOtpVerificationBinding.inflate(LayoutInflater.from(context), this, true)
 
     val otpView = binding.otpView
     val otpRemainingView = binding.otpRemainingView
+    var error: String? = null
+        set(value) {
+            field = value
+
+            binding.tvError.isVisible = value?.isNotEmpty() == true
+            binding.tvError.text = value
+
+            otpView.isError = value?.isNotEmpty() == true
+        }
 
     private fun init(attrs: AttributeSet?) {
         binding.bvVerification.isEnabled = false
+        binding.tvError.isVisible = false
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
