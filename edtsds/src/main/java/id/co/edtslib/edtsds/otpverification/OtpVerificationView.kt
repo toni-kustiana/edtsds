@@ -63,6 +63,7 @@ class OtpVerificationView: FrameLayout {
                 }
 
                 override fun onTextChanged(text: String) {
+                    error = null
                     binding.bvVerification.isEnabled = text.length == binding.otpView.length
                 }
             }
