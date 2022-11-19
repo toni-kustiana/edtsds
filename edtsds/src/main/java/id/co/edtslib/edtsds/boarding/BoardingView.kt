@@ -38,6 +38,16 @@ class BoardingView: FrameLayout {
     private val binding: ViewBoardingBinding =
         ViewBoardingBinding.inflate(LayoutInflater.from(context), this, true)
 
+    var autoScrollInterval = 0
+    private var runnable: Runnable? = null
+
+    var canBackOnFirstPosition = false
+    var circular = false
+        set(value) {
+            field = value
+            adapter.circular = value
+        }
+
     val pagingNavigationView = binding.navigation
     val viewPager = binding.viewPager
     var alignment = Alignment.Left
@@ -69,11 +79,43 @@ class BoardingView: FrameLayout {
                 adapter.notifyDataSetChanged()
 
                 binding.navigation.selectedIndex = 0
+                if (autoScrollInterval > 0) {
+                    startAutoScroll()
+                }
+
+                viewPager.post {
+                    viewPager.setCurrentItem(adapter.getInitialPosition(canBackOnFirstPosition), false)
+                }
             }
             else {
+                removeAutoScroll()
                 isVisible = false
             }
         }
+
+    private fun removeAutoScroll() {
+        if (runnable != null) {
+            binding.viewPager.removeCallbacks(runnable)
+        }
+        runnable = null
+    }
+
+    private fun startAutoScroll() {
+        removeAutoScroll()
+        if (list?.isNotEmpty() == true) {
+            runnable = Runnable {
+                val currentItem = binding.viewPager.currentItem
+                if (currentItem == list!!.size - 1) {
+                    binding.viewPager.currentItem = adapter.getInitialPosition(canBackOnFirstPosition)
+                } else {
+                    binding.viewPager.currentItem = currentItem + 1
+                }
+
+                startAutoScroll()
+            }
+            binding.viewPager.postDelayed(runnable, autoScrollInterval*1000L)
+        }
+    }
 
     private fun init(attrs: AttributeSet?) {
         setup()
@@ -101,6 +143,10 @@ class BoardingView: FrameLayout {
             binding.navigation.shapeResId = a.getResourceId(
                 R.styleable.BoardingView_shape,
                 R.drawable.bg_navigation)
+
+            autoScrollInterval = a.getInt(R.styleable.BoardingView_autoScrollInterval, 0)
+            circular = a.getBoolean(R.styleable.BoardingView_autoScrollInterval, false)
+            canBackOnFirstPosition = a.getBoolean(R.styleable.BoardingView_canBackOnFirstPosition, false)
 
             val iAlignment = a.getInt(R.styleable.BoardingView_alignment, 0)
             alignment = Alignment.values()[iAlignment]
@@ -141,7 +187,18 @@ class BoardingView: FrameLayout {
                 super.onPageSelected(position)
                 delegate?.onSelected(position)
                 if (binding.navigation.selectedIndex != position) {
-                    binding.navigation.selectedIndex = position
+                    binding.navigation.selectedIndex = adapter.getRealPosition(position)
+                }
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (autoScrollInterval > 0) {
+                    startAutoScroll()
                 }
             }
         })

@@ -7,11 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-
-   <id.co.edtslib.edtsds.otpverification.OtpVerificationView
-       android:id="@+id/otpVerificationView"
-       android:layout_marginTop="@dimen/dimen_32dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.boarding.BoardingView
+        android:id="@+id/boardingView"
+        app:autoScrollInterval="5"
+        app:canBackOnFirstPosition="true"
+        app:circular="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:imageHeight="208dp"
+        app:shape="@drawable/bg_onboarding_page_navigation"
+        app:shapeSelectedWidth="@dimen/dimen_20dp"
+        app:shapeSize="@dimen/dimen_8dp" />
 
 </LinearLayout>

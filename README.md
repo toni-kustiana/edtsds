@@ -1228,6 +1228,15 @@ otpRemainingView.delegate = object : OtpRemainingDelegate {
 ##### _app:imageHeight_
 [dimension]: height of image
 
+##### _app:autoScrollInterval_
+[int]: auto scroll interval, default no
+
+##### _app:circular_
+[boolean]: boarding circular, default false
+
+##### _app:canBackOnFirstPosition_
+[boolean]: can backward on first position, default false
+
 You can use all pagenavigation attributes fot setup page navigation view [PagingNavigationView](#PagingNavigationView)
 
 ### Data
