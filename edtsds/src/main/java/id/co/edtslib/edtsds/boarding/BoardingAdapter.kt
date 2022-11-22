@@ -43,6 +43,14 @@ class BoardingAdapter: BaseRecyclerViewAdapter<AdapterBoardingItemBinding, Board
         }
     }
 
+    fun getFakePosition(position: Int): Int {
+        return if (circular && list.size > 1) {
+            (itemCount / 2 - (itemCount/2) % list.size)+position
+        } else {
+            position
+        }
+    }
+
     fun getInitialPosition(canBackOnFirstPosition: Boolean): Int {
         return if (circular && list.size > 1) {
             if (canBackOnFirstPosition) {

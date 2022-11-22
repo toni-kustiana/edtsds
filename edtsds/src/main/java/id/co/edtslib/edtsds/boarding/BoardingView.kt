@@ -145,7 +145,7 @@ class BoardingView: FrameLayout {
                 R.drawable.bg_navigation)
 
             autoScrollInterval = a.getInt(R.styleable.BoardingView_autoScrollInterval, 0)
-            circular = a.getBoolean(R.styleable.BoardingView_autoScrollInterval, false)
+            circular = a.getBoolean(R.styleable.BoardingView_circular, false)
             canBackOnFirstPosition = a.getBoolean(R.styleable.BoardingView_canBackOnFirstPosition, false)
 
             val iAlignment = a.getInt(R.styleable.BoardingView_alignment, 0)
@@ -175,9 +175,9 @@ class BoardingView: FrameLayout {
         binding.viewPager.adapter = adapter
         binding.navigation.delegate = object : PagingNavigationDelegate {
             override fun onSelected(position: Int) {
-
-                if (binding.viewPager.currentItem != position) {
-                    binding.viewPager.currentItem = position
+                val fakePosition = adapter.getFakePosition(position)
+                if (binding.viewPager.currentItem != fakePosition) {
+                    binding.viewPager.currentItem = fakePosition
                 }
             }
         }
