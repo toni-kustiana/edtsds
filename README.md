@@ -52,6 +52,53 @@ dependencies {
 # [17. SexFieldView](#SexFieldView)
 # [18. DateFieldView](#DateFieldView)
 # [19. HtmlTextView](#HtmlTextView)
+# [19. ShimmerView](#ShimmerView)
+
+# ShimmerView
+
+
+The ShimmerView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.shimmer.ShimmerView
+    android:id="@+id/shimmerView"
+    app:shimmerBackground="@drawable/bg_shimmer_text"
+    app:shimmerWidth="100dp"
+    app:shimmerAutoStart="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="72dp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="test test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </id.co.edtslib.edtsds.shimmer.ShimmerView>
+```
+
+```kotlin
+    val shimmerView = findViewById<ShimmerView>(R.id.shimmerView)
+    shimmerView.showShimmer()
+    shimmerView.postDelayed({
+        shimmerView.hideShimmer()
+    }, 2000)
+```
+
+### Attributes information
+
+##### _app:shimmerWidth_
+[dimension]: shimmer width, default (= width of content)
+
+##### _app:shimmerHeight_
+[dimension]: shimmer height, default (= height of content)
+
+##### _app:shimmerBackground_
+[reference]: background of shimmer
+
+##### _app:shimmerAutoStart_
+[boolean]: true = shimmer auto start, default false 
 
 # HtmlTextView
 

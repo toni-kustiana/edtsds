@@ -209,4 +209,10 @@
         <attr name="label"  />
         <attr name="autoShowLabel" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="ShimmerView">
+        <attr name="shimmerWidth" format="dimension"  />
+        <attr name="shimmerHeight" format="dimension"  />
+        <attr name="shimmerBackground" format="reference"  />
+        <attr name="shimmerAutoStart" format="boolean"  />
+    </declare-styleable>
 </resources>
