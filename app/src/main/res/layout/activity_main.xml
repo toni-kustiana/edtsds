@@ -11,6 +11,7 @@
         android:id="@+id/shimmerView"
         app:shimmerBackground="@drawable/bg_shimmer_text"
         app:shimmerWidth="100dp"
+        app:shimmerHeight="28dp"
         app:shimmerAutoStart="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

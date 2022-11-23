@@ -3,9 +3,6 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.boarding.BoardingData
-import id.co.edtslib.edtsds.boarding.BoardingView
-import id.co.edtslib.edtsds.otpverification.OtpVerificationView
 import id.co.edtslib.edtsds.shimmer.ShimmerView
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val shimmerView = findViewById<ShimmerView>(R.id.shimmerView)
-        //shimmerView.showShimmer()
+       // shimmerView.showShimmer()
         shimmerView.postDelayed({
             shimmerView.hideShimmer()
         }, 2000)

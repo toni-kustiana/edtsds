@@ -7,7 +7,6 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import com.facebook.shimmer.ShimmerFrameLayout
 import id.co.edtslib.edtsds.R
-import id.co.edtslib.edtsds.RibbonView
 
 class ShimmerView: FrameLayout {
     constructor(context: Context) : super(context)
@@ -79,7 +78,9 @@ class ShimmerView: FrameLayout {
             shimmerBackground = a.getResourceId(R.styleable.ShimmerView_shimmerBackground, 0)
 
             if (a.getBoolean(R.styleable.ShimmerView_shimmerAutoStart, false)) {
-                showShimmer()
+                post {
+                    showShimmer()
+                }
             }
             else {
                 hideShimmer()
@@ -95,8 +96,8 @@ class ShimmerView: FrameLayout {
     fun showShimmer() {
         if (shimmerWidth == 0 && shimmerHeight == 0) {
             post {
-                shimmerWidth = getChildAt(1).width
-                shimmerHeight = getChildAt(1).height
+                shimmerWidth = getChildAt(childCount-1).width
+                shimmerHeight = getChildAt(childCount-1).height
 
                 doShowShimmer()
             }
@@ -104,14 +105,14 @@ class ShimmerView: FrameLayout {
         else
         if (shimmerWidth == 0) {
             post {
-                shimmerWidth = getChildAt(1).width
+                shimmerWidth = getChildAt(childCount-1).width
                 doShowShimmer()
             }
         }
         else
             if (shimmerHeight == 0) {
                 post {
-                    shimmerHeight = getChildAt(1).height
+                    shimmerHeight = getChildAt(childCount-1).height
                     doShowShimmer()
                 }
             }
@@ -121,7 +122,7 @@ class ShimmerView: FrameLayout {
     }
 
     private fun doShowShimmer() {
-        getChildAt(1).isVisible = false
+        getChildAt(childCount-1).isVisible = false
 
         shimmerView?.isVisible = true
         shimmerLayout?.startShimmer()
@@ -131,7 +132,7 @@ class ShimmerView: FrameLayout {
         shimmerLayout?.stopShimmer()
         shimmerView?.isVisible = false
 
-        getChildAt(1).isVisible = true
+        getChildAt(childCount-1).isVisible = true
 
     }
 }
