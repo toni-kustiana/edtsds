@@ -53,13 +53,13 @@ dependencies {
 # [18. DateFieldView](#DateFieldView)
 # [19. HtmlTextView](#HtmlTextView)
 # [19. ShimmerView](#ShimmerView)
-# [20. RecyclerSkeletonView](#RecyclerSkeletonView)
+# [20. RecyclerShimmerView](#RecyclerShimmerView)
 
-# RecyclerSkeletonView
+# RecyclerShimmerView
 
-![RecyclerSkeletonView](https://i.postimg.cc/MH5nYhY1/shimmer.png)
+![RecyclerShimmerView](https://i.postimg.cc/MH5nYhY1/shimmer.png)
 
-The RecyclerSkeletonView is very easy to use. Just add it to your layout like any other view.
+The RecyclerShimmerView is very easy to use. Just add it to your layout like any other view.
 ##### Via XML
 
 Here's a basic implementation.
