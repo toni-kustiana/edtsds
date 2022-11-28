@@ -3,7 +3,7 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.list.skeleton.MenuSkeletonView
+import id.co.edtslib.edtsds.list.skeleton.RecyclerShimmerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val menuSkeletonView = findViewById<MenuSkeletonView>(R.id.menuSkeletonView)
+        val menuSkeletonView = findViewById<RecyclerShimmerView>(R.id.menuSkeletonView)
         menuSkeletonView.show()
         menuSkeletonView.postDelayed({
             menuSkeletonView.hide()

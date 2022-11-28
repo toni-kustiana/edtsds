@@ -215,4 +215,8 @@
         <attr name="shimmerBackground" format="reference"  />
         <attr name="shimmerAutoStart" format="boolean"  />
     </declare-styleable>
+    <declare-styleable name="RecyclerSkeletonView">
+        <attr name="count"   />
+        <attr name="layout" format="reference" />
+    </declare-styleable>
 </resources>

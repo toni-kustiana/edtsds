@@ -53,9 +53,43 @@ dependencies {
 # [18. DateFieldView](#DateFieldView)
 # [19. HtmlTextView](#HtmlTextView)
 # [19. ShimmerView](#ShimmerView)
+# [20. RecyclerSkeletonView](#RecyclerSkeletonView)
+
+# RecyclerSkeletonView
+
+![RecyclerSkeletonView](https://i.postimg.cc/MH5nYhY1/shimmer.png)
+
+The RecyclerSkeletonView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.list.skeleton.RecyclerShimmerView
+        app:count="10"
+        app:layout="@layout/skeleton_menu_item"
+        android:id="@+id/menuSkeletonView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+```kotlin
+   val menuSkeletonView = findViewById<RecyclerShimmerView>(R.id.menuSkeletonView)
+    menuSkeletonView.show()
+    menuSkeletonView.postDelayed({
+        menuSkeletonView.hide()
+    }, 5000)
+```
+
+### Attributes information
+
+##### _app:count_
+[int]: count of list, default 10
+
+##### _app:layout_
+[reference]: adapter view holder layout, default menu layout. 
 
 # ShimmerView
-
 
 The ShimmerView is very easy to use. Just add it to your layout like any other view.
 ##### Via XML
