@@ -1,0 +1,41 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_menu"
+    android:padding="@dimen/dimen_16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerName"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        app:shimmer_auto_start="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/H2"
+            android:background="@drawable/bg_shimmer_text"
+            android:textColor="@color/colorNeutral70"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_marginTop="@dimen/dimen_4dp"
+        app:shimmer_auto_start="true"
+        app:layout_constraintTop_toBottomOf="@id/shimmerName"
+        app:layout_constraintStart_toStartOf="@id/shimmerName"
+        app:layout_constraintEnd_toEndOf="@id/shimmerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddress"
+            style="@style/B3"
+            android:background="@drawable/bg_shimmer_text"
+            android:textColor="@color/colorNeutral50"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_32dp" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

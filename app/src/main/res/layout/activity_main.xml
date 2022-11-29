@@ -9,7 +9,7 @@
     tools:ignore="RtlSymmetry">
     <id.co.edtslib.edtsds.list.skeleton.RecyclerShimmerView
         app:count="10"
-        app:layout="@layout/skeleton_menu_item"
+        app:layout="@layout/skeleton_test"
         android:id="@+id/menuSkeletonView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -51,7 +51,7 @@ class RecyclerShimmerView: FrameLayout {
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
                 attrs,
-                R.styleable.OtpRemainingView,
+                R.styleable.RecyclerSkeletonView,
                 0, 0
             )
 
