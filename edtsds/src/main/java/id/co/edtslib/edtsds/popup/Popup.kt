@@ -144,6 +144,19 @@ class Popup private constructor(context: Context, private val view: View?, theme
                 // ignore it
             }
         }
+
+        fun close(action: () -> Unit) {
+            try {
+                popup?.setOnDismissListener {
+                    action()
+                }
+                popup?.dismiss()
+                popup = null
+            }
+            catch (e: Exception) {
+                // ignore it
+            }
+        }
     }
 
     val binding = DialogPopupBinding.inflate(layoutInflater)
