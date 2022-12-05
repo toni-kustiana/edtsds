@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import id.co.edtslib.edtsds.ButtonView
@@ -30,17 +31,18 @@ class Popup private constructor(context: Context, private val view: View?, theme
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, positiveClickListener: OnClickListener?,
-                 gravity: Int = Gravity.START, themeResId: Int = 0, dismissible: Boolean = false) {
+                 gravity: Int = Gravity.START, themeResId: Int = 0, dismissible: Boolean = false,
+                 isHtml: Boolean = false) {
             show(activity, title, message, positiveButton, null,
                 positiveClickListener, null, themeResId =
-                themeResId, gravity = gravity)
+                themeResId, gravity = gravity, dismissible = dismissible, isHtml = isHtml)
         }
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, negativeButton: String?,
                  positiveClickListener: OnClickListener?, negativeClickListener: OnClickListener?,
                  orientation: Orientation = Orientation.Horizontal, gravity: Int = Gravity.START,
-                 themeResId: Int = 0, dismissible: Boolean = false) {
+                 themeResId: Int = 0, dismissible: Boolean = false, isHtml: Boolean = false) {
 
             if (popup == null) {
                 popup = Popup(activity, null, themeResId)
@@ -48,10 +50,12 @@ class Popup private constructor(context: Context, private val view: View?, theme
                 popup?.dismissible = dismissible
 
                 popup?.binding?.tvTitle?.isVisible = title?.isNotEmpty() == true
-                popup?.binding?.tvTitle?.text = title
+                popup?.binding?.tvTitle?.text = if (isHtml && title != null) HtmlCompat.fromHtml(title,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY) else title
                 popup?.binding?.tvTitle?.gravity = gravity
 
-                popup?.binding?.tvMessage?.text = message
+                popup?.binding?.tvMessage?.text = if (isHtml) HtmlCompat.fromHtml(message,
+                    HtmlCompat.FROM_HTML_MODE_LEGACY) else message
                 popup?.binding?.tvMessage?.gravity = gravity
 
                 popup?.binding?.bvNegative?.isVisible = negativeButton != null
