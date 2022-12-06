@@ -133,7 +133,7 @@ class Popup private constructor(context: Context, private val view: View?, theme
 
         fun show(view: View, width: Float = 0.9f,
             height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
-                 themeResId: Int = 0, dismissible: Boolean = false) {
+                 themeResId: Int = 0, dismissible: Boolean = false): Popup {
             val popup = Popup(view.context, view, themeResId)
             popup.dismissible = dismissible
             popup.show()
@@ -148,6 +148,8 @@ class Popup private constructor(context: Context, private val view: View?, theme
                 w,
                 height
             )
+
+            return popup
         }
     }
 
