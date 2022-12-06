@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.bumptech.glide.Glide
 import id.co.edtslib.edtsds.R
 
 class SlidingItemLayoutView: FrameLayout {
@@ -27,7 +28,8 @@ class SlidingItemLayoutView: FrameLayout {
     }
 
     private var imageView: AppCompatImageView? = null
-    private var imageViewResId = 0
+    var imageViewResId = 0
+    var imageUrl: String? = null
     private var drawableWidth = 0f
 
     private fun init(attrs: AttributeSet?) {
@@ -46,7 +48,7 @@ class SlidingItemLayoutView: FrameLayout {
     }
 
     fun redraw() {
-        if (imageViewResId != 0) {
+        if (imageViewResId != 0 || imageUrl != null) {
             postDelayed( {
                 val h = height
 
@@ -55,7 +57,13 @@ class SlidingItemLayoutView: FrameLayout {
                     addView(imageView, 0)
 
                     imageView?.scaleType = ImageView.ScaleType.FIT_XY
-                    imageView?.setImageResource(imageViewResId)
+
+                    if (imageUrl != null) {
+                        Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+                    }
+                    else {
+                        imageView?.setImageResource(imageViewResId)
+                    }
                 }
 
                 val frameLayout = imageView?.layoutParams
