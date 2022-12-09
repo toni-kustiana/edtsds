@@ -53,7 +53,7 @@ class TextFieldView: TextInputLayout {
     var text: String? = null
         set(value) {
             field = value
-            editText?.setText(text)
+            editText?.setText(value)
         }
         get() = editText?.text?.toString()
 
