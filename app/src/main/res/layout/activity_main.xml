@@ -7,10 +7,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.list.skeleton.RecyclerShimmerView
-        app:count="10"
-        app:layout="@layout/skeleton_test"
-        android:id="@+id/menuSkeletonView"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/aaa"
+        app:inputType="popup"
+        android:hint="Provinsi"
+        app:placeholderText="ahahah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        app:inputType="phone"
+        android:hint="Phone"
+        app:emptyHint="Phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -5,6 +5,7 @@ import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
@@ -17,7 +18,7 @@ import id.co.edtslib.edtsds.base.MyValueListener
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address, Search, Email
+        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup
     }
 
     enum class ImeOption {
@@ -48,6 +49,14 @@ class TextFieldView: TextInputLayout {
         }
 
     private var startIcon: Int = 0
+
+    var text: String? = null
+        set(value) {
+            field = value
+            editText?.setText(text)
+        }
+        get() = editText?.text?.toString()
+
     var delegate: TextFieldDelegate? = null
 
     var imeOption = ImeOption.Next
@@ -151,6 +160,20 @@ class TextFieldView: TextInputLayout {
                     editText?.setOnFocusChangeListener { _, b ->
                         if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
                             this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
+                    }
+                }
+                InputType.Popup -> {
+                    endIconMode = END_ICON_CUSTOM
+                    endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_chevron_right, null)
+                    editText?.inputType = android.text.InputType.TYPE_NULL
+                    editText?.setOnFocusChangeListener { v, b ->
+                        if (b) {
+                            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                            imm?.hideSoftInputFromWindow(v.windowToken, 0)
+
+                            editText?.performClick()
+                            delegate?.onChanged(editText?.text?.toString())
                         }
                     }
                 }
