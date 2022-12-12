@@ -7,13 +7,20 @@
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-
-    <id.co.edtslib.edtsds.list.skeleton.RecyclerShimmerView
-        android:id="@+id/menuSkeletonView"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/aaa"
+        app:inputType="popup"
+        android:hint="Provinsi"
+        app:placeholderText="ahahah"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:count="10"
-        app:layout="@layout/skeleton_test" />
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        app:inputType="phone"
+        android:hint="Phone"
+        app:emptyHint="Phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <id.co.edtslib.edtsds.badge.BadgeView
         android:layout_width="wrap_content"

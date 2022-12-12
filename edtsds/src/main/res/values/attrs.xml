@@ -44,6 +44,7 @@
             <enum name="address" value="5" />
             <enum name="search" value="6" />
             <enum name="email" value="7" />
+            <enum name="popup" value="8" />
         </attr>
         <attr name="emptyHint" format="string" />
         <attr name="startIcon" format="reference" />
