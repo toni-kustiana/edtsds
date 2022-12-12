@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="type" format="enum">
+        <enum name="success" value="0" />
+        <enum name="warning" value="1" />
+        <enum name="error" value="2" />
+    </attr>
+    <attr name="label" format="string" />
+    <attr name="message" format="string" />
+    <attr name="shape" format="integer" />
+    <attr name="shapeSize" format="dimension" />
+    <attr name="shapeSelectedWidth" format="dimension" />
+    <attr name="shapeSelectedHeight" format="dimension" />
+    <attr name="space" format="dimension" />
+    <attr name="count" format="integer" />
+    <attr name="snap" format="boolean" />
+
+    <declare-styleable name="AlertBoxView">
+        <attr name="type" />
+        <attr name="message" />
+        <attr name="dismissible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ButtonView">
+        <attr name="variant" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="secondary" value="1" />
+            <enum name="alternative" value="2" />
+            <enum name="outline" value="3" />
+        </attr>
+        <attr name="size" format="enum">
+            <enum name="medium" value="0" />
+            <enum name="small" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TextFieldView">
+        <attr name="inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="password" value="1" />
+            <enum name="pin" value="2" />
+            <enum name="phone" value="3" />
+            <enum name="ktp" value="4" />
+            <enum name="address" value="5" />
+            <enum name="search" value="6" />
+            <enum name="email" value="7" />
+            <enum name="popup" value="8" />
+        </attr>
+        <attr name="emptyHint" format="string" />
+        <attr name="startIcon" format="reference" />
+        <attr name="maxLength" format="integer" />
+        <attr name="imeOptions" format="enum">
+            <enum name="next" value="0" />
+            <enum name="done" value="1" />
+            <enum name="send" value="2" />
+            <enum name="search" value="3" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="StepperView">
+        <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="step" format="integer" />
+        <attr name="value" format="integer" />
+        <attr name="canInput" format="boolean" />
+        <attr name="backgroundMinus" format="reference" />
+        <attr name="backgroundPlus" format="reference" />
+        <attr name="backgroundValue" format="reference" />
+        <attr name="textColorMinus" format="color" />
+        <attr name="textColorPlus" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="BadgeView">
+        <attr name="badgeType" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="secondary" value="1" />
+            <enum name="neutral" value="2" />
+            <enum name="important" value="3" />
+            <enum name="custom" value="4" />
+        </attr>
+        <attr name="label" />
+    </declare-styleable>
+    <declare-styleable name="RibbonView">
+        <attr name="type" />
+    </declare-styleable>
+    <declare-styleable name="SlidingItemView">
+        <attr name="itemSpace" format="dimension" />
+        <attr name="itemPreviewSize" format="dimension" />
+        <attr name="snap" />
+    </declare-styleable>
+    <declare-styleable name="SlidingItemLayoutView">
+        <attr name="drawableStartCompat" format="reference" />
+        <attr name="drawableWidth" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="SlidingBannerView">
+        <attr name="bannerScale" format="float" />
+        <attr name="bannerCorner" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="PagingNavigationView">
+        <attr name="shape" />
+        <attr name="shapeSize" />
+        <attr name="shapeSelectedWidth" />
+        <attr name="shapeSelectedHeight" />
+        <attr name="space" />
+        <attr name="count" />
+    </declare-styleable>
+    <declare-styleable name="BoardingView">
+        <attr name="shape" />
+        <attr name="shapeSize" />
+        <attr name="shapeSelectedWidth" />
+        <attr name="shapeSelectedHeight" />
+        <attr name="space" />
+        <attr name="count" />
+        <attr name="autoScrollInterval" format="integer" />
+        <attr name="circular" format="boolean" />
+        <attr name="canBackOnFirstPosition" format="boolean" />
+        <attr name="imageHeight" format="dimension" />
+        <attr name="pagerFullHeight" format="boolean" />
+        <attr name="alignment" format="enum">
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="LinkTextView">
+        <attr name="linkText" format="string" />
+        <attr name="linkColor" format="color" />
+    </declare-styleable>
+
+    <!-- otp -->
+    <attr name="otpInterval" format="integer" />
+
+    <declare-styleable name="OtpView">
+        <attr name="otpShape" format="reference" />
+        <attr name="otpLength" format="integer" />
+        <attr name="otpPasswordAnimate" format="integer" />
+        <attr name="otpPasswordSymbol" format="string" />
+        <attr name="otpPlaceHolderText" format="string" />
+        <attr name="otpPlaceHolderTextColor" format="color" />
+        <attr name="otpType" format="enum">
+            <enum name="number" value="0" />
+            <enum name="password" value="1" />
+            <enum name="passwordWithEye" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="OtpRemainingView">
+        <attr name="otpInterval" />
+        <attr name="otpRemainingText" format="string" />
+        <attr name="otpRemainingFormat" format="enum">
+            <enum name="clock" value="0" />
+            <enum name="text" value="1" />
+        </attr>
+        <attr name="otpRemainingHour" format="string" />
+        <attr name="otpRemainingMinute" format="string" />
+        <attr name="otpRemainingSecond" format="string" />
+
+    </declare-styleable>
+    <declare-styleable name="OtpVerificationView">
+        <attr name="otpInterval" />
+    </declare-styleable>
+    <declare-styleable name="SlidingChipsView">
+        <attr name="slideChipMargin" format="dimension" />
+        <attr name="slideChipTextColor" format="reference" />
+        <attr name="slideChipTextPadding" format="dimension" />
+        <attr name="slideChipBackground" format="reference" />
+        <attr name="slideChipTextStyle" format="reference" />
+        <attr name="slideChipStrokeColor" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="GroupChipView">
+        <attr name="groupChipMargin" format="dimension" />
+        <attr name="groupChipTextColor" format="reference" />
+        <attr name="groupChipStrokeColor" format="reference" />
+        <attr name="groupChipTextPadding" format="dimension" />
+        <attr name="groupChipBackground" format="reference" />
+        <attr name="groupChipTextStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="ScaleImageView">
+        <attr name="scale" format="float" />
+    </declare-styleable>
+    <declare-styleable name="BottomLayout">
+        <attr name="title" format="string" />
+        <attr name="titleLayout" format="reference" />
+        <attr name="contentLayout" format="reference" />
+        <attr name="cancelable" format="boolean" />
+        <attr name="tray" format="boolean" />
+        <attr name="popup" format="boolean" />
+        <attr name="bottomLayoutType" format="enum">
+            <enum name="flat" value="0" />
+            <enum name="dialog" value="1" />
+        </attr>
+        <attr name="snap" />
+    </declare-styleable>
+    <declare-styleable name="PercentageBarView">
+        <attr name="colorNoActive" format="reference" />
+        <attr name="colorActive" format="reference" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="SexFieldView">
+        <attr name="label" />
+        <attr name="sex" format="enum">
+            <enum name="man" value="0" />
+            <enum name="woman" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="DateFieldView">
+        <attr name="dateFormat" format="string" />
+        <attr name="hint" format="string" />
+        <attr name="minAge" format="integer" />
+        <attr name="label" />
+        <attr name="autoShowLabel" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="ShimmerView">
+        <attr name="shimmerWidth" format="dimension" />
+        <attr name="shimmerHeight" format="dimension" />
+        <attr name="shimmerBackground" format="reference" />
+        <attr name="shimmerAutoStart" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="RecyclerSkeletonView">
+        <attr name="count" />
+        <attr name="layout" format="reference" />
+    </declare-styleable>
+</resources>

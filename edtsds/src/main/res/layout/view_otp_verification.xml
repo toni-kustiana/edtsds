@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <id.co.edtslib.edtsds.otpview.OtpView
+        android:layout_gravity="center"
+        app:otpType="number"
+        app:otpLength="4"
+        android:id="@+id/otpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:id="@+id/tvError"
+        style="@style/B1"
+        android:layout_marginStart="@dimen/dimen_40dp"
+        android:layout_marginEnd="@dimen/dimen_40dp"
+        android:textColor="@color/colorSupportError"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.ButtonView
+        android:id="@+id/bvVerification"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:text="@string/otp_verification"
+        app:size="medium"
+        app:variant="primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.otpremainingview.OtpRemainingView
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:otpRemainingFormat="clock"
+        app:otpRemainingText="@string/send_code_counter"
+        android:id="@+id/otpRemainingView"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

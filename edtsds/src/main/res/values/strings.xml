@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="man">Laki-laki</string>
+    <string name="woman">Perempuan</string>
+    <string name="birth_date">Tanggal Lahir</string>
+
+</resources>

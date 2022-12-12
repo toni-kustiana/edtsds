@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.appcompat.widget.AppCompatTextView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_16dp"
+    android:orientation="vertical"
+    tools:ignore="RtlSymmetry">
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/aaa"
+        app:inputType="popup"
+        android:hint="Provinsi"
+        app:placeholderText="ahahah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        app:inputType="phone"
+        android:hint="Phone"
+        app:emptyHint="Phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.badge.BadgeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/H1"
-        android:text="Abah Adilah"
-        tools:ignore="HardcodedText" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:badgeType="primary"
+        app:label="Primary" />
+
+    <id.co.edtslib.edtsds.badge.BadgeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="secondary"
+        app:label="Secondary" />
+
+    <id.co.edtslib.edtsds.badge.BadgeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="neutral"
+        app:label="Neutral" />
+
+    <id.co.edtslib.edtsds.badge.BadgeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="important"
+        app:label="Important" />
+
+    <id.co.edtslib.edtsds.badge.BadgeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FF33DD"
+        android:text="Custom"
+        android:textColor="#3DEF42"
+        app:badgeType="custom"
+        app:label="Label" />
+
+</LinearLayout>
