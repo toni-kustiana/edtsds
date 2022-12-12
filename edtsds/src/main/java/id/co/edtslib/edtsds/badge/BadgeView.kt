@@ -65,14 +65,12 @@ class BadgeView: MaterialTextView {
 
         gravity = Gravity.CENTER_HORIZONTAL
 
-        if (badgeType != BadgeType.Custom) {
-            val size2InDp = 2
-            val size4InDp = 4
-            val scale = resources.displayMetrics.density
-            val dp2AsPixels = (size2InDp * scale + 0.5f).toInt()
-            val dp4AsPixels = (size4InDp * scale + 0.5f).toInt()
-            setPadding(dp4AsPixels, dp2AsPixels, dp4AsPixels, dp2AsPixels)
-        }
+        val size2InDp = 2
+        val size4InDp = 4
+        val scale = resources.displayMetrics.density
+        val dp2AsPixels = (size2InDp * scale + 0.5f).toInt()
+        val dp4AsPixels = (size4InDp * scale + 0.5f).toInt()
+        setPadding(dp4AsPixels, dp2AsPixels, dp4AsPixels, dp2AsPixels)
 
     }
 }
