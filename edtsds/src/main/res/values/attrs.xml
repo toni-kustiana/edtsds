@@ -75,8 +75,9 @@
             <enum name="secondary" value="1" />
             <enum name="neutral" value="2" />
             <enum name="important" value="3" />
+            <enum name="custom" value="4" />
         </attr>
-        <attr name="label"  />
+        <attr name="label" />
     </declare-styleable>
     <declare-styleable name="RibbonView">
         <attr name="type" />
@@ -84,7 +85,7 @@
     <declare-styleable name="SlidingItemView">
         <attr name="itemSpace" format="dimension" />
         <attr name="itemPreviewSize" format="dimension" />
-        <attr name="snap"  />
+        <attr name="snap" />
     </declare-styleable>
     <declare-styleable name="SlidingItemLayoutView">
         <attr name="drawableStartCompat" format="reference" />
@@ -95,29 +96,29 @@
         <attr name="bannerCorner" format="dimension" />
     </declare-styleable>
     <declare-styleable name="PagingNavigationView">
-        <attr name="shape"  />
-        <attr name="shapeSize"  />
-        <attr name="shapeSelectedWidth"  />
-        <attr name="shapeSelectedHeight"  />
+        <attr name="shape" />
+        <attr name="shapeSize" />
+        <attr name="shapeSelectedWidth" />
+        <attr name="shapeSelectedHeight" />
         <attr name="space" />
-        <attr name="count"  />
+        <attr name="count" />
     </declare-styleable>
     <declare-styleable name="BoardingView">
-        <attr name="shape"  />
-        <attr name="shapeSize"  />
-        <attr name="shapeSelectedWidth"  />
-        <attr name="shapeSelectedHeight"  />
+        <attr name="shape" />
+        <attr name="shapeSize" />
+        <attr name="shapeSelectedWidth" />
+        <attr name="shapeSelectedHeight" />
         <attr name="space" />
-        <attr name="count"  />
+        <attr name="count" />
         <attr name="autoScrollInterval" format="integer" />
         <attr name="circular" format="boolean" />
         <attr name="canBackOnFirstPosition" format="boolean" />
         <attr name="imageHeight" format="dimension" />
         <attr name="pagerFullHeight" format="boolean" />
         <attr name="alignment" format="enum">
-            <enum value="0" name="Left" />
-            <enum value="1" name="Center" />
-            <enum value="2" name="Right"/>
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
         </attr>
 
     </declare-styleable>
@@ -147,8 +148,8 @@
         <attr name="otpInterval" />
         <attr name="otpRemainingText" format="string" />
         <attr name="otpRemainingFormat" format="enum">
-            <enum name="clock" value="0"/>
-            <enum name="text" value="1"/>
+            <enum name="clock" value="0" />
+            <enum name="text" value="1" />
         </attr>
         <attr name="otpRemainingHour" format="string" />
         <attr name="otpRemainingMinute" format="string" />
@@ -188,7 +189,7 @@
             <enum name="flat" value="0" />
             <enum name="dialog" value="1" />
         </attr>
-        <attr name="snap"  />
+        <attr name="snap" />
     </declare-styleable>
     <declare-styleable name="PercentageBarView">
         <attr name="colorNoActive" format="reference" />
@@ -196,27 +197,27 @@
         <attr name="radius" format="dimension" />
     </declare-styleable>
     <declare-styleable name="SexFieldView">
-        <attr name="label"  />
+        <attr name="label" />
         <attr name="sex" format="enum">
             <enum name="man" value="0" />
             <enum name="woman" value="1" />
         </attr>
     </declare-styleable>
     <declare-styleable name="DateFieldView">
-        <attr name="dateFormat" format="string"  />
+        <attr name="dateFormat" format="string" />
         <attr name="hint" format="string" />
         <attr name="minAge" format="integer" />
-        <attr name="label"  />
+        <attr name="label" />
         <attr name="autoShowLabel" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ShimmerView">
-        <attr name="shimmerWidth" format="dimension"  />
-        <attr name="shimmerHeight" format="dimension"  />
-        <attr name="shimmerBackground" format="reference"  />
-        <attr name="shimmerAutoStart" format="boolean"  />
+        <attr name="shimmerWidth" format="dimension" />
+        <attr name="shimmerHeight" format="dimension" />
+        <attr name="shimmerBackground" format="reference" />
+        <attr name="shimmerAutoStart" format="boolean" />
     </declare-styleable>
     <declare-styleable name="RecyclerSkeletonView">
-        <attr name="count"   />
+        <attr name="count" />
         <attr name="layout" format="reference" />
     </declare-styleable>
 </resources>

@@ -3,7 +3,7 @@
     <!-- important -->
     <item android:state_selected="true" android:state_activated="true">
         <shape android:shape="rectangle">
-            <solid android:color="#DC1013" />
+            <solid android:color="@color/colorSupportError" />
             <corners android:radius="@dimen/dimen_4dp" />
         </shape>
     </item>
@@ -18,7 +18,7 @@
     <!-- secondary -->
     <item android:state_selected="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorNeutral50" />
+            <solid android:color="@color/colorSecondary30" />
             <corners android:radius="@dimen/dimen_4dp" />
         </shape>
     </item>

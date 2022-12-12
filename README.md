@@ -897,7 +897,7 @@ var message: String? = null
 [string]: label text for badge
 
 ##### _app:badgeType_
-[enum]: enum of badge type: primary, secondary, neutral, important
+[enum]: enum of badge type: primary, secondary, neutral, important, custom
 
 primary:\
 ![BadgeView]()
@@ -910,6 +910,11 @@ neutral:\
 
 important:\
 ![BadgeView]()
+
+custom:\
+![BadgeView]()
+
+notes: don't use label in custom type, use android:text
 
 
 # ButtonView

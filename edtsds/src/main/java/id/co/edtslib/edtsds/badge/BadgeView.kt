@@ -3,14 +3,14 @@ package id.co.edtslib.edtsds.badge
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import com.google.android.material.textview.MaterialTextView
 import id.co.edtslib.edtsds.R
 
-class BadgeView: AppCompatTextView {
+class BadgeView: MaterialTextView {
 
     enum class BadgeType {
-        Primary, Secondary, Neutral, Important
+        Primary, Secondary, Neutral, Important, Custom
     }
 
     constructor(context: Context) : super(context) {
@@ -47,8 +47,10 @@ class BadgeView: AppCompatTextView {
             val v = a.getInt(R.styleable.BadgeView_badgeType, 0)
             badgeType = BadgeType.values()[v]
 
-            val t = a.getString(R.styleable.BadgeView_label)
-            text = t ?: ""
+            if (badgeType != BadgeType.Custom) {
+                val t = a.getString(R.styleable.BadgeView_label)
+                text = t ?: ""
+            }
 
             a.recycle()
         }
@@ -56,15 +58,21 @@ class BadgeView: AppCompatTextView {
             badgeType = BadgeType.Primary
         }
 
-        setBackgroundResource(R.drawable.bg_badge)
-        setTextColor(ContextCompat.getColorStateList(context, R.color.color_badge))
+        if (badgeType != BadgeType.Custom) {
+            setBackgroundResource(R.drawable.bg_badge)
+            setTextColor(ContextCompat.getColorStateList(context, R.color.color_badge))
+        }
 
         gravity = Gravity.CENTER_HORIZONTAL
 
-        val sizeInDp = 4
-        val scale = resources.displayMetrics.density
-        val dpAsPixels = (sizeInDp * scale + 0.5f).toInt()
-        setPadding(dpAsPixels, dpAsPixels, dpAsPixels, dpAsPixels)
+        if (badgeType != BadgeType.Custom) {
+            val size2InDp = 2
+            val size4InDp = 4
+            val scale = resources.displayMetrics.density
+            val dp2AsPixels = (size2InDp * scale + 0.5f).toInt()
+            val dp4AsPixels = (size4InDp * scale + 0.5f).toInt()
+            setPadding(dp4AsPixels, dp2AsPixels, dp4AsPixels, dp2AsPixels)
+        }
 
     }
 }
