@@ -4,10 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import com.google.android.material.textview.MaterialTextView
 import id.co.edtslib.edtsds.R
 
-class BadgeView: MaterialTextView {
+class BadgeView : MaterialTextView {
 
     enum class BadgeType {
         Primary, Secondary, Neutral, Important, Custom
@@ -16,9 +17,11 @@ class BadgeView: MaterialTextView {
     constructor(context: Context) : super(context) {
         init(null)
     }
+
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(attrs)
     }
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
@@ -53,24 +56,23 @@ class BadgeView: MaterialTextView {
             }
 
             a.recycle()
-        }
-        else {
+        } else {
             badgeType = BadgeType.Primary
         }
 
         if (badgeType != BadgeType.Custom) {
-            setBackgroundResource(R.drawable.bg_badge)
-            setTextColor(ContextCompat.getColorStateList(context, R.color.color_badge))
+            setBackgroundResource(R.drawable.edts_bg_badge)
+            setTextColor(ContextCompat.getColorStateList(context, R.color.edts_color_badge))
         }
 
-        gravity = Gravity.CENTER_HORIZONTAL
+        TextViewCompat.setTextAppearance(this, R.style.H4)
 
-        val size2InDp = 2
-        val size4InDp = 4
-        val scale = resources.displayMetrics.density
-        val dp2AsPixels = (size2InDp * scale + 0.5f).toInt()
-        val dp4AsPixels = (size4InDp * scale + 0.5f).toInt()
-        setPadding(dp4AsPixels, dp2AsPixels, dp4AsPixels, dp2AsPixels)
+        gravity = Gravity.CENTER
+
+        val left = resources.getDimensionPixelSize(R.dimen.dimen_4dp)
+        val top = resources.getDimensionPixelSize(R.dimen.dimen_2dp)
+
+        setPadding(left, top, left, top)
 
     }
 }
