@@ -76,6 +76,7 @@ The PagingView is very easy to use. Just add it to your layout like any other vi
    private lateinit var pagingView: PagingView<Result<SearchResultContentData?>, ProductItem>
 
     pagingView = binding.root.findViewById(R.id.pagingView)
+    pagingView.size = RemoteConfig.getPageSize()
     pagingView.delegate = object : PagingDelegate<Result<SearchResultContentData?>> {
         override fun loadPage(page: Int) = loadProducts(page)
     
