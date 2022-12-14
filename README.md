@@ -54,6 +54,54 @@ dependencies {
 # [19. HtmlTextView](#HtmlTextView)
 # [19. ShimmerView](#ShimmerView)
 # [20. RecyclerShimmerView](#RecyclerShimmerView)
+# [21. PagingView](#PagingView)
+
+# PagingView
+
+The PagingView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+```xml
+    <edts.klikidm.android.core_resource.ui.paging.PagingView
+        android:id="@+id/pagingView"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/dimen_20dp"
+        android:paddingBottom="@dimen/dimen_32dp"/>
+```
+
+```kotlin
+   private lateinit var pagingView: PagingView<Result<SearchResultContentData?>, ProductItem>
+
+    pagingView = binding.root.findViewById(R.id.pagingView)
+    pagingView.delegate = object : PagingDelegate<Result<SearchResultContentData?>> {
+        override fun loadPage(page: Int) = loadProducts(page)
+    
+        override fun processResult(t: Result<SearchResultContentData?>) {
+            IdmProcessLoadResult(fragmentActivity = requireActivity(), t,
+                object : IdmProcessDelegate<SearchResultContentData?> {
+                    override fun success(data: SearchResultContentData?) {
+
+                        val page = if (data?.getPageNumber() == null) 0 else data.getPageNumber()
+                        val totalPage = if (data?.totalPages == null) 0 else data.totalPages
+
+                        pagingView.setData(data?.content, page, totalPage)
+                    }
+                })
+        }
+    
+        override fun onNextPageLoading() {
+            binding.nextPageProgressView.isVisible = true
+        }
+    
+        override fun onPageLoaded() {
+            binding.nextPageProgressView.isVisible = false
+        }
+    
+    }
+```
 
 # RecyclerShimmerView
 

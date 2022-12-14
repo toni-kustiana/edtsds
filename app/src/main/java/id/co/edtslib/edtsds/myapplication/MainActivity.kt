@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val bbb = findViewById<TextFieldView>(R.id.bbb)
         bbb.text = "Test"
-        bbb.editText?.hint = "Abah Adilah"
+        bbb.hint = "Abah Adilah"
 
     }
 }

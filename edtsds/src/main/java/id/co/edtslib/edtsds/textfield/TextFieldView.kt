@@ -58,7 +58,7 @@ class TextFieldView: TextInputLayout {
             field = value
 
             if (inputType == InputType.Search) {
-                isHintEnabled = text?.isNotEmpty() != true
+                isHintEnabled = value?.isNotEmpty() != true
             }
 
             if (ellipsize && value != null) {
