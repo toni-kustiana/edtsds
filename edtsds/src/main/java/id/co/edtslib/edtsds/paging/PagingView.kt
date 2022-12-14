@@ -25,7 +25,7 @@ class PagingView<T, L>: RecyclerView {
 
     fun loadPage(page: Int) {
         loading = true
-        delegate?.loadPage(page)?.observe(context as LifecycleOwner) {
+        delegate?.loadPage(page, size)?.observe(context as LifecycleOwner) {
             delegate?.processResult(it)
             loading = false
             if (page > 0) {

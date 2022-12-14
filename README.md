@@ -78,7 +78,7 @@ The PagingView is very easy to use. Just add it to your layout like any other vi
     pagingView = binding.root.findViewById(R.id.pagingView)
     pagingView.size = RemoteConfig.getPageSize()
     pagingView.delegate = object : PagingDelegate<Result<SearchResultContentData?>> {
-        override fun loadPage(page: Int) = loadProducts(page)
+        override fun loadPage(page: Int, size: Int) = loadProducts(page)
     
         override fun processResult(t: Result<SearchResultContentData?>) {
             IdmProcessLoadResult(fragmentActivity = requireActivity(), t,
@@ -97,7 +97,7 @@ The PagingView is very easy to use. Just add it to your layout like any other vi
             binding.nextPageProgressView.isVisible = true
         }
     
-        override fun onPageLoaded() {
+        override fun onNextPageLoaded() {
             binding.nextPageProgressView.isVisible = false
         }
     
