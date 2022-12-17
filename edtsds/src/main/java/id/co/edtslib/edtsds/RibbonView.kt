@@ -79,7 +79,7 @@ class RibbonView: FrameLayout {
 
         binding.textView.text = message
 
-        val animation = AnimationUtils.loadAnimation(context, R.anim.slide_top_in)
+        val animation = AnimationUtils.loadAnimation(context, R.anim.ds_slide_top_in)
         animation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
 

@@ -1,57 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:id="@+id/aaa"
-        app:inputType="popup"
-        android:hint="Kecamatan"
-        app:ellipsize="true"
-        android:layout_width="match_parent"
+    <id.co.edtslib.edtsds.stepper2.Stepper2View
+        android:id="@+id/stepper"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:id="@+id/bbb"
-        app:inputType="search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.badge.BadgeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="primary"
-        app:label="Primary" />
-
-    <id.co.edtslib.edtsds.badge.BadgeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="secondary"
-        app:label="Secondary" />
-
-    <id.co.edtslib.edtsds.badge.BadgeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="neutral"
-        app:label="Neutral" />
-
-    <id.co.edtslib.edtsds.badge.BadgeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="important"
-        app:label="Important" />
-
-    <id.co.edtslib.edtsds.badge.BadgeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FF33DD"
-        android:text="Custom"
-        android:textColor="#3DEF42"
-        app:badgeType="custom"
-        app:label="Label" />
 
 </LinearLayout>
