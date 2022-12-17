@@ -24,93 +24,122 @@ class Stepper2View: FrameLayout {
     )
 
     private val binding = DsViewStepper2Binding.inflate(LayoutInflater.from(context), this, true)
+    private var clicked = false
 
     var delegate: Stepper2Delegate? = null
     var valueAnimationDuration = 100L
     var max = Int.MAX_VALUE
     var min = 0
     var value = 0
-        set(value) {
-            if (valueAnimationDuration > 0) {
-                val animation = if (value > field)
-                    TranslateAnimation(0.0f, 0.0f, -50.0f, 0.0f)
+        set(_value) {
+            if (clicked) {
+                binding.clExpand.isVisible = _value > 0
+
+                if (valueAnimationDuration > 0) {
+                    if (_value != field) {
+                        val animation = if (_value > field)
+                            TranslateAnimation(0.0f, 0.0f, -50.0f, 0.0f)
+                        else
+                            TranslateAnimation(0.0f, 0.0f, 0.0f, -50.0f)
+                        animation.duration = valueAnimationDuration
+
+                        binding.tvValue.startAnimation(animation)
+                    }
+                }
+                binding.tvValue.text = String.format("%d", _value)
+
+                if (field == 0 && _value == 1) {
+                    val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_in)
+
+                    anim.setAnimationListener(object : AnimationListener {
+                        override fun onAnimationStart(p0: Animation?) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animation?) {
+                            setViewVisibility()
+                        }
+
+                        override fun onAnimationRepeat(p0: Animation?) {
+                        }
+                    })
+                    binding.clExpand.startAnimation(anim)
+                }
                 else
-                    TranslateAnimation(0.0f, 0.0f, 0.0f, -50.0f)
-                animation.duration = valueAnimationDuration
+                if (field == 1 && _value == 0)
+                {
+                    val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_out)
+                    anim.setAnimationListener(object : AnimationListener {
+                        override fun onAnimationStart(p0: Animation?) {
+                        }
 
-                binding.tvValue.startAnimation(animation)
-            }
-            binding.tvValue.text = String.format("%d", value)
+                        override fun onAnimationEnd(p0: Animation?) {
+                            setViewVisibility()
+                        }
 
-            binding.clExpand.isVisible = value > 0
+                        override fun onAnimationRepeat(p0: Animation?) {
+                        }
+                    })
+                    binding.clExpand.startAnimation(anim)
+                }
+                else {
+                    setViewVisibility()
+                }
 
-            if (field == 0 && value == 1) {
-                val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_in)
+                field = _value
+                delegate?.onChangeValue(_value)
 
-                anim.setAnimationListener(object : AnimationListener {
-                    override fun onAnimationStart(p0: Animation?) {
-                    }
-
-                    override fun onAnimationEnd(p0: Animation?) {
-                        binding.btNew.isVisible = value == 0
-                        binding.btAdd.isVisible = value > 0
-                    }
-
-                    override fun onAnimationRepeat(p0: Animation?) {
-                    }
-                })
-                binding.clExpand.startAnimation(anim)
-            }
-            else
-            if (field == 1 && value == 0)
-            {
-                val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_out)
-                anim.setAnimationListener(object : AnimationListener {
-                    override fun onAnimationStart(p0: Animation?) {
-                    }
-
-                    override fun onAnimationEnd(p0: Animation?) {
-                        binding.btNew.isVisible = value == 0
-                        binding.btAdd.isVisible = value > 0
-                    }
-
-                    override fun onAnimationRepeat(p0: Animation?) {
-                    }
-                })
-                binding.clExpand.startAnimation(anim)
+                setLeftWidth()
             }
             else {
-                binding.btNew.isVisible = value == 0
-                binding.btAdd.isVisible = value > 0
+                field = _value
+                delegate?.onChangeValue(_value)
+
+                binding.clExpand.isVisible = false
+                binding.tvSingleValue.text =  String.format("%d", _value)
+                setViewVisibility()
             }
-
-            field = value
-            delegate?.onChangeValue(value)
-
-            setLeftWidth()
 
         }
 
     init {
-        binding.btNew.isVisible = value == 0
-        binding.btAdd.isVisible = value > 0
+        setViewVisibility()
         binding.clExpand.isVisible = value > 0
 
         binding.btNew.setOnClickListener {
-            add()
+            if (isEnabled) {
+                clicked = true
+                add()
+            }
         }
 
         binding.btAdd.setOnClickListener {
-            add()
+            if (isEnabled) {
+                add()
+            }
         }
 
         binding.btMinus.setOnClickListener {
-            minus()
+            if (isEnabled) {
+                minus()
+            }
+        }
+
+        binding.flSingleValue.setOnClickListener {
+            if (isEnabled) {
+                clicked = true
+                value = value
+            }
         }
 
         post {
             setLeftWidth()
         }
+    }
+
+    private fun setViewVisibility() {
+        binding.btNew.isVisible = value == 0
+        binding.btAdd.isVisible = value > 0
+        binding.flSingleValue.isVisible = value > 0 && ! clicked
     }
 
     private fun setLeftWidth() {

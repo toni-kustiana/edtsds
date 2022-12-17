@@ -25,5 +25,13 @@
     <dimen name="chip_dimen_16dp">16dp</dimen>
     <dimen name="chip_dimen_20dp">20dp</dimen>
 
+    <dimen name="ds_stepper2_width">100dp</dimen>
+    <!-- width - half circle -->
+    <dimen name="ds_stepper2_left_width">84dp</dimen>
+    <dimen name="ds_stepper2_circle">32dp</dimen>
+    <dimen name="ds_stepper2_half_circle">16dp</dimen>
+    <dimen name="ds_stepper2_small_circle">22dp</dimen>
+    <dimen name="ds_stepper2_icon">12dp</dimen>
+
 
 </resources>

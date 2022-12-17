@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val stepper = findViewById<Stepper2View>(R.id.stepper)
+        stepper.value = 10
         stepper.delegate = object : Stepper2Delegate {
             override fun onChangeValue(value: Int) {
                 Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()

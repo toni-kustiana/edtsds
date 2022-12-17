@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clRoot"
     android:layout_width="wrap_content"
-    android:minWidth="100dp"
-    android:layout_height="@dimen/dimen_32dp">
+    android:minWidth="@dimen/ds_stepper2_width"
+    android:layout_height="@dimen/ds_stepper2_circle">
     <FrameLayout
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/flLeft"
-        android:layout_width="84dp"
+        android:layout_width="@dimen/ds_stepper2_left_width"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clExpand"
@@ -19,9 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <FrameLayout
-                android:layout_marginStart="@dimen/dimen_16dp"
-                android:paddingStart="@dimen/dimen_16dp"
-                android:paddingEnd="@dimen/dimen_16dp"
+                android:layout_marginStart="@dimen/ds_stepper2_half_circle"
+                android:paddingStart="@dimen/ds_stepper2_half_circle"
+                android:paddingEnd="@dimen/ds_stepper2_half_circle"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/btMinus"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,13 +41,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/ds_bg_round_primary"
-                android:layout_width="@dimen/dimen_32dp"
+                android:layout_width="@dimen/ds_stepper2_circle"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_gravity="center"
                     android:src="@drawable/ds_ic_minus_bold"
-                    android:layout_width="@dimen/dimen_12dp"
-                    android:layout_height="@dimen/dimen_12dp" />
+                    android:layout_width="@dimen/ds_stepper2_icon"
+                    android:layout_height="@dimen/ds_stepper2_icon" />
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/ds_bg_round_primary"
-        android:layout_width="@dimen/dimen_32dp"
+        android:layout_width="@dimen/ds_stepper2_circle"
         android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/btAdd"
@@ -65,24 +65,39 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/ds_bg_round_white"
             android:layout_gravity="center"
-            android:layout_width="22dp"
-            android:layout_height="22dp">
+            android:layout_width="@dimen/ds_stepper2_small_circle"
+            android:layout_height="@dimen/ds_stepper2_small_circle">
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_gravity="center"
                 android:src="@drawable/ds_ic_plus_bold_primary30"
-                android:layout_width="@dimen/dimen_12dp"
-                android:layout_height="@dimen/dimen_12dp" />
+                android:layout_width="@dimen/ds_stepper2_icon"
+                android:layout_height="@dimen/ds_stepper2_icon" />
         </FrameLayout>
         <FrameLayout
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/btNew"
             android:background="@drawable/ds_bg_round_primary"
-            android:layout_width="@dimen/dimen_32dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_gravity="center"
                 android:src="@drawable/ds_ic_plus_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+        <FrameLayout
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/flSingleValue"
+            android:background="@drawable/ds_bg_round_primary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSingleValue"
+                style="@style/H2"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </FrameLayout>
