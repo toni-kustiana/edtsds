@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DsViewStepper2Binding
 
-class Stepper2View: FrameLayout {
+open class Stepper2View: FrameLayout {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -24,7 +24,12 @@ class Stepper2View: FrameLayout {
     )
 
     private val binding = DsViewStepper2Binding.inflate(LayoutInflater.from(context), this, true)
-    private var clicked = false
+    var showValueOnly = false
+        set(_value) {
+            field = _value
+
+            value = value
+        }
 
     var delegate: Stepper2Delegate? = null
     var valueAnimationDuration = 100L
@@ -32,7 +37,7 @@ class Stepper2View: FrameLayout {
     var min = 0
     var value = 0
         set(_value) {
-            if (clicked) {
+            if (showValueOnly) {
                 binding.clExpand.isVisible = _value > 0
 
                 if (valueAnimationDuration > 0) {
@@ -106,27 +111,27 @@ class Stepper2View: FrameLayout {
         binding.clExpand.isVisible = value > 0
 
         binding.btNew.setOnClickListener {
-            if (isEnabled) {
-                clicked = true
+            showValueOnly = true
+            if (value < max) {
                 add()
             }
         }
 
         binding.btAdd.setOnClickListener {
-            if (isEnabled) {
+            if (value < max) {
                 add()
             }
         }
 
         binding.btMinus.setOnClickListener {
-            if (isEnabled) {
+            if (value > min) {
                 minus()
             }
         }
 
         binding.flSingleValue.setOnClickListener {
             if (isEnabled) {
-                clicked = true
+                showValueOnly = true
                 value = value
             }
         }
@@ -139,7 +144,7 @@ class Stepper2View: FrameLayout {
     private fun setViewVisibility() {
         binding.btNew.isVisible = value == 0
         binding.btAdd.isVisible = value > 0
-        binding.flSingleValue.isVisible = value > 0 && ! clicked
+        binding.flSingleValue.isVisible = value > 0 && ! showValueOnly
     }
 
     private fun setLeftWidth() {
@@ -153,15 +158,11 @@ class Stepper2View: FrameLayout {
         }
     }
 
-    private fun add() {
-        if (value < max) {
-            value++
-        }
+    protected open fun add() {
+        value++
     }
 
-    private fun minus() {
-        if (value > min) {
-            value--
-        }
+    protected open fun minus() {
+        value--
     }
 }
