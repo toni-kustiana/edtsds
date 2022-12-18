@@ -91,13 +91,13 @@ open class Stepper2View: FrameLayout {
                 }
 
                 field = _value
-                delegate?.onChangeValue(_value)
+                delegate?.onValueChanged(_value)
 
                 setLeftWidth()
             }
             else {
                 field = _value
-                delegate?.onChangeValue(_value)
+                delegate?.onValueChanged(_value)
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
@@ -113,19 +113,19 @@ open class Stepper2View: FrameLayout {
         binding.btNew.setOnClickListener {
             showValueOnly = true
             if (value < max) {
-                add()
+                add(value+1)
             }
         }
 
         binding.btAdd.setOnClickListener {
             if (value < max) {
-                add()
+                add(value+1)
             }
         }
 
         binding.btMinus.setOnClickListener {
             if (value > min) {
-                minus()
+                minus(value-1)
             }
         }
 
@@ -158,11 +158,11 @@ open class Stepper2View: FrameLayout {
         }
     }
 
-    protected open fun add() {
+    protected open fun add(p: Int) {
         value++
     }
 
-    protected open fun minus() {
+    protected open fun minus(p: Int) {
         value--
     }
 }

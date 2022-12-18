@@ -55,6 +55,44 @@ dependencies {
 # [19. ShimmerView](#ShimmerView)
 # [20. RecyclerShimmerView](#RecyclerShimmerView)
 # [21. PagingView](#PagingView)
+# [22. Stepper2View](#Stepper2View)
+
+# Stepper2View
+
+![Stepper2View](https://i.postimg.cc/cHLsmx99/stepper2.gif)
+
+The Stepper2View is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.stepper2.Stepper2View
+        android:id="@+id/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+
+```kotlin
+    val stepper = findViewById<Stepper2View>(R.id.stepper)
+    stepper.value = 10
+    stepper.delegate = object : Stepper2Delegate {
+        override fun onValueChanged(value: Int) {
+            Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()
+        }
+    }
+```
+
+### Attributes information
+
+```xml
+    <dimen name="ds_stepper2_left_width">84dp</dimen>
+    <dimen name="ds_stepper2_circle">32dp</dimen>
+    <dimen name="ds_stepper2_half_circle">16dp</dimen>
+    <dimen name="ds_stepper2_small_circle">22dp</dimen>
+    <dimen name="ds_stepper2_icon">12dp</dimen>
+
+```
 
 # PagingView
 
