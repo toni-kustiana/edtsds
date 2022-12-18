@@ -86,6 +86,8 @@ Here's a basic implementation.
 ### Attributes information
 
 ```xml
+    <dimen name="ds_stepper2_width">100dp</dimen>
+    <!-- width - half circle -->
     <dimen name="ds_stepper2_left_width">84dp</dimen>
     <dimen name="ds_stepper2_circle">32dp</dimen>
     <dimen name="ds_stepper2_half_circle">16dp</dimen>
