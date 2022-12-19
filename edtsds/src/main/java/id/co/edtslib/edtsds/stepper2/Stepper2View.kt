@@ -61,7 +61,7 @@ open class Stepper2View: FrameLayout {
                         }
 
                         override fun onAnimationEnd(p0: Animation?) {
-                            setViewVisibility()
+                            setViewVisibility(_value)
                         }
 
                         override fun onAnimationRepeat(p0: Animation?) {
@@ -78,7 +78,7 @@ open class Stepper2View: FrameLayout {
                         }
 
                         override fun onAnimationEnd(p0: Animation?) {
-                            setViewVisibility()
+                            setViewVisibility(_value)
                         }
 
                         override fun onAnimationRepeat(p0: Animation?) {
@@ -87,13 +87,11 @@ open class Stepper2View: FrameLayout {
                     binding.clExpand.startAnimation(anim)
                 }
                 else {
-                    setViewVisibility()
+                    setViewVisibility(_value)
                 }
 
                 field = _value
                 delegate?.onValueChanged(_value)
-
-                setLeftWidth()
             }
             else {
                 field = _value
@@ -101,13 +99,13 @@ open class Stepper2View: FrameLayout {
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
-                setViewVisibility()
+                setViewVisibility(_value)
             }
 
         }
 
     init {
-        setViewVisibility()
+        setViewVisibility(0)
         binding.clExpand.isVisible = value > 0
 
         binding.btNew.setOnClickListener {
@@ -133,27 +131,12 @@ open class Stepper2View: FrameLayout {
             showValueOnly = false
             value = value
         }
-
-        post {
-            setLeftWidth()
-        }
     }
 
-    private fun setViewVisibility() {
-        binding.btNew.isVisible = value == 0
-        binding.btAdd.isVisible = value > 0
-        binding.flSingleValue.isVisible = value > 0 && showValueOnly
-    }
-
-    private fun setLeftWidth() {
-        val w = binding.clRoot.width
-
-        val dp16 = context.resources.getDimensionPixelSize(R.dimen.dimen_16dp)
-        val newW = w - dp16
-        val layoutParams = binding.flLeft.layoutParams
-        if (newW != layoutParams.width) {
-            layoutParams.width = newW
-        }
+    private fun setViewVisibility(_value: Int) {
+        binding.btNew.isVisible = _value == 0
+        binding.btAdd.isVisible = _value > 0
+        binding.flSingleValue.isVisible = _value > 0 && showValueOnly
     }
 
     protected open fun add(p: Int) {
