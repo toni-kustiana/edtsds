@@ -32,12 +32,12 @@ open class Stepper2View: FrameLayout {
         }
 
     var delegate: Stepper2Delegate? = null
-    var valueAnimationDuration = 100L
+    var valueAnimationDuration = 0L //100L
     var max = Int.MAX_VALUE
     var min = 0
     var value = 0
         set(_value) {
-            if (showValueOnly) {
+            if (! showValueOnly) {
                 binding.clExpand.isVisible = _value > 0
 
                 if (valueAnimationDuration > 0) {
@@ -111,7 +111,7 @@ open class Stepper2View: FrameLayout {
         binding.clExpand.isVisible = value > 0
 
         binding.btNew.setOnClickListener {
-            showValueOnly = true
+            showValueOnly = false
             if (value < max) {
                 add(value+1)
             }
@@ -130,10 +130,8 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.flSingleValue.setOnClickListener {
-            if (isEnabled) {
-                showValueOnly = true
-                value = value
-            }
+            showValueOnly = false
+            value = value
         }
 
         post {
@@ -144,7 +142,7 @@ open class Stepper2View: FrameLayout {
     private fun setViewVisibility() {
         binding.btNew.isVisible = value == 0
         binding.btAdd.isVisible = value > 0
-        binding.flSingleValue.isVisible = value > 0 && ! showValueOnly
+        binding.flSingleValue.isVisible = value > 0 && showValueOnly
     }
 
     private fun setLeftWidth() {
