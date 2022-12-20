@@ -78,6 +78,6 @@ class ButtonView: AppCompatTextView {
         setBackgroundResource(R.drawable.bg_button)
         setTextColor(ContextCompat.getColorStateList(context, R.color.color_button))
 
-        gravity = Gravity.CENTER_HORIZONTAL
+        gravity = Gravity.CENTER
     }
 }

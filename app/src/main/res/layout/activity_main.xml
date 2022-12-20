@@ -10,15 +10,14 @@
     <id.co.edtslib.edtsds.textfield.TextFieldView
         android:id="@+id/aaa"
         app:inputType="popup"
-        android:hint="Provinsi"
-        app:placeholderText="ahahah"
+        android:hint="Kecamatan"
+        app:ellipsize="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <id.co.edtslib.edtsds.textfield.TextFieldView
-        app:inputType="phone"
-        android:hint="Phone"
-        app:emptyHint="Phone"
+        android:id="@+id/bbb"
+        app:inputType="search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

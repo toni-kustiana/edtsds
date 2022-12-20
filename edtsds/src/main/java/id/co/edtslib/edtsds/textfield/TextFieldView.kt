@@ -1,6 +1,7 @@
 package id.co.edtslib.edtsds.textfield
 
 import android.content.Context
+import android.graphics.Rect
 import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
@@ -48,12 +49,46 @@ class TextFieldView: TextInputLayout {
             }
         }
 
+    private var ellipsizeWidth = 0
     private var startIcon: Int = 0
+    private var ellipsize = false
 
     var text: String? = null
         set(value) {
             field = value
-            editText?.setText(value)
+
+            if (inputType == InputType.Search) {
+                isHintEnabled = text?.isNotEmpty() != true
+            }
+
+            if (ellipsize && value != null) {
+                editText?.post {
+                    val diff = if (ellipsizeWidth == 0) context.resources.getDimensionPixelSize(R.dimen.dimen_72dp) else ellipsizeWidth
+                    val width = editText!!.width - diff
+
+                    val bounds = Rect()
+                    editText!!.paint.getTextBounds(value, 0, value.length, bounds)
+                    if (bounds.width() < width) {
+                        editText?.setText(value)
+                    }
+                    else {
+                        var i = 1
+                        while(true) {
+                            val temp = "${value.substring(0, value.length-i)}..."
+                            editText!!.paint.getTextBounds(temp, 0, temp.length, bounds)
+                            if (bounds.width() < width) {
+                                editText?.setText(temp)
+                                break
+                            }
+
+                            i++
+                        }
+                    }
+                }
+            }
+            else {
+                editText?.setText(value)
+            }
         }
         get() = editText?.text?.toString()
 
@@ -174,6 +209,13 @@ class TextFieldView: TextInputLayout {
 
                             editText?.performClick()
                             delegate?.onChanged(editText?.text?.toString())
+
+                            editText?.setOnClickListener {
+                                delegate?.onChanged(editText?.text?.toString())
+                            }
+                        }
+                        else {
+                            editText?.setOnClickListener(null)
                         }
                     }
                 }
@@ -193,7 +235,7 @@ class TextFieldView: TextInputLayout {
                     }
 
                     editText?.setOnFocusChangeListener { _, b ->
-                        isHintEnabled = ! b
+                        isHintEnabled = ! b && text?.isNotEmpty() != true
                     }
 
                     startIconDrawable = if (startIcon == 0) {
@@ -259,6 +301,9 @@ class TextFieldView: TextInputLayout {
                 R.styleable.TextFieldView,
                 0, 0
             )
+
+            ellipsize = a.getBoolean(R.styleable.TextFieldView_ellipsize, false)
+            ellipsizeWidth = a.getDimension(R.styleable.TextFieldView_ellipsizeWidth, 0f).toInt()
 
             emptyHint = a.getString(R.styleable.TextFieldView_emptyHint)
 
