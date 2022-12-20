@@ -54,6 +54,95 @@ dependencies {
 # [19. HtmlTextView](#HtmlTextView)
 # [19. ShimmerView](#ShimmerView)
 # [20. RecyclerShimmerView](#RecyclerShimmerView)
+# [21. PagingView](#PagingView)
+# [22. Stepper2View](#Stepper2View)
+
+# Stepper2View
+
+![Stepper2View](https://i.postimg.cc/cHLsmx99/stepper2.gif)
+
+The Stepper2View is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.stepper2.Stepper2View
+        android:id="@+id/stepper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+```
+
+```kotlin
+    val stepper = findViewById<Stepper2View>(R.id.stepper)
+    stepper.value = 10
+    stepper.delegate = object : Stepper2Delegate {
+        override fun onValueChanged(value: Int) {
+            Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()
+        }
+    }
+```
+
+### Attributes information
+
+```xml
+    <dimen name="ds_stepper2_width">100dp</dimen>
+    <!-- width - half circle -->
+    <dimen name="ds_stepper2_left_width">84dp</dimen>
+    <dimen name="ds_stepper2_circle">32dp</dimen>
+    <dimen name="ds_stepper2_half_circle">16dp</dimen>
+    <dimen name="ds_stepper2_small_circle">22dp</dimen>
+    <dimen name="ds_stepper2_icon">12dp</dimen>
+
+```
+
+# PagingView
+
+The PagingView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+```xml
+    <edts.klikidm.android.core_resource.ui.paging.PagingView
+        android:id="@+id/pagingView"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/dimen_20dp"
+        android:paddingBottom="@dimen/dimen_32dp"/>
+```
+
+```kotlin
+   private lateinit var pagingView: PagingView<Result<SearchResultContentData?>, ProductItem>
+
+    pagingView = binding.root.findViewById(R.id.pagingView)
+    pagingView.size = RemoteConfig.getPageSize()
+    pagingView.delegate = object : PagingDelegate<Result<SearchResultContentData?>> {
+        override fun loadPage(page: Int, size: Int) = loadProducts(page)
+    
+        override fun processResult(t: Result<SearchResultContentData?>) {
+            IdmProcessLoadResult(fragmentActivity = requireActivity(), t,
+                object : IdmProcessDelegate<SearchResultContentData?> {
+                    override fun success(data: SearchResultContentData?) {
+
+                        val page = if (data?.getPageNumber() == null) 0 else data.getPageNumber()
+                        val totalPage = if (data?.totalPages == null) 0 else data.totalPages
+
+                        pagingView.setData(data?.content, page, totalPage)
+                    }
+                })
+        }
+    
+        override fun onNextPageLoading() {
+            binding.nextPageProgressView.isVisible = true
+        }
+    
+        override fun onNextPageLoaded() {
+            binding.nextPageProgressView.isVisible = false
+        }
+    
+    }
+```
 
 # RecyclerShimmerView
 
