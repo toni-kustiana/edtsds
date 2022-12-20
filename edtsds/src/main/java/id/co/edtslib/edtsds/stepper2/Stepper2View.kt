@@ -109,7 +109,6 @@ open class Stepper2View: FrameLayout {
         binding.clExpand.isVisible = value > 0
 
         binding.btNew.setOnClickListener {
-            showValueOnly = false
             if (value < max) {
                 add(value+1)
             }
@@ -140,6 +139,7 @@ open class Stepper2View: FrameLayout {
     }
 
     protected open fun add(p: Int) {
+        showValueOnly = false
         value++
     }
 
