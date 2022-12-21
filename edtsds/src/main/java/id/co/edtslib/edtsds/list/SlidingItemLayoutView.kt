@@ -59,7 +59,12 @@ class SlidingItemLayoutView: FrameLayout {
                     imageView?.scaleType = ImageView.ScaleType.FIT_XY
 
                     if (imageUrl != null) {
-                        Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+                        try {
+                            Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+                        }
+                        catch (ignore: IllegalArgumentException) {
+                            imageView?.setImageResource(imageViewResId)
+                        }
                     }
                     else {
                         imageView?.setImageResource(imageViewResId)
