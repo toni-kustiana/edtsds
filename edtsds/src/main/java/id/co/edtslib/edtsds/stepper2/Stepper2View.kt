@@ -37,6 +37,8 @@ open class Stepper2View: FrameLayout {
     var min = 0
     var value = 0
         set(_value) {
+            binding.btAdd.isActivated = _value < max
+
             if (! showValueOnly) {
                 binding.clExpand.isVisible = _value > 0
 
@@ -112,17 +114,26 @@ open class Stepper2View: FrameLayout {
             if (value < max) {
                 add(value+1)
             }
+            else {
+                delegate?.onReachMax()
+            }
         }
 
         binding.btAdd.setOnClickListener {
             if (value < max) {
                 add(value+1)
             }
+            else {
+                delegate?.onReachMax()
+            }
         }
 
         binding.btMinus.setOnClickListener {
             if (value > min) {
                 minus(value-1)
+            }
+            else {
+                delegate?.onReachMin()
             }
         }
 
