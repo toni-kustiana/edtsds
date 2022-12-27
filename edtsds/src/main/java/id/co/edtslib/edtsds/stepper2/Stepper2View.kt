@@ -93,11 +93,11 @@ open class Stepper2View: FrameLayout {
                 }
 
                 field = _value
-                delegate?.onValueChanged(_value)
+                delegate?.onValueChanged(this, _value)
             }
             else {
                 field = _value
-                delegate?.onValueChanged(_value)
+                delegate?.onValueChanged(this, _value)
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
@@ -115,7 +115,7 @@ open class Stepper2View: FrameLayout {
                 add(value+1)
             }
             else {
-                delegate?.onReachMax()
+                delegate?.onReachMax(this)
             }
         }
 
@@ -124,7 +124,7 @@ open class Stepper2View: FrameLayout {
                 add(value+1)
             }
             else {
-                delegate?.onReachMax()
+                delegate?.onReachMax(this)
             }
         }
 
@@ -133,7 +133,7 @@ open class Stepper2View: FrameLayout {
                 minus(value-1)
             }
             else {
-                delegate?.onReachMin()
+                delegate?.onReachMin(this)
             }
         }
 
