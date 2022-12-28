@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'id.co.edtslib.edtsds'
-version = '1.0.83'
+version = '1.0.84'
 
 afterEvaluate {
     publishing {
@@ -16,7 +16,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'id.co.edtslib.edtsds'
                 artifactId = 'edtsds'
-                version = '1.0.83'
+                version = '1.0.84'
             }
         }
     }
