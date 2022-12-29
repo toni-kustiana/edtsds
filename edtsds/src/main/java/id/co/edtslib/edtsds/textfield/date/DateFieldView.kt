@@ -170,8 +170,10 @@ class DateFieldView: FrameLayout {
         binding.bvSubmit.text = spinnerButtonText
         binding.datePicker.maxDate = getMaxDate()
 
+        selectedDate = if (date == null) Date() else date!!
+
         val calendar = Calendar.getInstance()
-        calendar.time = if (date == null) Date() else date!!
+        calendar.time = if (selectedDate == null) Date() else selectedDate!!
 
         binding.datePicker.init(calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)

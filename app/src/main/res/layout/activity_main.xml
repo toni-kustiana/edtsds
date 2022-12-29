@@ -10,7 +10,7 @@
     <id.co.edtslib.edtsds.textfield.date.DateFieldView
         android:id="@+id/stepper"
         app:showIcon="false"
-        app:calendarType="calendar"
+        app:calendarType="spinner"
         app:spinnerTitle="Dari sampai"
         app:spinnerButtonText="Pilih"
         android:layout_width="match_parent"
