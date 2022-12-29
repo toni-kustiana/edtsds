@@ -277,6 +277,19 @@ Here's a basic implementation.
 ##### _app:minAge_
 [integer]: minimum age of calendar, default 0
 
+##### _app:calendarType_
+[enum]: spinner, calendar, default calendar
+
+##### _app:showIcon_
+[boolean]: false if hide icon, default true
+
+##### _app:spinnerTitle_
+[string]: tray title if calendar type is spinner
+
+##### _app:spinnerButtonText_
+[string]: tray button text if calendar type is spinner
+
+
 ### Listener for date value changed
 ```kotlin
     val dateView = findViewById<DateFieldView>(R.id.dateView)
