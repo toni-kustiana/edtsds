@@ -212,6 +212,13 @@
         <attr name="minAge" format="integer" />
         <attr name="label" />
         <attr name="autoShowLabel" format="boolean" />
+        <attr name="showIcon" format="boolean" />
+        <attr name="spinnerTitle" format="string" />
+        <attr name="spinnerButtonText" format="string" />
+        <attr name="calendarType" format="enum">
+            <enum name="calendar" value="0" />
+            <enum name="spinner" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="ShimmerView">
         <attr name="shimmerWidth" format="dimension" />
