@@ -31,12 +31,13 @@ class PagingView<T, L>: RecyclerView {
             if (page > 0) {
                 delegate?.onNextPageLoaded()
             }
-            this.page++
         }
     }
 
     fun setData(list: List<L>?, page: Int, totalPage: Int) {
         totalPages = totalPage
+        this.page = page
+
         val baseAdapter = adapter as BaseRecyclerViewAdapter<*, L>
 
         val offset = page*size
@@ -93,7 +94,7 @@ class PagingView<T, L>: RecyclerView {
                 loading = true
                 delegate?.onNextPageLoading()
                 postDelayed({
-                    loadPage(page)
+                    loadPage(page+1)
                 }, 500)
             }
         }
