@@ -90,7 +90,7 @@ class PagingView<T, L>: RecyclerView {
 
 
         if (last+1 >= baseAdapter.list.size) {
-            if (! loading && page < totalPages) {
+            if (! loading && page+1 < totalPages) {
                 loading = true
                 delegate?.onNextPageLoading()
                 postDelayed({
