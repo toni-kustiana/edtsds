@@ -42,18 +42,19 @@ class PagingView<T, L>: RecyclerView {
 
         val offset = page*size
         val mList = list?.toMutableList()
+        val listSize = baseAdapter.list.size
         for (i in 0 until  size) {
             val index = i + offset
             if (mList?.isNotEmpty() != true) {
                 // jika ada di adapter, remove it
-                if (index+1 < baseAdapter.list.size) {
+                if (index < listSize) {
                     baseAdapter.list.removeAt(index)
                     baseAdapter.notifyItemRemoved(index)
                 }
             }
             else {
                 val l = mList.removeFirst()
-                if (index+1 < baseAdapter.list.size) {
+                if (index < listSize) {
                     baseAdapter.list[index] = l
                     baseAdapter.notifyItemChanged(index)
                 }
