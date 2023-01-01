@@ -58,8 +58,6 @@ dependencies {
 # [22. Stepper2View](#Stepper2View)
 # [23. RatingView](#RatingView)
 
-# RatingView
-
 ![RatingView](https://i.ibb.co/xHrz9Kv/rating.png)
 
 The RatingView is very easy to use. Just add it to your layout like any other view.
@@ -88,6 +86,8 @@ Here's a basic implementation.
 
 ##### _app:count_
 [int]: count of rating, default 5
+
+# Stepper2View
 
 ![Stepper2View](https://i.postimg.cc/cHLsmx99/stepper2.gif)
 
