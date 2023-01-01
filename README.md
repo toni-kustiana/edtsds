@@ -58,6 +58,8 @@ dependencies {
 # [22. Stepper2View](#Stepper2View)
 # [23. RatingView](#RatingView)
 
+# RatingView
+
 ![RatingView](https://i.ibb.co/xHrz9Kv/rating.png)
 
 The RatingView is very easy to use. Just add it to your layout like any other view.
