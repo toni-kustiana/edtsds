@@ -1,8 +1,11 @@
 package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import id.co.edtslib.edtsds.ratingview.RatingDelegate
+import id.co.edtslib.edtsds.ratingview.RatingView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,6 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        val ratingView = findViewById<RatingView>(R.id.ratingView)
+        ratingView.delegate = object : RatingDelegate {
+            override fun onChanged(value: Int) {
+                Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 }

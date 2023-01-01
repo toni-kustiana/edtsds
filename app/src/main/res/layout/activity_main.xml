@@ -7,12 +7,9 @@
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.date.DateFieldView
-        android:id="@+id/stepper"
-        app:showIcon="false"
-        app:calendarType="spinner"
-        app:spinnerTitle="Dari sampai"
-        app:spinnerButtonText="Pilih"
+    <id.co.edtslib.edtsds.ratingview.RatingView
+        android:id="@+id/ratingView"
+        app:count="5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

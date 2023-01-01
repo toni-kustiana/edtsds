@@ -230,4 +230,7 @@
         <attr name="count" />
         <attr name="layout" format="reference" />
     </declare-styleable>
+    <declare-styleable name="RatingView">
+        <attr name="count" />
+    </declare-styleable>
 </resources>
