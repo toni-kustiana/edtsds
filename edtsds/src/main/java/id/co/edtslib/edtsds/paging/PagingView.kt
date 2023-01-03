@@ -47,7 +47,7 @@ class PagingView<T, L>: RecyclerView {
             val index = i + offset
             if (mList?.isNotEmpty() != true) {
                 // jika ada di adapter, remove it
-                if (index < listSize) {
+                if (index+1 < listSize) {
                     baseAdapter.list.removeAt(index)
                     baseAdapter.notifyItemRemoved(index)
                 }
