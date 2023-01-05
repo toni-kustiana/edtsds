@@ -13,14 +13,5 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        val ratingView = findViewById<RatingView>(R.id.ratingView)
-        ratingView.delegate = object : RatingDelegate {
-            override fun onChanged(value: Int) {
-                Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()
-            }
-        }
-
     }
 }
