@@ -17,6 +17,7 @@
     <dimen name="dimen_50dp">50dp</dimen>
     <dimen name="dimen_56dp">56dp</dimen>
     <dimen name="dimen_72dp">72dp</dimen>
+    <dimen name="material_input_text_to_prefix_suffix_padding">0dp</dimen>
 
     <dimen name="dimen_checkbox_padding">6dp</dimen>
     <dimen name="dimen_bottom_layout_margin_top">100dp</dimen>

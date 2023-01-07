@@ -7,10 +7,18 @@
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.UnderlineTextView
-        android:id="@+id/ratingView"
-        android:text="sdlsdlsld"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        app:hintEnabled="false"
+        app:emptyHint="Minimum"
+        app:inputType="money"
+        app:currency="Rp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp" />
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:hint="aaaaa"
+        app:emptyHint="bbb"
+        app:inputType="phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>
