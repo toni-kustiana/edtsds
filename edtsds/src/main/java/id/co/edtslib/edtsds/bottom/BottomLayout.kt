@@ -39,6 +39,19 @@ class BottomLayout: FrameLayout {
     private val binding: ViewBottomLayoutBinding =
         ViewBottomLayoutBinding.inflate(LayoutInflater.from(context), this, true)
 
+    var canceledOnTouchOutside = false
+        set(value) {
+            field = value
+            if (value) {
+                binding.vWindow.setOnClickListener {
+                    delegate?.onDismiss()
+                }
+            }
+            else {
+                binding.vWindow.setOnClickListener(null)
+            }
+        }
+
     var title: String? = null
         set(value) {
             field = value
