@@ -11,14 +11,13 @@
         app:hintEnabled="false"
         app:emptyHint="Minimum"
         app:inputType="money"
+        app:maxLength="10"
         app:currency="Rp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp" />
-    <id.co.edtslib.edtsds.textfield.TextFieldView
+    <id.co.edtslib.edtsds.stepper2.Stepper2View
+        android:id="@+id/stepperView"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:hint="aaaaa"
-        app:emptyHint="bbb"
-        app:inputType="phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

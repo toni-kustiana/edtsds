@@ -13,6 +13,8 @@ import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DsViewStepper2Binding
 
 open class Stepper2View: FrameLayout {
+    private var runnable: Runnable? = null
+
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -32,6 +34,7 @@ open class Stepper2View: FrameLayout {
         }
 
     var delegate: Stepper2Delegate? = null
+    var delay = 500L
     var valueAnimationDuration = 0L //100L
     var max = Int.MAX_VALUE
     var min = 0
@@ -93,11 +96,11 @@ open class Stepper2View: FrameLayout {
                 }
 
                 field = _value
-                delegate?.onValueChanged(this, _value)
+                changedValue(_value)
             }
             else {
                 field = _value
-                delegate?.onValueChanged(this, _value)
+                changedValue(_value)
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
@@ -140,6 +143,23 @@ open class Stepper2View: FrameLayout {
         binding.flSingleValue.setOnClickListener {
             showValueOnly = false
             value = value
+        }
+    }
+
+    private fun changedValue(value: Int) {
+        if (delay > 0) {
+            if (runnable != null) {
+                removeCallbacks(runnable)
+                runnable = null
+            }
+
+            runnable = Runnable {
+                delegate?.onValueChanged(this, value)
+            }
+            postDelayed(runnable, delay)
+        }
+        else {
+            delegate?.onValueChanged(this, value)
         }
     }
 

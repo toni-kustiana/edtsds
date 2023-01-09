@@ -447,22 +447,26 @@ class TextFieldView: TextInputLayout {
                 val s = p0?.toString()
                 val n = s?.replace(".", "")
 
-                delegate?.onChanged(n)
-                editText?.removeTextChangedListener(this)
+                val len = n?.length ?: 0
 
-                try {
-                    if (n?.toDouble() != null) {
-                        val sn = formatDecimal(n.toDouble())!!
+                if (len < maxLength) {
+                    delegate?.onChanged(n)
+                    editText?.removeTextChangedListener(this)
 
-                        editText?.setText(sn)
-                        editText?.setSelection(sn.length)
+                    try {
+                        if (n?.toDouble() != null) {
+                            val sn = formatDecimal(n.toDouble())!!
+
+                            editText?.setText(sn)
+                            editText?.setSelection(sn.length)
+                        }
                     }
-                }
-                catch (ignore: NumberFormatException) {
+                    catch (ignore: NumberFormatException) {
 
-                }
+                    }
 
-                editText?.addTextChangedListener(this)
+                    editText?.addTextChangedListener(this)
+                }
             }
         }
 
