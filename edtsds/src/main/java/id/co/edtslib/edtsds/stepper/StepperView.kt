@@ -21,6 +21,8 @@ class StepperView: FrameLayout {
     var delegate: StepperDelegate? = null
     private var textWatcher: TextWatcher? = null
     private var tvAdd: TextView? = null
+    private var runnable:  Runnable? = null
+    var delay = 500L
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -152,7 +154,7 @@ class StepperView: FrameLayout {
                                 setEditTextListener()
                             }
 
-                        delegate?.onChangeValue(min)
+                        changedValue(min)
                     } else {
                         var value = getValue()
                         if (value > max && value > lastValue) {
@@ -166,7 +168,7 @@ class StepperView: FrameLayout {
                             lastValue = value
                         }
 
-                        delegate?.onChangeValue(value)
+                        changedValue(value)
                     }
                 }
             }
@@ -179,6 +181,23 @@ class StepperView: FrameLayout {
         editText?.setText(String.format("%d", value))
 
         tvAdd?.isActivated = value < max
+    }
+
+    private fun changedValue(value: Int) {
+        if (delay > 0L) {
+            if (runnable != null) {
+                removeCallbacks(runnable)
+                runnable = null
+            }
+
+            runnable = Runnable {
+                delegate?.onChangeValue(value)
+            }
+            postDelayed(runnable, delay)
+        }
+        else {
+            delegate?.onChangeValue(value)
+        }
     }
 
     fun setMaxValue(value: Int) {
@@ -221,7 +240,7 @@ class StepperView: FrameLayout {
                     removeEditTextListener()
                     editText?.setText(String.format("%d", d1))
                     tvAdd?.isActivated = d1 < max
-                    delegate?.onChangeValue(d1)
+                    changedValue(d1)
                     setEditTextListener()
                 }
             }
@@ -242,7 +261,7 @@ class StepperView: FrameLayout {
                 if (d1 >= min && d != d1) {
                     removeEditTextListener()
                     editText?.setText(String.format("%d", d1))
-                    delegate?.onChangeValue(d1)
+                    changedValue(d1)
                     tvAdd?.isActivated = d1 < max
                     setEditTextListener()
                 }

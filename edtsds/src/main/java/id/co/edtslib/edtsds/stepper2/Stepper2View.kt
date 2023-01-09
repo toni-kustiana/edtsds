@@ -30,7 +30,7 @@ open class Stepper2View: FrameLayout {
         set(_value) {
             field = _value
 
-            value = value
+            lValue = lValue
         }
 
     var delegate: Stepper2Delegate? = null
@@ -38,7 +38,7 @@ open class Stepper2View: FrameLayout {
     var valueAnimationDuration = 0L //100L
     var max = Int.MAX_VALUE
     var min = 0
-    var value = 0
+    private var lValue = 0
         set(_value) {
             binding.btAdd.isActivated = _value < max
 
@@ -96,11 +96,9 @@ open class Stepper2View: FrameLayout {
                 }
 
                 field = _value
-                changedValue(_value)
             }
             else {
                 field = _value
-                changedValue(_value)
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
@@ -111,11 +109,11 @@ open class Stepper2View: FrameLayout {
 
     init {
         setViewVisibility(0)
-        binding.clExpand.isVisible = value > 0
+        binding.clExpand.isVisible = lValue > 0
 
         binding.btNew.setOnClickListener {
-            if (value < max) {
-                add(value+1)
+            if (lValue < max) {
+                add(lValue+1)
             }
             else {
                 delegate?.onReachMax(this)
@@ -123,8 +121,8 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.btAdd.setOnClickListener {
-            if (value < max) {
-                add(value+1)
+            if (lValue < max) {
+                add(lValue+1)
             }
             else {
                 delegate?.onReachMax(this)
@@ -132,8 +130,8 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.btMinus.setOnClickListener {
-            if (value > min) {
-                minus(value-1)
+            if (lValue > min) {
+                minus(lValue-1)
             }
             else {
                 delegate?.onReachMin(this)
@@ -142,7 +140,7 @@ open class Stepper2View: FrameLayout {
 
         binding.flSingleValue.setOnClickListener {
             showValueOnly = false
-            value = value
+            lValue = lValue
         }
     }
 
@@ -171,10 +169,18 @@ open class Stepper2View: FrameLayout {
 
     protected open fun add(p: Int) {
         showValueOnly = false
-        value++
+        lValue++
+        changedValue(lValue)
+
     }
 
     protected open fun minus(p: Int) {
-        value--
+        lValue--
+        changedValue(lValue)
+    }
+
+    fun setValue(value: Int) {
+        lValue = value
+        changedValue(lValue)
     }
 }
