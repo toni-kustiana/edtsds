@@ -181,6 +181,5 @@ open class Stepper2View: FrameLayout {
 
     fun setValue(value: Int) {
         lValue = value
-        changedValue(lValue)
     }
 }
