@@ -39,6 +39,12 @@ class BadgeView : MaterialTextView {
 
         }
 
+    var badgeLabel = ""
+        set(value) {
+            field = value
+
+        }
+
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -53,6 +59,10 @@ class BadgeView : MaterialTextView {
             if (badgeType != BadgeType.Custom) {
                 val t = a.getString(R.styleable.BadgeView_label)
                 text = t ?: ""
+            } else {
+                if (badgeLabel.isNotEmpty()) {
+                    text = badgeLabel
+                }
             }
 
             a.recycle()
