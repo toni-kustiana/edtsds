@@ -13,6 +13,8 @@ import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.DsViewStepper2Binding
 
 open class Stepper2View: FrameLayout {
+    private var runnable: Runnable? = null
+
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -32,11 +34,14 @@ open class Stepper2View: FrameLayout {
         }
 
     var delegate: Stepper2Delegate? = null
+    var delay = 500L
     var valueAnimationDuration = 0L //100L
     var max = Int.MAX_VALUE
     var min = 0
     var value = 0
         set(_value) {
+            binding.btAdd.isActivated = _value < max
+
             if (! showValueOnly) {
                 binding.clExpand.isVisible = _value > 0
 
@@ -91,11 +96,9 @@ open class Stepper2View: FrameLayout {
                 }
 
                 field = _value
-                delegate?.onValueChanged(_value)
             }
             else {
                 field = _value
-                delegate?.onValueChanged(_value)
 
                 binding.clExpand.isVisible = false
                 binding.tvSingleValue.text =  String.format("%d", _value)
@@ -112,11 +115,17 @@ open class Stepper2View: FrameLayout {
             if (value < max) {
                 add(value+1)
             }
+            else {
+                delegate?.onReachMax(this)
+            }
         }
 
         binding.btAdd.setOnClickListener {
             if (value < max) {
                 add(value+1)
+            }
+            else {
+                delegate?.onReachMax(this)
             }
         }
 
@@ -124,11 +133,31 @@ open class Stepper2View: FrameLayout {
             if (value > min) {
                 minus(value-1)
             }
+            else {
+                delegate?.onReachMin(this)
+            }
         }
 
         binding.flSingleValue.setOnClickListener {
             showValueOnly = false
             value = value
+        }
+    }
+
+    private fun changedValue(value: Int) {
+        if (delay > 0) {
+            if (runnable != null) {
+                removeCallbacks(runnable)
+                runnable = null
+            }
+
+            runnable = Runnable {
+                delegate?.onValueChanged(this, value)
+            }
+            postDelayed(runnable, delay)
+        }
+        else {
+            delegate?.onValueChanged(this, value)
         }
     }
 
@@ -141,9 +170,12 @@ open class Stepper2View: FrameLayout {
     protected open fun add(p: Int) {
         showValueOnly = false
         value++
+        changedValue(value)
+
     }
 
     protected open fun minus(p: Int) {
         value--
+        changedValue(value)
     }
 }

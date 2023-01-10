@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -19,6 +20,9 @@ class StepperView: FrameLayout {
     private var lastValue = -1
     var delegate: StepperDelegate? = null
     private var textWatcher: TextWatcher? = null
+    private var tvAdd: TextView? = null
+    private var runnable:  Runnable? = null
+    var delay = 500L
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -46,8 +50,9 @@ class StepperView: FrameLayout {
             }
         }
 
-        val tvAdd = view.findViewById<TextView>(R.id.tvAdd)
-        tvAdd.setOnClickListener {
+        tvAdd = view.findViewById<TextView>(R.id.tvAdd)
+        tvAdd?.isActivated = true
+        tvAdd?.setOnClickListener {
             add()
         }
 
@@ -88,7 +93,7 @@ class StepperView: FrameLayout {
 
             val bgPlus = a.getResourceId(R.styleable.StepperView_backgroundPlus, 0)
             if (bgPlus != 0) {
-                tvAdd.setBackgroundResource(bgPlus)
+                tvAdd?.setBackgroundResource(bgPlus)
             }
 
             val bgValue = a.getResourceId(R.styleable.StepperView_backgroundValue, 0)
@@ -103,7 +108,7 @@ class StepperView: FrameLayout {
 
             val colorPlus = a.getColor(R.styleable.StepperView_textColorPlus, 0)
             if (colorPlus != 0) {
-                tvAdd.setTextColor(colorPlus)
+                tvAdd?.setTextColor(colorPlus)
             }
 
             val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
@@ -149,7 +154,7 @@ class StepperView: FrameLayout {
                                 setEditTextListener()
                             }
 
-                        delegate?.onChangeValue(min)
+                        changedValue(min)
                     } else {
                         var value = getValue()
                         if (value > max && value > lastValue) {
@@ -163,7 +168,7 @@ class StepperView: FrameLayout {
                             lastValue = value
                         }
 
-                        delegate?.onChangeValue(value)
+                        changedValue(value)
                     }
                 }
             }
@@ -174,6 +179,25 @@ class StepperView: FrameLayout {
 
     fun setValue(value: Int) {
         editText?.setText(String.format("%d", value))
+
+        tvAdd?.isActivated = value < max
+    }
+
+    private fun changedValue(value: Int) {
+        if (delay > 0L) {
+            if (runnable != null) {
+                removeCallbacks(runnable)
+                runnable = null
+            }
+
+            runnable = Runnable {
+                delegate?.onChangeValue(value)
+            }
+            postDelayed(runnable, delay)
+        }
+        else {
+            delegate?.onChangeValue(value)
+        }
     }
 
     fun setMaxValue(value: Int) {
@@ -215,7 +239,8 @@ class StepperView: FrameLayout {
                 if (d1 <= max && d != d1) {
                     removeEditTextListener()
                     editText?.setText(String.format("%d", d1))
-                    delegate?.onChangeValue(d1)
+                    tvAdd?.isActivated = d1 < max
+                    changedValue(d1)
                     setEditTextListener()
                 }
             }
@@ -236,7 +261,8 @@ class StepperView: FrameLayout {
                 if (d1 >= min && d != d1) {
                     removeEditTextListener()
                     editText?.setText(String.format("%d", d1))
-                    delegate?.onChangeValue(d1)
+                    changedValue(d1)
+                    tvAdd?.isActivated = d1 < max
                     setEditTextListener()
                 }
             }

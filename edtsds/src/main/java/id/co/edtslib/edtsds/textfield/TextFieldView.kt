@@ -2,11 +2,16 @@ package id.co.edtslib.edtsds.textfield
 
 import android.content.Context
 import android.graphics.Rect
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
@@ -16,10 +21,11 @@ import com.google.android.material.textfield.TextInputLayout
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.base.MyMaskedTextChangedListener
 import id.co.edtslib.edtsds.base.MyValueListener
+import java.text.DecimalFormat
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup
+        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup, Money
     }
 
     enum class ImeOption {
@@ -114,6 +120,7 @@ class TextFieldView: TextInputLayout {
 
         }
 
+    var currency: String? = null
     var maxLength = 0
         set(value) {
             field = value
@@ -164,6 +171,13 @@ class TextFieldView: TextInputLayout {
                         android.text.InputType.TYPE_TEXT_VARIATION_PHONETIC
 
                     setPhoneListener()
+                }
+                InputType.Money -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                            android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+                    prefixText = currency
+
+                    setMoneyListener()
                 }
                 InputType.Email -> {
                     editText?.addTextChangedListener {
@@ -306,6 +320,7 @@ class TextFieldView: TextInputLayout {
             ellipsizeWidth = a.getDimension(R.styleable.TextFieldView_ellipsizeWidth, 0f).toInt()
 
             emptyHint = a.getString(R.styleable.TextFieldView_emptyHint)
+            currency = a.getString(R.styleable.TextFieldView_currency)
 
             startIcon = a.getResourceId(R.styleable.TextFieldView_startIcon, 0)
 
@@ -335,9 +350,23 @@ class TextFieldView: TextInputLayout {
         }
 
         val layoutParams = editText.layoutParams
-        layoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
-        layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
 
+        if (! isHintEnabled) {
+            val prefixView = findViewById<AppCompatTextView>(com.google.android.material.R.id.textinput_prefix_text)
+            prefixView.layoutParams = LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            prefixView.gravity = Gravity.CENTER
+
+            editText.setPadding(editText.paddingStart, 0, editText.paddingEnd, 0)
+
+            post {
+                layoutParams.height = height
+                editText.hint = emptyHint
+            }
+        }
+        else
         if (inputType == InputType.Search) {
             editText.setPadding(0, 0, 0, 0)
         }
@@ -355,8 +384,16 @@ class TextFieldView: TextInputLayout {
         TextViewCompat.setTextAppearance(editText, R.style.B1)
         editText.setTextColor(ContextCompat.getColorStateList(context,
             R.color.color_text_text_field))
-        editText.setBackgroundResource(if (inputType == InputType.Search) R.drawable.bg_search_field
-            else R.drawable.bg_text_field)
+        if (isHintEnabled) {
+            editText.setBackgroundResource(
+                if (inputType == InputType.Search) R.drawable.bg_search_field
+                else R.drawable.bg_text_field
+            )
+        }
+        else {
+            editText.setBackgroundResource(0)
+            setBackgroundResource(R.drawable.bg_text_field)
+        }
 
         setErrorTextAppearance(R.style.B3)
         setErrorTextColor((ContextCompat.getColorStateList(context, R.color.colorSupportError)))
@@ -396,6 +433,53 @@ class TextFieldView: TextInputLayout {
             val view = getChildAt(1)
             view.setPadding(0, dp4, 0, 0)
         }
+    }
+
+    private fun setMoneyListener() {
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val s = p0?.toString()
+                val n = s?.replace(".", "")
+
+                val len = n?.length ?: 0
+
+                if (len < maxLength) {
+                    delegate?.onChanged(n)
+                    editText?.removeTextChangedListener(this)
+
+                    try {
+                        if (n?.toDouble() != null) {
+                            val sn = formatDecimal(n.toDouble())!!
+
+                            editText?.setText(sn)
+                            editText?.setSelection(sn.length)
+                        }
+                    }
+                    catch (ignore: NumberFormatException) {
+
+                    }
+
+                    editText?.addTextChangedListener(this)
+                }
+            }
+        }
+
+        editText?.addTextChangedListener(textWatcher)
+    }
+
+    private fun formatDecimal(d: Double): String? {
+        val formatter = DecimalFormat("#,###")
+        val symbols = formatter.decimalFormatSymbols
+        symbols.groupingSeparator = '.'
+        symbols.decimalSeparator = ','
+        formatter.decimalFormatSymbols = symbols
+        return formatter.format(d)
     }
 
     private fun setPhoneListener() {

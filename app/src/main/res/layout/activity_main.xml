@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        app:hintEnabled="false"
+        app:emptyHint="Minimum"
+        app:inputType="money"
+        app:maxLength="10"
+        app:currency="Rp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp" />
     <id.co.edtslib.edtsds.stepper2.Stepper2View
-        android:id="@+id/stepper"
-        android:layout_width="wrap_content"
+        android:id="@+id/stepperView"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

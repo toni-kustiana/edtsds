@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'id.co.edtslib.edtsds'
-version = '1.0.0'
+version = '1.0.84'
 
 afterEvaluate {
     publishing {
@@ -15,8 +15,8 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'id.co.edtslib.edtsds'
-                artifactId = 'Edtsds'
-                version = '1.0.0'
+                artifactId = 'edtsds'
+                version = '1.0.84'
             }
         }
     }

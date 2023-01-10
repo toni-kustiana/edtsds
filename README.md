@@ -56,6 +56,38 @@ dependencies {
 # [20. RecyclerShimmerView](#RecyclerShimmerView)
 # [21. PagingView](#PagingView)
 # [22. Stepper2View](#Stepper2View)
+# [23. RatingView](#RatingView)
+
+# RatingView
+
+![RatingView](https://i.ibb.co/xHrz9Kv/rating.png)
+
+The RatingView is very easy to use. Just add it to your layout like any other view.
+##### Via XML
+
+Here's a basic implementation.
+
+```xml
+    <id.co.edtslib.edtsds.ratingview.RatingView
+        android:id="@+id/ratingView"
+        app:count="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+```
+
+```kotlin
+    val ratingView = findViewById<RatingView>(R.id.ratingView)
+    ratingView.delegate = object : RatingDelegate {
+        override fun onChanged(value: Int) {
+            Toast.makeText(this@MainActivity, "$value", Toast.LENGTH_SHORT).show()
+        }
+    }
+```
+
+### Attributes information
+
+##### _app:count_
+[int]: count of rating, default 5
 
 # Stepper2View
 
@@ -276,6 +308,19 @@ Here's a basic implementation.
 
 ##### _app:minAge_
 [integer]: minimum age of calendar, default 0
+
+##### _app:calendarType_
+[enum]: spinner, calendar, default calendar
+
+##### _app:showIcon_
+[boolean]: false if hide icon, default true
+
+##### _app:spinnerTitle_
+[string]: tray title if calendar type is spinner
+
+##### _app:spinnerButtonText_
+[string]: tray button text if calendar type is spinner
+
 
 ### Listener for date value changed
 ```kotlin

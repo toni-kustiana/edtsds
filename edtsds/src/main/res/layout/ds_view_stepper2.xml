@@ -63,13 +63,13 @@
             android:id="@+id/btAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ds_bg_round_white"
+            android:background="@drawable/ds_bg_round_white_gray"
             android:layout_gravity="center"
             android:layout_width="@dimen/ds_stepper2_small_circle"
             android:layout_height="@dimen/ds_stepper2_small_circle">
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_gravity="center"
-                android:src="@drawable/ds_ic_plus_bold_primary30"
+                android:src="@drawable/ds_ic_plus"
                 android:layout_width="@dimen/ds_stepper2_icon"
                 android:layout_height="@dimen/ds_stepper2_icon" />
         </FrameLayout>

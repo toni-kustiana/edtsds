@@ -29,16 +29,19 @@ class Popup private constructor(context: Context, private val view: View?, theme
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, positiveClickListener: PopupDelegate?,
                  gravity: Int = Gravity.START, themeResId: Int = 0, dismissible: Boolean = false,
-                 isHtml: Boolean = false) =
+                 isHtml: Boolean = false,
+                 negativeButtonStyle: ButtonView.ButtonVariant = ButtonView.ButtonVariant.Outline) =
             show(activity, title, message, positiveButton, null,
                 positiveClickListener, null, themeResId =
-                themeResId, gravity = gravity, dismissible = dismissible, isHtml = isHtml)
+                themeResId, gravity = gravity, dismissible = dismissible, isHtml = isHtml,
+                negativeButtonStyle = negativeButtonStyle)
 
         fun show(activity: FragmentActivity, title: String?, message: String,
                  positiveButton: String?, negativeButton: String?,
                  positiveClickListener: PopupDelegate?, negativeClickListener: PopupDelegate?,
                  orientation: Orientation = Orientation.Horizontal, gravity: Int = Gravity.START,
-                 themeResId: Int = 0, dismissible: Boolean = false, isHtml: Boolean = false): Popup {
+                 themeResId: Int = 0, dismissible: Boolean = false, isHtml: Boolean = false,
+                negativeButtonStyle: ButtonView.ButtonVariant = ButtonView.ButtonVariant.Outline): Popup {
 
             val popup = Popup(activity, null, themeResId)
 
@@ -55,6 +58,7 @@ class Popup private constructor(context: Context, private val view: View?, theme
 
             popup.binding.bvNegative.isVisible = negativeButton != null
             popup.binding.bvNegative.text = negativeButton
+            popup.binding.bvNegative.variant = negativeButtonStyle
 
 
             popup.binding.bvNegative.setOnClickListener {

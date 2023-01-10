@@ -1,5 +1,6 @@
 package id.co.edtslib.edtsds.list.radiobuttonlist
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapter
@@ -20,11 +21,12 @@ class RadioButtonAdapter<T>: BaseRecyclerViewAdapter<AdapterRadioButtonBinding, 
         }
     }
     var menuDelegate: RadioButtonListDelegate<T>? = null
+    var gravity = Gravity.START
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterRadioButtonBinding
         get() = AdapterRadioButtonBinding::inflate
 
-    override fun createHolder() = RadioButtonHolder<T>(binding)
+    override fun createHolder() = RadioButtonHolder<T>(binding, this)
 
     fun select(position: Int) {
         var i = 0

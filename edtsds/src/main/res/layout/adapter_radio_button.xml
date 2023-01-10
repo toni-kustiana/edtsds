@@ -8,6 +8,7 @@
     android:background="@drawable/bg_menu"
     android:textColor="@color/colorNeutral70"
     app:drawableStartCompat="@drawable/ic_radio"
+    app:drawableEndCompat="@drawable/ic_radio"
     android:drawablePadding="@dimen/dimen_12dp"
     style="@style/B1"
     android:layout_width="match_parent"

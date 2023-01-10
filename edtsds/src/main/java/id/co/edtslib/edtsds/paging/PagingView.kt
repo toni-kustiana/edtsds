@@ -31,36 +31,36 @@ class PagingView<T, L>: RecyclerView {
             if (page > 0) {
                 delegate?.onNextPageLoaded()
             }
-            this.page++
         }
     }
 
     fun setData(list: List<L>?, page: Int, totalPage: Int) {
         totalPages = totalPage
+        this.page = page
+
         val baseAdapter = adapter as BaseRecyclerViewAdapter<*, L>
 
-        val offset = page*size
-        val mList = list?.toMutableList()
-        for (i in 0 until  size) {
-            val index = i + offset
-            if (mList?.isNotEmpty() != true) {
-                // jika ada di adapter, remove it
-                if (index+1 < baseAdapter.list.size) {
-                    baseAdapter.list.removeAt(index)
-                    baseAdapter.notifyItemRemoved(index)
-                }
+        var offset = page*size
+
+        val mList = list ?: listOf()
+        val listSize = baseAdapter.list.size
+
+        mList.forEach {
+            if (offset < listSize) {
+                baseAdapter.list[offset] = it
+                baseAdapter.notifyItemChanged(offset)
             }
             else {
-                val l = mList.removeFirst()
-                if (index+1 < baseAdapter.list.size) {
-                    baseAdapter.list[index] = l
-                    baseAdapter.notifyItemChanged(index)
-                }
-                else {
-                    baseAdapter.list.add(l)
-                    baseAdapter.notifyItemInserted(baseAdapter.list.size-1)
-                }
+                baseAdapter.list.add(it)
+                baseAdapter.notifyItemInserted(baseAdapter.list.size-1)
             }
+
+            offset++
+        }
+
+        while (offset < baseAdapter.list.size) {
+            baseAdapter.list.removeAt(offset)
+            baseAdapter.notifyItemRemoved(offset)
         }
     }
 
@@ -89,11 +89,11 @@ class PagingView<T, L>: RecyclerView {
 
 
         if (last+1 >= baseAdapter.list.size) {
-            if (! loading && page < totalPages) {
+            if (! loading && page+1 < totalPages) {
                 loading = true
                 delegate?.onNextPageLoading()
                 postDelayed({
-                    loadPage(page)
+                    loadPage(page+1)
                 }, 500)
             }
         }
