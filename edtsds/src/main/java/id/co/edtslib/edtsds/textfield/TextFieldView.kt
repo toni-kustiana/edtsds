@@ -448,6 +448,8 @@ class TextFieldView: TextInputLayout {
                 val n = s?.replace(".", "")
 
                 val len = n?.length ?: 0
+                val latestSelection = editText?.selectionEnd
+                val isLast = editText?.selectionEnd == p0?.length
 
                 if (len < maxLength) {
                     delegate?.onChanged(n)
@@ -458,7 +460,13 @@ class TextFieldView: TextInputLayout {
                             val sn = formatDecimal(n.toDouble())!!
 
                             editText?.setText(sn)
-                            editText?.setSelection(sn.length)
+                            if (isLast) {
+                                editText?.setSelection(sn.length)
+                            }
+                            else
+                            if (latestSelection != null) {
+                                editText?.setSelection(latestSelection)
+                            }
                         }
                     }
                     catch (ignore: NumberFormatException) {
