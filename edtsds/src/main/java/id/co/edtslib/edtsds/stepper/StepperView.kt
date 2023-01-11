@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import id.co.edtslib.edtsds.R
 import java.lang.NumberFormatException
 
@@ -90,6 +91,11 @@ class StepperView: FrameLayout {
             if (colorPlus != 0) {
                 tvAdd?.setTextColor(colorPlus)
             }
+
+            val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
+
+            val layoutParams = textView?.layoutParams as LinearLayoutCompat.LayoutParams
+            layoutParams.width = dp40
 
             a.recycle()
         }
