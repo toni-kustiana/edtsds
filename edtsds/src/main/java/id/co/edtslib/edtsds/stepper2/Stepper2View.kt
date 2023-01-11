@@ -141,6 +141,7 @@ open class Stepper2View: FrameLayout {
         binding.flSingleValue.setOnClickListener {
             showValueOnly = false
             value = value
+            delegate?.onExpand(this, value)
         }
     }
 
