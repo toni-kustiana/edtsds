@@ -13,10 +13,9 @@
         android:text="@string/minus"
         android:layout_width="@dimen/dimen_32dp"
         android:layout_height="match_parent" />
-    <id.co.edtslib.edtsds.base.NumberEditText
-        android:id="@+id/editText"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView"
         android:background="@drawable/bg_stepper_value"
-        android:inputType="number"
         android:gravity="center"
         android:textColor="@color/colorNeutral70"
         style="@style/H2"

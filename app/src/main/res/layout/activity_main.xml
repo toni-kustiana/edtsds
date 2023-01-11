@@ -15,4 +15,7 @@
         app:currency="Rp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp" />
+    <id.co.edtslib.edtsds.stepper.StepperView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
