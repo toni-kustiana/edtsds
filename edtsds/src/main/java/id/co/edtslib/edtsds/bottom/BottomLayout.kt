@@ -52,6 +52,14 @@ class BottomLayout: FrameLayout {
             }
         }
 
+    var isOverlay: Boolean? = null
+        set(value) {
+            field = value
+
+            val color = if (value != false) R.color.colorOpacity else android.R.color.transparent
+            binding.vWindow.setBackgroundColor(ContextCompat.getColor(context, color))
+        }
+
     var title: String? = null
         set(value) {
             field = value

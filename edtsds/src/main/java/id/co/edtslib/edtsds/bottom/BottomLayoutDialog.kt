@@ -16,7 +16,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                           tray: Boolean = true, cancelable: Boolean = false,
                           titleView: View? = null, titleDivider: Boolean = true,
                           popup: Boolean = false,
-                          canceledOnTouchOutside: Boolean = true,
+                          canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = tray,
                           themeResId: Int = R.style.BottomLayoutDialog): BottomLayoutDialog {
             val dialog = BottomLayoutDialog(context, themeResId)
             dialog.binding.bottomLayout.title = title
@@ -27,6 +27,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
             dialog.binding.bottomLayout.titleDivider = titleDivider
             dialog.binding.bottomLayout.popup = popup
             dialog.binding.bottomLayout.canceledOnTouchOutside = canceledOnTouchOutside
+            dialog.binding.bottomLayout.isOverlay = isOverlay
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dialog.dismiss()
@@ -43,12 +44,14 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
         }
 
         fun showTray(context: Context, title: String, contentView: View, titleView: View? = null,
-                     titleDivider: Boolean = true, popup: Boolean = false, canceledOnTouchOutside: Boolean = true,
+                     titleDivider: Boolean = true, popup: Boolean = false,
+                     canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = true,
                      themeResId: Int = R.style.BottomLayoutDialog) =
             showSwipeTray(context, title, contentView, tray = false, cancelable = true,
                 titleView = titleView, titleDivider = titleDivider, popup = popup,
                 themeResId = themeResId,
-                canceledOnTouchOutside = canceledOnTouchOutside)
+                canceledOnTouchOutside = canceledOnTouchOutside,
+                isOverlay = isOverlay)
 
         fun close() {
             try {
