@@ -214,7 +214,7 @@ class TextFieldView: TextInputLayout {
                 }
                 InputType.Popup -> {
                     endIconMode = END_ICON_CUSTOM
-                    endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_chevron_right, null)
+                    endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_chevron_down, null)
                     editText?.inputType = android.text.InputType.TYPE_NULL
                     editText?.setOnFocusChangeListener { v, b ->
                         if (b) {
