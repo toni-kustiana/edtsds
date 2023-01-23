@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import id.co.edtslib.baserecyclerview2.AdapterData
 import id.co.edtslib.baserecyclerview2.BaseRecyclerView2
 
-class Paging2View<T>: RecyclerView {
+class Paging2View<T, L>: RecyclerView {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -37,7 +37,7 @@ class Paging2View<T>: RecyclerView {
         }
     }
 
-    fun setData(list: List<T>?, page: Int, totalPage: Int) {
+    fun setData(list: List<L>?, page: Int, totalPage: Int) {
         totalPages = totalPage
         this.page = page
 
