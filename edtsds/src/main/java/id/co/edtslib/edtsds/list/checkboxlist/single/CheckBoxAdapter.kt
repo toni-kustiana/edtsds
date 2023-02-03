@@ -1,5 +1,6 @@
 package id.co.edtslib.edtsds.list.checkboxlist.single
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapter
@@ -21,11 +22,12 @@ open class CheckBoxAdapter<T>: BaseRecyclerViewAdapter<AdapterCheckboxBinding, T
         }
     }
     var menuDelegate: CheckBoxListDelegate<T>? = null
+    var gravity = Gravity.START
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterCheckboxBinding
         get() = AdapterCheckboxBinding::inflate
 
-    override fun createHolder() = CheckBoxHolder<T>(binding)
+    override fun createHolder() = CheckBoxHolder<T>(binding, this)
 
     open fun select(position: Int) {
         var i = 0
