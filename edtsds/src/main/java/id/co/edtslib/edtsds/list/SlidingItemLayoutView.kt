@@ -57,18 +57,18 @@ class SlidingItemLayoutView: FrameLayout {
                     addView(imageView, 0)
 
                     imageView?.scaleType = ImageView.ScaleType.FIT_XY
+                }
 
-                    if (imageUrl != null) {
-                        try {
-                            Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
-                        }
-                        catch (ignore: IllegalArgumentException) {
-                            imageView?.setImageResource(imageViewResId)
-                        }
+                if (imageUrl != null) {
+                    try {
+                        Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
                     }
-                    else {
+                    catch (ignore: IllegalArgumentException) {
                         imageView?.setImageResource(imageViewResId)
                     }
+                }
+                else {
+                    imageView?.setImageResource(imageViewResId)
                 }
 
                 val frameLayout = imageView?.layoutParams
