@@ -49,16 +49,41 @@ class SlidingItemLayoutView: FrameLayout {
 
     fun redraw() {
         if (imageViewResId != 0 || imageUrl != null) {
-            postDelayed( {
-                val h = height
+            if (imageView == null) {
+                postDelayed( {
+                    val h = height
 
-                if (imageView == null) {
                     imageView = AppCompatImageView(context)
                     addView(imageView, 0)
 
                     imageView?.scaleType = ImageView.ScaleType.FIT_XY
-                }
 
+                    if (imageUrl != null) {
+                        try {
+                            Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+                        }
+                        catch (ignore: IllegalArgumentException) {
+                            imageView?.setImageResource(imageViewResId)
+                        }
+                    }
+                    else {
+                        imageView?.setImageResource(imageViewResId)
+                    }
+
+                    val frameLayout = imageView?.layoutParams
+                    frameLayout?.width = drawableWidth.toInt()
+                    frameLayout?.height = h - paddingTop - paddingBottom
+
+                    if (childCount > 1) {
+                        val view = getChildAt(1)
+                        if (view is SlidingItemView<*, *>) {
+                            setScrollListener(view)
+                        }
+                    }
+
+                }, 500)
+            }
+            else {
                 if (imageUrl != null) {
                     try {
                         Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
@@ -70,19 +95,7 @@ class SlidingItemLayoutView: FrameLayout {
                 else {
                     imageView?.setImageResource(imageViewResId)
                 }
-
-                val frameLayout = imageView?.layoutParams
-                frameLayout?.width = drawableWidth.toInt()
-                frameLayout?.height = h - paddingTop - paddingBottom
-
-                if (childCount > 1) {
-                    val view = getChildAt(1)
-                    if (view is SlidingItemView<*, *>) {
-                        setScrollListener(view)
-                    }
-                }
-
-            }, 500)
+            }
         }
     }
 
