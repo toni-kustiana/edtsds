@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -49,6 +50,22 @@ class BottomLayout: FrameLayout {
             }
             else {
                 binding.vWindow.setOnClickListener(null)
+            }
+        }
+
+    var bottomHeight = ViewGroup.LayoutParams.WRAP_CONTENT
+        set(value) {
+            field = value
+            if (value != ViewGroup.LayoutParams.WRAP_CONTENT) {
+                val layoutParams = binding.flBottom.layoutParams as LayoutParams
+                layoutParams.height = value
+
+                val layoutParams1 = binding.llBottom.layoutParams as LayoutParams
+                layoutParams1.height = ViewGroup.LayoutParams.MATCH_PARENT
+
+                val layoutParams2 = binding.flContent.layoutParams as LinearLayout.LayoutParams
+                layoutParams2.weight = 1f
+                layoutParams2.height = 0
             }
         }
 

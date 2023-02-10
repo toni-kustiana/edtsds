@@ -2,6 +2,7 @@ package id.co.edtslib.edtsds.myapplication
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.bottom.BottomLayoutDialog
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val binding1 = SkeletonTestBinding.inflate(LayoutInflater.from(this))
         BottomLayoutDialog.showTray(context = this, title = "Dialog 2", contentView = binding1.root,
-            isOverlay = false)
+            isOverlay = false, height = ViewGroup.LayoutParams.MATCH_PARENT)
 
     }
 }
