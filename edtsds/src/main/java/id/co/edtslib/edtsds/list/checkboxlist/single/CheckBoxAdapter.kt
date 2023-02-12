@@ -27,21 +27,25 @@ open class CheckBoxAdapter<T>: BaseRecyclerViewAdapter<AdapterCheckboxBinding, T
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterCheckboxBinding
         get() = AdapterCheckboxBinding::inflate
 
-    override fun createHolder() = CheckBoxHolder<T>(binding, this)
+    override fun createHolder() = CheckBoxHolder(binding, this)
 
     open fun select(position: Int) {
         var i = 0
         list.forEach {
             if (it is DataSelected) {
-                val newSelected = i == position
                 val dataSelected = it as DataSelected
-                if (newSelected != dataSelected.selected) {
-                    dataSelected.selected = newSelected
-                    notifyItemChanged(i)
-                }
 
-                if (newSelected) {
-                    menuDelegate?.onSelected(it)
+                if (i == position) {
+                    dataSelected.selected = ! dataSelected.selected
+                    notifyItemChanged(i)
+
+                    menuDelegate?.onSelected(if (dataSelected.selected) it else null)
+                }
+                else {
+                    if (dataSelected.selected) {
+                        dataSelected.selected = false
+                        notifyItemChanged(i)
+                    }
                 }
             }
 
