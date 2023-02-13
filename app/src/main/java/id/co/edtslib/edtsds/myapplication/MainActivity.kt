@@ -16,14 +16,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val binding = ViewContentSwipeBinding.inflate(LayoutInflater.from(this))
-
-        BottomLayoutDialog.showTray(context = this, title = "Dialog 1", contentView = binding.root)
-
-
-        val binding1 = SkeletonTestBinding.inflate(LayoutInflater.from(this))
-        BottomLayoutDialog.showTray(context = this, title = "Dialog 2", contentView = binding1.root,
-            isOverlay = false, height = ViewGroup.LayoutParams.MATCH_PARENT)
-
     }
 }

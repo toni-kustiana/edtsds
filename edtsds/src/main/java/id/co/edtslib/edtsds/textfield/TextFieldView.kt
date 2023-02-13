@@ -25,7 +25,7 @@ import java.text.DecimalFormat
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup, Money
+        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup, Money, Decimal
     }
 
     enum class ImeOption {
@@ -262,6 +262,21 @@ class TextFieldView: TextInputLayout {
                             resources, startIcon,
                             null
                         )
+                    }
+                }
+                InputType.Decimal -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                            android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or
+                            android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
+
+                    editText?.setOnFocusChangeListener { _, b ->
+                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+                            this@TextFieldView.setHint(if (b) hint else emptyHint)
+                        }
                     }
                 }
                 else -> {
