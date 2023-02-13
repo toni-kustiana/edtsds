@@ -4,7 +4,7 @@
     style="@style/H3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_badge"
+    android:background="@drawable/edts_bg_badge"
     android:maxWidth="@dimen/dimen_40dp"
     android:padding="@dimen/dimen_4dp"
     android:textColor="@color/colorWhite" />
