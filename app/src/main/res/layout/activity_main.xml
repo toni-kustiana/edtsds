@@ -20,4 +20,9 @@
     <id.co.edtslib.edtsds.stepper.StepperView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.checkbox.CheckBox
+        android:text="test"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
