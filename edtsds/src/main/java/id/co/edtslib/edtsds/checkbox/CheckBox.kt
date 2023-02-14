@@ -17,6 +17,13 @@ class CheckBox: AppCompatTextView {
 
     var delegate: CheckBoxDelegate? = null
 
+    var isChecked = false
+        set(value) {
+            field = value
+            isActivated = value
+        }
+        get() = isActivated
+
     init {
         setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox, 0, 0, 0)
         gravity = Gravity.CENTER_VERTICAL

@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <id.co.edtslib.edtsds.checkbox.CheckBox
+        android:id="@+id/checkbox"
         android:text="test"
         android:enabled="false"
         android:layout_width="match_parent"
