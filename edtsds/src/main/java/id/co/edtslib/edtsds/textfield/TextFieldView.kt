@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -346,7 +345,6 @@ class TextFieldView: TextInputLayout {
         if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
             val h = if (b) hint else emptyHint
             if (h != null) {
-                Toast.makeText(context, h, Toast.LENGTH_SHORT).show()
                 this@TextFieldView.setHint(HtmlCompat.fromHtml(h, HtmlCompat.FROM_HTML_MODE_LEGACY))
             }
             else {
