@@ -46,6 +46,7 @@
             <enum name="email" value="7" />
             <enum name="popup" value="8" />
             <enum name="money" value="9" />
+            <enum name="number" value="10" />
         </attr>
         <attr name="currency" format="string" />
         <attr name="ellipsizeWidth" format="dimension" />

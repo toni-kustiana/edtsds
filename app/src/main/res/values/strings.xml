@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Edts DS Example</string>
+
+    <string name="full_name_mandatory"><![CDATA[Nama Lengkap <font color="#ff0000">*</font>]]></string>
+    <string name="full_name_input">Masukkan Nama Lengkap *</string>
+
 </resources>

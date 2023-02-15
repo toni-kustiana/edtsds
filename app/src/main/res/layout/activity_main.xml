@@ -7,23 +7,16 @@
     android:layout_margin="@dimen/dimen_16dp"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.date.DateFieldView
-        app:hint="-"
-        app:dateFormat="d MMM yyyy"
-        android:layout_marginStart="@dimen/dimen_4dp"
-        android:id="@+id/tvDateUntil"
-        app:showIcon="false"
-        app:calendarType="spinner"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <id.co.edtslib.edtsds.checkbox.CheckBox
-        android:id="@+id/checkbox"
-        android:text="test"
-        android:enabled="false"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/etName"
+        app:errorTextColor="@color/colorSupportError"
+        app:errorTextAppearance="@style/B2"
+        app:errorIconDrawable="@null"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        app:emptyHint="@string/full_name_input"
+        android:hint="@string/full_name_mandatory"
+        app:inputType="number"
+        app:imeOptions="next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

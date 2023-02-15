@@ -11,9 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.widget.TextViewCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
@@ -25,7 +27,7 @@ import java.text.DecimalFormat
 
 class TextFieldView: TextInputLayout {
     enum class InputType {
-        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup, Money
+        Text, Password, Pin, Phone, Ktp, Address, Search, Email, Popup, Money, Number
     }
 
     enum class ImeOption {
@@ -147,9 +149,7 @@ class TextFieldView: TextInputLayout {
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (b) hint else emptyHint)
-                        }
+                        setHintOnFocus(b)
                     }
                 }
                 InputType.Pin -> {
@@ -161,9 +161,7 @@ class TextFieldView: TextInputLayout {
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (b) hint else emptyHint)
-                        }
+                        setHintOnFocus(b)
                     }
                 }
                 InputType.Phone -> {
@@ -179,6 +177,14 @@ class TextFieldView: TextInputLayout {
 
                     setMoneyListener()
                 }
+                InputType.Number -> {
+                    editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                            android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+
+                    editText?.setOnFocusChangeListener { _, b ->
+                        setHintOnFocus(b)
+                    }
+                }
                 InputType.Email -> {
                     editText?.addTextChangedListener {
                         delegate?.onChanged(it?.toString())
@@ -188,9 +194,7 @@ class TextFieldView: TextInputLayout {
                             android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
                     editText?.setOnFocusChangeListener { _, b ->
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (b) hint else emptyHint)
-                        }
+                        setHintOnFocus(b)
                     }
                 }
                 InputType.Ktp -> {
@@ -207,9 +211,7 @@ class TextFieldView: TextInputLayout {
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (b) hint else emptyHint)
-                        }
+                        setHintOnFocus(b)
                     }
                 }
                 InputType.Popup -> {
@@ -273,9 +275,7 @@ class TextFieldView: TextInputLayout {
                     }
 
                     editText?.setOnFocusChangeListener { _, b ->
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (b) hint else emptyHint)
-                        }
+                        setHintOnFocus(b)
                     }
                 }
             }
@@ -342,6 +342,18 @@ class TextFieldView: TextInputLayout {
         setup(editText)
     }
 
+    private fun setHintOnFocus(b: Boolean) {
+        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
+            val h = if (b) hint else emptyHint
+            if (h != null) {
+                Toast.makeText(context, h, Toast.LENGTH_SHORT).show()
+                this@TextFieldView.setHint(HtmlCompat.fromHtml(h, HtmlCompat.FROM_HTML_MODE_LEGACY))
+            }
+            else {
+                this@TextFieldView.setHint(null)
+            }
+        }
+    }
 
     private fun setup(editText: TextInputEditText) {
         hint = editText.hint?.toString()
@@ -496,9 +508,7 @@ class TextFieldView: TextInputLayout {
                 editText!!,
                 object : MyValueListener {
                     override fun onFocussed(view: View?, hasFocus: Boolean) {
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (hasFocus) hint else emptyHint)
-                        }
+                        setHintOnFocus(hasFocus)
                     }
 
                     override fun onTextChanged(
@@ -525,9 +535,7 @@ class TextFieldView: TextInputLayout {
                 editText!!,
                 object : MyValueListener {
                     override fun onFocussed(view: View?, hasFocus: Boolean) {
-                        if (emptyHint?.isNotEmpty() == true && editText?.text?.isNotEmpty() != true) {
-                            this@TextFieldView.setHint(if (hasFocus) hint else emptyHint)
-                        }
+                        setHintOnFocus(hasFocus)
                     }
 
                     override fun onTextChanged(
