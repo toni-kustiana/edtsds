@@ -12,7 +12,6 @@
         app:errorTextColor="@color/colorSupportError"
         app:errorTextAppearance="@style/B2"
         app:errorIconDrawable="@null"
-        android:layout_marginTop="@dimen/dimen_12dp"
         app:emptyHint="@string/full_name_input"
         android:hint="@string/full_name_mandatory"
         app:inputType="number"
