@@ -5,6 +5,7 @@
         <enum name="warning" value="1" />
         <enum name="error" value="2" />
     </attr>
+    <attr name="hint" format="string" />
     <attr name="label" format="string" />
     <attr name="message" format="string" />
     <attr name="shape" format="integer" />
@@ -14,6 +15,11 @@
     <attr name="space" format="dimension" />
     <attr name="count" format="integer" />
     <attr name="snap" format="boolean" />
+    <attr name="spinnerTitle" format="string" />
+    <attr name="spinnerButtonText" format="string" />
+    <attr name="autoShowLabel" format="boolean" />
+    <attr name="showIcon" format="boolean" />
+    <attr name="fieldEnabled" format="boolean" />
 
     <declare-styleable name="AlertBoxView">
         <attr name="type" />
@@ -210,14 +216,15 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="DateFieldView">
+        <attr name="fieldEnabled" />
         <attr name="dateFormat" format="string" />
-        <attr name="hint" format="string" />
+        <attr name="hint" />
         <attr name="minAge" format="integer" />
         <attr name="label" />
-        <attr name="autoShowLabel" format="boolean" />
-        <attr name="showIcon" format="boolean" />
-        <attr name="spinnerTitle" format="string" />
-        <attr name="spinnerButtonText" format="string" />
+        <attr name="autoShowLabel" />
+        <attr name="showIcon" />
+        <attr name="spinnerTitle" />
+        <attr name="spinnerButtonText" />
         <attr name="calendarType" format="enum">
             <enum name="calendar" value="0" />
             <enum name="spinner" value="1" />
@@ -235,5 +242,16 @@
     </declare-styleable>
     <declare-styleable name="RatingView">
         <attr name="count" />
+    </declare-styleable>
+    <declare-styleable name="TimeFieldView">
+        <attr name="fieldEnabled" />
+        <attr name="timeFormat" format="string" />
+        <attr name="spinnerTitle" />
+        <attr name="spinnerButtonText" />
+        <attr name="hint" />
+        <attr name="label" />
+        <attr name="autoShowLabel" />
+        <attr name="showIcon" />
+        <attr name="clockType" format="integer" />
     </declare-styleable>
 </resources>

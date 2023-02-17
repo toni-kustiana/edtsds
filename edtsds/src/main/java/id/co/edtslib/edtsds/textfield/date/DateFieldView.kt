@@ -39,6 +39,13 @@ class DateFieldView: FrameLayout {
     private val binding = DsViewDateFieldBinding.inflate(LayoutInflater.from(context), this, true)
     private var selectedDate: Date? = null
 
+    var fieldEnabled: Boolean = true
+        set(value) {
+            field = value
+            binding.root.isEnabled = value
+            binding.clContent.isEnabled = value
+        }
+
     var delegate: DateFieldDelegate? = null
 
     var spinnerTitle: String? = null
@@ -143,6 +150,7 @@ class DateFieldView: FrameLayout {
                 format = lFormat
             }
 
+            fieldEnabled = a.getBoolean(R.styleable.DateFieldView_fieldEnabled, true)
             spinnerTitle = a.getString(R.styleable.DateFieldView_spinnerTitle)
             spinnerButtonText = a.getString(R.styleable.DateFieldView_spinnerButtonText)
             hint = a.getString(R.styleable.DateFieldView_hint)

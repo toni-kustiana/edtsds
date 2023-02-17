@@ -19,4 +19,38 @@
         app:imeOptions="next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.textfield.date.DateFieldView
+        android:id="@+id/tvSptaBaDate"
+        style="@style/B1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        android:focusable="false"
+        app:endIconDrawable="@drawable/ic_timer_small"
+        app:endIconMode="custom"
+        app:endIconTint="@color/colorNeutral50"
+        app:hint="Contoh"
+        app:fieldEnabled="false"
+        app:hintTextAppearance="@style/B1"
+        app:imeOptions="done"
+        app:label="Contoh" />
+    <id.co.edtslib.edtsds.textfield.time.TimeFieldView
+        android:id="@+id/tvSptaBaTime"
+        style="@style/B1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        android:focusable="false"
+        app:endIconDrawable="@drawable/ic_timer_small"
+        app:endIconMode="custom"
+        app:endIconTint="@color/colorNeutral50"
+        app:hint="Contoh"
+        app:fieldEnabled="false"
+        app:hintTextAppearance="@style/B1"
+        app:imeOptions="done"
+        app:label="Contoh" />
 </LinearLayout>
