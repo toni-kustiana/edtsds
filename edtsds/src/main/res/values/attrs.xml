@@ -47,6 +47,7 @@
             <enum name="popup" value="8" />
             <enum name="money" value="9" />
             <enum name="number" value="10" />
+            <enum name="decimal" value="11" />
         </attr>
         <attr name="currency" format="string" />
         <attr name="ellipsizeWidth" format="dimension" />
