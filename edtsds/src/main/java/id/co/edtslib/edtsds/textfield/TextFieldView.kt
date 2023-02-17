@@ -180,6 +180,10 @@ class TextFieldView: TextInputLayout {
                     editText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER or
                             android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
 
+                    editText?.addTextChangedListener {
+                        delegate?.onChanged(it?.toString())
+                    }
+
                     editText?.setOnFocusChangeListener { _, b ->
                         setHintOnFocus(b)
                     }
