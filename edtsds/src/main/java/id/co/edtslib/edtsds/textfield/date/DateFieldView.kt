@@ -17,13 +17,15 @@ import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateFieldView: FrameLayout {
+class DateFieldView : FrameLayout {
     constructor(context: Context) : super(context) {
         init(null)
     }
+
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(attrs)
     }
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
@@ -103,7 +105,6 @@ class DateFieldView: FrameLayout {
         }
 
 
-
     private fun setTextValue() {
         binding.tvValue.text = if (date == null) hint else {
             val simpleDateFormat = SimpleDateFormat(format, Locale("ID"))
@@ -117,7 +118,8 @@ class DateFieldView: FrameLayout {
 
         binding.editText.setOnFocusChangeListener { v, b ->
             if (b) {
-                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                val imm =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
             isActivated = b
@@ -131,8 +133,7 @@ class DateFieldView: FrameLayout {
 
             if (calendarType == CalendarType.Spinner) {
                 showSpinner()
-            }
-            else {
+            } else {
                 showCalendar()
             }
         }
@@ -156,7 +157,7 @@ class DateFieldView: FrameLayout {
             hint = a.getString(R.styleable.DateFieldView_hint)
             label = a.getString(R.styleable.DateFieldView_label)
             autoShowLabel = a.getBoolean(R.styleable.DateFieldView_autoShowLabel, true)
-            showIcon =  a.getBoolean(R.styleable.DateFieldView_showIcon, true)
+            showIcon = a.getBoolean(R.styleable.DateFieldView_showIcon, true)
 
             val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)
             calendarType = CalendarType.values()[calendarTypeIndex]
@@ -168,7 +169,7 @@ class DateFieldView: FrameLayout {
     private fun getMaxDate(): Long {
         val now = Calendar.getInstance()
         now.time = Date()
-        now.set(Calendar.YEAR, now.get(Calendar.YEAR)-minAge)
+        now.set(Calendar.YEAR, now.get(Calendar.YEAR) - minAge)
 
         return now.time.time
     }
@@ -183,7 +184,8 @@ class DateFieldView: FrameLayout {
         val calendar = Calendar.getInstance()
         calendar.time = if (selectedDate == null) Date() else selectedDate!!
 
-        binding.datePicker.init(calendar.get(Calendar.YEAR),
+        binding.datePicker.init(
+            calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
         ) { _, year, month, date ->
             val result = Calendar.getInstance()
@@ -195,8 +197,10 @@ class DateFieldView: FrameLayout {
         }
 
         val dialog = (if (spinnerTitle == null) "" else spinnerTitle)?.let {
-            BottomLayoutDialog.showTray(context = context,
-                title = it, contentView = binding.root)
+            BottomLayoutDialog.showTray(
+                context = context,
+                title = it, contentView = binding.root
+            )
         }
 
         binding.bvSubmit.setOnClickListener {
@@ -214,7 +218,8 @@ class DateFieldView: FrameLayout {
             calendar.time = if (date == null) Date() else date!!
             selectedDate = calendar.time
 
-            val dialog = DatePickerDialog(context, R.style.CalendarDatePickerDialog,
+            val dialog = DatePickerDialog(
+                context, R.style.CalendarDatePickerDialog,
                 { _, year, month, date ->
                     val result = Calendar.getInstance()
                     result.set(Calendar.YEAR, year)
@@ -223,19 +228,20 @@ class DateFieldView: FrameLayout {
 
                     this@DateFieldView.date = result.time
                 }, calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE))
+                calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
+            )
 
             dialog.datePicker.maxDate = getMaxDate()
             dialog.show()
-        }
-        else {
+        } else {
             val binding = ViewDatePickerBinding.inflate(LayoutInflater.from(context), null, false)
             binding.datePicker.maxDate = getMaxDate()
 
             val calendar = Calendar.getInstance()
             calendar.time = if (date == null) Date() else date!!
 
-            binding.datePicker.init(calendar.get(Calendar.YEAR),
+            binding.datePicker.init(
+                calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
             ) { _, year, month, date ->
                 val result = Calendar.getInstance()
@@ -248,11 +254,12 @@ class DateFieldView: FrameLayout {
 
             val builder = AlertDialog.Builder(context)
             builder.setView(binding.root)
-            builder.setNegativeButton(android.R.string.cancel) {
-                    p0, _ -> p0.dismiss()
+            builder.setNegativeButton(android.R.string.cancel) { p0, _ ->
+                p0.dismiss()
             }
 
-            builder.setPositiveButton(android.R.string.ok
+            builder.setPositiveButton(
+                android.R.string.ok
             ) { p0, _ ->
                 this@DateFieldView.date = selectedDate
                 p0?.dismiss()
