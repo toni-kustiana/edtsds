@@ -76,8 +76,9 @@
         <attr name="backgroundMinus" format="reference" />
         <attr name="backgroundPlus" format="reference" />
         <attr name="backgroundValue" format="reference" />
-        <attr name="textColorMinus" format="color" />
-        <attr name="textColorPlus" format="color" />
+        <attr name="textColorMinus" format="reference" />
+        <attr name="textColorPlus" format="reference" />
+        <attr name="textColorValue" format="reference" />
 
     </declare-styleable>
 

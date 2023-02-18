@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import id.co.edtslib.edtsds.R
 import java.lang.NumberFormatException
 
@@ -14,7 +15,10 @@ class StepperView: FrameLayout {
     private var max = Int.MAX_VALUE
     private var step = 1
     var delegate: StepperDelegate? = null
+
     private var tvAdd: TextView? = null
+    private var tvMinus: TextView? = null
+
     private var runnable:  Runnable? = null
     var delay = 500L
 
@@ -43,8 +47,8 @@ class StepperView: FrameLayout {
             add()
         }
 
-        val tvMinus = view.findViewById<TextView>(R.id.tvMinus)
-        tvMinus.setOnClickListener {
+        tvMinus = view.findViewById<TextView>(R.id.tvMinus)
+        tvMinus?.setOnClickListener {
             minus()
         }
 
@@ -69,7 +73,7 @@ class StepperView: FrameLayout {
 
             val bgMinus = a.getResourceId(R.styleable.StepperView_backgroundMinus, 0)
             if (bgMinus != 0) {
-                tvMinus.setBackgroundResource(bgMinus)
+                tvMinus?.setBackgroundResource(bgMinus)
             }
 
             val bgPlus = a.getResourceId(R.styleable.StepperView_backgroundPlus, 0)
@@ -82,14 +86,19 @@ class StepperView: FrameLayout {
                 textView?.setBackgroundResource(bgValue)
             }
 
-            val colorMinus = a.getColor(R.styleable.StepperView_textColorMinus, 0)
+            val colorMinus = a.getResourceId(R.styleable.StepperView_textColorMinus, 0)
             if (colorMinus != 0) {
-                tvMinus.setTextColor(colorMinus)
+                tvMinus?.setTextColor(ContextCompat.getColorStateList(context, colorMinus))
             }
 
-            val colorPlus = a.getColor(R.styleable.StepperView_textColorPlus, 0)
+            val colorPlus = a.getResourceId(R.styleable.StepperView_textColorPlus, 0)
             if (colorPlus != 0) {
-                tvAdd?.setTextColor(colorPlus)
+                tvAdd?.setTextColor(ContextCompat.getColorStateList(context, colorPlus))
+            }
+
+            val colorValue = a.getResourceId(R.styleable.StepperView_textColorValue, 0)
+            if (colorValue != 0) {
+                textView?.setTextColor(ContextCompat.getColorStateList(context, colorValue))
             }
 
             val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
@@ -106,6 +115,7 @@ class StepperView: FrameLayout {
         textView?.text = String.format("%d", value)
 
         tvAdd?.isActivated = value < max
+        tvMinus?.isActivated = value > min
     }
 
     private fun changedValue(value: Int) {
@@ -127,10 +137,16 @@ class StepperView: FrameLayout {
 
     fun setMaxValue(value: Int) {
         max = value
+
+        tvMinus?.isActivated = getValue() > min
+        tvAdd?.isActivated = getValue() < max
     }
 
     fun setMinValue(value: Int) {
         min = value
+
+        tvMinus?.isActivated = getValue() > min
+        tvAdd?.isActivated = getValue() < max
     }
 
     private fun getValue(): Int {
@@ -152,6 +168,9 @@ class StepperView: FrameLayout {
                     delegate?.onErrorMax()
                 }
 
+                tvMinus?.isActivated = d1 > min
+                tvAdd?.isActivated = d1 < max
+
                 if (d1 <= max && d != d1) {
                     textView?.text = String.format("%d", d1)
                     tvAdd?.isActivated = d1 < max
@@ -172,6 +191,10 @@ class StepperView: FrameLayout {
                 if (d1 < min) {
                     delegate?.onErrorMin()
                 }
+
+                tvMinus?.isActivated = d1 > min
+                tvAdd?.isActivated = d1 < max
+
                 if (d1 >= min && d != d1) {
                     textView?.text = String.format("%d", d1)
                     changedValue(d1)
