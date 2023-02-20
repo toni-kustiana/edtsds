@@ -20,16 +20,18 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
-class TimeFieldView: FrameLayout {
+class TimeFieldView : FrameLayout {
 
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context) : super(context) {
         init(null)
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(attrs)
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
@@ -40,18 +42,18 @@ class TimeFieldView: FrameLayout {
     }
 
     enum class ClockType {
-        Calendar, Spinner
+        Clock, Spinner
     }
 
     private val binding = DsViewTimeFieldBinding.inflate(LayoutInflater.from(context), this, true)
     private var selectedTime: LocalTime? = null
 
     var fieldEnabled: Boolean = true
-    set(value) {
-        field = value
-        binding.root.isEnabled = value
-        binding.clContent.isEnabled = value
-    }
+        set(value) {
+            field = value
+            binding.root.isEnabled = value
+            binding.clContent.isEnabled = value
+        }
 
     var delegate: TimeFieldDelegate? = null
 
@@ -63,7 +65,7 @@ class TimeFieldView: FrameLayout {
             binding.imageView.isVisible = value
         }
 
-    var clockType = ClockType.Calendar
+    var clockType = ClockType.Clock
 
     var time: LocalTime? = null
         set(value) {
@@ -109,7 +111,6 @@ class TimeFieldView: FrameLayout {
         }
 
 
-
     private fun setTextValue() {
         binding.tvValue.text = if (time == null) hint else {
             val dtf = DateTimeFormatter.ofPattern(format)
@@ -123,7 +124,8 @@ class TimeFieldView: FrameLayout {
 
         binding.editText.setOnFocusChangeListener { v, b ->
             if (b) {
-                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                val imm =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
             isActivated = b
@@ -137,8 +139,7 @@ class TimeFieldView: FrameLayout {
 
             if (clockType == ClockType.Spinner) {
                 showSpinner()
-            }
-            else {
+            } else {
                 showClock()
             }
         }
@@ -161,7 +162,7 @@ class TimeFieldView: FrameLayout {
             hint = a.getString(R.styleable.TimeFieldView_hint)
             label = a.getString(R.styleable.TimeFieldView_label)
             autoShowLabel = a.getBoolean(R.styleable.TimeFieldView_autoShowLabel, true)
-            showIcon =  a.getBoolean(R.styleable.TimeFieldView_showIcon, true)
+            showIcon = a.getBoolean(R.styleable.TimeFieldView_showIcon, true)
 
             val clockTypeIndex = a.getInt(R.styleable.TimeFieldView_clockType, 0)
             clockType = ClockType.values()[clockTypeIndex]
@@ -182,8 +183,10 @@ class TimeFieldView: FrameLayout {
         }
 
         val dialog = (if (spinnerTitle == null) "" else spinnerTitle)?.let {
-            BottomLayoutDialog.showTray(context = context,
-                title = it, contentView = binding.root)
+            BottomLayoutDialog.showTray(
+                context = context,
+                title = it, contentView = binding.root
+            )
         }
 
         binding.bvSubmit.setOnClickListener {
@@ -200,16 +203,16 @@ class TimeFieldView: FrameLayout {
             val now = LocalTime.now()
             selectedTime = if (time == null) now else time!!
 
-            val dialog = TimePickerDialog(context, R.style.TimePickerTheme,
+            val dialog = TimePickerDialog(
+                context, R.style.TimePickerTheme,
                 { _, hour, minute ->
                     val result = LocalTime.of(hour, minute)
                     this@TimeFieldView.time = result
-                }, now.hour, now.minute, DateFormat.is24HourFormat(context)
+                }, selectedTime!!.hour, selectedTime!!.minute, DateFormat.is24HourFormat(context)
             )
 
             dialog.show()
-        }
-        else {
+        } else {
             val binding = DsViewTimePickerBinding.inflate(LayoutInflater.from(context), null, false)
 
             binding.timePicker.setOnTimeChangedListener { _, hour, minute ->
@@ -219,11 +222,12 @@ class TimeFieldView: FrameLayout {
 
             val builder = AlertDialog.Builder(context)
             builder.setView(binding.root)
-            builder.setNegativeButton(android.R.string.cancel) {
-                    p0, _ -> p0.dismiss()
+            builder.setNegativeButton(android.R.string.cancel) { p0, _ ->
+                p0.dismiss()
             }
 
-            builder.setPositiveButton(android.R.string.ok
+            builder.setPositiveButton(
+                android.R.string.ok
             ) { p0, _ ->
                 this@TimeFieldView.time = selectedTime
                 p0?.dismiss()
