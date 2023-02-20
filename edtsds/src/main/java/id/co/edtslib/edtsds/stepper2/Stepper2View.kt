@@ -35,6 +35,7 @@ open class Stepper2View: FrameLayout {
 
     var delegate: Stepper2Delegate? = null
     var delay = 500L
+    var step = 1
     var valueAnimationDuration = 0L //100L
     var max = Int.MAX_VALUE
     var min = 0
@@ -58,7 +59,7 @@ open class Stepper2View: FrameLayout {
                 }
                 binding.tvValue.text = String.format("%d", _value)
 
-                if (field == 0 && _value == 1) {
+                if (field == 0 && _value == step) {
                     val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_in)
 
                     anim.setAnimationListener(object : AnimationListener {
@@ -75,7 +76,7 @@ open class Stepper2View: FrameLayout {
                     binding.clExpand.startAnimation(anim)
                 }
                 else
-                if (field == 1 && _value == 0)
+                if (field == step && _value == 0)
                 {
                     val anim = AnimationUtils.loadAnimation(context, R.anim.ds_slide_right_out)
                     anim.setAnimationListener(object : AnimationListener {
@@ -113,7 +114,7 @@ open class Stepper2View: FrameLayout {
 
         binding.btNew.setOnClickListener {
             if (value < max) {
-                add(value+1)
+                add(value+step)
             }
             else {
                 delegate?.onReachMax(this)
@@ -122,7 +123,7 @@ open class Stepper2View: FrameLayout {
 
         binding.btAdd.setOnClickListener {
             if (value < max) {
-                add(value+1)
+                add(value+step)
             }
             else {
                 delegate?.onReachMax(this)
@@ -131,7 +132,7 @@ open class Stepper2View: FrameLayout {
 
         binding.btMinus.setOnClickListener {
             if (value > min) {
-                minus(value-1)
+                minus(value-step)
             }
             else {
                 delegate?.onReachMin(this)
@@ -170,13 +171,13 @@ open class Stepper2View: FrameLayout {
 
     protected open fun add(p: Int) {
         showValueOnly = false
-        value++
+        value += step
         changedValue(value)
 
     }
 
     protected open fun minus(p: Int) {
-        value--
+        value -= step
         changedValue(value)
     }
 }
