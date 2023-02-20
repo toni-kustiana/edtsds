@@ -13,7 +13,7 @@ class StepperView: FrameLayout {
     private var textView: TextView? = null
     private var min = 0
     private var max = Int.MAX_VALUE
-    private var step = 1
+    var step = 1
     var delegate: StepperDelegate? = null
 
     private var tvAdd: TextView? = null
