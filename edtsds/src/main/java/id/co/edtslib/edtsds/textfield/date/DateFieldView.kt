@@ -75,6 +75,10 @@ class DateFieldView : FrameLayout {
 
     var format = "dd-MM-yyyy"
     var minAge = 0
+    var enableFuture = false
+        set(value) {
+            field = value
+        }
 
     var hint: String? = null
         set(value) {
@@ -158,6 +162,7 @@ class DateFieldView : FrameLayout {
             label = a.getString(R.styleable.DateFieldView_label)
             autoShowLabel = a.getBoolean(R.styleable.DateFieldView_autoShowLabel, true)
             showIcon = a.getBoolean(R.styleable.DateFieldView_showIcon, true)
+            enableFuture = a.getBoolean(R.styleable.DateFieldView_enableFuture, false)
 
             val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)
             calendarType = CalendarType.values()[calendarTypeIndex]
@@ -166,7 +171,8 @@ class DateFieldView : FrameLayout {
         }
     }
 
-    private fun getMaxDate(): Long {
+    private fun getMaxDate(): Long? {
+        if (enableFuture) return null
         val now = Calendar.getInstance()
         now.time = Date()
         now.set(Calendar.YEAR, now.get(Calendar.YEAR) - minAge)
@@ -177,7 +183,9 @@ class DateFieldView : FrameLayout {
     private fun showSpinner() {
         val binding = DsDateFieldSpinnerBinding.inflate(LayoutInflater.from(context))
         binding.bvSubmit.text = spinnerButtonText
-        binding.datePicker.maxDate = getMaxDate()
+        if (!enableFuture) {
+            binding.datePicker.maxDate = getMaxDate()!!
+        }
 
         selectedDate = if (date == null) Date() else date!!
 
@@ -231,11 +239,15 @@ class DateFieldView : FrameLayout {
                 calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
             )
 
-            dialog.datePicker.maxDate = getMaxDate()
+            if (!enableFuture) {
+                dialog.datePicker.maxDate = getMaxDate()!!
+            }
             dialog.show()
         } else {
             val binding = ViewDatePickerBinding.inflate(LayoutInflater.from(context), null, false)
-            binding.datePicker.maxDate = getMaxDate()
+            if (!enableFuture) {
+                binding.datePicker.maxDate = getMaxDate()!!
+            }
 
             val calendar = Calendar.getInstance()
             calendar.time = if (date == null) Date() else date!!
