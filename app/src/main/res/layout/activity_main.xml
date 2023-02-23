@@ -8,30 +8,10 @@
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
 
-    <id.co.edtslib.edtsds.stepper.StepperView
+    <id.co.edtslib.edtsds.otpview.OtpView
+        android:id="@+id/otpView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:textColorMinus="@color/cl_stepper"
         app:textColorPlus="@color/cl_stepper" />
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        android:id="@+id/textFieldView"
-        android:enabled="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <id.co.edtslib.edtsds.textfield.date.DateFieldView
-        android:id="@+id/fieldDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:dateFormat="dd MMM yyy"
-        app:hint="SampleDate"
-        app:label="SampleDate" />
-
-    <id.co.edtslib.edtsds.textfield.time.TimeFieldView
-        android:id="@+id/fieldTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="SampleTime"
-        app:label="SampleTime"
-        app:timeFormat="HH:mm" />
 </LinearLayout>
