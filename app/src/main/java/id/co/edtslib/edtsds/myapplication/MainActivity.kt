@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.otpview.OtpView
+import id.co.edtslib.edtsds.stepper.StepperView
 import id.co.edtslib.edtsds.textfield.TextFieldView
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val otpView = findViewById<OtpView>(R.id.otpView)
-        otpView.isEnabled = true
+        val stepperView = findViewById<StepperView>(R.id.stepperView)
+        stepperView.isEnabled = false
 
     }
 }

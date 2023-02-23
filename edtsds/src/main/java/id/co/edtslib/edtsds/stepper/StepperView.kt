@@ -205,4 +205,11 @@ class StepperView: FrameLayout {
 
         }
     }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+
+        tvMinus?.isEnabled = enabled
+        tvAdd?.isEnabled = enabled
+    }
 }
