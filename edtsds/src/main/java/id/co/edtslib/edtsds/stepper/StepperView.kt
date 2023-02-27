@@ -211,5 +211,6 @@ class StepperView: FrameLayout {
 
         tvMinus?.isEnabled = enabled
         tvAdd?.isEnabled = enabled
+        textView?.isEnabled = enabled
     }
 }

@@ -27,6 +27,7 @@ class CheckBoxHolder<T>(private val binding: AdapterCheckboxBinding,
         if (list[position] is DataSelected) {
             val dataSelected = list[position] as DataSelected
             binding.root.isActivated = dataSelected.selected
+            binding.textView.isEnabled = ! dataSelected.disabled
         }
     }
 }

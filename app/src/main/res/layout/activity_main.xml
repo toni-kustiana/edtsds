@@ -8,13 +8,9 @@
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
 
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:id="@+id/stepperView"
-        app:maxValue="5"
-        app:minValue="5"
-        app:value="5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:textColorMinus="@color/cl_stepper"
-        app:textColorPlus="@color/cl_stepper" />
+   <id.co.edtslib.edtsds.list.checkboxlist.multiple.MultipleCheckBoxListView
+       android:id="@+id/listView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+
 </LinearLayout>

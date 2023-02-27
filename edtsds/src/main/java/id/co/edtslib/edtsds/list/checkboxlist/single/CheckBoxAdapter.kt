@@ -14,7 +14,9 @@ open class CheckBoxAdapter<T>: BaseRecyclerViewAdapter<AdapterCheckboxBinding, T
     init {
         delegate = object : BaseRecyclerViewAdapterDelegate<T> {
             override fun onClick(t: T, position: Int, holder: BaseViewHolder<T>?) {
-                select(position)
+                if (t is DataSelected && ! t.disabled) {
+                    select(position)
+                }
             }
 
             override fun onDraw(t: T, position: Int) {
