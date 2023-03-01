@@ -59,6 +59,7 @@ class TextFieldView: TextInputLayout {
     private var ellipsizeWidth = 0
     private var startIcon: Int = 0
     private var ellipsize = false
+    private var bg = 0
 
     var text: String? = null
         set(value) {
@@ -345,6 +346,8 @@ class TextFieldView: TextInputLayout {
             val v = a.getInt(R.styleable.TextFieldView_inputType, 0)
             inputType = InputType.values()[v]
 
+            bg = a.getResourceId(R.styleable.TextFieldView_textFieldBackground, 0)
+
             maxLength = a.getInt(R.styleable.TextFieldView_maxLength, 0)
 
             val e = a.getInt(R.styleable.TextFieldView_imeOptions, 0)
@@ -415,13 +418,14 @@ class TextFieldView: TextInputLayout {
             R.color.color_text_text_field))
         if (isHintEnabled) {
             editText.setBackgroundResource(
-                if (inputType == InputType.Search) R.drawable.bg_search_field
+                if (bg != 0) bg else
+                    if (inputType == InputType.Search) R.drawable.bg_search_field
                 else R.drawable.bg_text_field
             )
         }
         else {
             editText.setBackgroundResource(0)
-            setBackgroundResource(R.drawable.bg_text_field)
+            setBackgroundResource(if (bg != 0) bg else R.drawable.bg_text_field)
         }
 
         setErrorTextAppearance(R.style.B3)

@@ -33,11 +33,14 @@
             <enum name="secondary" value="1" />
             <enum name="alternative" value="2" />
             <enum name="outline" value="3" />
+            <enum name="custom" value="4" />
         </attr>
         <attr name="size" format="enum">
             <enum name="medium" value="0" />
             <enum name="small" value="1" />
         </attr>
+        <attr name="buttonBackground" format="reference" />
+        <attr name="buttonTextColor" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TextFieldView">
@@ -67,6 +70,7 @@
             <enum name="send" value="2" />
             <enum name="search" value="3" />
         </attr>
+        <attr name="textFieldBackground" format="reference" />
     </declare-styleable>
     <declare-styleable name="StepperView">
         <attr name="minValue" format="integer" />
