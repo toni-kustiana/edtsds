@@ -119,6 +119,7 @@ class StepperView: FrameLayout {
     }
 
     private fun changedValue(value: Int) {
+        delegate?.onValueChanged(value)
         if (delay > 0L) {
             if (runnable != null) {
                 removeCallbacks(runnable)
@@ -126,12 +127,12 @@ class StepperView: FrameLayout {
             }
 
             runnable = Runnable {
-                delegate?.onChangeValue(value)
+                delegate?.onSubmit(value)
             }
             postDelayed(runnable, delay)
         }
         else {
-            delegate?.onChangeValue(value)
+            delegate?.onSubmit(value)
         }
     }
 
