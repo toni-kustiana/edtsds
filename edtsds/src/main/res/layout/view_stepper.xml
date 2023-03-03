@@ -22,6 +22,18 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editText"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:background="@drawable/bg_stepper_value"
+        android:gravity="center"
+        android:maxLength="3"
+        android:textColor="@color/colorNeutral70"
+        style="@style/H2"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
     <androidx.appcompat.widget.AppCompatTextView
         android:background="@drawable/bg_stepper_plus"
         android:id="@+id/tvAdd"
