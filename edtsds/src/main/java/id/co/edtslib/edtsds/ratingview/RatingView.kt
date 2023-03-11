@@ -7,7 +7,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.get
 import id.co.edtslib.edtsds.R
 
-class RatingView: LinearLayoutCompat {
+class RatingView : LinearLayoutCompat {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(attrs)
@@ -59,7 +59,18 @@ class RatingView: LinearLayoutCompat {
                 }
             }
 
-            return if (found) v+1 else 0
+            return if (found) v + 1 else 0
+        }
+
+    var value: Int = 0
+        set(value) {
+            field = value
+            val rating = if (value < 0) {
+                0
+            } else if (value > count) {
+                count
+            } else value
+            setRating(rating - 1)
         }
 
     private fun init(attrs: AttributeSet?) {
@@ -75,8 +86,7 @@ class RatingView: LinearLayoutCompat {
             count = a.getInt(R.styleable.RatingView_count, 5)
 
             a.recycle()
-        }
-        else {
+        } else {
             count = 5
         }
     }
@@ -92,6 +102,6 @@ class RatingView: LinearLayoutCompat {
                 get(i).animate().scaleX(1f).scaleY(1f)
             }
         }
-        delegate?.onChanged(index+1)
+        delegate?.onChanged(index + 1)
     }
 }
