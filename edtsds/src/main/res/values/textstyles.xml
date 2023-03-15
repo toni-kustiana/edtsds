@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="RubikRegular">
-        <item name="android:fontFamily">@font/rubik_regular</item>
+    <style name="InterRegular">
+        <item name="android:fontFamily">@font/inter_regular</item>
     </style>
 
-    <style name="RubikMedium">
-        <item name="android:fontFamily">@font/rubik_medium</item>
+    <style name="InterMedium">
+        <item name="android:fontFamily">@font/inter_medium</item>
     </style>
 
-    <style name="D1" parent="RubikMedium">
+    <style name="D1" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">28sp</item>
     </style>
 
-    <style name="D2" parent="RubikMedium">
+    <style name="D2" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="H1" parent="RubikMedium">
+    <style name="H1" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="H2" parent="RubikMedium">
+    <style name="H2" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="H3" parent="RubikMedium">
+    <style name="H3" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="H4" parent="RubikMedium">
+    <style name="H4" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">10sp</item>
     </style>
 
-    <style name="B1" parent="RubikRegular">
+    <style name="B1" parent="InterRegular">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="B1Medium" parent="RubikMedium">
+    <style name="B1Medium" parent="InterMedium">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="B2" parent="RubikRegular">
+    <style name="B2" parent="InterRegular">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="B3" parent="RubikRegular">
+    <style name="B3" parent="InterRegular">
         <item name="android:textSize">10sp</item>
     </style>
 
-    <style name="P1" parent="RubikRegular">
+    <style name="P1" parent="InterRegular">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="P2" parent="RubikRegular">
+    <style name="P2" parent="InterRegular">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="AlertTextError" parent="RubikRegular">
+    <style name="AlertTextError" parent="InterRegular">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorSupportError</item>
     </style>
 
-    <style name="WarningTextError" parent="RubikRegular">
+    <style name="WarningTextError" parent="InterRegular">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorSupportWarning</item>
     </style>
 
-    <style name="SuccessTextError" parent="RubikRegular">
+    <style name="SuccessTextError" parent="InterRegular">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorSupportSuccess</item>
     </style>
