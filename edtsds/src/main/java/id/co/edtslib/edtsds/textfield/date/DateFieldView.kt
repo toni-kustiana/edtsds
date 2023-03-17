@@ -73,11 +73,30 @@ class DateFieldView : FrameLayout {
             binding.tvLabel.isVisible = autoShowLabel != false || value != null
         }
 
+    var minDate: Date? = null
+    var maxDate: Date? = null
+
     var format = "dd-MM-yyyy"
+
     var minAge = 0
+        set(value) {
+            field = value
+
+            val now = Date()
+            val calendar = Calendar.getInstance()
+            calendar.time = now
+            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR)-minAge)
+
+            maxDate = calendar.time
+        }
+
+
     var enableFuture = false
         set(value) {
             field = value
+            if (value) {
+                maxDate = null
+            }
         }
 
     var hint: String? = null
@@ -162,6 +181,7 @@ class DateFieldView : FrameLayout {
             label = a.getString(R.styleable.DateFieldView_label)
             autoShowLabel = a.getBoolean(R.styleable.DateFieldView_autoShowLabel, true)
             showIcon = a.getBoolean(R.styleable.DateFieldView_showIcon, true)
+
             enableFuture = a.getBoolean(R.styleable.DateFieldView_enableFuture, false)
 
             val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)
@@ -169,22 +189,21 @@ class DateFieldView : FrameLayout {
 
             a.recycle()
         }
+        else {
+            enableFuture = false
+        }
     }
 
-    private fun getMaxDate(): Long? {
-        if (enableFuture) return null
-        val now = Calendar.getInstance()
-        now.time = Date()
-        now.set(Calendar.YEAR, now.get(Calendar.YEAR) - minAge)
-
-        return now.time.time
-    }
+    private fun getMaxDate() = maxDate?.time
 
     private fun showSpinner() {
         val binding = DsDateFieldSpinnerBinding.inflate(LayoutInflater.from(context))
         binding.bvSubmit.text = spinnerButtonText
-        if (!enableFuture) {
+        if (maxDate != null) {
             binding.datePicker.maxDate = getMaxDate()!!
+        }
+        if (minDate != null) {
+            binding.datePicker.minDate = minDate!!.time
         }
 
         selectedDate = if (date == null) Date() else date!!
@@ -239,14 +258,20 @@ class DateFieldView : FrameLayout {
                 calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)
             )
 
-            if (!enableFuture) {
+            if (maxDate != null) {
                 dialog.datePicker.maxDate = getMaxDate()!!
+            }
+            if (minDate != null) {
+                dialog.datePicker.minDate = minDate!!.time
             }
             dialog.show()
         } else {
             val binding = ViewDatePickerBinding.inflate(LayoutInflater.from(context), null, false)
-            if (!enableFuture) {
+            if (maxDate != null) {
                 binding.datePicker.maxDate = getMaxDate()!!
+            }
+            if (minDate != null) {
+                binding.datePicker.minDate = minDate!!.time
             }
 
             val calendar = Calendar.getInstance()

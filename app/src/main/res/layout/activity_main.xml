@@ -7,8 +7,9 @@
     android:id="@+id/flRoot"
     android:layout_margin="@dimen/dimen_16dp"
     tools:ignore="RtlSymmetry">
-   <id.co.edtslib.edtsds.stepper.StepperView
-       app:canEdit="true"
+   <id.co.edtslib.edtsds.textfield.date.DateFieldView
+       android:id="@+id/dateFieldView"
+       app:minAge="17"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" />
 
