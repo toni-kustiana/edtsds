@@ -146,6 +146,7 @@ class TextFieldView: TextInputLayout {
                         android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
@@ -158,6 +159,7 @@ class TextFieldView: TextInputLayout {
                         android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
 
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
@@ -182,6 +184,7 @@ class TextFieldView: TextInputLayout {
                             android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
 
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
 
@@ -191,6 +194,7 @@ class TextFieldView: TextInputLayout {
                 }
                 InputType.Email -> {
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
 
@@ -212,6 +216,7 @@ class TextFieldView: TextInputLayout {
                             android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
                     editText?.setOnFocusChangeListener { _, b ->
@@ -244,6 +249,8 @@ class TextFieldView: TextInputLayout {
                             android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
 
                     editText?.addTextChangedListener {
+                        error = null
+
                         endIconMode = if (it?.toString()?.isNotEmpty() == true) END_ICON_CUSTOM else END_ICON_NONE
                         endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_search_cancel,
                             null)
@@ -276,6 +283,8 @@ class TextFieldView: TextInputLayout {
                             android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
 
                     editText?.addTextChangedListener {
+                        error = null
+
                         delegate?.onChanged(it?.toString())
                     }
 
@@ -290,6 +299,7 @@ class TextFieldView: TextInputLayout {
                         android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
 
                     editText?.addTextChangedListener {
+                        error = null
                         delegate?.onChanged(it?.toString())
                     }
 
@@ -537,7 +547,7 @@ class TextFieldView: TextInputLayout {
                         extractedValue: String,
                         formattedValue: String
                     ) {
-
+                        error = null
                         delegate?.onChanged("08$extractedValue")
                     }
 
