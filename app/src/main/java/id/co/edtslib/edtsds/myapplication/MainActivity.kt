@@ -3,28 +3,28 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import java.util.Calendar
+import id.co.edtslib.edtsds.chips.sliding.ChipItemData
+import id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, 2023)
-        calendar.set(Calendar.MONTH, 2)
-        calendar.set(Calendar.DATE, 31)
+        val items = mutableListOf<ChipItemData>()
+        items.add(ChipItemData("abah adilah"))
+        items.add(ChipItemData("habib helsan", id.co.edtslib.edtsds.R.drawable.ic_alert_warning))
+        items.add(ChipItemData("hezbi cibinong", "http://www.adilahsoft.com/ic_pin_point_map.png"))
 
-        val calendar1 = Calendar.getInstance()
-        calendar1.set(Calendar.YEAR, 2023)
-        calendar1.set(Calendar.MONTH, 2)
-        calendar1.set(Calendar.DATE, 16)
+        val slidingChipsView = findViewById<SlidingChipsView<ChipItemData>>(R.id.slidingChipsView)
+        slidingChipsView.items = items
 
-        //val dateFieldView = findViewById<DateFieldView>(R.id.dateFieldView)
-        //dateFieldView.enableFuture = false
-        //dateFieldView.minDate = calendar1.time
+
+
     }
 
 }

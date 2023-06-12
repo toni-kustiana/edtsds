@@ -184,6 +184,9 @@
         <attr name="slideChipBackground" format="reference" />
         <attr name="slideChipTextStyle" format="reference" />
         <attr name="slideChipStrokeColor" format="reference" />
+        <attr name="slideChipIconSize" format="dimension" />
+        <attr name="slideChipIconPaddingStart" format="dimension" />
+        <attr name="slideChipIconPaddingEnd" format="dimension" />
     </declare-styleable>
     <declare-styleable name="GroupChipView">
         <attr name="groupChipMargin" format="dimension" />
