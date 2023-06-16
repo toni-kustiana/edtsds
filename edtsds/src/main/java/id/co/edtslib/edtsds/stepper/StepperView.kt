@@ -4,7 +4,6 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -138,13 +137,13 @@ class StepperView: FrameLayout {
         }
     }
 
-    private fun setText(s: String?, editing: Boolean = false) {
+    private fun setText(text: String?, editing: Boolean = false) {
         if (textWatcher != null) {
             editText?.removeTextChangedListener(textWatcher)
         }
-        textView?.text = s
+        textView?.text = text
         if (! editing) {
-            editText?.setText(s)
+            editText?.setText(text)
         }
 
         textWatcher = object : TextWatcher {
@@ -152,7 +151,7 @@ class StepperView: FrameLayout {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var s = p0?.toString()
+                val s = p0?.toString()
                 if (s != null) {
                     try {
                         val d = s.toInt()
@@ -222,7 +221,7 @@ class StepperView: FrameLayout {
         tvAdd?.isActivated = getValue() < max
     }
 
-    private fun getValue(): Int {
+    fun getValue(): Int {
         return try {
             val s = textView?.text?.toString()
             return s?.toInt() ?: min
