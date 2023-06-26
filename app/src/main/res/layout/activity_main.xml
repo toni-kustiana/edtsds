@@ -2,16 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/flRoot"
     tools:ignore="RtlSymmetry">
-   <id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
-       android:id="@+id/slidingChipsView"
-       app:slideChipIconSize="@dimen/dimen_16dp"
-       app:slideChipIconPaddingStart="@dimen/dimen_8dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content" />
+
+    <id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
+        android:id="@+id/slidingChipsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:slideChipIconPaddingStart="@dimen/dimen_8dp"
+        app:slideChipIconSize="@dimen/dimen_16dp" />
+
+    <id.co.edtslib.edtsds.textfield.date.MonthYearFieldView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:label="Pilih Periode"
+        app:spinnerButtonText="Pilih"
+        app:spinnerTitle="Pilih periode" />
 
 </LinearLayout>

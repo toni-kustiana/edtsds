@@ -17,7 +17,7 @@ import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateFieldView : FrameLayout {
+open class DateFieldView : FrameLayout {
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -38,8 +38,10 @@ class DateFieldView : FrameLayout {
         Calendar, Spinner
     }
 
-    private val binding = DsViewDateFieldBinding.inflate(LayoutInflater.from(context), this, true)
-    private var selectedDate: Date? = null
+    private fun requireView() = this
+
+    protected val binding = DsViewDateFieldBinding.inflate(LayoutInflater.from(context), requireView(), true)
+    protected var selectedDate: Date? = null
 
     var fieldEnabled: Boolean = true
         set(value) {
@@ -196,7 +198,7 @@ class DateFieldView : FrameLayout {
 
     private fun getMaxDate() = maxDate?.time
 
-    private fun showSpinner() {
+    protected open fun showSpinner() {
         val binding = DsDateFieldSpinnerBinding.inflate(LayoutInflater.from(context))
         binding.bvSubmit.text = spinnerButtonText
         if (maxDate != null) {
@@ -238,7 +240,7 @@ class DateFieldView : FrameLayout {
 
     }
 
-    private fun showCalendar() {
+    protected open fun showCalendar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
             val calendar = Calendar.getInstance()
