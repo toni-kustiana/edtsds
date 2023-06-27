@@ -15,7 +15,9 @@ import id.co.edtslib.edtsds.databinding.DsDateFieldSpinnerBinding
 import id.co.edtslib.edtsds.databinding.DsViewDateFieldBinding
 import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 open class DateFieldView : FrameLayout {
     constructor(context: Context) : super(context) {
@@ -40,7 +42,8 @@ open class DateFieldView : FrameLayout {
 
     private fun requireView() = this
 
-    protected val binding = DsViewDateFieldBinding.inflate(LayoutInflater.from(context), requireView(), true)
+    protected val binding =
+        DsViewDateFieldBinding.inflate(LayoutInflater.from(context), requireView(), true)
     protected var selectedDate: Date? = null
 
     var fieldEnabled: Boolean = true
@@ -60,7 +63,7 @@ open class DateFieldView : FrameLayout {
             binding.imageView.isVisible = value
         }
 
-    var calendarType = CalendarType.Calendar
+    open var calendarType = CalendarType.Calendar
 
     var date: Date? = null
         set(value) {
@@ -78,7 +81,7 @@ open class DateFieldView : FrameLayout {
     var minDate: Date? = null
     var maxDate: Date? = null
 
-    var format = "dd-MM-yyyy"
+    open var format = "dd-MM-yyyy"
 
     var minAge = 0
         set(value) {
@@ -87,7 +90,7 @@ open class DateFieldView : FrameLayout {
             val now = Date()
             val calendar = Calendar.getInstance()
             calendar.time = now
-            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR)-minAge)
+            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - minAge)
 
             maxDate = calendar.time
         }
@@ -190,8 +193,7 @@ open class DateFieldView : FrameLayout {
             calendarType = CalendarType.values()[calendarTypeIndex]
 
             a.recycle()
-        }
-        else {
+        } else {
             enableFuture = false
         }
     }

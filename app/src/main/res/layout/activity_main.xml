@@ -15,7 +15,17 @@
         app:slideChipIconPaddingStart="@dimen/dimen_8dp"
         app:slideChipIconSize="@dimen/dimen_16dp" />
 
+    <id.co.edtslib.edtsds.textfield.date.DateFieldView
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dateFormat="dd MMM yyyy"
+        app:label="Pilih Periode"
+        app:spinnerButtonText="Pilih"
+        app:spinnerTitle="Pilih periode" />
+
     <id.co.edtslib.edtsds.textfield.date.MonthYearFieldView
+        android:id="@+id/monthYearPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:label="Pilih Periode"

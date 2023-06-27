@@ -46,6 +46,9 @@ class MonthYearFieldView : DateFieldView {
         )
     }
 
+    override var calendarType: CalendarType = CalendarType.Spinner
+    override var format: String = "MMMM yyyy"
+
     private fun init(attrs: AttributeSet?) {
         error = null
 
@@ -94,18 +97,14 @@ class MonthYearFieldView : DateFieldView {
 
             enableFuture = a.getBoolean(R.styleable.DateFieldView_enableFuture, false)
 
-            val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)
+            val calendarTypeIndex =
+                a.getInt(R.styleable.DateFieldView_calendarType, calendarType.ordinal)
             calendarType = CalendarType.values()[calendarTypeIndex]
 
             a.recycle()
-        }
-        else {
+        } else {
             enableFuture = false
         }
-
-        // new added code. special for month year picker
-        calendarType = CalendarType.Spinner
-        format = "MMM yyyy"
     }
 
     override fun showSpinner() {
