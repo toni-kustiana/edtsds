@@ -264,4 +264,7 @@
         <attr name="showIcon" />
         <attr name="clockType" format="integer" />
     </declare-styleable>
+    <declare-styleable name="MenuListView">
+        <attr name="showIcon" />
+    </declare-styleable>
 </resources>

@@ -31,5 +31,10 @@
         app:label="Pilih Periode"
         app:spinnerButtonText="Pilih"
         app:spinnerTitle="Pilih periode" />
+    <id.co.edtslib.edtsds.list.menu.MenuListView
+        android:id="@+id/listView"
+        app:showIcon="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

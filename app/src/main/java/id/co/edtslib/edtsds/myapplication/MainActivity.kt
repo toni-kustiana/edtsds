@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.chips.sliding.ChipItemData
-import id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
+import id.co.edtslib.edtsds.list.menu.MenuListView
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         items.add(ChipItemData("habib helsan", id.co.edtslib.edtsds.R.drawable.ic_alert_warning))
         items.add(ChipItemData("hezbi cibinong", "http://www.adilahsoft.com/ic_pin_point_map.png"))
 
-        val slidingChipsView = findViewById<SlidingChipsView<ChipItemData>>(R.id.slidingChipsView)
-        slidingChipsView.items = items
+        val listView = findViewById<MenuListView<ChipItemData>>(R.id.listView)
+        listView.data = items
 
 
 

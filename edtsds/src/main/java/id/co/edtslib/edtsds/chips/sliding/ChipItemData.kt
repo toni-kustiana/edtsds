@@ -18,4 +18,6 @@ class ChipItemData{
         this.text = text
         this.url = url
     }
+
+    override fun toString() = text
 }
