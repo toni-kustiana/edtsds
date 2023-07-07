@@ -3,7 +3,7 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.chips.sliding.ChipItemData
+import id.co.edtslib.edtsds.bottom.BottomLayout
 import id.co.edtslib.edtsds.list.menu.MenuListView
 
 class MainActivity : AppCompatActivity() {
@@ -15,14 +15,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val items = mutableListOf<ChipItemData>()
-        items.add(ChipItemData("abah adilah"))
-        items.add(ChipItemData("habib helsan", id.co.edtslib.edtsds.R.drawable.ic_alert_warning))
-        items.add(ChipItemData("hezbi cibinong", "http://www.adilahsoft.com/ic_pin_point_map.png"))
+        val list = mutableListOf<String>()
+        for (i in 1..1000) {
+            list.add("$i")
+        }
 
-        val listView = findViewById<MenuListView<ChipItemData>>(R.id.listView)
-        listView.data = items
+        val bottomLayout = findViewById<BottomLayout>(R.id.bottomLayout)
+        val listView = bottomLayout.contentView?.findViewById<MenuListView<String>>(R.id.listView)
+        listView?.data = list.toList()
 
+        bottomLayout.onInitialDraw()
 
 
     }

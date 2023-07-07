@@ -35,6 +35,9 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                 override fun onDismiss() {
                     dialog.dismiss()
                 }
+
+                override fun onFullHeight() {
+                }
             }
 
             dialog.setCancelable(cancelable)
