@@ -165,6 +165,7 @@ class BottomLayout: FrameLayout {
     private var rawY = 0f
     private var isDown = false
     private var downTime  = 0L
+    private var fullHeight = false
     var contentView: View? = null
         set(value) {
             if (field != null) {
@@ -234,54 +235,6 @@ class BottomLayout: FrameLayout {
     @SuppressLint("ClickableViewAccessibility")
     private fun setSwipeListener() {
         binding.flBottom.setOnTouchListener { view, motionEvent ->
-            if (tray) {
-                val max = (binding.flBottom.height - binding.flTray.height).toFloat()
-                when(motionEvent.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        originalRawY = motionEvent.rawY
-                        rawY = motionEvent.rawY - binding.flBottom.translationY
-                        isDown = true
-                        downTime = Date().time
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        if (! isDown) {
-                            isDown = true
-                            originalRawY = motionEvent.rawY
-                            rawY = motionEvent.rawY - binding.flBottom.translationY
-                            downTime = Date().time
-                        }
-                        else {
-                            val dy = motionEvent.rawY - rawY
-                            val newY =  if (dy < 0f) 0f else if (dy > max) max else dy
-                            binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
-                                override fun onAnimationStart(p0: Animator) {
-                                }
-
-                                override fun onAnimationEnd(p0: Animator) {
-                                }
-
-                                override fun onAnimationCancel(p0: Animator) {
-                                }
-
-                                override fun onAnimationRepeat(p0: Animator) {
-                                }
-
-                            }).translationY(newY).setDuration(0L).start()
-                        }
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        onUp(motionEvent)
-                    }
-                    MotionEvent.ACTION_CANCEL -> {
-                        onUp(motionEvent)
-                    }
-                }
-            }
-            view.performClick()
-            return@setOnTouchListener true
-        }
-
-        binding.flBottom.setOnTouchListener { view, motionEvent ->
             processEvent(motionEvent)
             view.performClick()
             return@setOnTouchListener true
@@ -312,9 +265,16 @@ class BottomLayout: FrameLayout {
                             override fun onAnimationStart(p0: Animator) {
                             }
 
+                            @SuppressLint("ClickableViewAccessibility")
                             override fun onAnimationEnd(p0: Animator) {
-                                if (newY == 0f && initialHeight > 0) {
+                                if (newY == 0f && fullHeight && binding.flBottom.height >= binding.flRoot.height) {
                                     setChildScroll(binding.flBottom, true)
+
+                                    binding.flBottom.isSelected = true
+                                    binding.flTray.isVisible = false
+                                    binding.flBottom.setOnTouchListener { view, motionEvent ->
+                                        return@setOnTouchListener false
+                                    }
                                     delegate?.onFullHeight()
                                 }
                             }
@@ -473,6 +433,7 @@ class BottomLayout: FrameLayout {
             binding.root.postDelayed({
                 val max = (binding.flBottom.height - binding.flTray.height).toFloat()
                 if (abs(max) > initialHeight) {
+                    fullHeight = true
                     setChildScroll(binding.flContent, false)
                     binding.flBottom.translationY = max - initialHeight
                 }
