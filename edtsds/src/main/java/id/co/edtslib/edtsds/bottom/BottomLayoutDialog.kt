@@ -12,6 +12,7 @@ import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context, themeResId) {
     companion object {
         private lateinit var dialog: BottomLayoutDialog
+        var delegate: BottomLayoutDelegate? = null
 
         fun showSwipeTray(context: Context, title: String, contentView: View,
                           tray: Boolean = true, cancelable: Boolean = false,
@@ -36,7 +37,12 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                     dialog.dismiss()
                 }
 
-                override fun onFullHeight() {
+                override fun onCollapse() {
+                    delegate?.onCollapse()
+                }
+
+                override fun onExpand() {
+                    delegate?.onExpand()
                 }
             }
 

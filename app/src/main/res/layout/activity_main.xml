@@ -12,9 +12,8 @@
         android:id="@+id/bottomLayout"
         app:titleLayout="@layout/view_title_layout"
         app:contentLayout="@layout/view_content"
-        app:initialHeight="400dp"
         app:marginTop="0dp"
-        app:snap="false"
+        app:snap="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

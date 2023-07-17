@@ -13,6 +13,8 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.databinding.ViewBottomLayoutBinding
 import java.util.Date
@@ -53,6 +55,12 @@ class BottomLayout: FrameLayout {
             }
         }
 
+    var scrollView: View? = null
+        set(value) {
+            field = value
+            setScrollViewListener(value)
+        }
+
     var bottomHeight = ViewGroup.LayoutParams.WRAP_CONTENT
         set(value) {
             field = value
@@ -91,9 +99,8 @@ class BottomLayout: FrameLayout {
             binding.flTray.isVisible = tray
         }
 
-    var initialHeight = 0f
-
     var snap = true
+    var halfSnap = false
     var type = Type.Flat
         set(value) {
             field = value
@@ -206,7 +213,7 @@ class BottomLayout: FrameLayout {
             title = a.getString(R.styleable.BottomLayout_title)
             cancelable = a.getBoolean(R.styleable.BottomLayout_cancelable, false)
             popup = a.getBoolean(R.styleable.BottomLayout_popup, false)
-            initialHeight = a.getDimension(R.styleable.BottomLayout_initialHeight, 0f)
+            halfSnap = a.getBoolean(R.styleable.BottomLayout_popup, false)
             marginTop = a.getDimension(R.styleable.BottomLayout_marginTop,
                 context.resources.getDimension(R.dimen.dimen_bottom_layout_margin_top))
 
@@ -268,14 +275,12 @@ class BottomLayout: FrameLayout {
                             @SuppressLint("ClickableViewAccessibility")
                             override fun onAnimationEnd(p0: Animator) {
                                 if (newY == 0f && fullHeight && binding.flBottom.height >= binding.flRoot.height) {
-                                    setChildScroll(binding.flBottom, true)
 
                                     binding.flBottom.isSelected = true
                                     binding.flTray.isVisible = false
                                     binding.flBottom.setOnTouchListener { view, motionEvent ->
                                         return@setOnTouchListener false
                                     }
-                                    delegate?.onFullHeight()
                                 }
                             }
 
@@ -371,7 +376,20 @@ class BottomLayout: FrameLayout {
         val max = (binding.flBottom.height - binding.flTray.height).toFloat()
         if (snap) {
             val mid = 2f*max/3f
-            val snapY = if (binding.flBottom.translationY > mid) max else 0f
+            val snapY = if (halfSnap) {
+                    if (binding.flBottom.translationY < 1f*max/3f) {
+                        0f
+                    }
+                    else
+                        if (binding.flBottom.translationY < 2f*max/3f) {
+                            1f*max/2f
+                        }
+                        else {
+                            max
+                        }
+
+                }
+                else if (binding.flBottom.translationY > mid) max else 0f
 
             binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(p0: Animator) {
@@ -428,39 +446,27 @@ class BottomLayout: FrameLayout {
         }
     }
 
-    fun onInitialDraw() {
-        if (initialHeight > 0) {
-            binding.root.postDelayed({
-                val max = (binding.flBottom.height - binding.flTray.height).toFloat()
-                if (abs(max) > initialHeight) {
-                    fullHeight = true
-                    setChildScroll(binding.flContent, false)
-                    binding.flBottom.translationY = max - initialHeight
+    private fun setScrollViewListener(view: View?) {
+        if (view is RecyclerView) {
+            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    if (rv.layoutManager is LinearLayoutManager) {
+                        val linearLayoutManager = rv.layoutManager as LinearLayoutManager
+                        val index = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
+                        if (index == 0 || binding.flBottom.translationY > 0) {
+                            processEvent(e)
+                        }
+                    }
+                    return false
                 }
-            }, 500)
+
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                }
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                }
+            })
         }
-    }
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setChildScroll(viewGroup: ViewGroup, enabled: Boolean) {
-        for (i in 0 until viewGroup.childCount) {
-
-            if (enabled) {
-                viewGroup.getChildAt(i).setOnTouchListener { _, _ ->
-                    false
-                }
-            }
-            else {
-                viewGroup.getChildAt(i).setOnTouchListener { _, event ->
-                    processEvent(event)
-                    true
-                }
-            }
-
-            if (viewGroup.getChildAt(i) is ViewGroup) {
-                val vg = viewGroup.getChildAt(i) as ViewGroup
-                setChildScroll(vg, enabled)
-            }
-        }
     }
 }
