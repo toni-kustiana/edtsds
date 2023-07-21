@@ -39,7 +39,7 @@ class BottomLayout: FrameLayout {
         init(attrs)
     }
 
-    private val binding: ViewBottomLayoutBinding =
+    val binding: ViewBottomLayoutBinding =
         ViewBottomLayoutBinding.inflate(LayoutInflater.from(context), this, true)
 
     var canceledOnTouchOutside = false
@@ -303,6 +303,11 @@ class BottomLayout: FrameLayout {
         }
     }
 
+    fun showHalf() {
+        val max = (binding.flBottom.height - binding.flTray.height).toFloat()
+        binding.flBottom.translationY = max/2f
+    }
+
     private fun onUp(motionEvent: MotionEvent) {
         val max = (binding.flBottom.height - binding.flTray.height).toFloat()
         isDown = false
@@ -320,6 +325,7 @@ class BottomLayout: FrameLayout {
                         }
 
                         override fun onAnimationEnd(p0: Animator) {
+                            delegate?.onCollapse()
                             checkDismiss()
                         }
 
@@ -339,6 +345,8 @@ class BottomLayout: FrameLayout {
                         }
 
                         override fun onAnimationEnd(p0: Animator) {
+                            delegate?.onExpand()
+
                         }
 
                         override fun onAnimationCancel(p0: Animator) {
@@ -396,6 +404,12 @@ class BottomLayout: FrameLayout {
                 }
 
                 override fun onAnimationEnd(p0: Animator) {
+                    if (snapY == max) {
+                        delegate?.onCollapse()
+                    }
+                    else if (snapY == 0f) {
+                        delegate?.onExpand()
+                    }
                     binding.flBottom.translationY = snapY
                     checkDismiss()
                 }
