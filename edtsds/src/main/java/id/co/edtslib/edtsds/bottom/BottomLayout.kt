@@ -106,6 +106,8 @@ class BottomLayout: FrameLayout {
             field = value
 
             binding.vWindow.setBackgroundColor(ContextCompat.getColor(context, if (type == Type.Dialog) R.color.colorOpacity else android.R.color.transparent))
+            binding.flRoot.isFocusable = value == Type.Dialog
+            binding.flRoot.isClickable = value == Type.Dialog
         }
 
     var popup: Boolean = false
