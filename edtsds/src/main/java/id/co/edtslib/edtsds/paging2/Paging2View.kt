@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.paging2
 import android.content.Context
 import android.util.AttributeSet
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -25,10 +26,17 @@ class Paging2View<T, L>: RecyclerView {
     var delegate: Paging2Delegate<T>? = null
     var itemOrdinal = 0
     var itemIndex = 0
+    private var liveData: LiveData<T>? = null
 
     fun loadPage(page: Int) {
         loading = true
-        delegate?.loadPage(page, size)?.observe(context as LifecycleOwner) {
+
+        if (liveData != null) {
+            liveData?.removeObservers(context as LifecycleOwner)
+        }
+
+        liveData = delegate?.loadPage(page, size)
+        liveData?.observe(context as LifecycleOwner) {
             delegate?.processResult(it)
             loading = false
             if (page > 0) {
