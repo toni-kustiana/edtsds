@@ -34,8 +34,21 @@ class RadioButtonListView<T>: RecyclerView {
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
+
             _adapter.list = value.toMutableList()
             _adapter.notifyDataSetChanged()
+
+            var i = 0
+            for (item in value) {
+                if (item is DataSelected) {
+                    if (item.selected) {
+                        selectedIndex = i
+                        break
+                    }
+                }
+
+                i++
+            }
         }
     var selectedIndex = 0
         set(value) {
