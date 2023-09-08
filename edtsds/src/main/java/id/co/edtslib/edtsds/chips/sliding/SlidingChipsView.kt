@@ -35,12 +35,6 @@ open class SlidingChipsView<T> : RecyclerView {
     var slideChipIconPaddingEnd = 0f
     var slideChipIconSize = 0f
     var firstSelected = false
-        set(value) {
-            field = value
-            if (value) {
-                prevSelectedIndex = 0
-            }
-        }
     var delegate: SlidingChipsDelegate<T>? = null
 
     private var prevSelectedIndex = -1
@@ -99,6 +93,8 @@ open class SlidingChipsView<T> : RecyclerView {
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
+
+            prevSelectedIndex = if (firstSelected) 0 else -1
 
             val list = mutableListOf<RecyclerData<T>>()
             for ((i, item) in items.withIndex()) {
