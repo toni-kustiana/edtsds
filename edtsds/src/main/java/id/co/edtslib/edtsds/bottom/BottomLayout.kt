@@ -215,7 +215,7 @@ class BottomLayout: FrameLayout {
             title = a.getString(R.styleable.BottomLayout_title)
             cancelable = a.getBoolean(R.styleable.BottomLayout_cancelable, false)
             popup = a.getBoolean(R.styleable.BottomLayout_popup, false)
-            halfSnap = a.getBoolean(R.styleable.BottomLayout_popup, false)
+            halfSnap = a.getBoolean(R.styleable.BottomLayout_halfSnap, false)
             marginTop = a.getDimension(R.styleable.BottomLayout_marginTop,
                 context.resources.getDimension(R.dimen.dimen_bottom_layout_margin_top))
 
