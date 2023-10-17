@@ -26,7 +26,10 @@ class StepperView: FrameLayout {
     private var tvMinus: TextView? = null
 
     private var runnable:  Runnable? = null
+    private var stepDisabled = false
+
     var delay = 500L
+    var delayUi = 0L
     private var textWatcher: TextWatcher? = null
 
     var canEdit = false
@@ -63,7 +66,19 @@ class StepperView: FrameLayout {
             if (canEdit) {
                 hideKeyboard()
             }
-            add()
+
+            if (stepDisabled.not()) {
+                if (delayUi != 0L) {
+                    stepDisabled = true
+                }
+                add()
+
+                if (delayUi != 0L) {
+                    postDelayed({
+                        stepDisabled = false
+                    }, delayUi)
+                }
+            }
         }
 
         tvMinus = view.findViewById<TextView>(R.id.tvMinus)
@@ -71,7 +86,18 @@ class StepperView: FrameLayout {
             if (canEdit) {
                 hideKeyboard()
             }
-            minus()
+
+            if (stepDisabled.not()) {
+                if (delayUi != 0L) {
+                    stepDisabled = true
+                }
+                minus()
+                if (delayUi != 0L) {
+                    postDelayed({
+                        stepDisabled = false
+                    }, delayUi)
+                }
+            }
         }
 
         if (attrs != null) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/flRoot"
     android:layout_width="match_parent"
@@ -8,14 +7,9 @@
     android:background="#ff0000"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.bottom.BottomLayout
-        android:id="@+id/bottomLayout"
-        app:titleLayout="@layout/view_title_layout"
-        app:contentLayout="@layout/view_content"
-        app:marginTop="0dp"
-        app:snap="true"
-        app:halfSnap="true"
-        android:layout_width="match_parent"
+    <id.co.edtslib.edtsds.stepper.StepperView
+        android:id="@+id/stepperView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

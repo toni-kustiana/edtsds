@@ -3,8 +3,7 @@ package id.co.edtslib.edtsds.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.bottom.BottomLayout
-import id.co.edtslib.edtsds.list.menu.MenuListView
+import id.co.edtslib.edtsds.stepper.StepperView
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,21 +14,9 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val bottomLayout = findViewById<BottomLayout>(R.id.bottomLayout)
+        val stepperView = findViewById<StepperView>(R.id.stepperView)
+        stepperView.delayUi = 0L
 
-        val menus = mutableListOf<String>()
-        for (i in 1..100) {
-            menus.add("Abah $i")
-        }
-
-        val listView = bottomLayout.findViewById<MenuListView<String>>(R.id.listView)
-        listView.data = menus.toList()
-
-        bottomLayout.scrollView = listView
-
-        bottomLayout.contentView?.postDelayed({
-            bottomLayout.showHalf()
-        }, 100)
 
     }
 }
