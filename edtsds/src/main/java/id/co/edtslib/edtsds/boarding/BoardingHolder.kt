@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
 import id.co.edtslib.baserecyclerview.BaseViewHolder
+import id.co.edtslib.edtsds.Util
 import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
 class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, private var height: Float,
@@ -65,7 +66,9 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, privat
                         image, "drawable",
                         fragmentActivity.packageName
                     )
-                    Glide.with(fragmentActivity).load(resourceId).into(viewBinding.imageView)
+                    if (Util.isValidContext(viewBinding.root.context)) {
+                        Glide.with(fragmentActivity).load(resourceId).into(viewBinding.imageView)
+                    }
                 }
             }
         }

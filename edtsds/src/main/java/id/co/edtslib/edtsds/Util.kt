@@ -1,7 +1,10 @@
 package id.co.edtslib.edtsds
 
+import android.app.Activity
+import android.content.Context
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
+
 
 object Util {
     private val shimmer = Shimmer.AlphaHighlightBuilder()// The attributes for a ShimmerDrawable is set by this builder
@@ -16,5 +19,17 @@ object Util {
 
     val shimmerDrawable = ShimmerDrawable().apply {
         setShimmer(shimmer)
+    }
+
+    fun isValidContext(context: Context?): Boolean {
+        if (context == null) {
+            return false
+        }
+        if (context is Activity) {
+            if (context.isDestroyed || context.isFinishing) {
+                return false
+            }
+        }
+        return true
     }
 }
