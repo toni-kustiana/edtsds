@@ -40,6 +40,23 @@ class StepperView: FrameLayout {
             textView?.isVisible = ! value
         }
 
+    var valueWidth = 0
+        set(value) {
+            field = value
+
+            val dp40 = if (value == 0) resources.getDimensionPixelSize(R.dimen.dimen_40dp)
+                else value
+            val dp50 = if (value == 0) resources.getDimensionPixelSize(R.dimen.dimen_50dp)
+                else value
+
+            val layoutParams = textView?.layoutParams as LinearLayoutCompat.LayoutParams
+            layoutParams.width = dp40
+
+            val layoutParams1 = editText?.layoutParams as LinearLayoutCompat.LayoutParams
+            layoutParams1.width = dp50
+
+        }
+
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -149,12 +166,15 @@ class StepperView: FrameLayout {
                 textView?.setTextColor(ContextCompat.getColorStateList(context, colorValue))
             }
 
-            val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
-
-            val layoutParams = textView?.layoutParams as LinearLayoutCompat.LayoutParams
-            layoutParams.width = dp40
-
             canEdit = a.getBoolean(R.styleable.StepperView_canEdit, false)
+
+            val lWidth = a.getDimension(R.styleable.StepperView_valueWidth, 0f)
+            if (lWidth > 0f) {
+                valueWidth = lWidth.toInt()
+            }
+            else {
+                valueWidth = 0
+            }
 
             a.recycle()
         }

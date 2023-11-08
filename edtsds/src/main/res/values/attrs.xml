@@ -84,6 +84,7 @@
         <attr name="textColorPlus" format="reference" />
         <attr name="textColorValue" format="reference" />
         <attr name="canEdit" format="boolean" />
+        <attr name="valueWidth" format="dimension" />
 
     </declare-styleable>
 
