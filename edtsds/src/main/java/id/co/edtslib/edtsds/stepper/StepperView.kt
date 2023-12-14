@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import id.co.edtslib.edtsds.R
 
-class StepperView: FrameLayout {
+open class StepperView: FrameLayout {
     private var textView: TextView? = null
     private var editText: EditText? = null
 
@@ -276,7 +276,7 @@ class StepperView: FrameLayout {
         }
     }
 
-    private fun add() {
+    protected open fun add() {
         try {
             val s = textView?.text?.toString()
             if (s != null) {
@@ -301,7 +301,7 @@ class StepperView: FrameLayout {
         }
     }
 
-    private fun minus() {
+    protected open fun minus() {
         try {
             val s = textView?.text?.toString()
             if (s != null) {
