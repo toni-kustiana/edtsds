@@ -25,7 +25,7 @@ open class Stepper2View: FrameLayout {
         defStyleAttr
     )
 
-    private val binding = DsViewStepper2Binding.inflate(LayoutInflater.from(context), this, true)
+    val binding = DsViewStepper2Binding.inflate(LayoutInflater.from(context), this, true)
     var showValueOnly = false
         set(_value) {
             field = _value
@@ -140,9 +140,7 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.flSingleValue.setOnClickListener {
-            showValueOnly = false
-            value = value
-            delegate?.onExpand(this, value)
+            expand()
         }
     }
 
@@ -179,5 +177,11 @@ open class Stepper2View: FrameLayout {
     protected open fun minus(p: Int) {
         value -= step
         changedValue(value)
+    }
+
+    protected open fun expand() {
+        showValueOnly = false
+        value = value
+        delegate?.onExpand(this, value)
     }
 }

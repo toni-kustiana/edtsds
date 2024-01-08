@@ -5,14 +5,11 @@
     android:id="@+id/flRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff0000"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:id="@+id/stepperView"
-        app:canEdit="true"
-        app:valueWidth="100dp"
-        android:layout_width="wrap_content"
+    <id.co.edtslib.edtsds.myapplication.TestStepperView
+        android:id="@+id/stepper"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
