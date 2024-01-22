@@ -263,6 +263,11 @@ class TextFieldView: TextInputLayout {
 
                     editText?.setOnFocusChangeListener { _, b ->
                         isHintEnabled = ! b && text?.isNotEmpty() != true
+                        if (b) {
+                            editText?.postDelayed({
+                                showKeyboard()
+                            }, 300)
+                        }
                     }
 
                     startIconDrawable = if (startIcon == 0) {
@@ -309,6 +314,14 @@ class TextFieldView: TextInputLayout {
                 }
             }
         }
+
+    private fun showKeyboard() {
+        editText?.requestFocus()
+        editText?.post {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
 
     private fun addFilter(inputFilter: InputFilter) {
         val filters = editText?.filters?.toMutableList()

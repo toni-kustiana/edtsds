@@ -7,9 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.myapplication.TestStepperView
-        android:id="@+id/stepper"
+    <id.co.edtslib.edtsds.textfield.TextFieldView
+        android:id="@+id/etSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        app:emptyHint="search aaa"
+        app:imeOptions="search"
+        app:inputType="search" />
 
 </LinearLayout>

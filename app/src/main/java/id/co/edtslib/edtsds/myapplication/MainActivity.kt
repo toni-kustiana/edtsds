@@ -18,9 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val stepper = findViewById<Stepper2View>(R.id.stepper)
-        stepper.showValueOnly = true
-        stepper.value = 1
+
 
     }
 }
