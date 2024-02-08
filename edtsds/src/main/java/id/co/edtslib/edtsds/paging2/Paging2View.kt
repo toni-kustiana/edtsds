@@ -2,13 +2,15 @@ package id.co.edtslib.edtsds.paging2
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import id.co.edtslib.baserecyclerview2.AdapterData
 import id.co.edtslib.baserecyclerview2.BaseRecyclerView2
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class Paging2View<T, L>: RecyclerView {
     constructor(context: Context) : super(context)
@@ -26,21 +28,19 @@ class Paging2View<T, L>: RecyclerView {
     var delegate: Paging2Delegate<T>? = null
     var itemOrdinal = 0
     var itemIndex = 0
-    private var liveData: LiveData<T>? = null
 
     fun loadPage(page: Int) {
         loading = true
 
-        if (liveData != null) {
-            liveData?.removeObservers(context as LifecycleOwner)
-        }
-
-        liveData = delegate?.loadPage(page, size)
-        liveData?.observe(context as LifecycleOwner) {
-            delegate?.processResult(it)
-            loading = false
-            if (page > 0) {
-                delegate?.onNextPageLoaded()
+        if (context is FragmentActivity) {
+            (context as FragmentActivity).lifecycleScope.launch {
+                delegate?.loadPage(page, size)?.collectLatest {
+                    delegate?.processResult(it)
+                    loading = false
+                    if (page > 0) {
+                        delegate?.onNextPageLoaded()
+                    }
+                }
             }
         }
     }
