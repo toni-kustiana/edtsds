@@ -28,13 +28,28 @@
                 android:background="@color/colorPrimary30"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvValue"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:textColor="@color/colorWhite"
-                    android:gravity="center"
-                    style="@style/H2"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvValue"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorWhite"
+                        android:gravity="center"
+                        style="@style/H2"
+                        android:layout_height="match_parent" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etValue"
+                        style="@style/H2"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/btMinus"

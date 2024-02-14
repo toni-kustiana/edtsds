@@ -2,8 +2,10 @@ package id.co.edtslib.edtsds.stepper
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -30,7 +32,10 @@ open class StepperView: FrameLayout {
 
     var delay = 500L
     var delayUi = 0L
+    var delayEditing = 500L
+
     private var textWatcher: TextWatcher? = null
+    private var textChangeRunnable: Runnable? = null
 
     var canEdit = false
         set(value) {
@@ -38,6 +43,15 @@ open class StepperView: FrameLayout {
 
             editText?.isVisible = value
             textView?.isVisible = ! value
+        }
+
+    var maxLength = 0
+        set(value) {
+            field = value
+
+            if (value > 0) {
+                editText?.filters = arrayOf(InputFilter.LengthFilter(value))
+            }
         }
 
     var valueWidth = 0
@@ -75,7 +89,20 @@ open class StepperView: FrameLayout {
         val view = inflate(context, R.layout.view_stepper, this)
 
         textView = view.findViewById(R.id.textView)
+
         editText = view.findViewById(R.id.editText)
+        editText?.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                editText?.clearFocus()
+            }
+
+            false
+        }
+        editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (! hasFocus) {
+                delegate?.onValueChanged(getValue())
+            }
+        }
 
         tvAdd = view.findViewById(R.id.tvAdd)
         tvAdd?.isActivated = true
@@ -98,7 +125,7 @@ open class StepperView: FrameLayout {
             }
         }
 
-        tvMinus = view.findViewById<TextView>(R.id.tvMinus)
+        tvMinus = view.findViewById(R.id.tvMinus)
         tvMinus?.setOnClickListener {
             if (canEdit) {
                 hideKeyboard()
@@ -126,6 +153,8 @@ open class StepperView: FrameLayout {
 
             min = a.getInt(R.styleable.StepperView_minValue,
                 0)
+            setMinValue(min)
+
             max = a.getInt(R.styleable.StepperView_maxValue,
                 Int.MAX_VALUE)
             step = a.getInt(R.styleable.StepperView_step,
@@ -169,11 +198,10 @@ open class StepperView: FrameLayout {
             canEdit = a.getBoolean(R.styleable.StepperView_canEdit, false)
 
             val lWidth = a.getDimension(R.styleable.StepperView_valueWidth, 0f)
-            if (lWidth > 0f) {
-                valueWidth = lWidth.toInt()
-            }
-            else {
-                valueWidth = 0
+            valueWidth = if (lWidth > 0f) {
+                lWidth.toInt()
+            } else {
+                0
             }
 
             a.recycle()
@@ -181,6 +209,8 @@ open class StepperView: FrameLayout {
         else {
             canEdit = false
         }
+
+        maxLength = 3
     }
 
     private fun setText(text: String?, editing: Boolean = false) {
@@ -212,12 +242,26 @@ open class StepperView: FrameLayout {
                             setText(String.format("%d", d), true)
 
                             tvAdd?.isActivated = d < max
-                            changedValue(d)
+
+                            if (textChangeRunnable != null) {
+                                editText?.removeCallbacks(textChangeRunnable)
+                            }
+                            textChangeRunnable = Runnable {
+                                changedValue(d)
+                            }
+                            editText?.postDelayed(textChangeRunnable, delayEditing)
                         }
                     }
                     catch (e: NumberFormatException) {
                         setText(String.format("%d", min), true)
-                        changedValue(min)
+
+                        if (textChangeRunnable != null) {
+                            editText?.removeCallbacks(textChangeRunnable)
+                        }
+                        textChangeRunnable = Runnable {
+                            changedValue(min)
+                        }
+                        editText?.postDelayed(textChangeRunnable, delayEditing)
                     }
                 }
             }
@@ -228,11 +272,17 @@ open class StepperView: FrameLayout {
         editText?.addTextChangedListener(textWatcher)
     }
 
-    fun setValue(value: Int) {
+    open fun setValue(value: Int) {
         setText(String.format("%d", value))
 
         tvAdd?.isActivated = value < max
         tvMinus?.isActivated = value > min
+
+        if (editText?.isFocused == true) {
+            if (editText?.text?.isNotEmpty() == true) {
+                editText?.setSelection(editText!!.text!!.length)
+            }
+        }
     }
 
     private fun changedValue(value: Int) {
@@ -262,6 +312,7 @@ open class StepperView: FrameLayout {
 
     fun setMinValue(value: Int) {
         min = value
+        editText?.hint = String.format("%d", value)
 
         tvMinus?.isActivated = getValue() > min
         tvAdd?.isActivated = getValue() < max
@@ -323,6 +374,11 @@ open class StepperView: FrameLayout {
         } catch (ignored: NumberFormatException) {
 
         }
+    }
+
+    fun isEditing() = editText?.isFocused == true
+    fun cancelEdit() {
+        editText?.clearFocus()
     }
 
     override fun setEnabled(enabled: Boolean) {
