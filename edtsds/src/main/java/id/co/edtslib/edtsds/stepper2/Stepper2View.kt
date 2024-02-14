@@ -58,8 +58,11 @@ open class Stepper2View: FrameLayout {
     private var _value = 0
     var value
         set(lValue) {
-            setTextWatcher()
+            if (textWatcher != null) {
+                binding.etValue.removeTextChangedListener(textWatcher)
+            }
             drawValue(value = lValue, editing = false)
+            setTextWatcher()
             if (binding.etValue.isFocused) {
                 if (binding.etValue.text?.isNotEmpty() == true) {
                     binding.etValue.setSelection(binding.etValue.text!!.length)
@@ -195,10 +198,6 @@ open class Stepper2View: FrameLayout {
     }
 
     private fun setTextWatcher() {
-        if (textWatcher != null) {
-            binding.etValue.removeTextChangedListener(textWatcher)
-        }
-
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
