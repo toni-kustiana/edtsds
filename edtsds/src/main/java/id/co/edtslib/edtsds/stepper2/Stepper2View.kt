@@ -45,10 +45,7 @@ open class Stepper2View: FrameLayout {
     var max = Int.MAX_VALUE
     var min = 0
 
-    var delayEditing = 500L
-
     private var textWatcher: TextWatcher? = null
-    private var textChangeRunnable: Runnable? = null
 
     var canEdit = false
         set(value) {
@@ -144,6 +141,7 @@ open class Stepper2View: FrameLayout {
         }
 
         canEdit = false
+        maxLength = 3
     }
 
     private fun changedValue(value: Int) {
@@ -211,25 +209,11 @@ open class Stepper2View: FrameLayout {
                     try {
                         val d = s.toInt()
                         drawValue(value = d, editing = true)
-
-                        if (textChangeRunnable != null) {
-                            binding.etValue.removeCallbacks(textChangeRunnable)
-                        }
-                        textChangeRunnable = Runnable {
-
-                        }
-                        binding.etValue.postDelayed(textChangeRunnable, delayEditing)
+                        changedValue(value)
                     }
                     catch (e: NumberFormatException) {
                         drawValue(value = value, editing = true)
-
-                        if (textChangeRunnable != null) {
-                            binding.etValue.removeCallbacks(textChangeRunnable)
-                        }
-                        textChangeRunnable = Runnable {
-
-                        }
-                        binding.etValue.postDelayed(textChangeRunnable, delayEditing)
+                        changedValue(value)
                     }
                 }
             }

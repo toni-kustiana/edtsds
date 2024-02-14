@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import id.co.edtslib.edtsds.ButtonView
 import id.co.edtslib.edtsds.stepper.StepperDelegate
 import id.co.edtslib.edtsds.stepper.StepperView
+import id.co.edtslib.edtsds.stepper2.Stepper2Delegate
 import id.co.edtslib.edtsds.stepper2.Stepper2View
 
 
@@ -28,6 +29,24 @@ class MainActivity : AppCompatActivity() {
         val stepper2View = findViewById<Stepper2View>(R.id.stepperView2)
         stepper2View.canEdit = true
         stepper2View.max = 6
+        stepper2View.delegate = object : Stepper2Delegate {
+            override fun onValueChanged(view: Stepper2View, value: Int) {
+                Log.d("abah", "abah $value")
+            }
+
+            override fun onReachMax(view: Stepper2View) {
+
+            }
+
+            override fun onReachMin(view: Stepper2View) {
+
+            }
+
+            override fun onExpand(view: Stepper2View, value: Int) {
+
+            }
+
+        }
 
         val buttonView = findViewById<ButtonView>(R.id.buttonView)
         buttonView.setOnClickListener {
