@@ -188,10 +188,12 @@ open class Stepper2View: FrameLayout {
     }
 
     private fun hideKeyboard() {
-        binding.etValue.clearFocus()
+        if (binding.etValue.isFocused) {
+            binding.etValue.clearFocus()
 
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.etValue.windowToken, 0)
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.etValue.windowToken, 0)
+        }
     }
 
     private fun setTextWatcher() {
@@ -302,6 +304,7 @@ open class Stepper2View: FrameLayout {
         else {
             _value = value
 
+            hideKeyboard()
             binding.clExpand.isVisible = false
             binding.tvSingleValue.text =  String.format("%d", value)
             setViewVisibility(value)

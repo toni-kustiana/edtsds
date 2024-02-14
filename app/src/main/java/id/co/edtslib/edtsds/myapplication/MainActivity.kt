@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val buttonView = findViewById<ButtonView>(R.id.buttonView)
         buttonView.setOnClickListener {
-            stepperView.setValue(8)
+            stepper2View.showValueOnly = true
         }
 
     }
