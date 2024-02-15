@@ -2,16 +2,10 @@ package id.co.edtslib.edtsds.myapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.webkit.WebView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import id.co.edtslib.edtsds.ButtonView
-import id.co.edtslib.edtsds.stepper.StepperDelegate
-import id.co.edtslib.edtsds.stepper.StepperView
-import id.co.edtslib.edtsds.stepper2.Stepper2Delegate
-import id.co.edtslib.edtsds.stepper2.Stepper2View
+import id.co.edtslib.edtsds.chips.sliding.ChipItemData
+import id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         adapter.notifyDataSetChanged()
 
+        val slidingChipView = findViewById<SlidingChipsView<ChipItemData>>(R.id.slidingChipView)
+        slidingChipView.items = mutableListOf(
+            ChipItemData("Testing", "https://cdn-klik-dev.edts.id/assets/mobile/ico-top/Tickets.png", ),
+            ChipItemData("Testing", "https://cdn-klik-dev.edts.id/assets/mobile/ico-top/Tickets.png", "https://cdn-klik-dev.edts.id/assets/mobile/ico-top/Tickets-sel.png"),
+            ChipItemData("Testing", R.drawable.ic_grocery),
+            ChipItemData("Testing", R.drawable.ic_grocery, R.drawable.ic_grocery_selected),
+        )
     }
 
 }

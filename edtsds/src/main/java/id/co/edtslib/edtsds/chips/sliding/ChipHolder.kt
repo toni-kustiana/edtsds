@@ -61,27 +61,40 @@ class ChipHolder<T>(private val binding: AdapterChipBinding,
         if (item is RecyclerData<*>) {
             if (item.data is ChipItemData) {
                 binding.chip.text = item.data.text
-                binding.chip.isChipIconVisible = item.data.icon != null ||
-                        item.data.url?.isNotEmpty() == true
+                binding.chip.isChipIconVisible =
+                    item.data.icon != null ||
+                            item.data.iconSelected != null ||
+                            item.data.url?.isNotEmpty() == true ||
+                            item.data.urlSelected?.isNotEmpty() == true
+
                 if (binding.chip.isChipIconVisible) {
                     binding.chip.chipIconSize = iconSize
                     binding.chip.chipStartPadding = iconPaddingStart
                     binding.chip.chipEndPadding = iconPaddingEnd
 
-                    if (item.data.icon != null) {
-                        binding.chip.chipIcon =
-                            ContextCompat.getDrawable(itemView.context, item.data.icon!!)
+                    if (item.data.icon != null || item.data.iconSelected != null) {
+                        if (item.selected) {
+                            val selectedIcon = item.data.iconSelected ?: item.data.icon
+
+                            if (selectedIcon != null)
+                                binding.chip.chipIcon =
+                                    ContextCompat.getDrawable(itemView.context, selectedIcon)
+                        }
+                        else if (item.data.icon != null)
+                            binding.chip.chipIcon =
+                                ContextCompat.getDrawable(itemView.context, item.data.icon!!)
                     }
                     else {
                         binding.chip.chipIcon =
                             ContextCompat.getDrawable(itemView.context, R.drawable.px1)
-                        Glide.with(itemView.context).load(item.data.url).
-                            listener(object : RequestListener<Drawable> {
+
+                        val glideListener =
+                            object : RequestListener<Drawable> {
                                 override fun onLoadFailed(
                                     e: GlideException?,
                                     model: Any?,
                                     target: Target<Drawable>?,
-                                    isFirstResource: Boolean
+                                    isFirstResource: Boolean,
                                 ): Boolean {
                                     binding.chip.isChipIconVisible = true
                                     return true
@@ -92,7 +105,7 @@ class ChipHolder<T>(private val binding: AdapterChipBinding,
                                     model: Any?,
                                     target: Target<Drawable>?,
                                     dataSource: DataSource?,
-                                    isFirstResource: Boolean
+                                    isFirstResource: Boolean,
                                 ): Boolean {
                                     binding.chip.isChipIconVisible = resource != null
                                     if (resource != null) {
@@ -100,8 +113,16 @@ class ChipHolder<T>(private val binding: AdapterChipBinding,
                                     }
                                     return true
                                 }
+                            }
 
-                            }).submit()
+
+                        Glide.with(itemView.context)
+                            .load(
+                                if (item.selected) item.data.urlSelected
+                                else item.data.url
+                            )
+                            .listener(glideListener)
+                            .submit()
                     }
                 }
                 else {
