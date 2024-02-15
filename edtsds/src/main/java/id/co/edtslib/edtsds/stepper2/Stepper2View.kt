@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
@@ -58,11 +59,12 @@ open class Stepper2View: FrameLayout {
     private var _value = 0
     var value
         set(lValue) {
-            if (textWatcher != null) {
-                binding.etValue.removeTextChangedListener(textWatcher)
-            }
+            resetEditTextListener()
+
             drawValue(value = lValue, editing = false)
-            setTextWatcher()
+
+            setEditTextListener()
+
             if (binding.etValue.isFocused) {
                 if (binding.etValue.text?.isNotEmpty() == true) {
                     binding.etValue.setSelection(binding.etValue.text!!.length)
@@ -131,18 +133,6 @@ open class Stepper2View: FrameLayout {
             false
         }
 
-        binding.etValue.setOnFocusChangeListener { _, hasFocus ->
-            if (! hasFocus) {
-                if (binding.etValue.text?.isNotEmpty() == true) {
-                    delegate?.onValueChanged(this, value)
-                }
-                else {
-                    drawValue(value = 0, editing = false)
-                    delegate?.onValueChanged(this, 0)
-                }
-            }
-        }
-
         canEdit = false
         maxLength = 3
     }
@@ -197,7 +187,30 @@ open class Stepper2View: FrameLayout {
         }
     }
 
-    private fun setTextWatcher() {
+    private fun resetEditTextListener() {
+        if (textWatcher != null) {
+            binding.etValue.removeTextChangedListener(textWatcher)
+        }
+
+        Log.d("abah", "abah remove fucos ")
+
+        binding.etValue.onFocusChangeListener = null
+    }
+
+    private fun setEditTextListener() {
+        /*binding.etValue.setOnFocusChangeListener { _, hasFocus ->
+            if (! hasFocus) {
+                Log.d("abah", "abah on focus $value")
+                if (binding.etValue.text?.isNotEmpty() == true) {
+                    changedValue(value)
+                }
+                else {
+                    drawValue(value = 0, editing = false)
+                    changedValue(0)
+                }
+            }
+        }*/
+
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }

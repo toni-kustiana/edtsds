@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.stepper.StepperView
-        android:id="@+id/stepperView"
-        app:canEdit="true"
-        app:minValue="1"
-        android:layout_width="match_parent"
+    <id.co.edtslib.edtsds.myapplication.SlidingStepperView
+        android:id="@+id/slidingStepperView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:layout_marginEnd="@dimen/dimen_16dp" />
-
-
-    <id.co.edtslib.edtsds.stepper2.Stepper2View
-        android:id="@+id/stepperView2"
-        app:canEdit="true"
-        app:minValue="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:layout_marginStart="@dimen/dimen_16dp"
-        android:layout_marginEnd="@dimen/dimen_16dp" />
-    <id.co.edtslib.edtsds.ButtonView
-        android:layout_margin="@dimen/dimen_16dp"
-        android:id="@+id/buttonView"
-        android:text="aaa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        tools:listitem="@layout/adapter_stepper"
+        />
 </LinearLayout>

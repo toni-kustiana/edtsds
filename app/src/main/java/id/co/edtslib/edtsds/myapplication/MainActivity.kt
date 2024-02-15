@@ -23,41 +23,15 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val stepperView = findViewById<StepperView>(R.id.stepperView)
-        stepperView.canEdit = true
+        val slidingStepperView = findViewById<SlidingStepperView>(R.id.slidingStepperView)
 
-        val stepper2View = findViewById<Stepper2View>(R.id.stepperView2)
-        stepper2View.canEdit = true
-        stepper2View.max = 6
-        stepper2View.delegate = object : Stepper2Delegate {
-            override fun onValueChanged(view: Stepper2View, value: Int) {
-                Log.d("abah", "abah $value")
-            }
-
-            override fun onReachMax(view: Stepper2View) {
-
-            }
-
-            override fun onReachMin(view: Stepper2View) {
-
-            }
-
-            override fun onExpand(view: Stepper2View, value: Int) {
-
-            }
-
+        val adapter = slidingStepperView.adapter as StepperAdapter
+        for (i in 0..100) {
+            adapter.list.add(1)
         }
 
-        val buttonView = findViewById<ButtonView>(R.id.buttonView)
-        buttonView.setOnClickListener {
-            stepper2View.showValueOnly = true
-        }
+        adapter.notifyDataSetChanged()
 
     }
 
-    override fun onBackPressed() {
-        val stepperView = findViewById<StepperView>(R.id.stepperView)
-        Toast.makeText(this, if (stepperView.isEditing()) "editing" else "lost", Toast.LENGTH_LONG).show()
-        //super.onBackPressed()
-    }
 }

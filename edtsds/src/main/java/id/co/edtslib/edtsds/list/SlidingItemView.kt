@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapter
 import id.co.edtslib.edtsds.R
+import id.co.edtslib.edtsds.base.MyLinearLayoutManager
 
 abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
     class ItemDecoration(private val size: Int): RecyclerView.ItemDecoration() {

@@ -45,6 +45,7 @@ dependencies {
     implementation project(":edtsds")
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation("com.github.edtslib:baserecyclerview:1.2.0")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
