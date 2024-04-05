@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
@@ -32,6 +31,7 @@ open class Stepper2View: FrameLayout {
     )
 
     val binding = DsViewStepper2Binding.inflate(LayoutInflater.from(context), this, true)
+    var focused = false
     var showValueOnly = false
         set(_value) {
             field = _value
@@ -96,7 +96,7 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.btAdd.setOnClickListener {
-            if (canEdit) {
+            if (canEdit && focused) {
                 hideKeyboard()
             }
 
@@ -109,7 +109,7 @@ open class Stepper2View: FrameLayout {
         }
 
         binding.btMinus.setOnClickListener {
-            if (canEdit) {
+            if (canEdit && focused) {
                 hideKeyboard()
             }
 
@@ -179,12 +179,10 @@ open class Stepper2View: FrameLayout {
     }
 
     private fun hideKeyboard() {
-        if (binding.etValue.isFocused) {
-            binding.etValue.clearFocus()
+        binding.etValue.clearFocus()
 
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(binding.etValue.windowToken, 0)
-        }
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.etValue.windowToken, 0)
     }
 
     private fun resetEditTextListener() {
@@ -192,24 +190,29 @@ open class Stepper2View: FrameLayout {
             binding.etValue.removeTextChangedListener(textWatcher)
         }
 
-        Log.d("abah", "abah remove fucos ")
-
         binding.etValue.onFocusChangeListener = null
     }
 
     private fun setEditTextListener() {
-        /*binding.etValue.setOnFocusChangeListener { _, hasFocus ->
+        binding.etValue.setOnFocusChangeListener { _, hasFocus ->
             if (! hasFocus) {
-                Log.d("abah", "abah on focus $value")
-                if (binding.etValue.text?.isNotEmpty() == true) {
-                    changedValue(value)
+                hideKeyboard()
+                if (focused) {
+                    if (binding.etValue.text?.isNotEmpty() == true) {
+                        changedValue(value)
+                    } else {
+                        drawValue(value = 0, editing = false)
+                        changedValue(0)
+                    }
                 }
-                else {
-                    drawValue(value = 0, editing = false)
-                    changedValue(0)
-                }
+
+                focused = false
+
             }
-        }*/
+            else {
+                focused = true
+            }
+        }
 
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -300,7 +303,9 @@ open class Stepper2View: FrameLayout {
         else {
             _value = value
 
-            hideKeyboard()
+            if (focused) {
+                hideKeyboard()
+            }
             binding.clExpand.isVisible = false
             binding.tvSingleValue.text =  String.format("%d", value)
             setViewVisibility(value)

@@ -27,7 +27,7 @@ class MyLinearLayoutManager: LinearLayoutManager {
         immediate: Boolean,
         focusedChildVisible: Boolean
     ): Boolean {
-        return if ((child as ViewGroup).focusedChild is EditText) {
+        return if ((child as ViewGroup).focusedChild !is EditText) {
             false
         } else super.requestChildRectangleOnScreen(
             parent,

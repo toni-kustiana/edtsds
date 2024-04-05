@@ -86,7 +86,7 @@ abstract class SlidingItemView<viewBinding: ViewBinding, T>: RecyclerView {
 
     protected open fun init(attrs: AttributeSet?) {
         adapter = createAdapter()
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        layoutManager = MyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         clipToPadding = false
 
         if (attrs != null) {
