@@ -80,6 +80,11 @@ class Popup private constructor(context: Context, private val view: View?, theme
                 }
             }
 
+            popup.binding.ivClose.isVisible = dismissible
+            popup.binding.ivClose.setOnClickListener {
+                popup.dismiss()
+            }
+
 
             if (orientation == Orientation.Vertical) {
                 popup.binding.llButton.orientation = LinearLayoutCompat.VERTICAL
@@ -106,7 +111,7 @@ class Popup private constructor(context: Context, private val view: View?, theme
                     }
                 }
 
-                popup.binding.bvPositive.variant = ButtonView.ButtonVariant.Outline
+                popup.binding.bvPositive.variant = ButtonView.ButtonVariant.Alternative
                 popup.binding.bvPositive.text = negativeButton
                 popup.binding.bvPositive.setOnClickListener {
                     if (negativeClickListener == null) {

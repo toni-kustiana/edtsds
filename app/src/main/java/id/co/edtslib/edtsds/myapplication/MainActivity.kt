@@ -2,10 +2,14 @@ package id.co.edtslib.edtsds.myapplication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import id.co.edtslib.edtsds.ButtonView
 import id.co.edtslib.edtsds.chips.sliding.ChipItemData
 import id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
+import id.co.edtslib.edtsds.popup.Popup
+import id.co.edtslib.edtsds.popup.PopupDelegate
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +37,33 @@ class MainActivity : AppCompatActivity() {
             ChipItemData("Testing", R.drawable.ic_grocery),
             ChipItemData("Testing", R.drawable.ic_grocery, R.drawable.ic_grocery_selected),
         )
+
+        val btnAsal = findViewById<ButtonView>(R.id.btnAsal)
+
+        btnAsal.setOnClickListener {
+            Popup.show(
+                activity = this,
+                title = "Hapus 2 Barang?",
+                message = "Barang yang kamu pilih akan dihapus dari keranjang.",
+                positiveButton = "Hapus",
+                negativeButton = "Pindahkan ke Favorit",
+                positiveClickListener = object : PopupDelegate {
+                    override fun onClick(popup: Popup, view: View) {
+                        popup.dismiss()
+
+                    }
+                },
+                negativeClickListener = object : PopupDelegate {
+                    override fun onClick(popup: Popup, view: View) {
+                        popup.dismiss()
+
+                    }
+                },
+                orientation = Popup.Orientation.Vertical,
+                dismissible = true,
+                negativeButtonStyle = ButtonView.ButtonVariant.Alternative
+            )
+        }
     }
 
 }
