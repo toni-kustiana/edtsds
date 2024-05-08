@@ -12,7 +12,7 @@ import id.co.edtslib.baserecyclerview2.BaseRecyclerView2
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class Paging2View<T, L>: RecyclerView {
+open class Paging2View<T, L>: RecyclerView {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
