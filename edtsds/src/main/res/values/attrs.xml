@@ -139,6 +139,15 @@
             <enum name="Center" value="1" />
             <enum name="Right" value="2" />
         </attr>
+        <attr name="navigationAlignment" format="enum">
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
+        </attr>
+        <attr name="navigationVerticalAlignment" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Bottom" value="1" />
+        </attr>
 
     </declare-styleable>
     <declare-styleable name="LinkTextView">

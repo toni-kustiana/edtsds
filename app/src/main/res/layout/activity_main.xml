@@ -7,28 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
-        android:id="@+id/slidingChipView"
+    <id.co.edtslib.edtsds.boarding.BoardingView
+        android:id="@+id/boardingView"
+        app:navigationAlignment="Center"
+        app:navigationVerticalAlignment="Bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:clipToPadding="false"
-        app:slideChipIconPaddingEnd="@dimen/dimen_8dp"
-        app:slideChipIconPaddingStart="@dimen/dimen_8dp"
-        app:slideChipIconSize="@dimen/dimen_20dp"
-        app:slideChipTextStyle="@style/H3" />
-
-    <id.co.edtslib.edtsds.myapplication.SlidingStepperView
-        android:id="@+id/slidingStepperView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/adapter_stepper"
-        />
-
-    <id.co.edtslib.edtsds.ButtonView
-        android:id="@+id/btnAsal"
-        android:layout_width="wrap_content"
-        app:variant="alternative"
-        android:layout_height="wrap_content"
-        android:text="Button Asal" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <View
+        android:background="#ff0000"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 </LinearLayout>
