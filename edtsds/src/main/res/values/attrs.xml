@@ -148,6 +148,8 @@
             <enum name="Top" value="0" />
             <enum name="Bottom" value="1" />
         </attr>
+        <attr name="contentTitleStyle" format="reference" />
+        <attr name="contentDescriptionStyle" format="reference" />
 
     </declare-styleable>
     <declare-styleable name="LinkTextView">

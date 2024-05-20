@@ -10,11 +10,19 @@ class BoardingAdapter: BaseRecyclerViewAdapter<AdapterBoardingItemBinding, Board
     var height = 0f
     var alignment = BoardingView.Alignment.Left
     var circular = false
+    var titleStyle: Int = 0
+    var descriptionStyle: Int = 0
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterBoardingItemBinding
         get() = AdapterBoardingItemBinding::inflate
 
-    override fun createHolder() = BoardingHolder(binding, height, alignment)
+    override fun createHolder(): BoardingHolder =
+        BoardingHolder(
+            viewBinding = binding,
+            height = height,
+            alignment = alignment,
+            titleStyle = titleStyle,
+            descriptionStyle = descriptionStyle)
 
     override fun getItemCount() = if (circular && list.size > 1) Int.MAX_VALUE else super.getItemCount()
 

@@ -16,4 +16,11 @@
     <style name="EdtsDialog" parent="Animation.Design.BottomSheetDialog">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="BoardingStyle" parent="InterMedium">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">26dp</item>
+        <item name="android:textColor">@color/colorNeutral70</item>
+    </style>
 </resources>

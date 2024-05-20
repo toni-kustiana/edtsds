@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.boarding
 import android.annotation.SuppressLint
 import android.view.Gravity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
@@ -10,9 +11,21 @@ import id.co.edtslib.baserecyclerview.BaseViewHolder
 import id.co.edtslib.edtsds.Util
 import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
-class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, private var height: Float,
-                     private var alignment: BoardingView.Alignment
+class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
+                     private var height: Float,
+                     private var alignment: BoardingView.Alignment,
+                     titleStyle: Int = 0,
+                     descriptionStyle: Int = 0
 ) : BaseViewHolder<BoardingData>(viewBinding) {
+    init {
+        if (titleStyle != 0) {
+            TextViewCompat.setTextAppearance(viewBinding.tvTitle, titleStyle)
+        }
+        if (descriptionStyle != 0) {
+            TextViewCompat.setTextAppearance(viewBinding.tvDescription, descriptionStyle)
+        }
+    }
+
     @SuppressLint("DiscouragedApi")
     override fun setData(
         list: MutableList<BoardingData>,
