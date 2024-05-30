@@ -57,7 +57,7 @@ open class Stepper2View: FrameLayout {
         }
 
     private var _value = 0
-    var value
+    open var value
         set(lValue) {
             resetEditTextListener()
 
