@@ -7,16 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.boarding.BoardingView
-        android:id="@+id/boardingView"
-        app:navigationAlignment="Center"
-        app:navigationVerticalAlignment="Bottom"
-        app:contentDescriptionStyle="@style/BoardingStyle"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-    <View
-        android:background="#ff0000"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+    <id.co.edtslib.edtsds.ShrinkingTextView
+        android:text="abah adilah aaa"
+        android:textSize="@dimen/dimen_40dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content" />
 </LinearLayout>

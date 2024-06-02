@@ -47,14 +47,14 @@ open class ShrinkingTextView: AppCompatTextView {
 
     private fun doCheck() {
         if (exp < 100) {
-            postDelayed({
+            post{
                 if (lineCount > line) {
                     val t = textSize
                     setTextSize(TypedValue.COMPLEX_UNIT_PX, t-step)
 
                     doCheck()
                 }
-            }, 100)
+            }
 
             exp++
         }

@@ -24,14 +24,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
+/*
         val json = "[{\"title\": \"Belanja Mudah\", \"description\": \"One stop online store yang menyediakan berbagai macam produk dalam satu aplikasi\", \"image\": \"ic_onboarding_1\"}, {\"title\": \"Beragam Varian Produk\", \"description\": \"Menyediakan ribuan pilihan produk yang lengkap dengan harga terbaik untuk segala kebutuhan\", \"image\": \"ic_onboarding_2\"}, {\"title\": \"Banyak Promonya\", \"description\": \"Nikmati beragam promo menarik dari Klik Indomaret untuk kamu\", \"image\": \"ic_onboarding_3\"}]"
 
         val boardingView = findViewById<BoardingView>(R.id.boardingView)
         boardingView.list = Gson().fromJson<List<BoardingData>?>(
             json,
             object : TypeToken<List<BoardingData>?>() {}.type
-        )
+        )*/
+
+
     }
 
 }
