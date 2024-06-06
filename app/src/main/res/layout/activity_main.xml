@@ -7,9 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.ShrinkingTextView
-        android:text="abah adilah aaa"
-        android:textSize="@dimen/dimen_40dp"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content" />
+    <id.co.edtslib.edtsds.percentagebarview.PercentageBarView
+        android:id="@+id/percentageBarView"
+        app:radius="@dimen/dimen_8dp"
+        app:indicator="true"
+        app:marginActive="@dimen/dimen_2dp"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 </LinearLayout>

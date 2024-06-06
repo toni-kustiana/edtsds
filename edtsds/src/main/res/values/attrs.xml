@@ -229,7 +229,10 @@
     <declare-styleable name="PercentageBarView">
         <attr name="colorNoActive" format="reference" />
         <attr name="colorActive" format="reference" />
+        <attr name="colorIndicator" format="reference" />
         <attr name="radius" format="dimension" />
+        <attr name="indicator" format="boolean" />
+        <attr name="marginActive" format="dimension" />
     </declare-styleable>
     <declare-styleable name="SexFieldView">
         <attr name="label" />

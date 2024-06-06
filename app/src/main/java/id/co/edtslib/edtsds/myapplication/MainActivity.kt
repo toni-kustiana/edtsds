@@ -12,6 +12,7 @@ import id.co.edtslib.edtsds.boarding.BoardingData
 import id.co.edtslib.edtsds.boarding.BoardingView
 import id.co.edtslib.edtsds.chips.sliding.ChipItemData
 import id.co.edtslib.edtsds.chips.sliding.SlidingChipsView
+import id.co.edtslib.edtsds.percentagebarview.PercentageBarView
 import id.co.edtslib.edtsds.popup.Popup
 import id.co.edtslib.edtsds.popup.PopupDelegate
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        val percentageBarView = findViewById<PercentageBarView>(R.id.percentageBarView)
+        percentageBarView.setPercentage(0.4f)
 /*
         val json = "[{\"title\": \"Belanja Mudah\", \"description\": \"One stop online store yang menyediakan berbagai macam produk dalam satu aplikasi\", \"image\": \"ic_onboarding_1\"}, {\"title\": \"Beragam Varian Produk\", \"description\": \"Menyediakan ribuan pilihan produk yang lengkap dengan harga terbaik untuk segala kebutuhan\", \"image\": \"ic_onboarding_2\"}, {\"title\": \"Banyak Promonya\", \"description\": \"Nikmati beragam promo menarik dari Klik Indomaret untuk kamu\", \"image\": \"ic_onboarding_3\"}]"
 
