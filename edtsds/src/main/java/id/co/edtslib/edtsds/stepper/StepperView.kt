@@ -5,14 +5,17 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.ImageViewCompat
 import id.co.edtslib.edtsds.R
 
 open class StepperView: FrameLayout {
@@ -24,8 +27,8 @@ open class StepperView: FrameLayout {
     var step = 1
     var delegate: StepperDelegate? = null
 
-    private var tvAdd: TextView? = null
-    private var tvMinus: TextView? = null
+    private var tvAdd: View? = null
+    private var tvMinus: View? = null
 
     private var runnable:  Runnable? = null
     private var stepDisabled = false
@@ -182,12 +185,14 @@ open class StepperView: FrameLayout {
 
             val colorMinus = a.getResourceId(R.styleable.StepperView_textColorMinus, 0)
             if (colorMinus != 0) {
-                tvMinus?.setTextColor(ContextCompat.getColorStateList(context, colorMinus))
+                val ivMinus = findViewById<AppCompatImageView?>(R.id.ivMinus)
+                ImageViewCompat.setImageTintList(ivMinus, ContextCompat.getColorStateList(context, colorMinus))
             }
 
             val colorPlus = a.getResourceId(R.styleable.StepperView_textColorPlus, 0)
             if (colorPlus != 0) {
-                tvAdd?.setTextColor(ContextCompat.getColorStateList(context, colorPlus))
+                val ivAdd = findViewById<AppCompatImageView?>(R.id.ivAdd)
+                ivAdd?.imageTintList = ContextCompat.getColorStateList(context, colorPlus)
             }
 
             val colorValue = a.getResourceId(R.styleable.StepperView_textColorValue, 0)

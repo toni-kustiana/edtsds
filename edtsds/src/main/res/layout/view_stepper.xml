@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_32dp">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:background="@drawable/bg_stepper_minus"
+    <FrameLayout
         android:id="@+id/tvMinus"
-        android:gravity="center"
-        style="@style/H3"
-        android:textColor="@color/colorNeutral50"
-        android:text="@string/minus"
+        android:background="@drawable/bg_stepper_minus"
         android:layout_width="@dimen/dimen_32dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMinus"
+            android:layout_margin="@dimen/ds_stepper_icon_margin"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_stepper_minus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
         android:background="@drawable/bg_stepper_value"
@@ -34,13 +38,17 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:background="@drawable/bg_stepper_plus"
+    <FrameLayout
         android:id="@+id/tvAdd"
-        android:gravity="center"
-        android:textColor="@color/colorNeutral50"
-        style="@style/H3"
-        android:text="@string/plus"
+        android:background="@drawable/bg_stepper_plus"
         android:layout_width="@dimen/dimen_32dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAdd"
+            android:layout_margin="@dimen/ds_stepper_icon_margin"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_stepper_plus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

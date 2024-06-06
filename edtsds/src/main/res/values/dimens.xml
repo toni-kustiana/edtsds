@@ -35,5 +35,6 @@
     <dimen name="ds_stepper2_small_circle">22dp</dimen>
     <dimen name="ds_stepper2_icon">12dp</dimen>
 
+    <dimen name="ds_stepper_icon_margin">8dp</dimen>
 
 </resources>
