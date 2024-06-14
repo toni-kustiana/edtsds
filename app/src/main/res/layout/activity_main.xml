@@ -7,13 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.stepper.StepperView
+    <id.co.edtslib.edtsds.stepper2.Stepper2View
         android:id="@+id/stepperView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:maxValue="3"
-        app:minValue="1"
-        app:textColorMinus="@color/cl_stepper"
-        app:textColorPlus="@color/white" />
+        android:layout_marginTop="@dimen/dimen_16dp" />
 </LinearLayout>

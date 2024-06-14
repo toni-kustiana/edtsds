@@ -70,6 +70,9 @@ open class Stepper2View: FrameLayout {
                     binding.etValue.setSelection(binding.etValue.text!!.length)
                 }
             }
+
+            binding.btMinus.isEnabled = lValue > min
+            binding.btMinus.isSelected = lValue <= min
         }
         get() = _value
 

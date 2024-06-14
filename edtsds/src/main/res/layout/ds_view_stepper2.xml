@@ -61,6 +61,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_gravity="center"
                     android:src="@drawable/ds_ic_minus_bold"
+                    app:tint="@color/color_tint_minus_stepper2"
                     android:layout_width="@dimen/ds_stepper2_icon"
                     android:layout_height="@dimen/ds_stepper2_icon" />
             </FrameLayout>
