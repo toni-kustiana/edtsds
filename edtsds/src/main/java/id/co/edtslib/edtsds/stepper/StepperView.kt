@@ -342,14 +342,15 @@ open class StepperView: FrameLayout {
                     delegate?.onErrorMax()
                 }
 
-                tvMinus?.isActivated = d1 > min
-                tvAdd?.isActivated = d1 < max
-
-                if (d1 <= max && d != d1) {
-                    setText(String.format("%d", d1))
-
+                if (d1 <= max) {
                     tvAdd?.isActivated = d1 < max
-                    changedValue(d1)
+                    tvMinus?.isActivated = d1 > min
+                    if (d != d1) {
+                        setText(String.format("%d", d1))
+
+                        tvAdd?.isActivated = d1 < max
+                        changedValue(d1)
+                    }
                 }
             }
         } catch (ignored: NumberFormatException) {
@@ -367,13 +368,14 @@ open class StepperView: FrameLayout {
                     delegate?.onErrorMin()
                 }
 
-                tvMinus?.isActivated = d1 > min
-                tvAdd?.isActivated = d1 < max
-
-                if (d1 >= min && d != d1) {
-                    setText(String.format("%d", d1))
-                    changedValue(d1)
+                if (d1 >= min) {
+                    tvMinus?.isActivated = d1 > min
                     tvAdd?.isActivated = d1 < max
+                    if (d != d1) {
+                        setText(String.format("%d", d1))
+                        changedValue(d1)
+                        tvAdd?.isActivated = d1 < max
+                    }
                 }
             }
         } catch (ignored: NumberFormatException) {
