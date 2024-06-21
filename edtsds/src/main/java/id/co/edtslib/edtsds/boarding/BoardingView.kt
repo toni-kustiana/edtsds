@@ -222,9 +222,9 @@ class BoardingView: FrameLayout {
             adapter.titleStyle = a.getResourceId(R.styleable.BoardingView_contentTitleStyle, 0)
             adapter.descriptionStyle = a.getResourceId(R.styleable.BoardingView_contentDescriptionStyle, 0)
 
-            adapter.height = a.getDimension(
-                R.styleable.BoardingView_imageHeight,
-                context.resources.getDimensionPixelSize(R.dimen.boarding_image_height).toFloat())
+            adapter.imageMargin = a.getDimension(
+                R.styleable.BoardingView_imageMargin,
+                context.resources.getDimensionPixelSize(R.dimen.dimen_50dp).toFloat())
 
             a.recycle()
         }

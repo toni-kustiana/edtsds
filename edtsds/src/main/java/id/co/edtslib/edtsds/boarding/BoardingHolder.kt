@@ -2,7 +2,9 @@ package id.co.edtslib.edtsds.boarding
 
 import android.annotation.SuppressLint
 import android.view.Gravity
+import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.marginStart
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
@@ -12,8 +14,8 @@ import id.co.edtslib.edtsds.Util
 import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
 class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
-                     private var height: Float,
                      private var alignment: BoardingView.Alignment,
+                     private val imageMargin: Float,
                      titleStyle: Int = 0,
                      descriptionStyle: Int = 0
 ) : BaseViewHolder<BoardingData>(viewBinding) {
@@ -24,6 +26,13 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
         if (descriptionStyle != 0) {
             TextViewCompat.setTextAppearance(viewBinding.tvDescription, descriptionStyle)
         }
+    }
+
+    init {
+        val lp = viewBinding.imageView.layoutParams as LinearLayout.LayoutParams
+        lp.marginStart = imageMargin.toInt()
+        lp.marginEnd = imageMargin.toInt()
+
     }
 
     @SuppressLint("DiscouragedApi")
@@ -60,11 +69,6 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
                 viewBinding.tvDescription.gravity = Gravity.START
                 layoutParamsDescription.gravity = Gravity.START
             }
-        }
-
-        val layoutParams = viewBinding.imageView.layoutParams as LinearLayoutCompat.LayoutParams
-        if (height > 0f && layoutParams.height != height.toInt()) {
-            layoutParams.height = height.toInt()
         }
 
         val image = list[position].image

@@ -132,7 +132,7 @@
         <attr name="autoScrollInterval" format="integer" />
         <attr name="circular" format="boolean" />
         <attr name="canBackOnFirstPosition" format="boolean" />
-        <attr name="imageHeight" format="dimension" />
+        <attr name="imageMargin" format="dimension" />
         <attr name="pagerFullHeight" format="boolean" />
         <attr name="alignment" format="enum">
             <enum name="Left" value="0" />
