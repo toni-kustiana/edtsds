@@ -74,6 +74,29 @@ class BoardingView: FrameLayout {
             adapter.alignment = value
         }
 
+    var titleStyle = 0
+        set(value) {
+            field = value
+            adapter.titleStyle = value
+        }
+    var descriptionStyle = 0
+        set(value) {
+            field = value
+            adapter.descriptionStyle = value
+        }
+
+    var imageMargin = context.resources.getDimensionPixelSize(R.dimen.dimen_50dp).toFloat()
+        set(value) {
+            field = value
+            adapter.imageMargin = value
+        }
+
+    var lineSpacing = context.resources.getDimensionPixelSize(R.dimen.dimen_4dp).toFloat()
+        set(value) {
+            field = value
+            adapter.lineSpacing = value
+        }
+
     var navigationAlignment = Alignment.Left
         set(value) {
             field = value
@@ -219,12 +242,17 @@ class BoardingView: FrameLayout {
 
             }
 
-            adapter.titleStyle = a.getResourceId(R.styleable.BoardingView_contentTitleStyle, 0)
-            adapter.descriptionStyle = a.getResourceId(R.styleable.BoardingView_contentDescriptionStyle, 0)
+            titleStyle = a.getResourceId(R.styleable.BoardingView_contentTitleStyle, 0)
+            descriptionStyle = a.getResourceId(R.styleable.BoardingView_contentDescriptionStyle, 0)
 
-            adapter.imageMargin = a.getDimension(
+            imageMargin = a.getDimension(
                 R.styleable.BoardingView_imageMargin,
                 context.resources.getDimensionPixelSize(R.dimen.dimen_50dp).toFloat())
+
+            lineSpacing = a.getDimension(
+                R.styleable.BoardingView_descriptionLineSpacing,
+                context.resources.getDimensionPixelSize(R.dimen.dimen_4dp).toFloat())
+
 
             a.recycle()
         }

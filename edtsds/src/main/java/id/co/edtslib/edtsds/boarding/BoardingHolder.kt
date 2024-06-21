@@ -15,9 +15,10 @@ import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
 class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
                      private var alignment: BoardingView.Alignment,
-                     private val imageMargin: Float,
+                     imageMargin: Float,
                      titleStyle: Int = 0,
-                     descriptionStyle: Int = 0
+                     descriptionStyle: Int = 0,
+                     lineSpacing: Float = 0f
 ) : BaseViewHolder<BoardingData>(viewBinding) {
     init {
         if (titleStyle != 0) {
@@ -26,9 +27,11 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
         if (descriptionStyle != 0) {
             TextViewCompat.setTextAppearance(viewBinding.tvDescription, descriptionStyle)
         }
-    }
 
-    init {
+        if (lineSpacing > 0f) {
+            viewBinding.tvDescription.setLineSpacing(lineSpacing, 1f)
+        }
+
         val lp = viewBinding.imageView.layoutParams as LinearLayout.LayoutParams
         lp.marginStart = imageMargin.toInt()
         lp.marginEnd = imageMargin.toInt()

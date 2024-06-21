@@ -133,6 +133,7 @@
         <attr name="circular" format="boolean" />
         <attr name="canBackOnFirstPosition" format="boolean" />
         <attr name="imageMargin" format="dimension" />
+        <attr name="descriptionLineSpacing" format="dimension" />
         <attr name="pagerFullHeight" format="boolean" />
         <attr name="alignment" format="enum">
             <enum name="Left" value="0" />

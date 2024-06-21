@@ -12,6 +12,7 @@ class BoardingAdapter: BaseRecyclerViewAdapter<AdapterBoardingItemBinding, Board
     var circular = false
     var titleStyle: Int = 0
     var descriptionStyle: Int = 0
+    var lineSpacing = 0f
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> AdapterBoardingItemBinding
         get() = AdapterBoardingItemBinding::inflate
@@ -22,7 +23,8 @@ class BoardingAdapter: BaseRecyclerViewAdapter<AdapterBoardingItemBinding, Board
             alignment = alignment,
             titleStyle = titleStyle,
             imageMargin = imageMargin,
-            descriptionStyle = descriptionStyle)
+            descriptionStyle = descriptionStyle,
+            lineSpacing = lineSpacing)
 
     override fun getItemCount() = if (circular && list.size > 1) Int.MAX_VALUE else super.getItemCount()
 
