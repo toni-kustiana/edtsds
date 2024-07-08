@@ -58,7 +58,7 @@
                 android:layout_marginEnd="@dimen/dimen_4dp"
                 android:layout_weight="1"
                 app:size="medium"
-                app:variant="outline"/>
+                app:variant="alternative"/>
 
             <id.co.edtslib.edtsds.ButtonView
                 android:id="@+id/bvPositive"
