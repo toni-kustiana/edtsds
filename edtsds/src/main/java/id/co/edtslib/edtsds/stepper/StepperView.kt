@@ -257,16 +257,7 @@ open class StepperView: FrameLayout {
                             editText?.postDelayed(textChangeRunnable, delayEditing)
                         }
                     }
-                    catch (e: NumberFormatException) {
-                        setText(String.format("%d", min), true)
-
-                        if (textChangeRunnable != null) {
-                            editText?.removeCallbacks(textChangeRunnable)
-                        }
-                        textChangeRunnable = Runnable {
-                            changedValue(min)
-                        }
-                        editText?.postDelayed(textChangeRunnable, delayEditing)
+                    catch (_: NumberFormatException) {
                     }
                 }
             }

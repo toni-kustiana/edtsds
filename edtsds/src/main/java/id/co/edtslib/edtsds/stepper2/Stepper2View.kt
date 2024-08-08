@@ -229,9 +229,7 @@ open class Stepper2View: FrameLayout {
                         drawValue(value = d, editing = true)
                         changedValue(value)
                     }
-                    catch (e: NumberFormatException) {
-                        drawValue(value = value, editing = true)
-                        changedValue(value)
+                    catch (_: NumberFormatException) {
                     }
                 }
             }
