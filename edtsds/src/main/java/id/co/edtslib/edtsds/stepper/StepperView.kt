@@ -258,6 +258,9 @@ open class StepperView: FrameLayout {
                         }
                     }
                     catch (_: NumberFormatException) {
+                        if (textChangeRunnable != null) {
+                            editText?.removeCallbacks(textChangeRunnable)
+                        }
                     }
                 }
             }
