@@ -271,8 +271,8 @@ open class StepperView: FrameLayout {
     open fun setValue(value: Int) {
         setText(String.format("%d", value))
 
-        tvAdd?.isActivated = value < max
-        tvMinus?.isActivated = value > min
+        tvAdd?.isActivated = value+(step-1) < max
+        tvMinus?.isActivated = value+(step-1) > min
 
         if (editText?.isFocused == true) {
             if (editText?.text?.isNotEmpty() == true) {
