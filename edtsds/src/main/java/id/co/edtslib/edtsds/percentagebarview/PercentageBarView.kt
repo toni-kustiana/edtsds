@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import id.co.edtslib.edtsds.R
+import kotlin.math.max
 
 class PercentageBarView: View {
     private val paint = Paint()
@@ -99,7 +100,7 @@ class PercentageBarView: View {
         if (indicator) {
             paint.color = colorIndicator
             canvas?.drawCircle(
-                w - height.toFloat() / 2,
+                max( w - height.toFloat() / 2, height.toFloat()/2),
                 height.toFloat() / 2,
                 height.toFloat() / 2,
                 paint
