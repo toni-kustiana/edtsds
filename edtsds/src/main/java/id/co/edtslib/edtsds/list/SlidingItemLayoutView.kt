@@ -51,51 +51,58 @@ class SlidingItemLayoutView: FrameLayout {
         if (imageViewResId != 0 || imageUrl != null) {
             if (imageView == null) {
                 postDelayed( {
-                    val h = height
+                    if (imageView == null) {
+                        val h = height
 
-                    imageView = AppCompatImageView(context)
-                    addView(imageView, 0)
+                        imageView = AppCompatImageView(context)
+                        addView(imageView, 0)
 
-                    imageView?.scaleType = ImageView.ScaleType.FIT_XY
+                        imageView?.scaleType = ImageView.ScaleType.FIT_XY
 
-                    if (imageUrl != null) {
-                        try {
-                            Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
-                        }
-                        catch (ignore: IllegalArgumentException) {
+                        if (imageUrl != null) {
+                            try {
+                                Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+                            } catch (ignore: IllegalArgumentException) {
+                                imageView?.setImageResource(imageViewResId)
+                            }
+                        } else {
                             imageView?.setImageResource(imageViewResId)
+                        }
+
+                        val frameLayout = imageView?.layoutParams
+                        frameLayout?.width = drawableWidth.toInt()
+                        frameLayout?.height = h - paddingTop - paddingBottom
+
+                        if (childCount > 1) {
+                            val view = getChildAt(1)
+                            if (view is SlidingItemView<*, *>) {
+                                setScrollListener(view)
+                            }
                         }
                     }
                     else {
-                        imageView?.setImageResource(imageViewResId)
-                    }
-
-                    val frameLayout = imageView?.layoutParams
-                    frameLayout?.width = drawableWidth.toInt()
-                    frameLayout?.height = h - paddingTop - paddingBottom
-
-                    if (childCount > 1) {
-                        val view = getChildAt(1)
-                        if (view is SlidingItemView<*, *>) {
-                            setScrollListener(view)
-                        }
+                        onBackgroundReady()
                     }
 
                 }, 500)
             }
             else {
-                if (imageUrl != null) {
-                    try {
-                        Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
-                    }
-                    catch (ignore: IllegalArgumentException) {
-                        imageView?.setImageResource(imageViewResId)
-                    }
-                }
-                else {
-                    imageView?.setImageResource(imageViewResId)
-                }
+                onBackgroundReady()
             }
+        }
+    }
+
+    private fun onBackgroundReady() {
+        if (imageUrl != null) {
+            try {
+                Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
+            }
+            catch (ignore: IllegalArgumentException) {
+                imageView?.setImageResource(imageViewResId)
+            }
+        }
+        else {
+            imageView?.setImageResource(imageViewResId)
         }
     }
 
