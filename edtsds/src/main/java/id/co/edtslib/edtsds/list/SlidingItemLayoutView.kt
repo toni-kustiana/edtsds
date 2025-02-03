@@ -27,10 +27,12 @@ class SlidingItemLayoutView: FrameLayout {
         init(attrs)
     }
 
+    private var runnable: Runnable? = null
     private var imageView: AppCompatImageView? = null
     var imageViewResId = 0
     var imageUrl: String? = null
     private var drawableWidth = 0f
+    private var latestHeight = 0
 
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
@@ -69,9 +71,11 @@ class SlidingItemLayoutView: FrameLayout {
                             imageView?.setImageResource(imageViewResId)
                         }
 
+                        latestHeight = h - paddingTop - paddingBottom
+
                         val frameLayout = imageView?.layoutParams
                         frameLayout?.width = drawableWidth.toInt()
-                        frameLayout?.height = h - paddingTop - paddingBottom
+                        frameLayout?.height = latestHeight
 
                         if (childCount > 1) {
                             val view = getChildAt(1)
@@ -104,6 +108,25 @@ class SlidingItemLayoutView: FrameLayout {
         else {
             imageView?.setImageResource(imageViewResId)
         }
+
+
+        if (runnable != null) {
+            removeCallbacks(runnable)
+        }
+
+        runnable = Runnable {
+            val h = height - paddingTop - paddingBottom
+            if (latestHeight != h) {
+                latestHeight = h
+
+                val frameLayout = imageView?.layoutParams
+                frameLayout?.height = latestHeight
+
+                imageView?.layoutParams = frameLayout
+            }
+        }
+
+        postDelayed(runnable, 250)
     }
 
     private fun setScrollListener(slidingItemView: SlidingItemView<*, *>) {
