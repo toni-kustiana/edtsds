@@ -27,12 +27,11 @@ class SlidingItemLayoutView: FrameLayout {
         init(attrs)
     }
 
-    private var runnable: Runnable? = null
     private var imageView: AppCompatImageView? = null
     var imageViewResId = 0
     var imageUrl: String? = null
     private var drawableWidth = 0f
-    private var latestHeight = 0
+    private var latestHeight: Int = 0
 
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
@@ -49,7 +48,7 @@ class SlidingItemLayoutView: FrameLayout {
         }
     }
 
-    fun redraw() {
+    fun redraw(slidingHeight: Int = 0) {
         if (imageViewResId != 0 || imageUrl != null) {
             if (imageView == null) {
                 postDelayed( {
@@ -85,18 +84,18 @@ class SlidingItemLayoutView: FrameLayout {
                         }
                     }
                     else {
-                        onBackgroundReady()
+                        onBackgroundReady(slidingHeight)
                     }
 
                 }, 500)
             }
             else {
-                onBackgroundReady()
+                onBackgroundReady(slidingHeight)
             }
         }
     }
 
-    private fun onBackgroundReady() {
+    private fun onBackgroundReady(h: Int) {
         if (imageUrl != null) {
             try {
                 Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
@@ -109,24 +108,12 @@ class SlidingItemLayoutView: FrameLayout {
             imageView?.setImageResource(imageViewResId)
         }
 
+        if (latestHeight != h && h > 0) {
+            latestHeight = h
 
-        if (runnable != null) {
-            removeCallbacks(runnable)
+            val frameLayout = imageView?.layoutParams
+            frameLayout?.height = latestHeight
         }
-
-        runnable = Runnable {
-            val h = height - paddingTop - paddingBottom
-            if (latestHeight != h) {
-                latestHeight = h
-
-                val frameLayout = imageView?.layoutParams
-                frameLayout?.height = latestHeight
-
-                imageView?.layoutParams = frameLayout
-            }
-        }
-
-        postDelayed(runnable, 250)
     }
 
     private fun setScrollListener(slidingItemView: SlidingItemView<*, *>) {
