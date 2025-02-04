@@ -48,7 +48,7 @@ class SlidingItemLayoutView: FrameLayout {
         }
     }
 
-    fun redraw(slidingHeight: Int = 0) {
+    fun redraw() {
         if (imageViewResId != 0 || imageUrl != null) {
             if (imageView == null) {
                 postDelayed( {
@@ -72,9 +72,9 @@ class SlidingItemLayoutView: FrameLayout {
 
                         latestHeight = h - paddingTop - paddingBottom
 
-                        val frameLayout = imageView?.layoutParams
-                        frameLayout?.width = drawableWidth.toInt()
-                        frameLayout?.height = latestHeight
+                        val layoutParams = imageView?.layoutParams
+                        layoutParams?.width = drawableWidth.toInt()
+                        layoutParams?.height = latestHeight
 
                         if (childCount > 1) {
                             val view = getChildAt(1)
@@ -84,18 +84,18 @@ class SlidingItemLayoutView: FrameLayout {
                         }
                     }
                     else {
-                        onBackgroundReady(slidingHeight)
+                        onBackgroundReady()
                     }
 
                 }, 500)
             }
             else {
-                onBackgroundReady(slidingHeight)
+                onBackgroundReady()
             }
         }
     }
 
-    private fun onBackgroundReady(h: Int) {
+    private fun onBackgroundReady() {
         if (imageUrl != null) {
             try {
                 Glide.with(imageView!!.context).load(imageUrl).into(imageView!!)
@@ -108,11 +108,18 @@ class SlidingItemLayoutView: FrameLayout {
             imageView?.setImageResource(imageViewResId)
         }
 
-        if (latestHeight != h && h > 0) {
-            latestHeight = h
+        if (childCount > 1) {
+            val view = getChildAt(1)
 
-            val frameLayout = imageView?.layoutParams
-            frameLayout?.height = latestHeight
+            val h = view.height
+            if (latestHeight != h && h > 0) {
+                latestHeight = h
+
+                val lp = imageView?.layoutParams
+                lp?.height = latestHeight
+
+                imageView?.layoutParams = lp
+            }
         }
     }
 
