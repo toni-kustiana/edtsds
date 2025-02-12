@@ -447,7 +447,7 @@ class TextFieldView: TextInputLayout {
             )
         }
         else {
-            editText.setBackgroundResource(0)
+            editText.setBackgroundResource(if (bg != 0) bg else R.drawable.bg_text_field)
             setBackgroundResource(if (bg != 0) bg else R.drawable.bg_text_field)
         }
 
