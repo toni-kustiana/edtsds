@@ -17,10 +17,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
 import id.co.edtslib.edtsds.R
+import java.util.Locale
 
 open class StepperView: FrameLayout {
-    private var textView: TextView? = null
-    private var editText: EditText? = null
+    var textView: TextView? = null
+    var editText: EditText? = null
 
     private var min = 0
     private var max = Int.MAX_VALUE
@@ -103,7 +104,7 @@ open class StepperView: FrameLayout {
         }
         editText?.setOnFocusChangeListener { _, hasFocus ->
             if (! hasFocus) {
-                delegate?.onValueChanged(getValue())
+                delegate?.onValueChanged(getValue(), editText)
             }
         }
 
@@ -166,7 +167,7 @@ open class StepperView: FrameLayout {
             val value = a.getInt(R.styleable.StepperView_value,
                 1)
 
-            setText(String.format("%d", value))
+            setText(formatValue(value))
 
             val bgMinus = a.getResourceId(R.styleable.StepperView_backgroundMinus, 0)
             if (bgMinus != 0) {
@@ -218,6 +219,9 @@ open class StepperView: FrameLayout {
         maxLength = 3
     }
 
+    protected open fun formatValue(value: Int) =
+        String.format(Locale.getDefault(),"%d", value)
+
     private fun setText(text: String?, editing: Boolean = false) {
         if (textWatcher != null) {
             editText?.removeTextChangedListener(textWatcher)
@@ -237,14 +241,14 @@ open class StepperView: FrameLayout {
                     try {
                         val d = s.toInt()
                         if (d > max) {
-                            delegate?.onErrorMax()
+                            delegate?.onErrorMax(editText)
                         }
 
                         tvMinus?.isActivated = d > min
                         tvAdd?.isActivated = d < max
 
                         if (d <= max) {
-                            setText(String.format("%d", d), true)
+                            setText(formatValue(d), true)
 
                             tvAdd?.isActivated = d < max
 
@@ -252,7 +256,7 @@ open class StepperView: FrameLayout {
                                 editText?.removeCallbacks(textChangeRunnable)
                             }
                             textChangeRunnable = Runnable {
-                                changedValue(d)
+                                changedValue(d, editText)
                             }
                             editText?.postDelayed(textChangeRunnable, delayEditing)
                         }
@@ -269,7 +273,7 @@ open class StepperView: FrameLayout {
     }
 
     open fun setValue(value: Int) {
-        setText(String.format("%d", value))
+        setText(formatValue(value))
 
         tvAdd?.isActivated = value+(step-1) < max
         tvMinus?.isActivated = value+(step-1) > min
@@ -281,8 +285,8 @@ open class StepperView: FrameLayout {
         }
     }
 
-    private fun changedValue(value: Int) {
-        delegate?.onValueChanged(value)
+    private fun changedValue(value: Int, view: View?) {
+        delegate?.onValueChanged(value, view)
         if (delay > 0L) {
             if (runnable != null) {
                 removeCallbacks(runnable)
@@ -290,12 +294,12 @@ open class StepperView: FrameLayout {
             }
 
             runnable = Runnable {
-                delegate?.onSubmit(value)
+                delegate?.onSubmit(value, view)
             }
             postDelayed(runnable, delay)
         }
         else {
-            delegate?.onSubmit(value)
+            delegate?.onSubmit(value, view)
         }
     }
 
@@ -308,7 +312,7 @@ open class StepperView: FrameLayout {
 
     fun setMinValue(value: Int) {
         min = value
-        editText?.hint = String.format("%d", value)
+        editText?.hint = formatValue(value)
 
         tvMinus?.isActivated = getValue() > min
         tvAdd?.isActivated = getValue() < max
@@ -330,17 +334,17 @@ open class StepperView: FrameLayout {
                 val d = s.toInt()
                 val d1 = d+step
                 if (d1 > max) {
-                    delegate?.onErrorMax()
+                    delegate?.onErrorMax(null)
                 }
 
                 if (d1 <= max) {
                     tvAdd?.isActivated = d1 < max
                     tvMinus?.isActivated = d1 > min
                     if (d != d1) {
-                        setText(String.format("%d", d1))
+                        setText(formatValue(d1))
 
                         tvAdd?.isActivated = d1 < max
-                        changedValue(d1)
+                        changedValue(d1, null)
                     }
                 }
             }
@@ -356,15 +360,15 @@ open class StepperView: FrameLayout {
                 val d = s.toInt()
                 val d1  = d - step
                 if (d1 < min) {
-                    delegate?.onErrorMin()
+                    delegate?.onErrorMin(null)
                 }
 
                 if (d1 >= min) {
                     tvMinus?.isActivated = d1 > min
                     tvAdd?.isActivated = d1 < max
                     if (d != d1) {
-                        setText(String.format("%d", d1))
-                        changedValue(d1)
+                        setText(formatValue(d1))
+                        changedValue(d1, null)
                         tvAdd?.isActivated = d1 < max
                     }
                 }
