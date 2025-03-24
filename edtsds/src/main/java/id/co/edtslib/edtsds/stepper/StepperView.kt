@@ -23,8 +23,22 @@ open class StepperView: FrameLayout {
     var textView: TextView? = null
     var editText: EditText? = null
 
-    private var min = 0
-    private var max = Int.MAX_VALUE
+    open var min = 0
+        set(value) {
+            field = value
+
+            editText?.hint = formatValue(value)
+
+            tvMinus?.isActivated = getValue() > min
+            tvAdd?.isActivated = getValue() < max
+        }
+    open var max = Int.MAX_VALUE
+        set(value) {
+            field = value
+
+            tvMinus?.isActivated = getValue() > min
+            tvAdd?.isActivated = getValue() < max
+        }
     var step = 1
     var delegate: StepperDelegate? = null
 
@@ -157,7 +171,6 @@ open class StepperView: FrameLayout {
 
             min = a.getInt(R.styleable.StepperView_minValue,
                 0)
-            setMinValue(min)
 
             max = a.getInt(R.styleable.StepperView_maxValue,
                 Int.MAX_VALUE)
@@ -301,21 +314,6 @@ open class StepperView: FrameLayout {
         else {
             delegate?.onSubmit(value, view)
         }
-    }
-
-    fun setMaxValue(value: Int) {
-        max = value
-
-        tvMinus?.isActivated = getValue() > min
-        tvAdd?.isActivated = getValue() < max
-    }
-
-    fun setMinValue(value: Int) {
-        min = value
-        editText?.hint = formatValue(value)
-
-        tvMinus?.isActivated = getValue() > min
-        tvAdd?.isActivated = getValue() < max
     }
 
     fun getValue(): Int {
