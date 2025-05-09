@@ -82,7 +82,12 @@ class TextFieldView: TextInputLayout {
                     else {
                         var i = 1
                         while(true) {
-                            val temp = "${value.substring(0, value.length-i)}..."
+                            val endIndex = value.length-i
+                            if (endIndex < 0) {
+                                editText?.setText(value)
+                                break
+                            }
+                            val temp = "${value.substring(0, endIndex)}..."
                             editText!!.paint.getTextBounds(temp, 0, temp.length, bounds)
                             if (bounds.width() < width) {
                                 editText?.setText(temp)
