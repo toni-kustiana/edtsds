@@ -48,8 +48,8 @@ class TextFieldView: TextInputLayout {
     }
 
     var ellipsizeMargin = 0
-    private var hint: String? = null
-    private var emptyHint: String? = null
+    var hint: String? = null
+    var emptyHint: String? = null
         set(value) {
             field = value
             if (value != null) {
@@ -57,9 +57,9 @@ class TextFieldView: TextInputLayout {
             }
         }
 
-    private var ellipsizeWidth = 0
-    private var startIcon: Int = 0
-    private var ellipsize = false
+    var ellipsizeWidth = 0
+    var startIcon: Int = 0
+    var ellipsize = false
     private var bg = 0
 
     var text: String? = null
