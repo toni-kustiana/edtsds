@@ -47,6 +47,7 @@ class TextFieldView: TextInputLayout {
         init(attrs)
     }
 
+    var ellipsizeMargin = 0
     private var hint: String? = null
     private var emptyHint: String? = null
         set(value) {
@@ -478,6 +479,33 @@ class TextFieldView: TextInputLayout {
         hintTextColor = ContextCompat.getColorStateList(context, R.color.color_hint_text_field)
 
         setIndicatorPadding()
+    }
+
+    override fun setPlaceholderText(placeholderText: CharSequence?) {
+        if (ellipsize && placeholderText != null) {
+            var w = width - paddingStart - paddingEnd - ellipsizeMargin
+            if (startIconDrawable != null) {
+                w -= (startIconDrawable!!.minimumWidth + resources.getDimensionPixelSize(R.dimen.dimen_32dp))
+            }
+            for (i in 0 until placeholderText.length) {
+                val temp = if (i == 0) {
+                    placeholderText.substring(0, placeholderText.length-i)
+                } else {
+                    "${placeholderText.substring(0, placeholderText.length-i)}..."
+                }
+                val bounds = Rect()
+
+                editText!!.paint.getTextBounds(temp, 0, temp.length, bounds)
+
+                if (bounds.width() < w) {
+                    super.setPlaceholderText(temp)
+                    break
+                }
+            }
+        }
+        else {
+            super.setPlaceholderText(placeholderText)
+        }
     }
 
     override fun setError(errorText: CharSequence?) {
