@@ -48,7 +48,7 @@ class TextFieldView: TextInputLayout {
     }
 
     var ellipsizeMargin = 0
-    var hint: String? = null
+    private var hint: String? = null
     var emptyHint: String? = null
         set(value) {
             field = value
