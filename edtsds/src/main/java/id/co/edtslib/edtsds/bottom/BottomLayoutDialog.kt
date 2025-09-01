@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.view.Window
 import id.co.edtslib.edtsds.R
+import id.co.edtslib.edtsds.Util.applyWindowInset
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
 open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context, themeResId) {
@@ -20,7 +21,8 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                           popup: Boolean = false,
                           height: Int = LayoutParams.WRAP_CONTENT,
                           canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = tray,
-                          themeResId: Int = R.style.BottomLayoutDialog): BottomLayoutDialog {
+                          themeResId: Int = R.style.BottomLayoutDialog,
+                          consumeBottomInset: Boolean = true): BottomLayoutDialog {
             val dialog = BottomLayoutDialog(context, themeResId)
             dialog.binding.bottomLayout.bottomHeight = height
             dialog.binding.bottomLayout.title = title
@@ -49,6 +51,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
             dialog.setCancelable(cancelable)
             dialog.setCanceledOnTouchOutside(false)
             dialog.show()
+            dialog.applyWindowInset(contentView, consumeBottomInset)
 
             BottomLayoutDialog.dialog = dialog
 
@@ -59,13 +62,15 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                      titleDivider: Boolean = true, popup: Boolean = false,
                      canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = true,
                      height: Int = LayoutParams.WRAP_CONTENT,
-                     themeResId: Int = R.style.BottomLayoutDialog) =
+                     themeResId: Int = R.style.BottomLayoutDialog,
+                     consumeBottomInset: Boolean = true) =
             showSwipeTray(context, title, contentView, tray = false, cancelable = true,
                 titleView = titleView, titleDivider = titleDivider, popup = popup,
                 themeResId = themeResId,
                 canceledOnTouchOutside = canceledOnTouchOutside,
                 isOverlay = isOverlay,
-                height = height)
+                height = height,
+                consumeBottomInset = consumeBottomInset)
 
         fun close() {
             try {
