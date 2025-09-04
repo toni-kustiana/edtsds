@@ -1,7 +1,13 @@
 package id.co.edtslib.edtsds
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
@@ -31,5 +37,18 @@ object Util {
             }
         }
         return true
+    }
+
+    fun Dialog.applyWindowInset(
+        dialogRoot: View,
+        consumeBottomInset: Boolean = true
+    ){
+        ViewCompat.setOnApplyWindowInsetsListener(dialogRoot){ view, windowInsets ->
+            val navBarInset = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                if (consumeBottomInset) bottomMargin = navBarInset.bottom
+            }
+            WindowInsetsCompat.CONSUMED
+        }
     }
 }
