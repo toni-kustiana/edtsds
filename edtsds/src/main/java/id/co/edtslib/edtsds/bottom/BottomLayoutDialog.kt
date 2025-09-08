@@ -24,7 +24,6 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                           themeResId: Int = R.style.BottomLayoutDialog,
                           consumeBottomInset: Boolean = true): BottomLayoutDialog {
             val dialog = BottomLayoutDialog(context, themeResId)
-            dialog.binding.bottomLayout.bottomHeight = height
             dialog.binding.bottomLayout.title = title
             dialog.binding.bottomLayout.tray = tray
             dialog.binding.bottomLayout.cancelable = cancelable
@@ -50,8 +49,12 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
 
             dialog.setCancelable(cancelable)
             dialog.setCanceledOnTouchOutside(false)
+            dialog.applyWindowInset(contentView, consumeBottomInset){ bottomInset->
+                val isCustomHeight = !(height == LayoutParams.WRAP_CONTENT || height == LayoutParams.MATCH_PARENT)
+                val finalHeight = if (isCustomHeight) height + bottomInset  else height
+                dialog.binding.bottomLayout.bottomHeight = finalHeight
+            }
             dialog.show()
-            dialog.applyWindowInset(contentView, consumeBottomInset)
 
             BottomLayoutDialog.dialog = dialog
 

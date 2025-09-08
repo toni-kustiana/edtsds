@@ -41,13 +41,15 @@ object Util {
 
     fun Dialog.applyWindowInset(
         dialogRoot: View,
-        consumeBottomInset: Boolean = true
+        consumeBottomInset: Boolean = true,
+        bottomInset: (Int)->Unit
     ){
         ViewCompat.setOnApplyWindowInsetsListener(dialogRoot){ view, windowInsets ->
             val navBarInset = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
             view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 if (consumeBottomInset) bottomMargin = navBarInset.bottom
             }
+            bottomInset(navBarInset.bottom)
             WindowInsetsCompat.CONSUMED
         }
     }
