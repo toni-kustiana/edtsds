@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnAttach
 import androidx.core.view.updateLayoutParams
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
@@ -51,6 +52,10 @@ object Util {
             }
             bottomInset(navBarInset.bottom)
             WindowInsetsCompat.CONSUMED
+        }
+        // Ensure insets are requested after the view is attached
+        dialogRoot.doOnAttach {
+            ViewCompat.requestApplyInsets(it)
         }
     }
 }

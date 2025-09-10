@@ -156,7 +156,7 @@ class Popup private constructor(context: Context, private val view: View?, theme
             val popup = Popup(view.context, view, themeResId)
             popup.dismissible = dismissible
             popup.applyWindowInset(
-                popup.binding.root,
+                view,
                 consumeBottomInset
             ){}
             popup.show()
