@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup.LayoutParams
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -15,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import id.co.edtslib.edtsds.ButtonView
 import id.co.edtslib.edtsds.R
+import id.co.edtslib.edtsds.Util.applyWindowInset
 import id.co.edtslib.edtsds.databinding.DialogPopupBinding
 
 class Popup private constructor(context: Context, private val view: View?, themeResId: Int) : Dialog(context, themeResId) {
@@ -135,16 +137,28 @@ class Popup private constructor(context: Context, private val view: View?, theme
             return popup
         }
 
-        fun showFullScreen(view: View, themeResId: Int = 0, dismissible: Boolean = false) =
+        fun showFullScreen(
+            view: View,
+            themeResId: Int = 0,
+            dismissible: Boolean = false,
+            consumeBottomInset: Boolean = true,
+        ) =
             show(view, width = WindowManager.LayoutParams.MATCH_PARENT.toFloat(),
                 height = WindowManager.LayoutParams.MATCH_PARENT, themeResId = themeResId,
-                dismissible = dismissible)
+                dismissible = dismissible, consumeBottomInset = consumeBottomInset)
 
-        fun show(view: View, width: Float = 0.9f,
+        fun show(
+            view: View, width: Float = 0.9f,
             height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
-                 themeResId: Int = 0, dismissible: Boolean = false): Popup {
+            themeResId: Int = 0, dismissible: Boolean = false,
+            consumeBottomInset: Boolean = true
+        ): Popup {
             val popup = Popup(view.context, view, themeResId)
             popup.dismissible = dismissible
+            popup.applyWindowInset(
+                popup.binding.root,
+                consumeBottomInset
+            ){}
             popup.show()
 
             val w = when (width) {
