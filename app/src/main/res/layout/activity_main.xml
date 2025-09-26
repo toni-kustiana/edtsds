@@ -18,4 +18,12 @@
         app:ellipsize="true"
         app:imeOptions="search"
         app:inputType="search" />
+
+    <Button
+        android:id="@+id/btnShowTray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Tray"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_gravity="center"/>
 </LinearLayout>
