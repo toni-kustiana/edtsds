@@ -55,9 +55,6 @@ open class StepperView: FrameLayout {
     private var textWatcher: TextWatcher? = null
     private var textChangeRunnable: Runnable? = null
 
-    /**
-     * Set to true to enable input qty from keyboard
-     */
     var canEdit = false
         set(value) {
             field = value

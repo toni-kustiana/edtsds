@@ -46,10 +46,7 @@ object Util {
         bottomInset: (Int)->Unit
     ){
         ViewCompat.setOnApplyWindowInsetsListener(dialogRoot){ view, windowInsets ->
-            val navBarInset = windowInsets.getInsets(
-                WindowInsetsCompat.Type.navigationBars()
-                or WindowInsetsCompat.Type.ime()
-            )
+            val navBarInset = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
             view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 if (consumeBottomInset) bottomMargin = navBarInset.bottom
             }
