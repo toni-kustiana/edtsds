@@ -33,7 +33,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
             dialog.binding.bottomLayout.popup = popup
             dialog.binding.bottomLayout.canceledOnTouchOutside = canceledOnTouchOutside
             dialog.binding.bottomLayout.isOverlay = isOverlay
-            dialog.binding.bottomLayout.delegate = object : BottomLayoutV2Delegate {
+            dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dialog.dismiss()
                     delegate?.onDismiss()
@@ -48,7 +48,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                 }
 
                 override fun onClose() {
-                    (delegate as? BottomLayoutV2Delegate)?.onClose()
+                    delegate?.onClose()
                 }
             }
 

@@ -24,7 +24,7 @@ class BottomLayout: FrameLayout {
     enum class Type {
         Flat, Dialog
     }
-    var delegate: BottomLayoutV2Delegate? = null
+    var delegate: BottomLayoutDelegate? = null
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
