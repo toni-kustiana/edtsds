@@ -4,5 +4,4 @@ interface BottomLayoutDelegate {
     fun onDismiss()
     fun onCollapse()
     fun onExpand()
-    fun onClose(){}
 }
