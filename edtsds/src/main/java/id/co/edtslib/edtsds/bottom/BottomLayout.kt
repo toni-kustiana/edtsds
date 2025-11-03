@@ -143,7 +143,6 @@ class BottomLayout: FrameLayout {
             binding.ivCancel.isVisible = cancelable
             binding.ivCancel.setOnClickListener {
                 isVisible = false
-                delegate?.onClose()
             }
 
             binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable || ! popup
