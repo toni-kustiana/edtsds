@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/flRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        app:boxBackgroundMode="none"
-        app:boxStrokeWidth="@dimen/dimen_1dp"
-        app:boxStrokeColor="@color/colorPrimary10"
-        android:id="@+id/searchView"
+    <id.co.edtslib.edtsds.ButtonView
+        android:id="@+id/buttonView"
+        android:layout_gravity="center"
+        android:text="aku tombol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp"
-        android:layout_marginEnd="@dimen/dimen_16dp"
-        app:ellipsize="true"
-        app:imeOptions="search"
-        app:inputType="search" />
-</LinearLayout>
+        android:layout_height="match_parent">
+
+        <id.co.edtslib.edtsds.bottom.BottomLayout
+            android:id="@+id/bottomLayout"
+            app:contentLayout="@layout/view_content"
+            app:bottomLayoutType="flat"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+        <View
+            android:background="@color/colorNeutral20"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+    </LinearLayout>
+</FrameLayout>

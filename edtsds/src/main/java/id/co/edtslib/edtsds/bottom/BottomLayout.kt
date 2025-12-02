@@ -85,12 +85,25 @@ class BottomLayout: FrameLayout {
             binding.vWindow.setBackgroundColor(ContextCompat.getColor(context, color))
         }
 
+    var heightPercent = 1f
+        set(value) {
+            field = value
+
+            val max = (binding.flBottom.height - binding.flTray.height).toFloat()
+            binding.flBottom.translationY = max*(1-value)
+        }
+
+    var titleVisible = true
+        set(value) {
+            field = value
+            title = title
+        }
     var title: String? = null
         set(value) {
             field = value
             binding.tvTitle.text = value
 
-            binding.flTitle.isVisible = value?.isNotEmpty() == true || cancelable || ! popup
+            binding.flTitle.isVisible = (value?.isNotEmpty() == true || cancelable || ! popup) && titleVisible
         }
 
     var tray = true
@@ -306,8 +319,11 @@ class BottomLayout: FrameLayout {
     }
 
     fun showHalf() {
-        val max = (binding.flBottom.height - binding.flTray.height).toFloat()
-        binding.flBottom.translationY = max/2f
+        heightPercent = 0.5f
+    }
+
+    fun collapse() {
+        heightPercent = 0f
     }
 
     private fun onUp(motionEvent: MotionEvent) {
