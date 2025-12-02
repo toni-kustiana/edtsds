@@ -5,6 +5,7 @@
         <enum name="warning" value="1" />
         <enum name="error" value="2" />
     </attr>
+    <attr name="hint" format="string" />
     <attr name="label" format="string" />
     <attr name="message" format="string" />
     <attr name="shape" format="integer" />
@@ -14,6 +15,11 @@
     <attr name="space" format="dimension" />
     <attr name="count" format="integer" />
     <attr name="snap" format="boolean" />
+    <attr name="spinnerTitle" format="string" />
+    <attr name="spinnerButtonText" format="string" />
+    <attr name="autoShowLabel" format="boolean" />
+    <attr name="showIcon" format="boolean" />
+    <attr name="fieldEnabled" format="boolean" />
 
     <declare-styleable name="AlertBoxView">
         <attr name="type" />
@@ -27,11 +33,14 @@
             <enum name="secondary" value="1" />
             <enum name="alternative" value="2" />
             <enum name="outline" value="3" />
+            <enum name="custom" value="4" />
         </attr>
         <attr name="size" format="enum">
             <enum name="medium" value="0" />
             <enum name="small" value="1" />
         </attr>
+        <attr name="buttonBackground" format="reference" />
+        <attr name="buttonTextColor" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TextFieldView">
@@ -46,6 +55,8 @@
             <enum name="email" value="7" />
             <enum name="popup" value="8" />
             <enum name="money" value="9" />
+            <enum name="number" value="10" />
+            <enum name="decimal" value="11" />
         </attr>
         <attr name="currency" format="string" />
         <attr name="ellipsizeWidth" format="dimension" />
@@ -59,18 +70,21 @@
             <enum name="send" value="2" />
             <enum name="search" value="3" />
         </attr>
+        <attr name="textFieldBackground" format="reference" />
     </declare-styleable>
     <declare-styleable name="StepperView">
         <attr name="minValue" format="integer" />
         <attr name="maxValue" format="integer" />
         <attr name="step" format="integer" />
         <attr name="value" format="integer" />
-        <attr name="canInput" format="boolean" />
         <attr name="backgroundMinus" format="reference" />
         <attr name="backgroundPlus" format="reference" />
         <attr name="backgroundValue" format="reference" />
-        <attr name="textColorMinus" format="color" />
-        <attr name="textColorPlus" format="color" />
+        <attr name="textColorMinus" format="reference" />
+        <attr name="textColorPlus" format="reference" />
+        <attr name="textColorValue" format="reference" />
+        <attr name="canEdit" format="boolean" />
+        <attr name="valueWidth" format="dimension" />
 
     </declare-styleable>
 
@@ -118,13 +132,25 @@
         <attr name="autoScrollInterval" format="integer" />
         <attr name="circular" format="boolean" />
         <attr name="canBackOnFirstPosition" format="boolean" />
-        <attr name="imageHeight" format="dimension" />
+        <attr name="imageMargin" format="dimension" />
+        <attr name="descriptionLineSpacing" format="dimension" />
         <attr name="pagerFullHeight" format="boolean" />
         <attr name="alignment" format="enum">
             <enum name="Left" value="0" />
             <enum name="Center" value="1" />
             <enum name="Right" value="2" />
         </attr>
+        <attr name="navigationAlignment" format="enum">
+            <enum name="Left" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Right" value="2" />
+        </attr>
+        <attr name="navigationVerticalAlignment" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Bottom" value="1" />
+        </attr>
+        <attr name="contentTitleStyle" format="reference" />
+        <attr name="contentDescriptionStyle" format="reference" />
 
     </declare-styleable>
     <declare-styleable name="LinkTextView">
@@ -171,6 +197,9 @@
         <attr name="slideChipBackground" format="reference" />
         <attr name="slideChipTextStyle" format="reference" />
         <attr name="slideChipStrokeColor" format="reference" />
+        <attr name="slideChipIconSize" format="dimension" />
+        <attr name="slideChipIconPaddingStart" format="dimension" />
+        <attr name="slideChipIconPaddingEnd" format="dimension" />
     </declare-styleable>
     <declare-styleable name="GroupChipView">
         <attr name="groupChipMargin" format="dimension" />
@@ -190,6 +219,8 @@
         <attr name="cancelable" format="boolean" />
         <attr name="tray" format="boolean" />
         <attr name="popup" format="boolean" />
+        <attr name="marginTop" format="dimension" />
+        <attr name="halfSnap" format="boolean" />
         <attr name="bottomLayoutType" format="enum">
             <enum name="flat" value="0" />
             <enum name="dialog" value="1" />
@@ -199,7 +230,10 @@
     <declare-styleable name="PercentageBarView">
         <attr name="colorNoActive" format="reference" />
         <attr name="colorActive" format="reference" />
+        <attr name="colorIndicator" format="reference" />
         <attr name="radius" format="dimension" />
+        <attr name="indicator" format="boolean" />
+        <attr name="marginActive" format="dimension" />
     </declare-styleable>
     <declare-styleable name="SexFieldView">
         <attr name="label" />
@@ -209,18 +243,20 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="DateFieldView">
+        <attr name="fieldEnabled" />
         <attr name="dateFormat" format="string" />
-        <attr name="hint" format="string" />
+        <attr name="hint" />
         <attr name="minAge" format="integer" />
         <attr name="label" />
-        <attr name="autoShowLabel" format="boolean" />
-        <attr name="showIcon" format="boolean" />
-        <attr name="spinnerTitle" format="string" />
-        <attr name="spinnerButtonText" format="string" />
+        <attr name="autoShowLabel" />
+        <attr name="showIcon" />
+        <attr name="spinnerTitle" />
+        <attr name="spinnerButtonText" />
         <attr name="calendarType" format="enum">
             <enum name="calendar" value="0" />
             <enum name="spinner" value="1" />
         </attr>
+        <attr name="enableFuture" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ShimmerView">
         <attr name="shimmerWidth" format="dimension" />
@@ -234,5 +270,19 @@
     </declare-styleable>
     <declare-styleable name="RatingView">
         <attr name="count" />
+    </declare-styleable>
+    <declare-styleable name="TimeFieldView">
+        <attr name="fieldEnabled" />
+        <attr name="timeFormat" format="string" />
+        <attr name="spinnerTitle" />
+        <attr name="spinnerButtonText" />
+        <attr name="hint" />
+        <attr name="label" />
+        <attr name="autoShowLabel" />
+        <attr name="showIcon" />
+        <attr name="clockType" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="MenuListView">
+        <attr name="showIcon" />
     </declare-styleable>
 </resources>

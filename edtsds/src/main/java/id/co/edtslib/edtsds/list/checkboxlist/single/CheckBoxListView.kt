@@ -3,6 +3,7 @@ package id.co.edtslib.edtsds.list.checkboxlist.single
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.co.edtslib.edtsds.list.checkboxlist.CheckBoxListDelegate
@@ -25,6 +26,13 @@ open class CheckBoxListView<T>: RecyclerView {
             field = value
             lAdapter.menuDelegate = delegate
         }
+
+    var gravity: Int = Gravity.START
+        set(value) {
+            field = value
+            lAdapter.gravity = value
+        }
+
     var data = listOf<T>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {

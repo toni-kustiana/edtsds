@@ -2,13 +2,17 @@ package id.co.edtslib.edtsds.paging
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class PagingView<T, L>: RecyclerView {
+open class PagingView<T, L>: RecyclerView {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -25,11 +29,13 @@ class PagingView<T, L>: RecyclerView {
 
     fun loadPage(page: Int) {
         loading = true
-        delegate?.loadPage(page, size)?.observe(context as LifecycleOwner) {
-            delegate?.processResult(it)
-            loading = false
-            if (page > 0) {
-                delegate?.onNextPageLoaded()
+        (context as FragmentActivity).lifecycleScope.launch {
+            delegate?.loadPage(page, size)?.collectLatest {
+                delegate?.processResult(it)
+                loading = false
+                if (page > 0) {
+                    delegate?.onNextPageLoaded()
+                }
             }
         }
     }

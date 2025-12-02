@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/dimen_16dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        app:hintEnabled="false"
-        app:emptyHint="Minimum"
-        app:inputType="money"
-        app:maxLength="10"
-        app:currency="Rp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp" />
-    <id.co.edtslib.edtsds.stepper2.Stepper2View
-        android:id="@+id/stepperView"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:layout_width="match_parent"
+    <id.co.edtslib.edtsds.ButtonView
+        android:id="@+id/buttonView"
+        android:layout_gravity="center"
+        android:text="aku tombol"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <id.co.edtslib.edtsds.bottom.BottomLayout
+            android:id="@+id/bottomLayout"
+            app:contentLayout="@layout/view_content"
+            app:bottomLayoutType="flat"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+        <View
+            android:background="@color/colorNeutral20"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+    </LinearLayout>
+</FrameLayout>

@@ -30,13 +30,11 @@ open class SlidingChipsView<T> : RecyclerView {
 
     private var _adapter: ChipAdapter<RecyclerData<T>>? = null
 
+
+    var slideChipIconPaddingStart = 0f
+    var slideChipIconPaddingEnd = 0f
+    var slideChipIconSize = 0f
     var firstSelected = false
-        set(value) {
-            field = value
-            if (value) {
-                prevSelectedIndex = 0
-            }
-        }
     var delegate: SlidingChipsDelegate<T>? = null
 
     private var prevSelectedIndex = -1
@@ -96,6 +94,8 @@ open class SlidingChipsView<T> : RecyclerView {
         set(value) {
             field = value
 
+            prevSelectedIndex = if (firstSelected) 0 else -1
+
             val list = mutableListOf<RecyclerData<T>>()
             for ((i, item) in items.withIndex()) {
                 list.add(RecyclerData(item, firstSelected && i == 0))
@@ -139,6 +139,15 @@ open class SlidingChipsView<T> : RecyclerView {
             val startEndSpace = a.getDimension(R.styleable.SlidingChipsView_slideChipMargin,
                 resources.getDimensionPixelSize(R.dimen.dimen_16dp).toFloat())
 
+            slideChipIconSize = a.getDimension(R.styleable.SlidingChipsView_slideChipIconSize,
+                0f)
+
+            slideChipIconPaddingStart = a.getDimension(R.styleable.SlidingChipsView_slideChipIconPaddingStart,
+                0f)
+
+            slideChipIconPaddingEnd = a.getDimension(R.styleable.SlidingChipsView_slideChipIconPaddingEnd,
+                0f)
+
             setPadding(startEndSpace.toInt(), 0, startEndSpace.toInt(), 0)
 
             textColor = a.getResourceId(R.styleable.SlidingChipsView_slideChipTextColor,
@@ -165,7 +174,7 @@ open class SlidingChipsView<T> : RecyclerView {
         addItemDecoration(ItemDecoration(context.resources.getDimensionPixelSize(R.dimen.dimen_8dp)))
 
         _adapter = ChipAdapter(textColor, textPadding, chipBackgroundColor, strokeColor,
-            textStyle)
+            textStyle, slideChipIconPaddingStart, slideChipIconPaddingEnd, slideChipIconSize)
         _adapter?.delegate = object : BaseRecyclerViewAdapterDelegate<RecyclerData<T>> {
             override fun onClick(t: RecyclerData<T>, position: Int, holder: BaseViewHolder<RecyclerData<T>>?) {
                 selectionIndex = position

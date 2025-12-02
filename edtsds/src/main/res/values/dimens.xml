@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dimen_half_dp">0.5dp</dimen>
     <dimen name="dimen_1dp">1dp</dimen>
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
@@ -34,5 +35,6 @@
     <dimen name="ds_stepper2_small_circle">22dp</dimen>
     <dimen name="ds_stepper2_icon">12dp</dimen>
 
+    <dimen name="ds_stepper_icon_margin">8dp</dimen>
 
 </resources>

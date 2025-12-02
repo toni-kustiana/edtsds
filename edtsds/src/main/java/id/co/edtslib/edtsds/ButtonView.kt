@@ -13,7 +13,7 @@ class ButtonView: AppCompatTextView {
     }
 
     enum class ButtonVariant {
-        Primary, Secondary, Alternative, Outline
+        Primary, Secondary, Alternative, Outline, Custom
     }
 
     constructor(context: Context) : super(context) {
@@ -55,6 +55,8 @@ class ButtonView: AppCompatTextView {
         }
 
     private fun init(attrs: AttributeSet?) {
+        var bg = 0
+        var cl = 0
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
                 attrs,
@@ -68,6 +70,16 @@ class ButtonView: AppCompatTextView {
             val s = a.getInt(R.styleable.ButtonView_size, 0)
             size = ButtonSize.values()[s]
 
+            val vBg = a.getResourceId(R.styleable.ButtonView_buttonBackground, 0)
+            if (vBg != 0) {
+                bg = vBg
+            }
+
+            val vCl = a.getResourceId(R.styleable.ButtonView_buttonTextColor, 0)
+            if (vCl != 0) {
+                cl = vCl
+            }
+
             a.recycle()
         }
         else {
@@ -75,8 +87,14 @@ class ButtonView: AppCompatTextView {
             variant = ButtonVariant.Primary
         }
 
-        setBackgroundResource(R.drawable.bg_button)
-        setTextColor(ContextCompat.getColorStateList(context, R.color.color_button))
+        if (variant == ButtonVariant.Custom && bg != 0 && cl != 0) {
+            setBackgroundResource(bg)
+            setTextColor(ContextCompat.getColorStateList(context, cl))
+        }
+        else {
+            setBackgroundResource(R.drawable.bg_button)
+            setTextColor(ContextCompat.getColorStateList(context, R.color.color_button))
+        }
 
         gravity = Gravity.CENTER
     }

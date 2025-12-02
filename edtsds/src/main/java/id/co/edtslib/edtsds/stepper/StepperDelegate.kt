@@ -1,7 +1,10 @@
 package id.co.edtslib.edtsds.stepper
 
+import android.view.View
+
 interface StepperDelegate {
-    fun onChangeValue(value: Int)
-    fun onErrorMax()
-    fun onErrorMin()
+    fun onValueChanged(value: Int, view: View?)
+    fun onSubmit(value: Int, view: View?)
+    fun onErrorMax(view: View?)
+    fun onErrorMin(view: View?)
 }

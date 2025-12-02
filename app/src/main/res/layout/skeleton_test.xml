@@ -4,7 +4,7 @@
     android:background="@drawable/bg_menu"
     android:padding="@dimen/dimen_16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerName"
         android:layout_marginEnd="@dimen/dimen_16dp"
@@ -38,4 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_32dp" />
     </com.facebook.shimmer.ShimmerFrameLayout>
+    <id.co.edtslib.edtsds.ButtonView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
@@ -33,6 +35,10 @@ class BoardingView: FrameLayout {
 
     enum class Alignment {
         Left, Center, Right
+    }
+
+    enum class VerticalAlignment {
+        Top, Bottom
     }
 
     private val binding: ViewBoardingBinding =
@@ -66,6 +72,72 @@ class BoardingView: FrameLayout {
                 }
             }
             adapter.alignment = value
+        }
+
+    var titleStyle = 0
+        set(value) {
+            field = value
+            adapter.titleStyle = value
+        }
+    var descriptionStyle = 0
+        set(value) {
+            field = value
+            adapter.descriptionStyle = value
+        }
+
+    var imageMargin = context.resources.getDimensionPixelSize(R.dimen.dimen_50dp).toFloat()
+        set(value) {
+            field = value
+            adapter.imageMargin = value
+        }
+
+    var lineSpacing = context.resources.getDimensionPixelSize(R.dimen.dimen_4dp).toFloat()
+        set(value) {
+            field = value
+            adapter.lineSpacing = value
+        }
+
+    var navigationAlignment = Alignment.Left
+        set(value) {
+            field = value
+            val layoutParams = binding.navigation.layoutParams as LinearLayoutCompat.LayoutParams
+            when (value) {
+                Alignment.Center -> {
+                    layoutParams.gravity = Gravity.CENTER_HORIZONTAL
+                }
+                Alignment.Right -> {
+                    layoutParams.gravity = Gravity.END
+                }
+                else -> {
+                    layoutParams.gravity = Gravity.START
+                }
+            }
+        }
+
+    var vAlignment = VerticalAlignment.Top
+        set(value) {
+            field = value
+            val lpLinear = binding.linearLayout.layoutParams as ViewGroup.LayoutParams
+            lpLinear.height = if (value == VerticalAlignment.Bottom) {
+                ViewGroup.LayoutParams.MATCH_PARENT
+            }
+            else {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+
+            val lpViewPager = binding.viewPager.layoutParams as LinearLayout.LayoutParams
+            lpViewPager.height = if (value == VerticalAlignment.Bottom) {
+                0
+            }
+            else {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+            lpViewPager.weight = if (value == VerticalAlignment.Bottom) {
+                1f
+            }
+            else {
+                0f
+            }
         }
 
     var list: List<BoardingData>? = null
@@ -151,6 +223,13 @@ class BoardingView: FrameLayout {
             val iAlignment = a.getInt(R.styleable.BoardingView_alignment, 0)
             alignment = Alignment.values()[iAlignment]
 
+            val iNavigationAlignment = a.getInt(R.styleable.BoardingView_navigationAlignment, 0)
+            navigationAlignment = Alignment.values()[iNavigationAlignment]
+
+            val iVerticalNavigationAlignment = a.getInt(R.styleable.BoardingView_navigationVerticalAlignment, -1)
+            if (iVerticalNavigationAlignment >= 0) {
+                vAlignment = VerticalAlignment.values()[iVerticalNavigationAlignment]
+            }
 
             val fullHeight = a.getBoolean(R.styleable.BoardingView_pagerFullHeight, false)
             if (fullHeight) {
@@ -163,9 +242,17 @@ class BoardingView: FrameLayout {
 
             }
 
-            adapter.height = a.getDimension(
-                R.styleable.BoardingView_imageHeight,
-                context.resources.getDimensionPixelSize(R.dimen.boarding_image_height).toFloat())
+            titleStyle = a.getResourceId(R.styleable.BoardingView_contentTitleStyle, 0)
+            descriptionStyle = a.getResourceId(R.styleable.BoardingView_contentDescriptionStyle, 0)
+
+            imageMargin = a.getDimension(
+                R.styleable.BoardingView_imageMargin,
+                context.resources.getDimensionPixelSize(R.dimen.dimen_50dp).toFloat())
+
+            lineSpacing = a.getDimension(
+                R.styleable.BoardingView_descriptionLineSpacing,
+                context.resources.getDimensionPixelSize(R.dimen.dimen_4dp).toFloat())
+
 
             a.recycle()
         }

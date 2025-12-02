@@ -2,27 +2,92 @@ package id.co.edtslib.edtsds.stepper
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.ImageViewCompat
 import id.co.edtslib.edtsds.R
-import java.lang.NumberFormatException
+import java.util.Locale
 
-class StepperView: FrameLayout {
-    private var editText: EditText? = null
-    private var min = 0
-    private var max = Int.MAX_VALUE
-    private var step = 1
-    private var lastValue = -1
+open class StepperView: FrameLayout {
+    var textView: TextView? = null
+    var editText: EditText? = null
+
+    open var min = 0
+        set(value) {
+            field = value
+
+            editText?.hint = formatValue(value)
+
+            tvMinus?.isActivated = getValue() > min
+            tvAdd?.isActivated = getValue() < max
+        }
+    open var max = Int.MAX_VALUE
+        set(value) {
+            field = value
+
+            tvMinus?.isActivated = getValue() > min
+            tvAdd?.isActivated = getValue() < max
+        }
+    var step = 1
     var delegate: StepperDelegate? = null
-    private var textWatcher: TextWatcher? = null
-    private var tvAdd: TextView? = null
+
+    private var tvAdd: View? = null
+    private var tvMinus: View? = null
+
     private var runnable:  Runnable? = null
+    private var stepDisabled = false
+
     var delay = 500L
+    var delayUi = 0L
+    var delayEditing = 500L
+
+    private var textWatcher: TextWatcher? = null
+    private var textChangeRunnable: Runnable? = null
+
+    var canEdit = false
+        set(value) {
+            field = value
+
+            editText?.isVisible = value
+            textView?.isVisible = ! value
+        }
+
+    var maxLength = 0
+        set(value) {
+            field = value
+
+            if (value > 0) {
+                editText?.filters = arrayOf(InputFilter.LengthFilter(value))
+            }
+        }
+
+    var valueWidth = 0
+        set(value) {
+            field = value
+
+            val dp40 = if (value == 0) resources.getDimensionPixelSize(R.dimen.dimen_40dp)
+                else value
+            val dp50 = if (value == 0) resources.getDimensionPixelSize(R.dimen.dimen_50dp)
+                else value
+
+            val layoutParams = textView?.layoutParams as LinearLayoutCompat.LayoutParams
+            layoutParams.width = dp40
+
+            val layoutParams1 = editText?.layoutParams as LinearLayoutCompat.LayoutParams
+            layoutParams1.width = dp50
+
+        }
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -41,24 +106,60 @@ class StepperView: FrameLayout {
     private fun init(attrs: AttributeSet?) {
         val view = inflate(context, R.layout.view_stepper, this)
 
-        editText = view.findViewById(R.id.editText)
-        setEditTextListener()
+        textView = view.findViewById(R.id.textView)
 
-        editText?.setOnFocusChangeListener { _, _ ->
-            if (editText!!.text.toString().isEmpty()) {
-                editText?.setText(String.format("%d", min))
+        editText = view.findViewById(R.id.editText)
+        editText?.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                editText?.clearFocus()
+            }
+
+            false
+        }
+        editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (! hasFocus) {
+                delegate?.onValueChanged(getValue(), editText)
             }
         }
 
-        tvAdd = view.findViewById<TextView>(R.id.tvAdd)
+        tvAdd = view.findViewById(R.id.tvAdd)
         tvAdd?.isActivated = true
         tvAdd?.setOnClickListener {
-            add()
+            if (canEdit) {
+                hideKeyboard()
+            }
+
+            if (stepDisabled.not()) {
+                if (delayUi != 0L) {
+                    stepDisabled = true
+                }
+                add()
+
+                if (delayUi != 0L) {
+                    postDelayed({
+                        stepDisabled = false
+                    }, delayUi)
+                }
+            }
         }
 
-        val tvMinus = view.findViewById<TextView>(R.id.tvMinus)
-        tvMinus.setOnClickListener {
-            minus()
+        tvMinus = view.findViewById(R.id.tvMinus)
+        tvMinus?.setOnClickListener {
+            if (canEdit) {
+                hideKeyboard()
+            }
+
+            if (stepDisabled.not()) {
+                if (delayUi != 0L) {
+                    stepDisabled = true
+                }
+                minus()
+                if (delayUi != 0L) {
+                    postDelayed({
+                        stepDisabled = false
+                    }, delayUi)
+                }
+            }
         }
 
         if (attrs != null) {
@@ -70,6 +171,7 @@ class StepperView: FrameLayout {
 
             min = a.getInt(R.styleable.StepperView_minValue,
                 0)
+
             max = a.getInt(R.styleable.StepperView_maxValue,
                 Int.MAX_VALUE)
             step = a.getInt(R.styleable.StepperView_step,
@@ -78,17 +180,11 @@ class StepperView: FrameLayout {
             val value = a.getInt(R.styleable.StepperView_value,
                 1)
 
-            editText?.setText(String.format("%d", value))
-
-            val canInput = a.getBoolean(R.styleable.StepperView_canInput, false)
-            editText?.isFocusable = canInput
-            editText?.isClickable = canInput
-
-            isActivated = canInput
+            setText(formatValue(value))
 
             val bgMinus = a.getResourceId(R.styleable.StepperView_backgroundMinus, 0)
             if (bgMinus != 0) {
-                tvMinus.setBackgroundResource(bgMinus)
+                tvMinus?.setBackgroundResource(bgMinus)
             }
 
             val bgPlus = a.getResourceId(R.styleable.StepperView_backgroundPlus, 0)
@@ -98,92 +194,112 @@ class StepperView: FrameLayout {
 
             val bgValue = a.getResourceId(R.styleable.StepperView_backgroundValue, 0)
             if (bgValue != 0) {
-                editText?.setBackgroundResource(bgValue)
+                textView?.setBackgroundResource(bgValue)
             }
 
-            val colorMinus = a.getColor(R.styleable.StepperView_textColorMinus, 0)
+            val colorMinus = a.getResourceId(R.styleable.StepperView_textColorMinus, 0)
             if (colorMinus != 0) {
-                tvMinus.setTextColor(colorMinus)
+                val ivMinus = findViewById<AppCompatImageView?>(R.id.ivMinus)
+                ImageViewCompat.setImageTintList(ivMinus, ContextCompat.getColorStateList(context, colorMinus))
             }
 
-            val colorPlus = a.getColor(R.styleable.StepperView_textColorPlus, 0)
+            val colorPlus = a.getResourceId(R.styleable.StepperView_textColorPlus, 0)
             if (colorPlus != 0) {
-                tvAdd?.setTextColor(colorPlus)
+                val ivAdd = findViewById<AppCompatImageView?>(R.id.ivAdd)
+                ivAdd?.imageTintList = ContextCompat.getColorStateList(context, colorPlus)
             }
 
-            val dp40 = resources.getDimensionPixelSize(R.dimen.dimen_40dp)
-            val dp56 = resources.getDimensionPixelSize(R.dimen.dimen_56dp)
-            val dp8 = resources.getDimensionPixelSize(R.dimen.dimen_8dp)
+            val colorValue = a.getResourceId(R.styleable.StepperView_textColorValue, 0)
+            if (colorValue != 0) {
+                textView?.setTextColor(ContextCompat.getColorStateList(context, colorValue))
+            }
 
-            val layoutParams = editText?.layoutParams as LinearLayoutCompat.LayoutParams
-            layoutParams.width = if (canInput) dp56 else dp40
-            layoutParams.marginStart = if (canInput) dp8 else 0
-            layoutParams.marginEnd = if (canInput) dp8 else 0
+            canEdit = a.getBoolean(R.styleable.StepperView_canEdit, false)
+
+            val lWidth = a.getDimension(R.styleable.StepperView_valueWidth, 0f)
+            valueWidth = if (lWidth > 0f) {
+                lWidth.toInt()
+            } else {
+                0
+            }
 
             a.recycle()
         }
+        else {
+            canEdit = false
+        }
 
+        maxLength = 3
     }
 
-    fun getEditText() = editText
+    protected open fun formatValue(value: Int) =
+        String.format(Locale.getDefault(),"%d", value)
 
-    fun removeEditTextListener() {
+    private fun setText(text: String?, editing: Boolean = false) {
         if (textWatcher != null) {
             editText?.removeTextChangedListener(textWatcher)
         }
-    }
+        textView?.text = text
+        if (! editing) {
+            editText?.setText(text)
+        }
 
-    fun setEditTextListener() {
         textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val s = p0?.toString()
                 if (s != null) {
-                    if (s.startsWith("0")) {
-                        if (s.length > 1) {
-                            editText?.setText(s.toString().trimStart('0'))
+                    try {
+                        val d = s.toInt()
+                        if (d > max) {
+                            delegate?.onErrorMax(editText)
                         }
-                        else
-                            if (min > 0) {
-                                removeEditTextListener()
-                                editText?.setText(String.format("%d", min))
-                                setEditTextListener()
+
+                        tvMinus?.isActivated = d > min
+                        tvAdd?.isActivated = d < max
+
+                        if (d <= max) {
+                            setText(formatValue(d), true)
+
+                            tvAdd?.isActivated = d < max
+
+                            if (textChangeRunnable != null) {
+                                editText?.removeCallbacks(textChangeRunnable)
                             }
-
-                        changedValue(min)
-                    } else {
-                        var value = getValue()
-                        if (value > max && value > lastValue) {
-                            delegate?.onErrorMax()
-                            value = lastValue
-
-                            removeEditTextListener()
-                            editText?.setText(String.format("%d", value))
-                            setEditTextListener()
-                        } else {
-                            lastValue = value
+                            textChangeRunnable = Runnable {
+                                changedValue(d, editText)
+                            }
+                            editText?.postDelayed(textChangeRunnable, delayEditing)
                         }
-
-                        changedValue(value)
+                    }
+                    catch (_: NumberFormatException) {
                     }
                 }
             }
-        }
 
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        }
         editText?.addTextChangedListener(textWatcher)
     }
 
-    fun setValue(value: Int) {
-        editText?.setText(String.format("%d", value))
+    open fun setValue(value: Int) {
+        setText(formatValue(value))
 
-        tvAdd?.isActivated = value < max
+        tvAdd?.isActivated = value+(step-1) < max
+        tvMinus?.isActivated = value+(step-1) > min
+
+        if (editText?.isFocused == true) {
+            if (editText?.text?.isNotEmpty() == true) {
+                editText?.setSelection(editText!!.text!!.length)
+            }
+        }
     }
 
-    private fun changedValue(value: Int) {
+    private fun changedValue(value: Int, view: View?) {
+        delegate?.onValueChanged(value, view)
         if (delay > 0L) {
             if (runnable != null) {
                 removeCallbacks(runnable)
@@ -191,57 +307,43 @@ class StepperView: FrameLayout {
             }
 
             runnable = Runnable {
-                delegate?.onChangeValue(value)
+                delegate?.onSubmit(value, view)
             }
             postDelayed(runnable, delay)
         }
         else {
-            delegate?.onChangeValue(value)
+            delegate?.onSubmit(value, view)
         }
     }
 
-    fun setMaxValue(value: Int) {
-        max = value
-    }
-
-    fun setMaxValue(value: Int, force: Boolean) {
-        if (force) {
-            editText?.removeTextChangedListener(textWatcher)
-        }
-        max = value
-
-        setEditTextListener()
-    }
-
-    fun setMinValue(value: Int) {
-        min = value
-    }
-
-    private fun getValue(): Int {
+    fun getValue(): Int {
         return try {
-            val s = editText?.text?.toString()
+            val s = textView?.text?.toString()
             return s?.toInt() ?: min
         } catch (e: NumberFormatException) {
             min
         }
     }
 
-    private fun add() {
+    protected open fun add() {
         try {
-            val s = editText?.text?.toString()
+            val s = textView?.text?.toString()
             if (s != null) {
                 val d = s.toInt()
                 val d1 = d+step
                 if (d1 > max) {
-                    delegate?.onErrorMax()
+                    delegate?.onErrorMax(null)
                 }
 
-                if (d1 <= max && d != d1) {
-                    removeEditTextListener()
-                    editText?.setText(String.format("%d", d1))
+                if (d1 <= max) {
                     tvAdd?.isActivated = d1 < max
-                    changedValue(d1)
-                    setEditTextListener()
+                    tvMinus?.isActivated = d1 > min
+                    if (d != d1) {
+                        setText(formatValue(d1))
+
+                        tvAdd?.isActivated = d1 < max
+                        changedValue(d1, null)
+                    }
                 }
             }
         } catch (ignored: NumberFormatException) {
@@ -249,25 +351,48 @@ class StepperView: FrameLayout {
         }
     }
 
-    private fun minus() {
+    protected open fun minus() {
         try {
-            val s = editText?.text?.toString()
+            val s = textView?.text?.toString()
             if (s != null) {
                 val d = s.toInt()
                 val d1  = d - step
                 if (d1 < min) {
-                    delegate?.onErrorMin()
+                    delegate?.onErrorMin(null)
                 }
-                if (d1 >= min && d != d1) {
-                    removeEditTextListener()
-                    editText?.setText(String.format("%d", d1))
-                    changedValue(d1)
+
+                if (d1 >= min) {
+                    tvMinus?.isActivated = d1 > min
                     tvAdd?.isActivated = d1 < max
-                    setEditTextListener()
+                    if (d != d1) {
+                        setText(formatValue(d1))
+                        changedValue(d1, null)
+                        tvAdd?.isActivated = d1 < max
+                    }
                 }
             }
         } catch (ignored: NumberFormatException) {
 
         }
+    }
+
+    fun isEditing() = editText?.isFocused == true
+    fun cancelEdit() {
+        editText?.clearFocus()
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+
+        tvMinus?.isEnabled = enabled
+        tvAdd?.isEnabled = enabled
+        textView?.isEnabled = enabled
+    }
+
+    private fun hideKeyboard() {
+        editText?.clearFocus()
+
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText?.windowToken, 0)
     }
 }

@@ -28,13 +28,28 @@
                 android:background="@color/colorPrimary30"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvValue"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:textColor="@color/colorWhite"
-                    android:gravity="center"
-                    style="@style/H2"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvValue"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorWhite"
+                        android:gravity="center"
+                        style="@style/H2"
+                        android:layout_height="match_parent" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etValue"
+                        style="@style/H2"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
             </FrameLayout>
             <FrameLayout
                 android:id="@+id/btMinus"
@@ -46,6 +61,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_gravity="center"
                     android:src="@drawable/ds_ic_minus_bold"
+                    app:tint="@color/color_tint_minus_stepper2"
                     android:layout_width="@dimen/ds_stepper2_icon"
                     android:layout_height="@dimen/ds_stepper2_icon" />
             </FrameLayout>

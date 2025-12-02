@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:drawableStart="@android:drawable/ic_menu_call"
+        android:drawablePadding="@dimen/dimen_8dp"
+        android:text="Ini Title"
+        android:textColor="@color/colorNeutral70"
+        android:layout_gravity="center"
+        android:gravity="center"
+        style="@style/H1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Edts DS Example</string>
+
+    <string name="full_name_mandatory"><![CDATA[Nama Lengkap <font color="#ff0000">*</font>]]></string>
+    <string name="full_name_input">Masukkan Nama Lengkap *</string>
+    <string name="xpress_cart_not_available_info"><![CDATA[Ada belanjaanmu yang tidak tersedia di <b>%s</b>, kamu bisa pilih toko lainnya jika ingin mengubah pesanan. Ubah Toko]]></string>
+    <string name="xpress_cart_not_available_info_link"> Ubah Toko</string>
+
 </resources>

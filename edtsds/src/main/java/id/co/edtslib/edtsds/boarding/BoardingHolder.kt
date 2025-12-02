@@ -2,16 +2,42 @@ package id.co.edtslib.edtsds.boarding
 
 import android.annotation.SuppressLint
 import android.view.Gravity
+import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.marginStart
+import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
 import id.co.edtslib.baserecyclerview.BaseViewHolder
+import id.co.edtslib.edtsds.Util
 import id.co.edtslib.edtsds.databinding.AdapterBoardingItemBinding
 
-class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, private var height: Float,
-                     private var alignment: BoardingView.Alignment
+class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding,
+                     private var alignment: BoardingView.Alignment,
+                     imageMargin: Float,
+                     titleStyle: Int = 0,
+                     descriptionStyle: Int = 0,
+                     lineSpacing: Float = 0f
 ) : BaseViewHolder<BoardingData>(viewBinding) {
+    init {
+        if (titleStyle != 0) {
+            TextViewCompat.setTextAppearance(viewBinding.tvTitle, titleStyle)
+        }
+        if (descriptionStyle != 0) {
+            TextViewCompat.setTextAppearance(viewBinding.tvDescription, descriptionStyle)
+        }
+
+        if (lineSpacing > 0f) {
+            viewBinding.tvDescription.setLineSpacing(lineSpacing, 1f)
+        }
+
+        val lp = viewBinding.imageView.layoutParams as LinearLayout.LayoutParams
+        lp.marginStart = imageMargin.toInt()
+        lp.marginEnd = imageMargin.toInt()
+
+    }
+
     @SuppressLint("DiscouragedApi")
     override fun setData(
         list: MutableList<BoardingData>,
@@ -48,11 +74,6 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, privat
             }
         }
 
-        val layoutParams = viewBinding.imageView.layoutParams as LinearLayoutCompat.LayoutParams
-        if (height > 0f && layoutParams.height != height.toInt()) {
-            layoutParams.height = height.toInt()
-        }
-
         val image = list[position].image
         if (image != null) {
             if (image.startsWith("http")) {
@@ -65,7 +86,9 @@ class BoardingHolder(private val viewBinding: AdapterBoardingItemBinding, privat
                         image, "drawable",
                         fragmentActivity.packageName
                     )
-                    Glide.with(fragmentActivity).load(resourceId).into(viewBinding.imageView)
+                    if (Util.isValidContext(viewBinding.root.context)) {
+                        Glide.with(fragmentActivity).load(resourceId).into(viewBinding.imageView)
+                    }
                 }
             }
         }

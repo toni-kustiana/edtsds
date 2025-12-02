@@ -322,5 +322,8 @@ class OtpView : LinearLayoutCompat {
         }
     }
 
-
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        editText?.isEnabled = enabled
+    }
 }

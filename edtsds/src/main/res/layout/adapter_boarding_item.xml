@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.appcompat.widget.AppCompatImageView
+    <id.co.edtslib.edtsds.ScaleImageView
         android:id="@+id/imageView"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:layout_width="@dimen/boarding_image_height"
-        android:layout_height="@dimen/boarding_image_height" />
+        app:scale="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
         style="@style/D2"
