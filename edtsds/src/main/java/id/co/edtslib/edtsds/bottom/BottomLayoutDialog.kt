@@ -1,16 +1,16 @@
 package id.co.edtslib.edtsds.bottom
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.view.Window
+import androidx.activity.ComponentDialog
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.Util.applyWindowInset
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
-open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context, themeResId) {
+open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialog(context, themeResId) {
     companion object {
         private lateinit var dialog: BottomLayoutDialog
         var delegate: BottomLayoutDelegate? = null
