@@ -50,6 +50,8 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
                 override fun onClose() {
                     delegate?.onClose()
                 }
+
+                override fun onInterceptDismiss() = delegate?.onInterceptDismiss() ?: false
             }
 
             dialog.setCancelable(cancelable)
@@ -94,7 +96,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
 
     fun close() {
         try {
-            dismiss()
+            binding.bottomLayout.tryDismiss()
         }
         catch (ignore: Exception) {
 
@@ -113,6 +115,6 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
     }
 
     override fun onBackPressed() {
-        close()
+        binding.bottomLayout.tryDismiss()
     }
 }

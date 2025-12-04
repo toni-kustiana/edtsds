@@ -47,7 +47,7 @@ class BottomLayout: FrameLayout {
             field = value
             if (value) {
                 binding.vWindow.setOnClickListener {
-                    delegate?.onDismiss()
+                    tryDismiss()
                 }
             }
             else {
@@ -89,8 +89,7 @@ class BottomLayout: FrameLayout {
         set(value) {
             field = value
 
-            val max = (binding.flBottom.height - binding.flTray.height).toFloat()
-            binding.flBottom.translationY = max*(1-value)
+            animateTo(getMax()*(1-value), isClosing = value == 0f)
         }
 
     var titleVisible = true
@@ -98,6 +97,7 @@ class BottomLayout: FrameLayout {
             field = value
             title = title
         }
+
     var title: String? = null
         set(value) {
             field = value
@@ -266,7 +266,7 @@ class BottomLayout: FrameLayout {
 
     private fun processEvent(motionEvent: MotionEvent) {
         if (tray) {
-            val max = (binding.flBottom.height - binding.flTray.height).toFloat()
+            val max = getMax()
             when(motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     originalRawY = motionEvent.rawY
@@ -327,62 +327,40 @@ class BottomLayout: FrameLayout {
         heightPercent = 0f
     }
 
+    fun showFull(){
+        heightPercent = 1f
+    }
+
     private fun onUp(motionEvent: MotionEvent) {
-        val max = (binding.flBottom.height - binding.flTray.height).toFloat()
+        val max = getMax()
         isDown = false
 
         val dy = motionEvent.rawY - rawY
         val newY =  if (dy < 0f) 0f else if (dy > max) max else dy
 
         val d = Date().time - downTime
+
+        // 1. HANDLE FAST SWIPE (FLING)
         if (d < 100) {
             val dy1 = motionEvent.rawY - originalRawY
             if (abs(dy1) > 10) {
                 if (dy1 > 0) {
-                    binding.flBottom.animate().translationY(max).setListener(object : Animator.AnimatorListener {
-                        override fun onAnimationStart(p0: Animator) {
-                        }
-
-                        override fun onAnimationEnd(p0: Animator) {
-                            delegate?.onCollapse()
-                            checkDismiss()
-                        }
-
-                        override fun onAnimationCancel(p0: Animator) {
-                            checkDismiss()
-                        }
-
-                        override fun onAnimationRepeat(p0: Animator) {
-                            checkDismiss()
-                        }
-
-                    })
+                    // User swiped DOWN
+                    tryDismiss()
                 }
                 else {
-                    binding.flBottom.animate().translationY(0f).setListener(object : Animator.AnimatorListener {
-                        override fun onAnimationStart(p0: Animator) {
-                        }
-
-                        override fun onAnimationEnd(p0: Animator) {
-                            delegate?.onExpand()
-
-                        }
-
-                        override fun onAnimationCancel(p0: Animator) {
-                        }
-
-                        override fun onAnimationRepeat(p0: Animator) {
-                        }
-
-                    })
+                    // User swiped UP
+                    showFull()
                 }
             }
             return
         }
 
+        // 2. HANDLE SLOW DRAG
+        // This updates the view to the finger's final position immediately (Duration 0),
+        // then calls snap() to decide where it should settle.
         binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator) {
-            }
+            override fun onAnimationStart(p0: Animator) {}
 
             override fun onAnimationEnd(p0: Animator) {
                 snap()
@@ -400,58 +378,37 @@ class BottomLayout: FrameLayout {
     }
 
     private fun snap() {
-        val max = (binding.flBottom.height - binding.flTray.height).toFloat()
+        val max = getMax()
+
+        // Calculate where the tray should go based on where the user left it
         if (snap) {
-            val mid = 2f*max/3f
+            val mid = 2f * max / 3f
             val snapY = if (halfSnap) {
-                    if (binding.flBottom.translationY < 1f*max/3f) {
-                        0f
-                    }
-                    else
-                        if (binding.flBottom.translationY < 2f*max/3f) {
-                            1f*max/2f
-                        }
-                        else {
-                            max
-                        }
+                if (binding.flBottom.translationY < 1f * max / 3f) 0f
+                else if (binding.flBottom.translationY < 2f * max / 3f) 1f * max / 2f
+                else max
+            } else if (binding.flBottom.translationY > mid) {
+                max
+            } else {
+                0f
+            }
 
-                }
-                else if (binding.flBottom.translationY > mid) max else 0f
-
-            binding.flBottom.animate().setListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(p0: Animator) {
-                }
-
-                override fun onAnimationEnd(p0: Animator) {
-                    if (snapY == max) {
-                        delegate?.onCollapse()
-                    }
-                    else if (snapY == 0f) {
-                        delegate?.onExpand()
-                    }
-                    binding.flBottom.translationY = snapY
-                    checkDismiss()
-                }
-
-                override fun onAnimationCancel(p0: Animator) {
-                    checkDismiss()
-                }
-
-                override fun onAnimationRepeat(p0: Animator) {
-                }
-
-            }).translationY(snapY).setDuration(0L).start()
-        }
-        else {
+            // EXECUTE THE SNAP
+            if (snapY == max) {
+                // If logic says "Close it", we must ASK PERMISSION first
+                tryDismiss()
+            } else {
+                // If logic says "Open" or "Half", just do it
+                animateTo(snapY)
+            }
+        } else {
             checkDismiss()
         }
     }
 
     private fun checkDismiss() {
-        val max = (binding.flBottom.height - binding.flTray.height).toFloat()
-
         if (type == Type.Dialog) {
-            if (binding.flBottom.translationY == max) {
+            if (binding.flBottom.translationY == getMax()) {
                 isVisible = false
             }
         }
@@ -501,5 +458,37 @@ class BottomLayout: FrameLayout {
             })
         }
 
+    }
+
+    fun tryDismiss() {
+        val max = getMax()
+        if (delegate?.onInterceptDismiss() == true) {
+            val targetY = if (halfSnap) max / 2f else 0f
+            animateTo(targetY) //reopen
+        } else {
+            animateTo(max, isClosing = true) // continue to dismiss
+        }
+    }
+
+    private fun getMax(): Float = (binding.flBottom.height - binding.flTray.height).toFloat()
+
+    private fun animateTo(targetY: Float, isClosing: Boolean = false) {
+        binding.flBottom.animate()
+            .translationY(targetY)
+            .setDuration(200)
+            .setListener(object : Animator.AnimatorListener {
+                override fun onAnimationEnd(p0: Animator) {
+                    if (targetY == 0f) {
+                        delegate?.onExpand()
+                    } else if (isClosing) {
+                        delegate?.onCollapse()
+                        checkDismiss() // hide the view
+                    }
+                }
+                override fun onAnimationStart(p0: Animator) {}
+                override fun onAnimationCancel(p0: Animator) {}
+                override fun onAnimationRepeat(p0: Animator) {}
+            })
+            .start()
     }
 }

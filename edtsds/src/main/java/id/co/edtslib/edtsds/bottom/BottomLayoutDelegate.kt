@@ -5,4 +5,5 @@ interface BottomLayoutDelegate {
     fun onCollapse()
     fun onExpand()
     fun onClose(){}
+    fun onInterceptDismiss(): Boolean = false
 }
