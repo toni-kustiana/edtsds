@@ -142,8 +142,7 @@ class BottomLayout: FrameLayout {
             field = value
             binding.ivCancel.isVisible = cancelable
             binding.ivCancel.setOnClickListener {
-                isVisible = false
-                delegate?.onClose()
+                tryDismiss { delegate?.onClose() }
             }
 
             binding.flTitle.isVisible = title?.isNotEmpty() == true || cancelable || ! popup
@@ -346,7 +345,7 @@ class BottomLayout: FrameLayout {
             if (abs(dy1) > 10) {
                 if (dy1 > 0) {
                     // User swiped DOWN
-                    tryDismiss()
+                    tryDismiss{delegate?.onCollapse()}
                 }
                 else {
                     // User swiped UP
@@ -396,7 +395,7 @@ class BottomLayout: FrameLayout {
             // EXECUTE THE SNAP
             if (snapY == max) {
                 // If logic says "Close it", we must ASK PERMISSION first
-                tryDismiss()
+                tryDismiss{delegate?.onCollapse()}
             } else {
                 // If logic says "Open" or "Half", just do it
                 animateTo(snapY)
@@ -460,19 +459,28 @@ class BottomLayout: FrameLayout {
 
     }
 
-    fun tryDismiss() {
+    /**
+     * Dismiss wrapper with logic to intercept it or not and custom delegate while dismissing
+     */
+    fun tryDismiss(
+        onDismiss: ()-> Unit = { delegate?.onDismiss() }
+    ) {
         val max = getMax()
         if (delegate?.onInterceptDismiss() == true) {
             val targetY = if (halfSnap) max / 2f else 0f
-            animateTo(targetY) //reopen
+            animateTo(targetY, onDismiss = onDismiss) //reopen
         } else {
-            animateTo(max, isClosing = true) // continue to dismiss
+            animateTo(max, true, onDismiss) // continue to dismiss
         }
     }
 
     private fun getMax(): Float = (binding.flBottom.height - binding.flTray.height).toFloat()
 
-    private fun animateTo(targetY: Float, isClosing: Boolean = false) {
+    private fun animateTo(
+        targetY: Float,
+        isClosing: Boolean = false,
+        onDismiss: ()-> Unit = { delegate?.onDismiss() }
+    ) {
         binding.flBottom.animate()
             .translationY(targetY)
             .setDuration(200)
@@ -481,7 +489,7 @@ class BottomLayout: FrameLayout {
                     if (targetY == 0f) {
                         delegate?.onExpand()
                     } else if (isClosing) {
-                        delegate?.onCollapse()
+                        onDismiss()
                         checkDismiss() // hide the view
                     }
                 }
