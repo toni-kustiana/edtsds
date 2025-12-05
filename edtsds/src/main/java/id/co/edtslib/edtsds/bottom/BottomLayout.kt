@@ -47,7 +47,10 @@ class BottomLayout: FrameLayout {
             field = value
             if (value) {
                 binding.vWindow.setOnClickListener {
-                    tryDismiss()
+                    /** 1. true = Run checkDismiss() -> triggers setVisibility(GONE) -> triggers delegate.onDismiss()
+                    *  2. {}   = Empty callback -> prevents tryDismiss from triggering delegate.onDismiss() manually
+                    *          and let checkDismiss + setVisibility handle it */
+                    tryDismiss(true){}
                 }
             }
             else {
@@ -466,7 +469,9 @@ class BottomLayout: FrameLayout {
      * @param shouldCheckDismiss true will check the layout visibility and call `delegate?.onDismiss()` on [setVisibility],
      * false will skip checking. Default is true, change to false in case like BottomLayoutDialog, because
      * it already call `dialog.dismiss` so no need to check and it also prevent double delegate?.onDismiss()` call.
-     * @param onDismiss callback when dismissing the layout, change based on your need.
+     * @param onDismiss callback when dismissing the layout, change based on your need. For best
+     * practice, if in this block you call `delegate?.onDismiss()` make sure set [shouldCheckDismiss] to false
+     * to prevent double invocation like described on [shouldCheckDismiss] or just use empty block {}
      */
     fun tryDismiss(
         shouldCheckDismiss: Boolean = true,
