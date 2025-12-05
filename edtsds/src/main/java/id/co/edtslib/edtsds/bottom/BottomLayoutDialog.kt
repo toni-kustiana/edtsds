@@ -11,6 +11,7 @@ import id.co.edtslib.edtsds.Util.applyWindowInset
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
 open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialog(context, themeResId) {
+    var isCleanDelegate: Boolean = false
     companion object {
         private lateinit var dialog: BottomLayoutDialog
         var delegate: BottomLayoutDelegate? = null
@@ -22,8 +23,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialo
                           height: Int = LayoutParams.WRAP_CONTENT,
                           canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = tray,
                           themeResId: Int = R.style.BottomLayoutDialog,
-                          consumeBottomInset: Boolean = true,
-                          isCleanDelegate: Boolean = false): BottomLayoutDialog {
+                          consumeBottomInset: Boolean = true): BottomLayoutDialog {
             val dialog = BottomLayoutDialog(context, themeResId)
             dialog.binding.bottomLayout.title = title
             dialog.binding.bottomLayout.tray = tray
@@ -37,12 +37,11 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialo
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
                     dismissAction(dialog)
-                    if (isCleanDelegate) delegate = null
                 }
 
                 override fun onCollapse() {
                     delegate?.onCollapse()
-                    if (isCleanDelegate) delegate = null
+                    if (dialog.isCleanDelegate) delegate = null
                 }
 
                 override fun onExpand() {
@@ -51,7 +50,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialo
 
                 override fun onClose() {
                     delegate?.onClose()
-                    if (isCleanDelegate) delegate = null
+                    if (dialog.isCleanDelegate) delegate = null
                 }
 
                 override fun onInterceptDismiss() = delegate?.onInterceptDismiss() ?: false
@@ -74,6 +73,7 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialo
         private fun dismissAction(dialog: BottomLayoutDialog) {
             dialog.dismiss()
             delegate?.onDismiss()
+            if (dialog.isCleanDelegate) delegate = null
         }
 
         fun showTray(context: Context, title: String, contentView: View, titleView: View? = null,
@@ -81,17 +81,14 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialo
                      canceledOnTouchOutside: Boolean = true, isOverlay: Boolean? = true,
                      height: Int = LayoutParams.WRAP_CONTENT,
                      themeResId: Int = R.style.BottomLayoutDialog,
-                     consumeBottomInset: Boolean = true,
-                     isCleanDelegate: Boolean = false) =
+                     consumeBottomInset: Boolean = true) =
             showSwipeTray(context, title, contentView, tray = false, cancelable = true,
                 titleView = titleView, titleDivider = titleDivider, popup = popup,
                 themeResId = themeResId,
                 canceledOnTouchOutside = canceledOnTouchOutside,
                 isOverlay = isOverlay,
                 height = height,
-                consumeBottomInset = consumeBottomInset,
-                isCleanDelegate = isCleanDelegate
-            )
+                consumeBottomInset = consumeBottomInset)
 
         fun close() {
             try {
