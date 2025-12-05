@@ -463,8 +463,14 @@ class BottomLayout: FrameLayout {
 
     /**
      * Dismiss wrapper with logic to intercept it or not and custom delegate while dismissing
+     *
+     * @param shouldCheckDismiss true will check the layout visibility and call `delegate?.onDismiss()` on [setVisibility],
+     * false will skip checking. Default is true, change to false in case like BottomLayoutDialog, because
+     * it already call `dialog.dismiss` so no need to check and it also prevent double delegate?.onDismiss()` call.
+     * @param onDismiss callback when dismissing the layout, change based on your need.
      */
     fun tryDismiss(
+        shouldCheckDismiss: Boolean = true,
         onDismiss: ()-> Unit = { delegate?.onDismiss() }
     ) {
         val max = getMax()
@@ -472,7 +478,7 @@ class BottomLayout: FrameLayout {
             val targetY = if (halfSnap) max / 2f else 0f
             animateTo(targetY, onDismiss = onDismiss) //reopen
         } else {
-            animateTo(max, true, onDismiss) // continue to dismiss
+            animateTo(max, true, shouldCheckDismiss, onDismiss) // continue to dismiss
         }
     }
 
@@ -481,6 +487,7 @@ class BottomLayout: FrameLayout {
     private fun animateTo(
         targetY: Float,
         isDismissing: Boolean = false,
+        shouldCheckDismiss: Boolean = true,
         onDismiss: ()-> Unit = { delegate?.onDismiss() }
     ) {
         binding.flBottom.animate()
@@ -492,7 +499,7 @@ class BottomLayout: FrameLayout {
                         delegate?.onExpand()
                     } else if (isDismissing) {
                         onDismiss()
-                        checkDismiss() // hide the view
+                        if (shouldCheckDismiss) checkDismiss() // hide the view
                     }
                 }
                 override fun onAnimationStart(p0: Animator) {}
