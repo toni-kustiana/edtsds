@@ -88,8 +88,7 @@ class BottomLayout: FrameLayout {
     var heightPercent = 1f
         set(value) {
             field = value
-            val isCollapsing = value == 0f
-            animateTo(getMax()*(1-value), isCollapsing){
+            animateTo(getMax()*(1-value)){
                 delegate?.onCollapse()
             }
         }
@@ -478,7 +477,7 @@ class BottomLayout: FrameLayout {
             val targetY = if (halfSnap) max / 2f else 0f
             animateTo(targetY, onDismiss = onDismiss) //reopen
         } else {
-            animateTo(max, true, shouldCheckDismiss, onDismiss) // continue to dismiss
+            animateTo(max, shouldCheckDismiss, onDismiss) // continue to dismiss
         }
     }
 
@@ -486,7 +485,6 @@ class BottomLayout: FrameLayout {
 
     private fun animateTo(
         targetY: Float,
-        isDismissing: Boolean = false,
         shouldCheckDismiss: Boolean = true,
         onDismiss: ()-> Unit = { delegate?.onDismiss() }
     ) {
@@ -497,7 +495,7 @@ class BottomLayout: FrameLayout {
                 override fun onAnimationEnd(p0: Animator) {
                     if (targetY == 0f) {
                         delegate?.onExpand()
-                    } else if (isDismissing) {
+                    } else if (targetY == getMax()) {
                         onDismiss()
                         if (shouldCheckDismiss) checkDismiss() // hide the view
                     }
