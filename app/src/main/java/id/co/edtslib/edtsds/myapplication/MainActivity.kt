@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         val switch = findViewById<SwitchCompat>(R.id.switchIntercept)
         bottomLayout.titleDivider = false
         bottomLayout.titleVisible = false
-        bottomLayout.halfSnap = true
         bottomLayout.delegate = object : BottomLayoutDelegate{
             override fun onDismiss() {
                 Toast.makeText(this@MainActivity, "Dismissed", Toast.LENGTH_SHORT).show()

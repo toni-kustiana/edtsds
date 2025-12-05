@@ -479,7 +479,7 @@ class BottomLayout: FrameLayout {
     ) {
         val max = getMax()
         if (delegate?.onInterceptDismiss() == true) {
-            val targetY = if (halfSnap) max / 2f else 0f
+            val targetY = max / 2f
             animateTo(targetY, onDismiss = onDismiss) //reopen
         } else {
             animateTo(max, shouldCheckDismiss, onDismiss) // continue to dismiss
