@@ -88,8 +88,10 @@ class BottomLayout: FrameLayout {
     var heightPercent = 1f
         set(value) {
             field = value
-
-            animateTo(getMax()*(1-value), isClosing = value == 0f)
+            val isCollapsing = value == 0f
+            animateTo(getMax()*(1-value), isCollapsing){
+                delegate?.onCollapse()
+            }
         }
 
     var titleVisible = true
@@ -478,7 +480,7 @@ class BottomLayout: FrameLayout {
 
     private fun animateTo(
         targetY: Float,
-        isClosing: Boolean = false,
+        isDismissing: Boolean = false,
         onDismiss: ()-> Unit = { delegate?.onDismiss() }
     ) {
         binding.flBottom.animate()
@@ -488,7 +490,7 @@ class BottomLayout: FrameLayout {
                 override fun onAnimationEnd(p0: Animator) {
                     if (targetY == 0f) {
                         delegate?.onExpand()
-                    } else if (isClosing) {
+                    } else if (isDismissing) {
                         onDismiss()
                         checkDismiss() // hide the view
                     }

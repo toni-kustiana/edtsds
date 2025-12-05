@@ -42,6 +42,14 @@ android {
     }
 }
 
+/** Instead of ./gradlew edtsds:bundleReleaseAar to copy paste the .aar.
+ *
+ *  Use ./gradlew edtsds:publishReleasePublicationToMavenLocal then
+ *  on project add MavenLocal() to `settings.gradle` dependencyResolutionManagement,
+ *  finally use below version.
+ *
+ *  This way, we can fully experience the lib just like if its already published to jitpack.
+ */
 publishing {
     publications {
         // Creates a Maven publication called "release".
