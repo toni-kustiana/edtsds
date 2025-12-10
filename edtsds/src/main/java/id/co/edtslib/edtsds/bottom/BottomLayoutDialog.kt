@@ -1,16 +1,17 @@
 package id.co.edtslib.edtsds.bottom
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.view.Window
+import androidx.activity.ComponentDialog
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.Util.applyWindowInset
 import id.co.edtslib.edtsds.databinding.DialogBottomLayoutBinding
 
-open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context, themeResId) {
+open class BottomLayoutDialog(context: Context, themeResId: Int): ComponentDialog(context, themeResId) {
+    var isCleanDelegate: Boolean = false
     companion object {
         private lateinit var dialog: BottomLayoutDialog
         var delegate: BottomLayoutDelegate? = null
@@ -35,12 +36,12 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
             dialog.binding.bottomLayout.isOverlay = isOverlay
             dialog.binding.bottomLayout.delegate = object : BottomLayoutDelegate {
                 override fun onDismiss() {
-                    dialog.dismiss()
-                    delegate?.onDismiss()
+                    dismissAction(dialog)
                 }
 
                 override fun onCollapse() {
                     delegate?.onCollapse()
+                    if (dialog.isCleanDelegate) delegate = null
                 }
 
                 override fun onExpand() {
@@ -49,7 +50,10 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
 
                 override fun onClose() {
                     delegate?.onClose()
+                    if (dialog.isCleanDelegate) delegate = null
                 }
+
+                override fun onInterceptDismiss() = delegate?.onInterceptDismiss() ?: false
             }
 
             dialog.setCancelable(cancelable)
@@ -64,6 +68,12 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
             BottomLayoutDialog.dialog = dialog
 
             return dialog
+        }
+
+        private fun dismissAction(dialog: BottomLayoutDialog) {
+            dialog.dismiss()
+            delegate?.onDismiss()
+            if (dialog.isCleanDelegate) delegate = null
         }
 
         fun showTray(context: Context, title: String, contentView: View, titleView: View? = null,
@@ -82,7 +92,9 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
 
         fun close() {
             try {
-                dialog.dismiss()
+                dialog.binding.bottomLayout.tryDismiss(shouldCheckDismiss = false){
+                    dismissAction(dialog)
+                }
             }
             catch (ignore: Exception) {
 
@@ -94,7 +106,9 @@ open class BottomLayoutDialog(context: Context, themeResId: Int): Dialog(context
 
     fun close() {
         try {
-            dismiss()
+            binding.bottomLayout.tryDismiss(shouldCheckDismiss = false){
+                dismissAction(dialog)
+            }
         }
         catch (ignore: Exception) {
 
