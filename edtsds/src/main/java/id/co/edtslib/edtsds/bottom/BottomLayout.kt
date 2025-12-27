@@ -183,6 +183,12 @@ class BottomLayout: FrameLayout {
 
             field = value
             if (value != null) {
+                if (value.parent != null) {
+                    if (value.parent is ViewGroup) {
+                        val vg = value.parent as ViewGroup
+                        vg.removeView(value)
+                    }
+                }
                 binding.flContent.addView(value)
             }
         }
