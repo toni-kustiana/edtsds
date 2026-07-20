@@ -3,19 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/flRoot"
+    android:background="#ffff00"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
-    <id.co.edtslib.edtsds.textfield.TextFieldView
-        app:boxBackgroundMode="none"
-        app:boxStrokeWidth="@dimen/dimen_1dp"
-        app:boxStrokeColor="@color/colorPrimary10"
-        android:id="@+id/searchView"
+    <id.co.edtslib.edtsds.textfield.date.DateFieldView
+        android:id="@+id/dateFieldView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp"
-        android:layout_marginEnd="@dimen/dimen_16dp"
-        app:ellipsize="true"
-        app:imeOptions="search"
-        app:inputType="search" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        app:spinnerSelectedTextAppearance="@style/D1"
+        app:spinnerUnselectedTextAppearance="@style/B3"
+        app:spinnerBackgroundColor="#F3F5F9"
+        app:spinnerBackgroundRadius="16dp"
+        app:spinnerBandColor="#ff0000"
+        app:spinnerBandRadius="16dp"
+        app:calendarType="spinnerWheel"
+        app:spinnerButtonText="Pilih"
+        app:dateFormat="dd-MM-yyyy"
+        app:hint="DD-MM-YYYY"
+        app:label="Test"
+        app:minAge="17" />
 </LinearLayout>

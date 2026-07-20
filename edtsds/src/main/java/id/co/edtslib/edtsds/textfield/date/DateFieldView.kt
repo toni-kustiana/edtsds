@@ -3,21 +3,34 @@ package id.co.edtslib.edtsds.textfield.date
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.NumberPicker
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.TextViewCompat
 import id.co.edtslib.edtsds.R
 import id.co.edtslib.edtsds.bottom.BottomLayoutDialog
 import id.co.edtslib.edtsds.databinding.DsDateFieldSpinnerBinding
+import id.co.edtslib.edtsds.databinding.DsDateFieldSpinnerWheelBinding
 import id.co.edtslib.edtsds.databinding.DsViewDateFieldBinding
 import id.co.edtslib.edtsds.databinding.ViewDatePickerBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import androidx.core.graphics.drawable.toDrawable
 
 open class DateFieldView : FrameLayout {
     constructor(context: Context) : super(context) {
@@ -37,7 +50,14 @@ open class DateFieldView : FrameLayout {
     }
 
     enum class CalendarType {
-        Calendar, Spinner
+        Calendar, Spinner, SpinnerWheel
+    }
+
+    companion object {
+        private val MONTHS = arrayOf(
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
     }
 
     private fun requireView() = this
@@ -57,6 +77,42 @@ open class DateFieldView : FrameLayout {
 
     var spinnerTitle: String? = null
     var spinnerButtonText: String? = null
+
+    // Spinner selection band style.
+    var spinnerBandColor: Int = ContextCompat.getColor(context, R.color.colorDatePickerBand)
+    var spinnerBandRadius: Float = resources.getDimension(R.dimen.dimen_8dp)
+    var spinnerBandHeight: Int =
+        resources.getDimensionPixelSize(R.dimen.date_picker_band_height)
+
+    // Spinner wheel background, drawn behind the rows other than the band.
+    var spinnerBackgroundColor: Int = Color.TRANSPARENT
+    var spinnerBackgroundRadius: Float = 0f
+
+    // Spinner day/month/year wheel text style.
+    var spinnerSelectedTextColor: Int =
+        ContextCompat.getColor(context, R.color.colorDatePickerSelectedText)
+    var spinnerUnselectedTextColor: Int =
+        ContextCompat.getColor(context, R.color.colorDatePickerUnselectedText)
+
+    /** Wheel text size in px; `0` keeps the [NumberPicker] default. */
+    var spinnerTextSize: Float = 0f
+
+    /**
+     * TextAppearance style resource (e.g. `R.style.H1`) for the selected (center)
+     * row. Drives text size and font; `0` means none. Color stays controlled by
+     * [spinnerSelectedTextColor], and an explicit [spinnerTextSize] overrides the
+     * size from this style.
+     */
+    var spinnerSelectedTextAppearance: Int = 0
+
+    /**
+     * TextAppearance style resource for the unselected (fading) rows. Drives text
+     * size and font; `0` means none. Color stays controlled by
+     * [spinnerUnselectedTextColor], and an explicit [spinnerTextSize] overrides
+     * the size from this style.
+     */
+    var spinnerUnselectedTextAppearance: Int = 0
+
     var showIcon = true
         set(value) {
             field = value
@@ -159,10 +215,10 @@ open class DateFieldView : FrameLayout {
         binding.root.setOnClickListener {
             binding.editText.requestFocus()
 
-            if (calendarType == CalendarType.Spinner) {
-                showSpinner()
-            } else {
-                showCalendar()
+            when (calendarType) {
+                CalendarType.Spinner -> showSpinner()
+                CalendarType.SpinnerWheel -> showSpinnerWheel()
+                else -> showCalendar()
             }
         }
 
@@ -188,6 +244,36 @@ open class DateFieldView : FrameLayout {
             showIcon = a.getBoolean(R.styleable.DateFieldView_showIcon, true)
 
             enableFuture = a.getBoolean(R.styleable.DateFieldView_enableFuture, false)
+
+            spinnerBandColor =
+                a.getColor(R.styleable.DateFieldView_spinnerBandColor, spinnerBandColor)
+            spinnerBandRadius =
+                a.getDimension(R.styleable.DateFieldView_spinnerBandRadius, spinnerBandRadius)
+            spinnerBandHeight = a.getDimensionPixelSize(
+                R.styleable.DateFieldView_spinnerBandHeight, spinnerBandHeight
+            )
+            spinnerBackgroundColor = a.getColor(
+                R.styleable.DateFieldView_spinnerBackgroundColor, spinnerBackgroundColor
+            )
+            spinnerBackgroundRadius = a.getDimension(
+                R.styleable.DateFieldView_spinnerBackgroundRadius, spinnerBackgroundRadius
+            )
+            spinnerSelectedTextColor = a.getColor(
+                R.styleable.DateFieldView_spinnerSelectedTextColor, spinnerSelectedTextColor
+            )
+            spinnerUnselectedTextColor = a.getColor(
+                R.styleable.DateFieldView_spinnerUnselectedTextColor, spinnerUnselectedTextColor
+            )
+            spinnerTextSize =
+                a.getDimension(R.styleable.DateFieldView_spinnerTextSize, spinnerTextSize)
+            spinnerSelectedTextAppearance = a.getResourceId(
+                R.styleable.DateFieldView_spinnerSelectedTextAppearance,
+                spinnerSelectedTextAppearance
+            )
+            spinnerUnselectedTextAppearance = a.getResourceId(
+                R.styleable.DateFieldView_spinnerUnselectedTextAppearance,
+                spinnerUnselectedTextAppearance
+            )
 
             val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)
             calendarType = CalendarType.values()[calendarTypeIndex]
@@ -238,8 +324,287 @@ open class DateFieldView : FrameLayout {
             date = selectedDate
             dialog?.close()
         }
+    }
 
+    /**
+     * Custom wheel spinner (day / month name / year) with a stylable selection
+     * band, wheel background and per-state text appearances. Separate from the
+     * legacy [showSpinner] so the native DatePicker spinner stays untouched.
+     */
+    protected open fun showSpinnerWheel() {
+        val binding = DsDateFieldSpinnerWheelBinding.inflate(LayoutInflater.from(context))
+        binding.bvSubmit.text = spinnerButtonText
 
+        selectedDate = if (date == null) Date() else date!!
+
+        val calendar = Calendar.getInstance()
+        calendar.time = selectedDate!!
+
+        val minCal = minDate?.let { Calendar.getInstance().apply { time = it } }
+        val maxCal = maxDate?.let { Calendar.getInstance().apply { time = it } }
+
+        val pickerDay = binding.pickerDay
+        val pickerMonth = binding.pickerMonth
+        val pickerYear = binding.pickerYear
+
+        // Year wheel bounds.
+        val minYear = minCal?.get(Calendar.YEAR) ?: 1900
+        val maxYear = maxCal?.get(Calendar.YEAR) ?: (calendar.get(Calendar.YEAR) + 100)
+        pickerYear.wrapSelectorWheel = false
+        pickerYear.minValue = minYear
+        pickerYear.maxValue = maxYear
+        pickerYear.value = calendar.get(Calendar.YEAR).coerceIn(minYear, maxYear)
+
+        // Month wheel (full Indonesian month names).
+        pickerMonth.wrapSelectorWheel = false
+        pickerMonth.displayedValues = MONTHS
+        pickerMonth.minValue = 0
+        pickerMonth.maxValue = MONTHS.size - 1
+        pickerMonth.value = calendar.get(Calendar.MONTH)
+
+        // Day wheel is (re)configured against the current month/year.
+        pickerDay.wrapSelectorWheel = false
+
+        fun clampMonthRange() {
+            val year = pickerYear.value
+            val minMonth = if (minCal != null && year == minYear) minCal.get(Calendar.MONTH) else 0
+            val maxMonth =
+                if (maxCal != null && year == maxYear) maxCal.get(Calendar.MONTH) else MONTHS.size - 1
+            pickerMonth.minValue = minMonth
+            pickerMonth.maxValue = maxMonth
+        }
+
+        fun clampDayRange() {
+            val year = pickerYear.value
+            val month = pickerMonth.value
+            val temp = Calendar.getInstance()
+            temp.set(Calendar.YEAR, year)
+            temp.set(Calendar.MONTH, month)
+            var minDay = 1
+            var maxDay = temp.getActualMaximum(Calendar.DAY_OF_MONTH)
+            if (minCal != null && year == minYear && month == minCal.get(Calendar.MONTH)) {
+                minDay = minCal.get(Calendar.DATE)
+            }
+            if (maxCal != null && year == maxYear && month == maxCal.get(Calendar.MONTH)) {
+                maxDay = maxCal.get(Calendar.DATE)
+            }
+            pickerDay.minValue = minDay
+            pickerDay.maxValue = maxDay
+        }
+
+        fun updateSelectedDate() {
+            val result = Calendar.getInstance()
+            result.set(Calendar.YEAR, pickerYear.value)
+            result.set(Calendar.MONTH, pickerMonth.value)
+            result.set(Calendar.DATE, pickerDay.value)
+            selectedDate = result.time
+        }
+
+        clampMonthRange()
+        clampDayRange()
+        // Set the day only after its min/max are configured, otherwise NumberPicker
+        // clamps it to the default 0..0 range and the picked date is lost.
+        pickerDay.value = calendar.get(Calendar.DATE)
+            .coerceIn(pickerDay.minValue, pickerDay.maxValue)
+
+        // Re-assert the selected style on the centered value of every wheel. Needed
+        // because NumberPicker hides its center EditText on any touch (drag, fling
+        // or tap-to-step) and does not reliably restore it, which would otherwise
+        // leave the newly selected value drawn in the unselected wheel paint. Posted
+        // so it runs after NumberPicker finishes its own value/scroll update.
+        fun restyleSelected(source: NumberPicker) {
+            source.post {
+                listOf(pickerDay, pickerMonth, pickerYear).forEach {
+                    applySelectedTextStyle(
+                        it,
+                        spinnerSelectedTextColor,
+                        spinnerTextSize,
+                        spinnerSelectedTextAppearance
+                    )
+                    it.invalidate()
+                }
+            }
+        }
+
+        pickerYear.setOnValueChangedListener { np, _, _ ->
+            clampMonthRange()
+            clampDayRange()
+            updateSelectedDate()
+            restyleSelected(np)
+        }
+        pickerMonth.setOnValueChangedListener { np, _, _ ->
+            clampDayRange()
+            updateSelectedDate()
+            restyleSelected(np)
+        }
+        pickerDay.setOnValueChangedListener { np, _, _ ->
+            updateSelectedDate()
+            restyleSelected(np)
+        }
+
+        binding.flWheels.background = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            setColor(spinnerBackgroundColor)
+            cornerRadius = spinnerBackgroundRadius
+        }
+
+        binding.vBand.background = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            setColor(spinnerBandColor)
+            cornerRadius = spinnerBandRadius
+        }
+        binding.vBand.layoutParams = binding.vBand.layoutParams.apply {
+            height = spinnerBandHeight
+        }
+
+        listOf(pickerDay, pickerMonth, pickerYear).forEach { picker ->
+            styleNumberPicker(
+                picker,
+                spinnerSelectedTextColor,
+                spinnerUnselectedTextColor,
+                spinnerTextSize,
+                spinnerSelectedTextAppearance,
+                spinnerUnselectedTextAppearance
+            )
+            // NumberPicker hides the center EditText on touch and only shows it
+            // again when idle; re-apply the selected style then so the newly
+            // centered value doesn't stay in the unselected appearance.
+            picker.setOnScrollListener { np, state ->
+                if (state == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    applySelectedTextStyle(
+                        np,
+                        spinnerSelectedTextColor,
+                        spinnerTextSize,
+                        spinnerSelectedTextAppearance
+                    )
+                    np.invalidate()
+                }
+            }
+        }
+
+        val dialog = (if (spinnerTitle == null) "" else spinnerTitle)?.let {
+            BottomLayoutDialog.showTray(
+                context = context,
+                title = it, contentView = binding.root
+            )
+        }
+
+        binding.bvSubmit.setOnClickListener {
+            date = selectedDate
+            dialog?.close()
+        }
+    }
+
+    /**
+     * Styles a wheel to match the design: near-black bold selected text, gray
+     * unselected text, and no built-in divider lines (the light-blue selection
+     * band is drawn by the layout behind the wheels). The color/typeface knobs
+     * are only reachable through reflection on the [NumberPicker] internals, so
+     * every step is wrapped and degrades gracefully on OEM ROMs / newer APIs.
+     */
+    private fun styleNumberPicker(
+        picker: NumberPicker,
+        selectedColor: Int,
+        unselectedColor: Int,
+        textSize: Float,
+        selectedAppearance: Int,
+        unselectedAppearance: Int
+    ) {
+        val transparent = ContextCompat.getColor(context, android.R.color.transparent)
+
+        // Hide the native divider lines so only the layout's band shows.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            try {
+                picker.selectionDividerHeight = 0
+            } catch (_: Exception) {
+            }
+        }
+        try {
+            NumberPicker::class.java.getDeclaredField("mSelectionDivider").apply {
+                isAccessible = true
+                set(picker, transparent.toDrawable())
+            }
+        } catch (_: Exception) {
+        }
+
+        // Selected (center) text, drawn by the inner EditText.
+        applySelectedTextStyle(picker, selectedColor, textSize, selectedAppearance)
+
+        // Unselected (fading) text, drawn by the wheel paint. Its size + font come
+        // from its own TextAppearance (resolved through a throwaway TextView), but
+        // the color stays from the attribute.
+        val unselected = resolveAppearance(unselectedAppearance)
+        try {
+            NumberPicker::class.java.getDeclaredField("mSelectorWheelPaint").apply {
+                isAccessible = true
+                (get(picker) as? Paint)?.apply {
+                    color = unselectedColor
+                    typeface = unselected?.typeface ?: Typeface.DEFAULT_BOLD
+                    when {
+                        textSize > 0f -> this.textSize = textSize
+                        unselected != null -> this.textSize = unselected.sizePx
+                    }
+                }
+            }
+        } catch (_: Exception) {
+        }
+
+        // Public API (API 29+) reinforces the wheel color where available.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            try {
+                picker.textColor = unselectedColor
+            } catch (_: Exception) {
+            }
+        }
+
+        picker.invalidate()
+    }
+
+    /**
+     * Applies the selected (center) style to the wheel's inner EditText and forces
+     * it back to VISIBLE. [NumberPicker] hides that EditText on touch and only
+     * restores it when idle, so the centered value must be re-styled and re-shown
+     * on scroll settle — otherwise the center keeps rendering with the unselected
+     * wheel paint. Color stays from the attribute to preserve the two-tone look.
+     */
+    private fun applySelectedTextStyle(
+        picker: NumberPicker,
+        selectedColor: Int,
+        textSize: Float,
+        selectedAppearance: Int
+    ) {
+        try {
+            NumberPicker::class.java.getDeclaredField("mInputText").apply {
+                isAccessible = true
+                (get(picker) as? EditText)?.apply {
+                    visibility = View.VISIBLE
+                    if (selectedAppearance != 0) {
+                        TextViewCompat.setTextAppearance(this, selectedAppearance)
+                    } else {
+                        typeface = Typeface.DEFAULT_BOLD
+                    }
+                    setTextColor(selectedColor)
+                    if (textSize > 0f) {
+                        setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                    }
+                }
+            }
+        } catch (_: Exception) {
+        }
+    }
+
+    private data class ResolvedTextAppearance(val typeface: Typeface?, val sizePx: Float)
+
+    /**
+     * Resolves the typeface and text size of a TextAppearance [styleRes] by
+     * applying it to a throwaway [TextView], so the wheel paint (which has no
+     * TextAppearance API) can mirror it. Returns `null` when [styleRes] is 0.
+     */
+    private fun resolveAppearance(styleRes: Int): ResolvedTextAppearance? {
+        if (styleRes == 0) return null
+        val probe = TextView(context)
+        TextViewCompat.setTextAppearance(probe, styleRes)
+        return ResolvedTextAppearance(probe.typeface, probe.textSize)
     }
 
     protected open fun showCalendar() {

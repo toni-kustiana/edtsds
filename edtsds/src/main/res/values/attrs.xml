@@ -255,8 +255,26 @@
         <attr name="calendarType" format="enum">
             <enum name="calendar" value="0" />
             <enum name="spinner" value="1" />
+            <enum name="spinnerWheel" value="2" />
         </attr>
         <attr name="enableFuture" format="boolean" />
+
+        <!-- Spinner selection band -->
+        <attr name="spinnerBandColor" format="color" />
+        <attr name="spinnerBandRadius" format="dimension" />
+        <attr name="spinnerBandHeight" format="dimension" />
+
+        <!-- Spinner wheel background (behind the rows other than the band) -->
+        <attr name="spinnerBackgroundColor" format="color" />
+        <attr name="spinnerBackgroundRadius" format="dimension" />
+
+        <!-- Spinner day/month/year wheel text style -->
+        <attr name="spinnerSelectedTextColor" format="color" />
+        <attr name="spinnerUnselectedTextColor" format="color" />
+        <attr name="spinnerTextSize" format="dimension" />
+        <!-- TextAppearance styles (e.g. @style/H1); drive size/font of the wheels. -->
+        <attr name="spinnerSelectedTextAppearance" format="reference" />
+        <attr name="spinnerUnselectedTextAppearance" format="reference" />
     </declare-styleable>
     <declare-styleable name="ShimmerView">
         <attr name="shimmerWidth" format="dimension" />

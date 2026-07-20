@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- date field spinner -->
+    <color name="colorDatePickerDivider">#1178D4</color>
+    <color name="colorDatePickerSelectedText">#151823</color>
+    <color name="colorDatePickerUnselectedText">#70727D</color>
+    <color name="colorDatePickerBand">#DCE9FB</color>
+
     <!-- primary -->
 
     <color name="colorPrimary50">#044B95</color>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="date_picker_wheel_height">180dp</dimen>
+    <dimen name="date_picker_band_height">44dp</dimen>
     <dimen name="dimen_half_dp">0.5dp</dimen>
     <dimen name="dimen_1dp">1dp</dimen>
     <dimen name="dimen_2dp">2dp</dimen>

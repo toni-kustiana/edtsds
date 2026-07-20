@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/flWheels"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/date_picker_wheel_height">
+
+        <View
+            android:id="@+id/vBand"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/date_picker_band_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:background="@drawable/bg_date_picker_band" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                android:id="@+id/pickerDay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                android:id="@+id/pickerMonth"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+            <NumberPicker
+                android:id="@+id/pickerYear"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
+    <View
+        android:background="@color/colorNeutral30"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp" />
+
+    <id.co.edtslib.edtsds.ButtonView
+        android:id="@+id/bvSubmit"
+        app:variant="primary"
+        app:size="medium"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>
