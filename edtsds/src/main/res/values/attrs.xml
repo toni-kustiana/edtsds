@@ -245,6 +245,7 @@
     <declare-styleable name="DateFieldView">
         <attr name="fieldEnabled" />
         <attr name="dateFormat" format="string" />
+        <attr name="dateIcon" format="reference" />
         <attr name="hint" />
         <attr name="minAge" format="integer" />
         <attr name="label" />

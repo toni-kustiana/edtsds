@@ -119,6 +119,12 @@ open class DateFieldView : FrameLayout {
             binding.imageView.isVisible = value
         }
 
+    var icon: Int = 0
+        set(value) {
+            field = value
+            binding.imageView.setImageResource(value)
+        }
+
     open var calendarType = CalendarType.Calendar
 
     var date: Date? = null
@@ -273,6 +279,10 @@ open class DateFieldView : FrameLayout {
             spinnerUnselectedTextAppearance = a.getResourceId(
                 R.styleable.DateFieldView_spinnerUnselectedTextAppearance,
                 spinnerUnselectedTextAppearance
+            )
+            icon = a.getResourceId(
+                R.styleable.DateFieldView_dateIcon,
+                R.drawable.ds_ic_date
             )
 
             val calendarTypeIndex = a.getInt(R.styleable.DateFieldView_calendarType, 0)

@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_16dp"
+        app:dateIcon="@drawable/ic_alert_cancel"
         app:spinnerSelectedTextAppearance="@style/D1"
         app:spinnerUnselectedTextAppearance="@style/B3"
         app:spinnerBackgroundColor="#F3F5F9"
